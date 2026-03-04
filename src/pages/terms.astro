@@ -1,0 +1,293 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import t from '../i18n/en.json';
+---
+
+<BaseLayout
+  lang="en"
+  title="Terms of Service — Runtime Lab"
+  description="Runtime Lab's Terms of Service governing use of the website and services."
+>
+  <Nav t={t.nav} lang="en" />
+
+  <main id="main-content" class="privacy-main">
+    <div class="privacy-container">
+
+      <div class="privacy-header reveal">
+        <div class="privacy-badge">LEGAL</div>
+        <h1 class="privacy-title">Terms of Service</h1>
+        <p class="privacy-meta">Last updated: March 2026</p>
+      </div>
+
+      <div class="privacy-intro reveal">
+        <p>These Terms of Service ("Terms") govern your use of the Runtime Lab website located at <a href="https://runtime-lab.com" class="privacy-link">https://runtime-lab.com</a>.</p>
+        <p>By accessing this website, you agree to be bound by these Terms. If you do not agree, you should not use the website.</p>
+      </div>
+
+      <div class="privacy-body">
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">01</span> Website Purpose</h2>
+          <p>Runtime Lab provides information about software engineering services, automation systems, and digital solutions.</p>
+          <p>The website is intended to help visitors learn about our services and contact us regarding potential projects.</p>
+          <p>The content on this site is provided for informational purposes only.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">02</span> No Professional Advice</h2>
+          <p>Information on this website does not constitute legal, financial, or professional advice.</p>
+          <p>Any business decisions made based on information from this website are your responsibility.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">03</span> AI and Automated Tools</h2>
+          <p>Our website may include AI-powered assistants or automated systems designed to help answer questions.</p>
+          <p>These systems may generate responses automatically. You acknowledge that:</p>
+          <ul class="privacy-list">
+            <li>AI responses may not always be accurate or complete.</li>
+            <li>AI systems should not be relied upon for critical business decisions.</li>
+            <li>Conversations may be processed to improve system performance.</li>
+          </ul>
+          <p>Users should avoid sharing sensitive, confidential, or proprietary information through AI chat interfaces.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">04</span> Intellectual Property</h2>
+          <p>All content on this website, including text, design, graphics, logos, and software concepts, is the property of Runtime Lab unless otherwise stated.</p>
+          <p>You may not reproduce, distribute, or reuse content without written permission.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">05</span> Limitation of Liability</h2>
+          <p>Runtime Lab is not responsible for:</p>
+          <ul class="privacy-list">
+            <li>Errors or omissions in website content</li>
+            <li>Temporary website downtime</li>
+            <li>Losses resulting from reliance on information provided on this site</li>
+          </ul>
+          <p>To the fullest extent permitted by law, Runtime Lab disclaims all liability arising from use of the website.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">06</span> External Links</h2>
+          <p>Our website may contain links to third-party websites.</p>
+          <p>We are not responsible for the content, policies, or practices of external sites.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">07</span> Service Engagement</h2>
+          <p>Submitting a form or contacting Runtime Lab through this website does not create a contractual relationship.</p>
+          <p>A formal agreement is required before any services are provided.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">08</span> Privacy</h2>
+          <p>Your use of this website is also governed by our <a href="/privacy" class="privacy-link">Privacy Policy</a>.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">09</span> Changes to These Terms</h2>
+          <p>Runtime Lab reserves the right to update these Terms at any time.</p>
+          <p>Updated versions will be posted on this page with a revised date.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">10</span> Governing Law</h2>
+          <p>These Terms are governed by the laws of the State of Florida, United States.</p>
+        </section>
+
+        <section class="privacy-section reveal">
+          <h2 class="privacy-section-title"><span class="privacy-num">11</span> Contact</h2>
+          <div class="privacy-contact-card">
+            <p class="privacy-contact-name">Runtime Lab</p>
+            <p>2125 Biscayne Blvd, Ste 204 #24417<br />Miami, Florida 33137<br />United States</p>
+            <p>
+              Email: <a href="mailto:support@runtime-lab.com" class="privacy-link">support@runtime-lab.com</a><br />
+              Phone: <a href="tel:+16452205559" class="privacy-link">+1 645 220 5559</a>
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <Footer t={t.footer} nav={{ logo: t.nav.logo }} lang="en" />
+</BaseLayout>
+
+<style>
+  .privacy-main {
+    background-color: #0B0F14;
+    min-height: 100vh;
+    padding-top: 96px;
+    padding-bottom: 0;
+  }
+
+  .privacy-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+  }
+
+  .privacy-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #1E293B;
+  }
+
+  .privacy-badge {
+    display: inline-block;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #2563EB;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    border-radius: 4px;
+    padding: 3px 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .privacy-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #F8FAFC;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+    line-height: 1.1;
+  }
+
+  .privacy-meta {
+    font-size: 0.8125rem;
+    color: #64748B;
+    margin: 0;
+  }
+
+  .privacy-intro {
+    margin-bottom: 3rem;
+  }
+
+  .privacy-intro p {
+    font-size: 1rem;
+    color: #94A3B8;
+    line-height: 1.75;
+    margin: 0 0 1rem;
+  }
+
+  .privacy-intro p:last-child { margin-bottom: 0; }
+
+  .privacy-section {
+    margin-bottom: 2.75rem;
+    padding-bottom: 2.75rem;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+  }
+
+  .privacy-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .privacy-section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+  }
+
+  .privacy-num {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #2563EB;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    border-radius: 4px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+  }
+
+  .privacy-section p {
+    font-size: 0.9375rem;
+    color: #94A3B8;
+    line-height: 1.75;
+    margin: 0 0 0.875rem;
+  }
+
+  .privacy-section p:last-child { margin-bottom: 0; }
+
+  .privacy-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .privacy-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
+    color: #94A3B8;
+    line-height: 1.6;
+    padding-left: 0.25rem;
+  }
+
+  .privacy-list li::before {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    background: #2563EB;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.55em;
+  }
+
+  .privacy-link {
+    color: #3B82F6;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .privacy-link:hover { color: #60A5FA; text-decoration: underline; }
+
+  .privacy-contact-card {
+    background: #10151C;
+    border: 1px solid #1E293B;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .privacy-contact-card p {
+    font-size: 0.9375rem !important;
+    color: #94A3B8 !important;
+    line-height: 1.75 !important;
+    margin: 0 !important;
+  }
+
+  .privacy-contact-name {
+    font-weight: 600 !important;
+    color: #F8FAFC !important;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>

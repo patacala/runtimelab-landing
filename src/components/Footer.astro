@@ -7,8 +7,11 @@ export interface Props {
     legal: { privacy: string; terms: string; copyright: string };
   };
   nav: { logo: string };
+  lang?: 'en' | 'es';
 }
-const { t, nav } = Astro.props;
+const { t, nav, lang = 'en' } = Astro.props;
+const privacyHref = lang === 'es' ? '/es/privacy' : '/privacy';
+const termsHref   = lang === 'es' ? '/es/terms'   : '/terms';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -82,9 +85,9 @@ const currentYear = new Date().getFullYear();
     <!-- Bottom row: Legal -->
     <div class="footer-bottom">
       <div class="footer-legal">
-        <a href="#" class="footer-legal-link">{t.legal.privacy}</a>
+        <a href={privacyHref} class="footer-legal-link">{t.legal.privacy}</a>
         <span class="footer-legal-sep" aria-hidden="true">·</span>
-        <a href="#" class="footer-legal-link">{t.legal.terms}</a>
+        <a href={termsHref} class="footer-legal-link">{t.legal.terms}</a>
       </div>
       <p class="footer-copyright">{t.legal.copyright.replace('{year}', String(currentYear))}</p>
     </div>
