@@ -6,8 +6,6 @@ export default defineConfig({
   site: 'https://runtime-lab.com',
   integrations: [
     tailwind(),
-    sitemap({
-      filter: (page) => !page.includes('/about'),
-    }),
+    sitemap(),
   ],
 });
