@@ -7,8 +7,8 @@ export interface Props {
 }
 
 const {
-  title = 'Runtime Lab — Engineering Studio',
-  description = 'Disconnected tools and manual work are the invisible ceiling on your revenue. Runtime Lab builds operational systems that scale.',
+  title = 'Runtimelab',
+  description = 'Disconnected tools and manual work are the invisible ceiling on your revenue. RuntimeLab builds operational systems that scale.',
   ogImage = '/assets/og-image.png',
   lang = 'en',
 } = Astro.props;
@@ -34,7 +34,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="Runtime Lab" />
+    <meta property="og:site_name" content="RuntimeLab" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -63,7 +63,7 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Runtime Lab",
+        "name": "RuntimeLab",
         "description": "Engineering studio that builds operational systems for growing businesses",
         "url": "https://runtimelab.io",
         "contactPoint": {

@@ -1,6 +1,6 @@
 {
   "nav": {
-    "logo": "Runtime Lab",
+    "logo": "RuntimeLab",
     "links": {
       "work": "Our Work",
       "services": "Services",
@@ -331,7 +331,7 @@
     "legal": {
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
-      "copyright": "© Runtime Lab {year}"
+      "copyright": "© RuntimeLab {year}"
     }
   }
 }
