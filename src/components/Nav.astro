@@ -8,7 +8,7 @@ export interface Props {
   lang: 'en' | 'es';
 }
 const { t, lang } = Astro.props;
-const langHref   = lang === 'en' ? '/es' : '/';
+const langHref   = lang === 'es' ? '/en' : '/';
 const langLabel  = lang === 'en' ? 'ES' : 'EN';
 const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English';
 ---

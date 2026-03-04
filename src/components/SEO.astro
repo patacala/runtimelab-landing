@@ -60,20 +60,9 @@ const webpage = {
 <meta name="color-scheme" content="dark" />
 
 <!-- Hreflang -->
-{lang === 'en' && (
-  <>
-    <link rel="alternate" hreflang="en" href="https://runtime-lab.com/" />
-    <link rel="alternate" hreflang="es" href="https://runtime-lab.com/es/" />
-    <link rel="alternate" hreflang="x-default" href="https://runtime-lab.com/" />
-  </>
-)}
-{lang === 'es' && (
-  <>
-    <link rel="alternate" hreflang="es" href="https://runtime-lab.com/es/" />
-    <link rel="alternate" hreflang="en" href="https://runtime-lab.com/" />
-    <link rel="alternate" hreflang="x-default" href="https://runtime-lab.com/" />
-  </>
-)}
+<link rel="alternate" hreflang="es" href="https://runtime-lab.com/" />
+<link rel="alternate" hreflang="en" href="https://runtime-lab.com/en/" />
+<link rel="alternate" hreflang="x-default" href="https://runtime-lab.com/" />
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
