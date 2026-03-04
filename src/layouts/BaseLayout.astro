@@ -1,4 +1,6 @@
 ---
+import SEO from '../components/SEO.astro';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -7,7 +9,7 @@ export interface Props {
 }
 
 const {
-  title = 'Runtimelab',
+  title = 'RuntimeLab — Engineering Studio',
   description = 'Disconnected tools and manual work are the invisible ceiling on your revenue. RuntimeLab builds operational systems that scale.',
   ogImage = '/assets/og-image.png',
   lang = 'en',
@@ -21,31 +23,18 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-
-    <!-- Primary Meta -->
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalURL} />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
-    <meta property="og:site_name" content="RuntimeLab" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <SEO
+      title={title}
+      description={description}
+      canonicalURL={canonicalURL}
+      ogImage={ogImage}
+      lang={lang}
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Preconnect for fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,27 +46,6 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
     />
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "RuntimeLab",
-        "url": "https://runtime-lab.com",
-        "logo": "https://runtime-lab.com/assets/logo.png",
-        "email": "support@runtime-lab.com",
-        "telephone": "+1-645-220-5559",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "2125 Biscayne Blvd, Ste 204 #24417",
-          "addressLocality": "Miami",
-          "addressRegion": "FL",
-          "postalCode": "33137",
-          "addressCountry": "US"
-        }
-      }
-    </script>
   </head>
   <body class="bg-bg text-primary font-sans antialiased overflow-x-hidden">
     <!-- Skip Link -->

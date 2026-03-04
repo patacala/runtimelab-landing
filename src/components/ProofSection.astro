@@ -59,7 +59,7 @@ const { t } = Astro.props;
 
         <!-- Problems (before) -->
         <div class="proof-block">
-          <span class="proof-block-label proof-label-before">{t.situation.problems.label}</span>
+          <h3 class="proof-block-label proof-label-before">{t.situation.problems.label}</h3>
           <ul class="proof-list" role="list">
             {t.situation.problems.items.map(item => (
               <li class="proof-list-item proof-item-before">
@@ -74,7 +74,7 @@ const { t } = Astro.props;
 
         <!-- Built (solution) -->
         <div class="proof-block">
-          <span class="proof-block-label proof-label-built">{t.built.label}</span>
+          <h3 class="proof-block-label proof-label-built">{t.built.label}</h3>
           <ul class="proof-list" role="list">
             {t.built.items.map(item => (
               <li class="proof-list-item proof-item-built">
@@ -95,7 +95,7 @@ const { t } = Astro.props;
       <!-- Right column: outcome -->
       <div class="proof-right">
 
-        <span class="proof-block-label proof-label-result">{t.result.label}</span>
+        <h3 class="proof-block-label proof-label-result">{t.result.label}</h3>
 
         <!-- Hero stat -->
         <div class="proof-stat-wrap">

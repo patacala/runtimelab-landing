@@ -1,0 +1,99 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonicalURL: string | URL;
+  ogImage?: string;
+  lang?: 'en' | 'es';
+  type?: 'website' | 'article';
+}
+
+const {
+  title,
+  description,
+  canonicalURL,
+  ogImage = '/assets/og-image.png',
+  lang = 'en',
+  type = 'website',
+} = Astro.props;
+
+const canonical = String(canonicalURL);
+const ogImageAbsolute = ogImage.startsWith('http')
+  ? ogImage
+  : `https://runtime-lab.com${ogImage}`;
+
+const organization = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "RuntimeLab",
+  "url": "https://runtime-lab.com",
+  "logo": "https://runtime-lab.com/assets/logo.png",
+  "email": "support@runtime-lab.com",
+  "telephone": "+1-645-220-5559",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "2125 Biscayne Blvd, Ste 204 #24417",
+    "addressLocality": "Miami",
+    "addressRegion": "FL",
+    "postalCode": "33137",
+    "addressCountry": "US"
+  }
+};
+
+const webpage = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "url": canonical,
+  "name": title,
+  "description": description,
+  "inLanguage": lang,
+  "isPartOf": { "@id": "https://runtime-lab.com" }
+};
+---
+
+<!-- Primary -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#0B0F14" />
+<meta name="color-scheme" content="dark" />
+
+<!-- Hreflang -->
+{lang === 'en' && (
+  <>
+    <link rel="alternate" hreflang="en" href="https://runtime-lab.com/" />
+    <link rel="alternate" hreflang="es" href="https://runtime-lab.com/es/" />
+    <link rel="alternate" hreflang="x-default" href="https://runtime-lab.com/" />
+  </>
+)}
+{lang === 'es' && (
+  <>
+    <link rel="alternate" hreflang="es" href="https://runtime-lab.com/es/" />
+    <link rel="alternate" hreflang="en" href="https://runtime-lab.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://runtime-lab.com/" />
+  </>
+)}
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImageAbsolute} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="RuntimeLab" />
+<meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageAbsolute} />
+
+<!-- Structured Data: Organization -->
+<script type="application/ld+json" set:html={JSON.stringify(organization)} />
+
+<!-- Structured Data: WebPage -->
+<script type="application/ld+json" set:html={JSON.stringify(webpage)} />
