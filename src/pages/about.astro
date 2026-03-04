@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — RuntimeLab"
+  description="RuntimeLab builds software systems for growing businesses. Based in Miami, Florida."
+>
+  <main class="about-main">
+    <div class="about-container">
+      <img src="/assets/logo.png" alt="RuntimeLab" class="about-logo" />
+      <h1 class="about-name">RuntimeLab</h1>
+      <p class="about-desc">Software systems for growing businesses.</p>
+      <ul class="about-details">
+        <li>Miami, Florida.</li>
+        <li><a href="mailto:support@runtime-lab.com">support@runtime-lab.com</a></li>
+      </ul>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .about-main {
+    min-height: 100vh;
+    background-color: #0B0F14;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .about-container {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .about-logo {
+    width: 160px;
+    height: auto;
+    margin: 0 auto 2rem;
+    display: block;
+  }
+
+  .about-name {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.75rem;
+  }
+
+  .about-desc {
+    font-size: 1rem;
+    color: #94A3B8;
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+  }
+
+  .about-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .about-details li {
+    font-size: 0.9375rem;
+    color: #64748B;
+  }
+
+  .about-details a {
+    color: #3B82F6;
+    text-decoration: none;
+  }
+
+  .about-details a:hover {
+    text-decoration: underline;
+  }
+</style>
