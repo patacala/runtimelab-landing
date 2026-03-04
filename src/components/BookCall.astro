@@ -1,0 +1,641 @@
+---
+// ── Set your Calendly scheduling URL here ──────────────────
+const CALENDLY_URL = 'https://calendly.com/runtime-lab-support/30-minutes-metting-runtimelab';
+// ────────────────────────────────────────────────────────────
+
+export interface Props {
+  t: {
+    badge: string;
+    title: { line1: string; line2: string };
+    sub: string;
+    trust: string[];
+    form: {
+      title: string;
+      name: { label: string; placeholder: string; error: string };
+      email: { label: string; placeholder: string; error: string };
+      company: { label: string; placeholder: string; optional: string };
+      submit: string;
+    };
+    scheduled: { title: string; sub: string };
+  };
+}
+
+const { t } = Astro.props;
+---
+
+<section
+  id="contact"
+  class="bc-section"
+  data-cal={CALENDLY_URL}
+  aria-label="Book a strategy call"
+>
+
+  <!-- Blueprint grid -->
+  <div class="bc-grid" aria-hidden="true"></div>
+
+  <!-- Top separator line -->
+  <div class="bc-separator" aria-hidden="true"></div>
+
+  <div class="bc-inner">
+
+    <!-- ══ Left: Value proposition ══ -->
+    <div class="bc-left reveal">
+
+      <span class="bc-badge">{t.badge}</span>
+
+      <h2 class="bc-title">
+        <span class="block bc-title-dim">{t.title.line1}</span>
+        <span class="block bc-title-bright">{t.title.line2}</span>
+      </h2>
+
+      <p class="bc-sub">{t.sub}</p>
+
+      <ul class="bc-trust" role="list">
+        {t.trust.map(item => (
+          <li class="bc-trust-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <!-- Decorative availability badge -->
+      <div class="bc-avail">
+        <span class="bc-avail-dot"></span>
+        <span class="bc-avail-text">Available Mon – Fri</span>
+      </div>
+
+    </div>
+
+    <!-- ══ Right: Form → Calendly ══ -->
+    <div class="bc-right reveal reveal-delay-200">
+
+      <!-- Form card -->
+      <div id="bc-form-wrap" class="bc-card">
+        <p class="bc-form-eyebrow">{t.form.title}</p>
+
+        <form id="bc-form" novalidate>
+
+          <!-- Full Name -->
+          <div class="bc-field" id="bc-field-name">
+            <label for="bc-name" class="bc-label">
+              {t.form.name.label}
+              <span class="bc-req" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="text"
+              id="bc-name"
+              class="bc-input"
+              placeholder={t.form.name.placeholder}
+              required
+              autocomplete="name"
+            />
+            <span class="bc-error-msg" role="alert">{t.form.name.error}</span>
+          </div>
+
+          <!-- Email -->
+          <div class="bc-field" id="bc-field-email">
+            <label for="bc-email" class="bc-label">
+              {t.form.email.label}
+              <span class="bc-req" aria-hidden="true">*</span>
+            </label>
+            <input
+              type="email"
+              id="bc-email"
+              class="bc-input"
+              placeholder={t.form.email.placeholder}
+              required
+              autocomplete="email"
+            />
+            <span class="bc-error-msg" role="alert">{t.form.email.error}</span>
+          </div>
+
+          <!-- Company (optional) -->
+          <div class="bc-field">
+            <label for="bc-company" class="bc-label">
+              {t.form.company.label}
+              <span class="bc-optional">{t.form.company.optional}</span>
+            </label>
+            <input
+              type="text"
+              id="bc-company"
+              class="bc-input"
+              placeholder={t.form.company.placeholder}
+              autocomplete="organization"
+            />
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" id="bc-submit" class="bc-submit">
+            <span id="bc-submit-label">{t.form.submit}</span>
+            <span id="bc-submit-dots" class="bc-dots" hidden aria-hidden="true">
+              <span></span><span></span><span></span>
+            </span>
+            <svg id="bc-submit-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </button>
+
+        </form>
+      </div>
+
+      <!-- Calendly card — hidden until form submitted -->
+      <div id="bc-cal-wrap" class="bc-card bc-cal-card" hidden>
+        <div class="bc-cal-header">
+          <div class="bc-cal-check">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div>
+            <p class="bc-cal-title">{t.scheduled.title}</p>
+            <p class="bc-cal-sub">{t.scheduled.sub}</p>
+          </div>
+        </div>
+        <!-- Calendly mounts here -->
+        <div id="bc-cal-widget" class="bc-cal-widget"></div>
+      </div>
+
+    </div><!-- /bc-right -->
+
+  </div><!-- /bc-inner -->
+
+</section>
+
+<style>
+
+  /* ── Section shell ── */
+  .bc-section {
+    position: relative;
+    background: #0B0F14;
+    padding: clamp(80px, 12vw, 128px) 0;
+    overflow: hidden;
+  }
+
+  .bc-separator {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(800px, 80%);
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(37, 99, 235, 0.35) 30%,
+      rgba(99, 102, 241, 0.25) 70%,
+      transparent
+    );
+  }
+
+  .bc-grid {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.038) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.038) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* ── Two-column layout ── */
+  .bc-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding-inline: clamp(24px, 6vw, 80px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(48px, 6vw, 96px);
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    .bc-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  /* ── Left column ── */
+  .bc-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #3B82F6;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .bc-title {
+    font-size: clamp(2rem, 3.6vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+    margin-bottom: 22px;
+  }
+
+  .bc-title-dim    { color: rgba(248, 250, 252, 0.65); }
+  .bc-title-bright { color: #F8FAFC; }
+
+  .bc-sub {
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    line-height: 1.76;
+    color: #64748B;
+    max-width: 440px;
+    margin-bottom: 36px;
+  }
+
+  /* Trust checklist */
+  .bc-trust {
+    list-style: none;
+    margin: 0 0 36px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .bc-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #94A3B8;
+  }
+
+  /* Availability badge */
+  .bc-avail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border: 1px solid rgba(34, 197, 94, 0.18);
+    border-radius: 6px;
+    background: rgba(34, 197, 94, 0.04);
+  }
+
+  .bc-avail-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22C55E;
+    animation: availPulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes availPulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.45; }
+  }
+
+  .bc-avail-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #4ADE80;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Right column ── */
+  .bc-right {
+    position: sticky;
+    top: 84px; /* clears fixed nav */
+  }
+
+  @media (max-width: 880px) {
+    .bc-right { position: static; }
+  }
+
+  /* ── Card (shared base) ── */
+  .bc-card {
+    background: rgba(16, 21, 28, 0.92);
+    border: 1px solid rgba(30, 41, 59, 0.8);
+    border-radius: 18px;
+    padding: 32px;
+    backdrop-filter: blur(16px);
+  }
+
+  .bc-form-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #334155;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* ── Form fields ── */
+  .bc-field {
+    margin-bottom: 20px;
+  }
+
+  .bc-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #94A3B8;
+    margin-bottom: 8px;
+  }
+
+  .bc-req {
+    color: #3B82F6;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .bc-optional {
+    font-size: 11px;
+    font-weight: 400;
+    color: #475569;
+    background: rgba(30, 41, 59, 0.55);
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  .bc-input {
+    width: 100%;
+    background: rgba(11, 15, 20, 0.85);
+    border: 1px solid rgba(30, 41, 59, 0.9);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 14px;
+    color: #F8FAFC;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.18s, box-shadow 0.18s;
+  }
+
+  .bc-input::placeholder { color: #334155; }
+
+  .bc-input:focus {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+  }
+
+  .bc-error-msg {
+    display: none;
+    font-size: 12px;
+    color: #EF4444;
+    margin-top: 5px;
+  }
+
+  .bc-field.show-error .bc-error-msg { display: block; }
+  .bc-field.show-error .bc-input {
+    border-color: rgba(239, 68, 68, 0.45);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.06);
+  }
+
+  /* ── Submit button ── */
+  .bc-submit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 13px 24px;
+    background: #2563EB;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    border: 1px solid rgba(99, 149, 255, 0.35);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      box-shadow 0.2s,
+      transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+      opacity 0.15s;
+  }
+
+  .bc-submit:hover:not(:disabled) {
+    background: #1D4ED8;
+    box-shadow: 0 6px 26px rgba(37, 99, 235, 0.46);
+    transform: translateY(-1px);
+  }
+
+  .bc-submit:active:not(:disabled) { transform: translateY(0); }
+  .bc-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+  /* Loading dots */
+  .bc-dots {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .bc-dots span {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: white;
+    animation: dotBounce 1.2s ease-in-out infinite;
+  }
+
+  .bc-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .bc-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes dotBounce {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+    40%           { transform: scale(1);   opacity: 1; }
+  }
+
+  /* ── Form exit / cal entry transitions ── */
+  @keyframes bcSlideOut {
+    to { opacity: 0; transform: translateY(-10px); }
+  }
+  @keyframes bcSlideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .bc-exit { animation: bcSlideOut 300ms cubic-bezier(0.4, 0, 1, 1) forwards; }
+  .bc-enter { animation: bcSlideIn 400ms cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+  /* ── Calendly card ── */
+  .bc-cal-card {
+    padding: 24px 20px 0;
+  }
+
+  .bc-cal-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.55);
+  }
+
+  .bc-cal-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .bc-cal-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #F8FAFC;
+    margin-bottom: 4px;
+  }
+
+  .bc-cal-sub {
+    font-size: 13px;
+    color: #64748B;
+    line-height: 1.55;
+  }
+
+  /* Calendly fills this — standard inline height */
+  .bc-cal-widget {
+    min-width: 280px;
+    height: 650px;
+  }
+
+</style>
+
+<script>
+  const section = document.getElementById('contact');
+  const CALENDLY_URL = section?.dataset?.cal ?? '';
+
+  /* ── Preload Calendly assets when section enters viewport ── */
+  function loadCalendlyAssets() {
+    if (document.getElementById('cal-css')) return;
+
+    const css = document.createElement('link');
+    css.id = 'cal-css';
+    css.rel = 'stylesheet';
+    css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
+
+    const js = document.createElement('script');
+    js.id = 'cal-js';
+    js.src = 'https://assets.calendly.com/assets/external/widget.js';
+    js.async = true;
+    document.head.appendChild(js);
+  }
+
+  if (section) {
+    const preloader = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadCalendlyAssets();
+          preloader.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    preloader.observe(section);
+  }
+
+  /* ── Init inline Calendly widget (retry until script ready) ── */
+  function initWidget(url, name, email, company, el) {
+    const Cal = window['Calendly'];
+    if (Cal) {
+      Cal.initInlineWidget({
+        url,
+        parentElement: el,
+        prefill: {
+          name,
+          email,
+          customAnswers: company ? { a1: company } : {}
+        }
+      });
+    } else {
+      setTimeout(() => initWidget(url, name, email, company, el), 150);
+    }
+  }
+
+  /* ── Form handling ── */
+  const form     = document.getElementById('bc-form');
+  const formWrap = document.getElementById('bc-form-wrap');
+  const calWrap  = document.getElementById('bc-cal-wrap');
+  const submitBtn   = document.getElementById('bc-submit');
+  const submitLabel = document.getElementById('bc-submit-label');
+  const submitDots  = document.getElementById('bc-submit-dots');
+  const submitArrow = document.getElementById('bc-submit-arrow');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nameEl    = document.getElementById('bc-name');
+    const emailEl   = document.getElementById('bc-email');
+    const companyEl = document.getElementById('bc-company');
+    const nameField  = document.getElementById('bc-field-name');
+    const emailField = document.getElementById('bc-field-email');
+
+    let valid = true;
+
+    if (!nameEl.value.trim()) {
+      nameField.classList.add('show-error');
+      valid = false;
+    } else {
+      nameField.classList.remove('show-error');
+    }
+
+    const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRx.test(emailEl.value.trim())) {
+      emailField.classList.add('show-error');
+      valid = false;
+    } else {
+      emailField.classList.remove('show-error');
+    }
+
+    if (!valid) return;
+
+    /* Loading state */
+    submitBtn.disabled = true;
+    submitLabel.hidden = true;
+    submitArrow.hidden = true;
+    submitDots.hidden  = false;
+
+    const name    = nameEl.value.trim();
+    const email   = emailEl.value.trim();
+    const company = companyEl.value.trim();
+
+    /* Build prefilled Calendly URL */
+    const calUrl = new URL(CALENDLY_URL);
+    calUrl.searchParams.set('name', name);
+    calUrl.searchParams.set('email', email);
+    if (company) calUrl.searchParams.set('a1', company);
+
+    /* Form → Calendly transition */
+    formWrap.classList.add('bc-exit');
+
+    setTimeout(() => {
+      formWrap.hidden = true;
+      calWrap.removeAttribute('hidden');
+      calWrap.classList.add('bc-enter');
+
+      const widget = document.getElementById('bc-cal-widget');
+      loadCalendlyAssets();
+      initWidget(calUrl.toString(), name, email, company, widget);
+    }, 320);
+  });
+
+  /* Clear error state on input */
+  document.getElementById('bc-name')?.addEventListener('input', () => {
+    document.getElementById('bc-field-name')?.classList.remove('show-error');
+  });
+  document.getElementById('bc-email')?.addEventListener('input', () => {
+    document.getElementById('bc-field-email')?.classList.remove('show-error');
+  });
+</script>

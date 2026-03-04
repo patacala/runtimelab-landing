@@ -1,0 +1,391 @@
+---
+export interface Props {
+  t: {
+    badge: string;
+    title: { line1: string; line2: string };
+    sub: string;
+    cta: { portfolio: string; specs: string };
+    metrics: Array<{ value: string; label: string; sub: string }>;
+    timeline: {
+      label: string;
+      milestones: Array<{ year: string; title: string; desc: string; stat: string; tag: string }>;
+    };
+  };
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="engineering"
+  class="eng-section py-28 md:py-36"
+  aria-labelledby="engineering-heading"
+>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <!-- ── Badge (centered) ── -->
+    <div class="flex justify-center mb-8 reveal">
+      <div class="flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent" style="animation: pulseDot 2s ease-in-out infinite;"></span>
+        <span class="text-[10px] font-bold tracking-[0.18em] text-secondary uppercase">{t.badge}</span>
+      </div>
+    </div>
+
+    <!-- ── Headline (centered) ── -->
+    <div class="text-center mb-6 reveal reveal-delay-100">
+      <h2
+        id="engineering-heading"
+        class="font-black text-primary leading-[0.92]"
+        style="font-size: clamp(2.5rem, 6vw, 5.5rem); letter-spacing: -0.025em;"
+      >
+        {t.title.line1}
+        <br />
+        <span class="text-gradient">{t.title.line2}</span>
+      </h2>
+    </div>
+
+    <!-- ── Sub (centered) ── -->
+    <p class="text-center text-secondary text-lg max-w-2xl mx-auto leading-relaxed mb-10 reveal reveal-delay-200">
+      {t.sub}
+    </p>
+
+    <!-- ── CTAs (centered) ── -->
+    <div class="flex flex-wrap justify-center gap-3 mb-20 reveal reveal-delay-300">
+      <a
+        href="#"
+        class="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-light text-white font-semibold rounded-lg transition-colors duration-200 text-sm"
+      >
+        {t.cta.portfolio}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a
+        href="#"
+        class="inline-flex items-center gap-2 px-6 py-3 border border-line hover:border-accent/40 text-secondary hover:text-primary font-semibold rounded-lg transition-colors duration-200 text-sm"
+      >
+        {t.cta.specs}
+      </a>
+    </div>
+
+    <!-- ── 4 Metric cards ── -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-24 reveal reveal-delay-300">
+      {t.metrics.map((m, i) => (
+        <div class={`metric-card reveal reveal-delay-${(i + 1) * 100}`}>
+          <div class="metric-value">{m.value}</div>
+          <div class="metric-label">{m.label}</div>
+          <div class="metric-sub">{m.sub}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- ── Timeline ── -->
+    <div>
+      <!-- Header (centered) -->
+      <div class="flex items-center justify-center gap-4 mb-16 reveal">
+        <span class="w-8 h-px bg-accent/40"></span>
+        <span class="text-[11px] font-bold tracking-[0.22em] text-muted uppercase">{t.timeline.label}</span>
+        <span class="w-8 h-px bg-accent/40"></span>
+      </div>
+
+      <!-- Timeline track -->
+      <div class="relative max-w-4xl mx-auto">
+
+        <!-- Center vertical beam -->
+        <div class="timeline-beam" aria-hidden="true">
+          <div class="timeline-beam-line"></div>
+        </div>
+
+        <!-- Milestone rows -->
+        <div class="flex flex-col gap-0">
+          {t.timeline.milestones.map((m, i) => {
+            const isLeft = i % 2 === 0;
+            return (
+              <div class={`timeline-row reveal reveal-delay-${(i + 1) * 100}`}>
+
+                {/* LEFT SLOT */}
+                <div class={`timeline-slot ${isLeft ? 'slot-content text-right' : 'slot-empty'}`}>
+                  {isLeft && (
+                    <div class="milestone-card ml-auto">
+                      <div class="flex items-center justify-end gap-2 mb-3">
+                        <span class="milestone-tag">{m.tag}</span>
+                        <span class="milestone-year">{m.year}</span>
+                      </div>
+                      <h3 class="font-bold text-lg text-primary mb-2 leading-tight">{m.title}</h3>
+                      <p class="text-secondary text-sm leading-relaxed mb-3">{m.desc}</p>
+                      <div class="flex justify-end">
+                        <span class="milestone-stat">{m.stat}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* CENTER DOT */}
+                <div class="timeline-dot-col" aria-hidden="true">
+                  <div class="timeline-dot">
+                    <div class="timeline-dot-inner"></div>
+                  </div>
+                </div>
+
+                {/* RIGHT SLOT */}
+                <div class={`timeline-slot ${!isLeft ? 'slot-content text-left' : 'slot-empty'}`}>
+                  {!isLeft && (
+                    <div class="milestone-card mr-auto">
+                      <div class="flex items-center gap-2 mb-3">
+                        <span class="milestone-year">{m.year}</span>
+                        <span class="milestone-tag">{m.tag}</span>
+                      </div>
+                      <h3 class="font-bold text-lg text-primary mb-2 leading-tight">{m.title}</h3>
+                      <p class="text-secondary text-sm leading-relaxed mb-3">{m.desc}</p>
+                      <span class="milestone-stat">{m.stat}</span>
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Section background: dark surface + top radial indigo glow ── */
+  .eng-section {
+    background-color: #090C12;
+    background-image:
+      /* top-center indigo radial — distinct from blueprint blue */
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(79, 70, 229, 0.13) 0%, transparent 65%),
+      /* subtle horizontal scan lines */
+      repeating-linear-gradient(
+        180deg,
+        transparent,
+        transparent 47px,
+        rgba(255, 255, 255, 0.013) 47px,
+        rgba(255, 255, 255, 0.013) 48px
+      );
+  }
+
+  /* Gradient text for second title line */
+  .text-gradient {
+    background: linear-gradient(90deg, #60A5FA 0%, #818CF8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Metric cards ── */
+  .metric-card {
+    background: rgba(20, 27, 36, 0.7);
+    border: 1px solid #1E293B;
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: border-color 0.2s;
+    backdrop-filter: blur(8px);
+  }
+  .metric-card:hover { border-color: rgba(37, 99, 235, 0.35); }
+
+  .metric-value {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #F8FAFC;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .metric-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #64748B;
+    margin-bottom: 4px;
+  }
+  .metric-sub {
+    font-size: 11px;
+    color: #334155;
+  }
+
+  /* ── Timeline beam (center line) ── */
+  .timeline-beam {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 2px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .timeline-beam-line {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      #1E293B 8%,
+      #1E293B 92%,
+      transparent
+    );
+    box-shadow:
+      0 0 8px 2px rgba(37, 99, 235, 0.2),
+      0 0 20px 4px rgba(37, 99, 235, 0.08);
+    position: relative;
+  }
+
+  /* Traveling photon on the beam */
+  .timeline-beam-line::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: white;
+    box-shadow:
+      0 0 8px 3px rgba(59, 130, 246, 0.9),
+      0 0 16px 6px rgba(37, 99, 235, 0.4);
+    animation: beamPhoton 3s ease-in-out infinite;
+  }
+
+  @keyframes beamPhoton {
+    0%   { top: 0%;   opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* ── Timeline rows ── */
+  .timeline-row {
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr;
+    align-items: center;
+    min-height: 140px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-slot {
+    padding: 20px 0;
+  }
+  .slot-empty { /* spacer */ }
+
+  /* ── Center dot ── */
+  .timeline-dot-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  }
+
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #0B0F14;
+    border: 2px solid #2563EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 0 0 4px rgba(37, 99, 235, 0.15),
+      0 0 12px rgba(37, 99, 235, 0.5);
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+  }
+
+  .timeline-dot-inner {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3B82F6;
+  }
+
+  /* ── Milestone card ── */
+  .milestone-card {
+    background: rgba(20, 27, 36, 0.6);
+    border: 1px solid #1E293B;
+    border-radius: 14px;
+    padding: 20px 22px;
+    max-width: 340px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(4px);
+  }
+  .milestone-card:hover {
+    border-color: rgba(37, 99, 235, 0.3);
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.08);
+  }
+
+  .milestone-year {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    color: #2563EB;
+    text-transform: uppercase;
+  }
+
+  .milestone-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #334155;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid #1E293B;
+    border-radius: 4px;
+    padding: 2px 7px;
+  }
+
+  .milestone-stat {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #22C55E;
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 6px;
+    padding: 3px 10px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Mobile: stack single column */
+  @media (max-width: 767px) {
+    .timeline-beam { display: none; }
+
+    .timeline-row {
+      grid-template-columns: 24px 1fr;
+      grid-template-rows: auto;
+      min-height: unset;
+    }
+
+    .timeline-slot.slot-empty { display: none; }
+    .timeline-slot.slot-content {
+      grid-column: 2;
+      text-align: left !important;
+    }
+    .milestone-card {
+      max-width: 100%;
+      margin: 0 !important;
+    }
+    .milestone-card .flex { justify-content: flex-start !important; }
+    .milestone-card .flex .milestone-tag { order: 2; }
+    .milestone-card .flex .milestone-year { order: 1; }
+    .milestone-stat { display: inline-block; }
+
+    .timeline-dot-col {
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      padding-top: 24px;
+    }
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(0.7); opacity: 0.6; }
+  }
+</style>

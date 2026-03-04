@@ -1,0 +1,476 @@
+---
+export interface Props {
+  t: {
+    label: string;
+    blocks: Array<{ tag: string; question: string; micro: string }>;
+  };
+}
+
+const { t } = Astro.props;
+
+const alignments = ['left', 'right', 'left', 'right'] as const;
+
+// Per-block typographic instability — slight size/rotation/tracking variation
+const instability = [
+  { fontSize: 'clamp(3.9rem, 11.7vw, 9.3rem)', rotate: '-0.3deg', tracking: '-0.03em', offset: '0px'  },
+  { fontSize: 'clamp(3.8rem, 11.4vw, 9.1rem)', rotate: '0.5deg',  tracking: '-0.04em', offset: '10px' },
+  { fontSize: 'clamp(4.1rem, 12.3vw, 9.8rem)', rotate: '-0.8deg', tracking: '-0.02em', offset: '-8px' },
+  { fontSize: 'clamp(3.7rem, 11.1vw, 8.9rem)', rotate: '0.6deg',  tracking: '-0.05em', offset: '5px'  },
+] as const;
+
+
+// Vertical offset breaks perfect grid alignment in micro visuals
+const mvOffsetY = ['-22px', '26px', '16px', '-28px'] as const;
+---
+
+<section
+  id="reality-check"
+  class="bg-bg relative"
+  aria-labelledby="reality-check-heading"
+>
+  <!-- Diagonal grid — texture variation from horizontal grids used elsewhere -->
+  <div class="rc-diag-grid" aria-hidden="true"></div>
+
+  {t.blocks.map((block, i) => (
+    <div
+      class="reality-block relative flex items-center min-h-[55vh] md:min-h-[60vh] border-b border-line/30 overflow-hidden"
+      data-index={i}
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div
+          class={`flex flex-col ${alignments[i] === 'right' ? 'items-end text-right' : 'items-start text-left'}`}
+          style={`transform: translateX(${instability[i].offset});`}
+        >
+
+          <!-- Tag row with decorators -->
+          <div class="flex items-center gap-3 mb-4 reveal">
+            {alignments[i] === 'right' && (
+              <span class={`h-px w-12 md:w-20 ${i === 3 ? 'bg-critical' : 'bg-accent'}`}></span>
+            )}
+            <span class={`text-[10px] font-bold tracking-[0.2em] uppercase ${i === 3 ? 'text-critical' : 'text-accent'}`}>
+              {block.tag}
+            </span>
+            {alignments[i] === 'left' && (
+              <span class={`h-px w-12 md:w-20 ${i === 3 ? 'bg-critical' : 'bg-accent'}`}></span>
+            )}
+          </div>
+
+          <!-- Question: wrapper handles reveal slide-up; h2 carries static instability rotation -->
+          <div class="reveal reveal-delay-100">
+            <h2
+              class="text-primary font-black leading-[0.88] inline-block"
+              style={`font-size: ${instability[i].fontSize}; letter-spacing: ${instability[i].tracking}; transform: rotate(${instability[i].rotate});`}
+            >
+              {block.question}
+            </h2>
+          </div>
+
+          <!-- Microcopy sub-line -->
+          <p class="mt-5 text-muted text-[11px] tracking-[0.06em] uppercase font-medium reveal reveal-delay-200 max-w-[30rem]">
+            {block.micro}
+          </p>
+
+        </div>
+      </div>
+
+      <!-- Ghost background number -->
+      <div
+        aria-hidden="true"
+        class={`absolute ${alignments[i] === 'right' ? 'left-6' : 'right-6'} top-1/2 -translate-y-1/2 text-[12rem] md:text-[20rem] font-black text-line/20 leading-none select-none pointer-events-none`}
+      >
+        {String(i + 1).padStart(2, '0')}
+      </div>
+
+      <!-- Micro Visual — desktop only, offset from center for instability -->
+      <div
+        aria-hidden="true"
+        class={`micro-visual hidden md:block absolute ${alignments[i] === 'right' ? 'left-8 lg:left-20' : 'right-8 lg:right-20'} pointer-events-none`}
+        style={`top: 50%; transform: translateY(${mvOffsetY[i]});`}
+      >
+
+        <!-- MV 0: Inbox — leads disappear on activation -->
+        {i === 0 && (
+          <div class="mv-leads">
+            <div class="mv-header">
+              <span class="mv-status-dot"></span>
+              <span class="mv-label">INBOX</span>
+              <span class="mv-badge">3</span>
+            </div>
+            <div class="mv-item mv-item-a">
+              <span class="mv-avatar"></span>
+              <div>
+                <div class="mv-name">Alex M.</div>
+                <div class="mv-time">just now</div>
+              </div>
+            </div>
+            <div class="mv-item mv-item-b">
+              <span class="mv-avatar"></span>
+              <div>
+                <div class="mv-name">Sarah K.</div>
+                <div class="mv-time">2s ago</div>
+              </div>
+            </div>
+            <div class="mv-empty">— no new leads —</div>
+          </div>
+        )}
+
+        <!-- MV 1: Chat — typing dots pulse at 2.6s cycle, timestamp reveals -->
+        {i === 1 && (
+          <div class="mv-chat">
+            <div class="mv-bubble-in">Are you there?</div>
+            <div class="mv-bubble-out">
+              <span class="mv-typing"></span>
+              <span class="mv-typing"></span>
+              <span class="mv-typing"></span>
+            </div>
+            <div class="mv-sent-ts">Sent 24h ago · Unread</div>
+          </div>
+        )}
+
+        <!-- MV 2: Spreadsheet — cells flicker and corrupt on activation -->
+        {i === 2 && (
+          <div class="mv-sheet">
+            <div class="mv-sheet-head">
+              <span>LEAD</span><span>STATUS</span>
+            </div>
+            <div class="mv-row">
+              <span class="mv-cn">J. Chen</span>
+              <span class="mv-cs">Follow-up</span>
+            </div>
+            <div class="mv-row mv-row-b">
+              <span class="mv-cn mv-cn-f">M. Davis</span>
+              <span class="mv-cs mv-cs-e">???</span>
+            </div>
+            <div class="mv-row mv-row-c">
+              <span class="mv-cn mv-cn-f">R. Park</span>
+              <span class="mv-cs mv-cs-e">Pending?</span>
+            </div>
+          </div>
+        )}
+
+        <!-- MV 3: Deal card — fades gray, CLOSED LOST badge appears -->
+        {i === 3 && (
+          <div class="mv-deal">
+            <div class="mv-deal-id">DEAL #042</div>
+            <div class="mv-deal-val">$4,200<span class="mv-unit">/mo</span></div>
+            <div class="mv-pipe">
+              <span class="pip pip-on"></span>
+              <span class="pip pip-on"></span>
+              <span class="pip pip-on"></span>
+              <span class="pip pip-on"></span>
+              <span class="pip pip-cur"></span>
+            </div>
+            <div class="mv-lost">CLOSED LOST</div>
+          </div>
+        )}
+
+      </div>
+    </div>
+  ))}
+</section>
+
+<style>
+/* ─── Diagonal grid overlay ─────────────────────────────── */
+.rc-diag-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* 135° angled lines — visual contrast to horizontal grids on other sections */
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.022) 0px,
+    rgba(37, 99, 235, 0.022) 1px,
+    transparent 1px,
+    transparent 44px
+  );
+}
+
+/* ─── Micro visual base ─────────────────────────────────── */
+.micro-visual {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.reality-block.is-active .micro-visual {
+  opacity: 1;
+}
+
+/* ─── MV 0 — Inbox: leads slide out ─────────────────────── */
+.mv-leads {
+  width: 158px;
+  background: #10151C;
+  border: 1px solid #1E293B;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+}
+.mv-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 7px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #1E293B;
+}
+.mv-status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #2563EB;
+  flex-shrink: 0;
+}
+.mv-label {
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: #64748B;
+  flex: 1;
+}
+.mv-badge {
+  background: #2563EB;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  border-radius: 3px;
+  padding: 1px 5px;
+  transition: opacity 0.3s ease 0.5s;
+}
+.mv-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.mv-avatar {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #1E293B;
+  border: 1px solid #2563EB20;
+  flex-shrink: 0;
+}
+.mv-name { color: #94A3B8; font-size: 10px; }
+.mv-time { color: #64748B; font-size: 8px; }
+.mv-empty {
+  font-size: 8px;
+  color: #1E293B;
+  text-align: center;
+  padding-top: 5px;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.75s;
+}
+/* Active: leads slide out right */
+.reality-block.is-active .mv-item-a {
+  opacity: 0;
+  transform: translateX(14px);
+  transition-delay: 0.15s;
+}
+.reality-block.is-active .mv-item-b {
+  opacity: 0;
+  transform: translateX(14px);
+  transition-delay: 0.35s;
+}
+.reality-block.is-active .mv-badge  { opacity: 0; }
+.reality-block.is-active .mv-empty  { opacity: 1; }
+
+/* ─── MV 1 — Chat: slow typing loop ─────────────────────── */
+.mv-chat {
+  width: 166px;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.mv-bubble-in,
+.mv-bubble-out {
+  padding: 7px 10px;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+.mv-bubble-in {
+  background: #1E293B;
+  color: #94A3B8;
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+  font-size: 10px;
+}
+.mv-bubble-out {
+  background: #0d1627;
+  border: 1px solid #2563EB25;
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  min-width: 56px;
+  min-height: 30px;
+  justify-content: center;
+}
+.mv-typing {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: #2563EB50;
+}
+.mv-sent-ts {
+  font-size: 8px;
+  color: #EF444450;
+  text-align: right;
+  margin-top: 1px;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.65s;
+}
+/* Active: dots pulse with long 2.6s cycle each, timestamp fades in */
+.reality-block.is-active .mv-typing:nth-child(1) {
+  animation: slowPulse 2.6s 0.2s infinite;
+}
+.reality-block.is-active .mv-typing:nth-child(2) {
+  animation: slowPulse 2.6s 1.1s infinite;
+}
+.reality-block.is-active .mv-typing:nth-child(3) {
+  animation: slowPulse 2.6s 2.0s infinite;
+}
+.reality-block.is-active .mv-sent-ts { opacity: 1; }
+
+@keyframes slowPulse {
+  0%, 100% { opacity: 0.15; transform: translateY(0); }
+  50%       { opacity: 1;    transform: translateY(-2px); }
+}
+
+/* ─── MV 2 — Spreadsheet: cell flicker ──────────────────── */
+.mv-sheet {
+  width: 174px;
+  background: #10151C;
+  border: 1px solid #1E293B;
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+}
+.mv-sheet-head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #141B24;
+  padding: 5px 8px;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: #64748B;
+  border-bottom: 1px solid #1E293B;
+}
+.mv-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5px 8px;
+  border-bottom: 1px solid #1E293B20;
+  font-size: 9px;
+}
+.mv-cn { color: #94A3B8; }
+.mv-cs { color: #64748B; }
+
+/* Active: row-b and row-c cells flicker with staggered delay */
+.reality-block.is-active .mv-row-b .mv-cn-f {
+  animation: cellFlick 0.85s 0.05s step-end 5 forwards;
+}
+.reality-block.is-active .mv-row-b .mv-cs-e {
+  animation: cellRed 1.1s 0.1s step-end 4 forwards;
+}
+.reality-block.is-active .mv-row-c .mv-cn-f {
+  animation: cellFlick 0.75s 0.4s step-end 4 forwards;
+}
+.reality-block.is-active .mv-row-c .mv-cs-e {
+  animation: cellRed 0.9s 0.55s step-end 5 forwards;
+}
+@keyframes cellFlick {
+  0%   { opacity: 1; }
+  20%  { opacity: 0.1; }
+  40%  { opacity: 0.7; }
+  60%  { opacity: 0.15; }
+  80%  { opacity: 0.85; }
+  100% { opacity: 0.45; }
+}
+@keyframes cellRed {
+  0%   { color: #64748B; }
+  25%  { color: #EF4444; }
+  50%  { color: #94A3B8; }
+  75%  { color: #EF4444CC; }
+  100% { color: #EF444460; }
+}
+
+/* ─── MV 3 — Deal card: fades, CLOSED LOST appears ──────── */
+.mv-deal {
+  width: 154px;
+  background: #10151C;
+  border: 1px solid #1E293B;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  transition: opacity 0.55s ease 0.3s, filter 0.55s ease 0.3s;
+}
+.mv-deal-id {
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: #64748B;
+  margin-bottom: 3px;
+}
+.mv-deal-val {
+  font-size: 20px;
+  font-weight: 700;
+  color: #F8FAFC;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  transition: color 0.4s ease 0.25s;
+}
+.mv-unit {
+  font-size: 10px;
+  font-weight: 400;
+  color: #64748B;
+}
+.mv-pipe {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 9px;
+}
+.pip {
+  height: 3px;
+  flex: 1;
+  border-radius: 2px;
+}
+.pip-on  { background: #2563EB50; }
+.pip-cur { background: #2563EB; transition: background 0.4s ease 0.5s; }
+.mv-lost {
+  display: inline-block;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: #EF4444;
+  border: 1px solid #EF444440;
+  border-radius: 2px;
+  padding: 2px 6px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease 0.55s, transform 0.3s ease 0.55s;
+}
+/* Active: card fades and desaturates, badge stamps in */
+.reality-block.is-active .mv-deal      { opacity: 0.35; filter: grayscale(0.6); }
+.reality-block.is-active .mv-deal-val  { color: #64748B; }
+.reality-block.is-active .pip-cur      { background: #EF444440; }
+.reality-block.is-active .mv-lost      { opacity: 1; transform: translateY(0); }
+</style>
+
+<script>
+  const blocks = document.querySelectorAll<HTMLElement>('.reality-block');
+
+  // Fire when block occupies the center 60% of the viewport
+  const centeredObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-active');
+        } else {
+          entry.target.classList.remove('is-active');
+        }
+      });
+    },
+    { rootMargin: '-20% 0px -20% 0px', threshold: 0 }
+  );
+
+  blocks.forEach((block) => centeredObserver.observe(block));
+</script>

@@ -1,0 +1,423 @@
+---
+export interface Props {
+  t: {
+    logo: string;
+    links: { work: string; services: string; contact: string };
+    cta: string;
+  };
+  lang: 'en' | 'es';
+}
+const { t, lang } = Astro.props;
+const langHref   = lang === 'en' ? '/es' : '/';
+const langLabel  = lang === 'en' ? 'ES' : 'EN';
+const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English';
+---
+
+<header id="nav" class="nav-header" role="banner">
+
+  <!-- Top accent line -->
+  <div class="nav-accent-line" aria-hidden="true"></div>
+
+  <nav class="nav-inner" aria-label="Main navigation">
+
+    <!-- ── Logo ── -->
+    <a href="/" class="nav-logo" aria-label="Runtime Lab">
+      <img src="/assets/logo.png" width="170"  alt="Runtime Lab" class="logo-img" />
+    </a>
+
+    <!-- ── Right side: links + CTA + hamburger ── -->
+    <div class="nav-right">
+
+      <!-- Desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="#engineering" class="nav-link">{t.links.work}</a></li>
+        <li><a href="#control"     class="nav-link">{t.links.services}</a></li>
+        <li><a href="#contact"     class="nav-link">{t.links.contact}</a></li>
+      </ul>
+
+      <!-- Language toggle -->
+      <a href={langHref} class="lang-toggle" aria-label={langAriaLabel}>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        {langLabel}
+      </a>
+
+      <!-- CTA -->
+      <a href="#decision" class="nav-cta">
+        {t.cta}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+        </svg>
+      </a>
+
+      <!-- Hamburger -->
+      <button
+        id="mobile-menu-toggle"
+        class="hamburger"
+        aria-label="Toggle mobile menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="ham-line" id="ham-line-1"></span>
+        <span class="ham-line ham-line-mid" id="ham-line-2"></span>
+        <span class="ham-line ham-line-short" id="ham-line-3"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Mobile menu ── -->
+  <div
+    id="mobile-menu"
+    class="mobile-menu hidden"
+    role="navigation"
+    aria-label="Mobile navigation"
+  >
+    <ul class="mobile-links">
+      <li>
+        <a href="#engineering" class="mobile-link">
+          <span class="mobile-num">01</span>
+          {t.links.work}
+        </a>
+      </li>
+      <li>
+        <a href="#control" class="mobile-link">
+          <span class="mobile-num">02</span>
+          {t.links.services}
+        </a>
+      </li>
+      <li>
+        <a href="#contact" class="mobile-link">
+          <span class="mobile-num">03</span>
+          {t.links.contact}
+        </a>
+      </li>
+    </ul>
+
+    <div class="mobile-cta-wrap">
+      <a href="#decision" class="mobile-cta">
+        {t.cta}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href={langHref} class="mobile-lang" aria-label={langAriaLabel}>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        {lang === 'en' ? 'Español' : 'English'}
+      </a>
+    </div>
+  </div>
+
+</header>
+
+<style>
+  /* ── Shell ── */
+  .nav-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    background: rgba(11, 15, 20, 0.85);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    border-bottom: 1px solid rgba(30, 41, 59, 0.55);
+  }
+
+  .nav-accent-line {
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(37, 99, 235, 0.8) 35%,
+      rgba(99, 102, 241, 0.6) 65%,
+      transparent 100%
+    );
+  }
+
+  /* ── Inner row ── */
+  .nav-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 74px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  /* ── Logo ── */
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-logo:hover .logo-icon {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: rgba(59, 130, 246, 0.45);
+  }
+
+  .logo-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: #F8FAFC;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+  }
+  .nav-logo:hover .logo-text { color: #93C5FD; }
+
+  .logo-badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #3B82F6;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.18);
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+
+  /* ── Right block ── */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+
+  /* ── Desktop links ── */
+  .nav-links {
+    display: none;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  @media (min-width: 768px) { .nav-links { display: flex; } }
+
+  .nav-link {
+    display: block;
+    padding: 7px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748B;
+    text-decoration: none;
+    border-radius: 7px;
+    transition: color 0.15s, background 0.15s;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  .nav-link:hover {
+    color: #CBD5E1;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  /* ── Language toggle (desktop) ── */
+  .lang-toggle {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #64748B;
+    border: 1px solid #1E293B;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-left: 6px;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    white-space: nowrap;
+  }
+  @media (min-width: 768px) { .lang-toggle { display: inline-flex; } }
+  .lang-toggle:hover {
+    color: #94A3B8;
+    border-color: #334155;
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  /* ── CTA button — solid, clean ── */
+  .nav-cta {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    margin-left: 10px;
+    background: #2563EB;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid rgba(99, 149, 255, 0.35);
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    box-shadow: 0 2px 12px rgba(37, 99, 235, 0.35);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+  @media (min-width: 768px) { .nav-cta { display: inline-flex; } }
+  .nav-cta:hover {
+    background: #1D4ED8;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+    transform: translateY(-1px);
+  }
+  .nav-cta:active { transform: translateY(0); }
+
+  /* ── Hamburger ── */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 8px;
+    margin-left: 6px;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .hamburger:hover { background: rgba(255,255,255,0.05); }
+  @media (min-width: 768px) { .hamburger { display: none; } }
+
+  .ham-line {
+    display: block;
+    height: 1.5px;
+    width: 20px;
+    background: #64748B;
+    border-radius: 2px;
+    transition: transform 0.25s ease, opacity 0.2s ease, width 0.2s ease;
+    transform-origin: center;
+  }
+  .ham-line-short { width: 13px; }
+  .hamburger:hover .ham-line { background: #94A3B8; }
+
+  /* X state */
+  .hamburger[aria-expanded="true"] #ham-line-1 { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] #ham-line-2 { opacity: 0; transform: scaleX(0); }
+  .hamburger[aria-expanded="true"] #ham-line-3 { transform: translateY(-6.5px) rotate(-45deg); width: 20px; }
+
+  /* ── Mobile menu ── */
+  .mobile-menu {
+    border-top: 1px solid rgba(30, 41, 59, 0.55);
+    background: rgba(9, 12, 18, 0.97);
+    backdrop-filter: blur(20px);
+  }
+  .mobile-menu.hidden { display: none; }
+
+  .mobile-links {
+    list-style: none;
+    margin: 0;
+    padding: 8px 12px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 12px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #94A3B8;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .mobile-link:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #F1F5F9;
+  }
+  .mobile-link:hover .mobile-num { color: #3B82F6; }
+
+  .mobile-num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #1E293B;
+    letter-spacing: 0.06em;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.15s;
+    min-width: 20px;
+  }
+
+  .mobile-cta-wrap {
+    padding: 8px 12px 16px;
+  }
+
+  .mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px;
+    background: #2563EB;
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
+  }
+  .mobile-cta:hover { background: #1D4ED8; }
+
+  /* ── Language toggle (mobile) ── */
+  .mobile-lang {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #1E293B;
+    border-radius: 10px;
+    color: #64748B;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .mobile-lang:hover {
+    color: #94A3B8;
+    border-color: #334155;
+    background: rgba(255, 255, 255, 0.03);
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu   = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+    menu?.classList.toggle('hidden', isOpen);
+  });
+
+  // Close menu when a link inside it is clicked
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggle?.setAttribute('aria-expanded', 'false');
+      menu.classList.add('hidden');
+    });
+  });
+</script>

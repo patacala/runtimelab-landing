@@ -1,0 +1,337 @@
+{
+  "nav": {
+    "logo": "Runtime Lab",
+    "links": {
+      "work": "Lo que Hacemos",
+      "services": "Servicios",
+      "contact": "Contacto"
+    },
+    "cta": "Construye con nosotros"
+  },
+  "hero": {
+    "title": {
+      "line1": "Tu negocio está creciendo.",
+      "line2": "Tu control, no."
+    },
+    "sub": "Las herramientas desconectadas y el trabajo manual son el <strong>techo invisible</strong> de tus ingresos.",
+    "cta": {
+      "primary": "Ver el Impacto"
+    },
+    "scroll": "DESLIZA PARA DESCUBRIR",
+    "chips": {
+      "revenueLeak": "Fuga de Ingresos",
+      "leads": "Leads",
+      "messages": "Mensajes",
+      "tasks": "Tareas"
+    },
+    "impactItems": [
+      "Los leads se enfrían",
+      "Los seguimientos se pierden",
+      "La competencia cierra tus tratos"
+    ],
+    "credibility": "Construido por ingenieros que escalaron plataformas usadas por millones."
+  },
+  "realityCheck": {
+    "label": "ACTO II — VERIFICACIÓN DE REALIDAD",
+    "blocks": [
+      {
+        "tag": "CAPTURA DE LEADS",
+        "question": "¿Leads perdidos?",
+        "micro": "Cada notificación sin respuesta es dinero que nunca entró a tu negocio."
+      },
+      {
+        "tag": "TIEMPO DE RESPUESTA",
+        "question": "¿Respuestas lentas?",
+        "micro": "El primero en responder se queda con el cliente el 78% de las veces. Tú no eres el primero."
+      },
+      {
+        "tag": "GESTIÓN MANUAL",
+        "question": "¿Seguimiento manual?",
+        "micro": "Cada tarea manual es un error esperando ocurrir."
+      },
+      {
+        "tag": "PÉRDIDA DE INGRESOS",
+        "question": "¿Clientes perdidos?",
+        "micro": "$4,200/mes. Sin cerrar. Cada semana."
+      }
+    ]
+  },
+  "structure": {
+    "badge": "ACTO III — EMERGE LA ESTRUCTURA",
+    "title": {
+      "chaos": "El caos no es una estrategia de escala.",
+      "structure": "La estructura sí."
+    },
+    "sub": "Cada herramienta desconectada es una fuga en tu pipeline de ingresos. Cerramos esas fugas con precisión de ingeniería.",
+    "flow": {
+      "step1": {
+        "label": "ESTADO INICIAL: CAOS",
+        "title": "Leads Fragmentados"
+      },
+      "step2": {
+        "label": "FASE DE SINCRONIZACIÓN",
+        "title": "Mensajes Unificados"
+      },
+      "step3": {
+        "label": "EL SISTEMA COMPLETO",
+        "title": "Flujo Vertical Estructurado",
+        "features": ["Pipeline Unificado", "Seguimiento Automático", "Analítica en Tiempo Real"]
+      }
+    },
+    "metrics": {
+      "uptime": { "value": "99.9%", "label": "Disponibilidad del sistema" },
+      "conversion": { "value": "4.2x", "label": "Conversión del pipeline" },
+      "manual": { "value": "Cero", "label": "Procesos manuales" }
+    },
+    "pipeline": ["Lead Capturado", "Seguimiento Activado", "Cita Agendada", "Trato Cerrado"],
+    "annotations": { "step1": "Conectado", "step2": "Automatizado", "step3": "Estructurado" }
+  },
+  "control": {
+    "actLabel": "ACTO VI",
+    "title": "El resultado es claridad.",
+    "sub": "Cuando tus sistemas están alineados, tu negocio opera con precisión. Sin perseguir leads. Sin seguimientos perdidos. Sin dinero que se escape.",
+    "benefits": [
+      {
+        "icon": "clock",
+        "title": "Responde en segundos",
+        "desc": "Tus respuestas automatizadas llegan antes que cualquier competidor — en el momento exacto en que el lead muestra interés."
+      },
+      {
+        "icon": "diamond",
+        "title": "Cierra más clientes",
+        "desc": "Un pipeline estructurado garantiza que cada lead recibe el mensaje correcto en el momento correcto."
+      },
+      {
+        "icon": "moon",
+        "title": "Trabaja mientras duermes",
+        "desc": "Tu sistema opera 24/7, calificando leads y agendando citas de forma automática."
+      }
+    ]
+  },
+  "decision": {
+    "badge": "ACTO VII — LA DECISIÓN",
+    "title": {
+      "line1": "Deja de improvisar.",
+      "line2": "Empieza a operar."
+    },
+    "sub": "Ya viste lo que es posible. Es el momento de construir el sistema que opera tu negocio — para que tú te dediques a hacerlo crecer.",
+    "cta": {
+      "primary": "Construye tu sistema",
+      "secondary": "Ver Demo"
+    },
+    "attributes": ["ENTERPRISE", "OPS GLOBAL", "SISTEMÁTICO", "VELOCIDAD"],
+    "dashboard": {
+      "label": "Ejemplo: Negocio Local de Servicios",
+      "metrics": {
+        "leads": "12 Leads",
+        "followUps": "9 Seguimientos",
+        "appointments": "4 Citas",
+        "closed": "2 Cerrados"
+      },
+      "status": "Estado del Sistema: Óptimo",
+      "progress": "51%"
+    }
+  },
+  "engineering": {
+    "badge": "AUTORIDAD DE INGENIERÍA",
+    "title": {
+      "line1": "CONSTRUIDO POR INGENIEROS QUE",
+      "line2": "ESCALARON PARA MILLONES."
+    },
+    "sub": "Hemos diseñado sistemas para fintech, SaaS empresarial y plataformas de alto tráfico. Ahora traemos ese mismo rigor a tu operación.",
+    "cta": {
+      "portfolio": "Ver Nuestro Portfolio",
+      "specs": "Especificaciones Técnicas"
+    },
+    "metrics": [
+      { "value": "2M+",   "label": "Usuarios Activos Diarios",     "sub": "en 3 regiones globales" },
+      { "value": "26K+",  "label": "Marcas Enterprise Atendidas",  "sub": "en una sola plataforma" },
+      { "value": "99.9%", "label": "Disponibilidad Garantizada",   "sub": "en todos los sistemas" },
+      { "value": "$0",    "label": "Ingresos Perdidos por Caídas", "sub": "en más de 5 años" }
+    ],
+    "timeline": {
+      "label": "PROYECTOS REALES. RESULTADOS MEDIBLES.",
+      "milestones": [
+        {
+          "year": "2018",
+          "title": "Primer Cliente Enterprise",
+          "desc": "Primer proyecto Fortune-500: 12 semanas de sprint con integración CRM a medida para un equipo de ventas de 3,000 usuarios.",
+          "stat": "3,000 usuarios",
+          "tag": "INTEGRACIÓN CRM"
+        },
+        {
+          "year": "2021",
+          "title": "1M Usuarios Simultáneos",
+          "desc": "Rediseñamos la infraestructura en tiempo real para sostener 1M usuarios simultáneos en 3 regiones de AWS con latencia menor a 50ms.",
+          "stat": "< 50ms latencia",
+          "tag": "INFRA EN TIEMPO REAL"
+        },
+        {
+          "year": "2023",
+          "title": "26K+ Marcas Integradas",
+          "desc": "Construimos la capa de integración que conecta más de 26,000 marcas a una plataforma de comercio global con $180M ARR.",
+          "stat": "$180M ARR",
+          "tag": "PLATAFORMA COMERCIAL"
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "title": "Qué Construimos",
+    "subtitle": "Tres sistemas para ordenar tu operación y escalar sin caos.",
+    "blocks": [
+      {
+        "title": "Sistemas de Negocio a Medida",
+        "items": [
+          "Portales de clientes",
+          "Dashboards internos",
+          "Herramientas de gestión operativa",
+          "Integraciones CRM"
+        ],
+        "result": "Menos trabajo manual. Más claridad para operar."
+      },
+      {
+        "title": "Sitios Web que Generan Ventas",
+        "items": [
+          "Diseño orientado a conversión",
+          "Sistemas de captura de leads",
+          "Arquitectura de conversión",
+          "Conexión directa al CRM"
+        ],
+        "result": "Convierte más visitas en clientes calificados."
+      },
+      {
+        "title": "Automatización e IA para tu Negocio",
+        "items": [
+          "Seguimientos automáticos",
+          "Asignación automática de leads",
+          "Agendamiento de citas",
+          "Respuestas inteligentes al instante"
+        ],
+        "result": "Responde más rápido. Cierra más tratos."
+      }
+    ]
+  },
+  "whoWeWorkWith": {
+    "title": "Para Negocios que Ya Están Creciendo",
+    "subtitle": "Trabajamos con negocios que crecen rápido y necesitan operar a la misma velocidad.",
+    "segments": [
+      {
+        "label": "Contratistas",
+        "desc": "Equipos por proyecto que manejan presupuestos, visitas de obra y solicitudes de clientes por llamadas, formularios y mensajes."
+      },
+      {
+        "label": "Equipos Inmobiliarios",
+        "desc": "Equipos de múltiples agentes que reciben consultas de compradores y vendedores por portales, correos y CRMs personales."
+      },
+      {
+        "label": "Negocios de Servicio Local",
+        "desc": "Servicios locales que gestionan reservas por llamadas, DMs, formularios web y clientes que llegan en persona."
+      },
+      {
+        "label": "Firmas Profesionales",
+        "desc": "Firmas de asesoría, legales y financieras que dependen de referencias e inbound sin un sistema de seguimiento estructurado."
+      },
+      {
+        "label": "Negocios con Múltiples Sucursales",
+        "desc": "Marcas que manejan demanda en varias ubicaciones, cada una corriendo con herramientas y procesos distintos."
+      }
+    ]
+  },
+  "proof": {
+    "badge": "CASO DE ÉXITO",
+    "sectionTitle": {
+      "line1": "Sistemas reales.",
+      "line2": "Resultados reales."
+    },
+    "sectionSub": "Un ejemplo concreto de lo que cambia cuando la infraestructura operativa correcta está en marcha.",
+    "industry": "NEGOCIO DE SERVICIOS LOCAL",
+    "situation": {
+      "label": "LA SITUACIÓN",
+      "context": "Una empresa de servicios en crecimiento perdiendo clientes por respuestas lentas y operaciones manuales desconectadas.",
+      "problems": {
+        "label": "EL PROBLEMA",
+        "items": [
+          "Leads perdidos por tiempos de respuesta lentos",
+          "Sin visibilidad unificada del pipeline",
+          "Seguimientos manuales que se perdían constantemente"
+        ]
+      }
+    },
+    "built": {
+      "label": "LO QUE CONSTRUIMOS",
+      "items": [
+        "Captura automática de leads de todos los canales",
+        "Dashboard centralizado de clientes",
+        "Automatización de seguimientos — 24/7"
+      ]
+    },
+    "result": {
+      "label": "EL RESULTADO",
+      "stat": "+37%",
+      "statLabel": "más llamadas agendadas",
+      "timeline": "En producción en 14 días. ROI entregado en el primer mes.",
+      "metrics": [
+        { "value": "14d", "label": "De kickoff a producción" },
+        { "value": "0", "label": "Leads perdidos tras el lanzamiento" },
+        { "value": "24/7", "label": "Seguimiento automatizado" }
+      ]
+    }
+  },
+  "bookCall": {
+    "badge": "AGENDA TU SESIÓN ESTRATÉGICA",
+    "title": {
+      "line1": "Trazamos",
+      "line2": "tu próximo paso."
+    },
+    "sub": "En 30 minutos, revisamos tu operación actual, identificamos las brechas que te cuestan ingresos y te mostramos exactamente qué construiríamos — sin rodeos, sin presión.",
+    "trust": [
+      "Sesión de 30 minutos",
+      "Auditoría de operaciones incluida",
+      "Hoja de ruta personalizada",
+      "Sin compromiso"
+    ],
+    "form": {
+      "title": "Reserva tu lugar",
+      "name": {
+        "label": "Nombre Completo",
+        "placeholder": "Juan García",
+        "error": "Por favor ingresa tu nombre"
+      },
+      "email": {
+        "label": "Email de Trabajo",
+        "placeholder": "juan@empresa.com",
+        "error": "Por favor ingresa un email válido"
+      },
+      "company": {
+        "label": "Empresa",
+        "placeholder": "Mi Empresa S.A.",
+        "optional": "opcional"
+      },
+      "submit": "Agendar una Llamada"
+    },
+    "scheduled": {
+      "title": "Elige el horario que mejor te quede",
+      "sub": "Tus datos fueron guardados. Selecciona un horario y te enviaremos la confirmación."
+    }
+  },
+  "footer": {
+    "tagline": "Sistemas de operación diseñados para escalar con intención.",
+    "nav": {
+      "systems": "Sistemas",
+      "howItWorks": "Cómo Funciona",
+      "caseStudies": "Casos de Éxito",
+      "contact": "Contacto"
+    },
+    "contact": {
+      "email": "support@runtime-lab.com",
+      "phone": "+16452205559",
+      "address": "2125 Biscayne Blvd, Ste 204 #24417, Miami, Florida 33137, Estados Unidos"
+    },
+    "legal": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio",
+      "copyright": "© Runtime Lab {year}"
+    }
+  }
+}

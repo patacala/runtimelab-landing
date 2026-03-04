@@ -1,0 +1,188 @@
+---
+export interface Props {
+  t: {
+    title: string;
+    subtitle: string;
+    blocks: Array<{
+      title: string;
+      items: string[];
+      result: string;
+    }>;
+  };
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="capabilities"
+  class="capabilities-section py-24 md:py-32 border-t border-line/50"
+  aria-labelledby="capabilities-heading"
+>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <h2
+        id="capabilities-heading"
+        class="font-black text-primary leading-tight mb-4"
+        style="font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.025em;"
+      >
+        {t.title}
+      </h2>
+      <p class="text-secondary text-lg max-w-2xl mx-auto leading-relaxed">
+        {t.subtitle}
+      </p>
+    </div>
+
+    <!-- Lista vertical: cada capacidad = franja con borde izquierdo (no cards) -->
+    <div class="capabilities-list">
+      {t.blocks.map((block, i) => (
+        <div class={`capability-strip reveal reveal-delay-${(i + 1) * 100}`}>
+          <div class="capability-strip-accent" aria-hidden="true"></div>
+          <div class="capability-strip-content">
+            <div class="capability-strip-header">
+              <span class="capability-strip-num">0{i + 1}</span>
+              <h3 class="capability-strip-title">{block.title}</h3>
+            </div>
+            <ul class="capability-strip-items" role="list">
+              {block.items.map((item) => (
+                <li class="capability-strip-item">{item}</li>
+              ))}
+            </ul>
+            <p class="capability-strip-result">{block.result}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .capabilities-section {
+    background-color: #10151C;
+    background-image: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, transparent 50%, rgba(15, 23, 42, 0.3) 100%);
+  }
+
+  .capabilities-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .capability-strip {
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid #1E293B;
+    transition: background-color 0.2s ease;
+  }
+
+  .capability-strip:last-child {
+    border-bottom: none;
+  }
+
+  .capability-strip:hover {
+    background: rgba(20, 27, 36, 0.6);
+  }
+
+  .capability-strip-accent {
+    width: 3px;
+    flex-shrink: 0;
+    background: linear-gradient(to bottom, #2563EB, rgba(37, 99, 235, 0.3));
+    opacity: 0.9;
+  }
+
+  .capability-strip-content {
+    flex: 1;
+    padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+    display: grid;
+    gap: 0.75rem 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .capability-strip-content {
+      grid-template-columns: 180px 1fr auto;
+      grid-template-rows: auto 1fr;
+      align-items: start;
+    }
+    .capability-strip-header {
+      grid-column: 1;
+      grid-row: 1 / -1;
+    }
+    .capability-strip-items {
+      grid-column: 2;
+      grid-row: 1 / -1;
+    }
+    .capability-strip-result {
+      grid-column: 3;
+      grid-row: 1 / -1;
+      align-self: center;
+      text-align: right;
+    }
+  }
+
+  .capability-strip-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .capability-strip-num {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: rgba(37, 99, 235, 0.6);
+  }
+
+  .capability-strip-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .capability-strip-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+
+  .capability-strip-item {
+    font-size: 0.8125rem;
+    color: #94A3B8;
+    padding-left: 0.875rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .capability-strip-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #334155;
+  }
+
+  .capability-strip-result {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #2563EB;
+    margin: 0;
+    line-height: 1.4;
+    max-width: 200px;
+  }
+
+  @media (max-width: 767px) {
+    .capability-strip-result {
+      max-width: none;
+    }
+  }
+</style>

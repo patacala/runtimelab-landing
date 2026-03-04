@@ -1,0 +1,610 @@
+---
+export interface Props {
+  t: {
+    badge: string;
+    title: { chaos: string; structure: string };
+    sub: string;
+    flow: {
+      step1: { label: string; title: string };
+      step2: { label: string; title: string };
+      step3: { label: string; title: string; features: string[] };
+    };
+    metrics: {
+      uptime: { value: string; label: string };
+      conversion: { value: string; label: string };
+      manual: { value: string; label: string };
+    };
+    pipeline: [string, string, string, string];
+    annotations: { step1: string; step2: string; step3: string };
+  };
+}
+const { t } = Astro.props;
+
+const sources = [
+  {
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    label: 'DIGITAL CHANNEL',
+    title: 'Web Pages',
+  },
+  {
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2h-3a5 5 0 0 0-5 5v3H6v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+    label: 'SOCIAL CHANNELS',
+    title: 'Social Networks',
+  },
+  {
+    icon: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+    label: 'PAID TRAFFIC',
+    title: 'Ad Campaigns',
+  },
+];
+
+const pipelineStages = [
+  { name: t.pipeline[0], success: false },
+  { name: t.pipeline[1], success: false },
+  { name: t.pipeline[2], success: false },
+  { name: t.pipeline[3], success: true  },
+];
+---
+
+<section
+  id="structure"
+  class="structure-section py-28 md:py-36"
+  aria-labelledby="structure-heading"
+>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+
+    <!-- Headline -->
+    <div class="mb-6 reveal">
+      <h2
+        id="structure-heading"
+        class="font-black leading-[1.0]"
+        style="font-size: clamp(2.25rem, 5.5vw, 5rem); letter-spacing: -0.025em;"
+      >
+        <span class="text-primary">{t.title.chaos}</span>
+        <br />
+        <span class="text-accent">{t.title.structure}</span>
+      </h2>
+    </div>
+
+    <p class="text-secondary text-lg leading-relaxed mb-20 reveal reveal-delay-100">
+      {t.sub}
+    </p>
+
+    <!-- ═══════════════════════════════════
+         FLOW DIAGRAM
+    ═══════════════════════════════════ -->
+    <div class="relative flex flex-col items-center w-full max-w-xl mx-auto mb-24">
+
+      <!-- Row 0: Source cards — static, always visible via reveal -->
+      <div class="grid grid-cols-3 gap-3 w-full reveal reveal-delay-100">
+        {sources.map((s) => (
+          <div class="source-card">
+            <div class="source-icon" set:html={s.icon} />
+            <div class="source-title">{s.title}</div>
+            <div class="source-label">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Converging connector — SVG paths draw via stroke-dashoffset -->
+      <div class="converge-connector w-full p-0 m-0" aria-hidden="true">
+        <svg
+          class="w-full block"
+          style="height: 48px;"
+          viewBox="0 0 320 64"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="beamGrad" x1="0" y1="0" x2="0" y2="64" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#334155" stop-opacity="0.4"/>
+              <stop offset="100%" stop-color="#3B82F6" stop-opacity="1"/>
+            </linearGradient>
+            <filter id="beamGlow" x="-200%" y="-20%" width="500%" height="140%">
+              <feGaussianBlur stdDeviation="2" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Glow layer -->
+          <path class="cp cp-side" d="M53 0 L160 64"  stroke="#2563EB" stroke-width="3" stroke-opacity="0.15" filter="url(#beamGlow)"/>
+          <path class="cp cp-mid"  d="M160 0 L160 64" stroke="#2563EB" stroke-width="3" stroke-opacity="0.15" filter="url(#beamGlow)"/>
+          <path class="cp cp-side" d="M267 0 L160 64" stroke="#2563EB" stroke-width="3" stroke-opacity="0.15" filter="url(#beamGlow)"/>
+
+          <!-- Core lines -->
+          <path class="cp cp-side" d="M53 0 L160 64"  stroke="url(#beamGrad)" stroke-width="1.5"/>
+          <path class="cp cp-mid"  d="M160 0 L160 64" stroke="url(#beamGrad)" stroke-width="1.5"/>
+          <path class="cp cp-side" d="M267 0 L160 64" stroke="url(#beamGrad)" stroke-width="1.5"/>
+
+          <!-- Merge dot -->
+          <circle class="converge-dot-main" cx="160" cy="64" r="3" fill="#2563EB"/>
+          <circle class="converge-dot-halo" cx="160" cy="64" r="6" fill="#2563EB"/>
+        </svg>
+      </div>
+
+      <!-- ── Step 1: Fragmented Leads ── -->
+      <div class="relative w-full" data-flow-step="1">
+
+        <!-- Micro annotation: Connected (right side, lg+ only) -->
+        <div class="flow-anno hidden lg:flex items-center absolute top-1/2 -translate-y-1/2 pointer-events-none" style="right: -9.5rem;">
+          <span class="block h-px w-8 bg-line flex-shrink-0"></span>
+          <span class="block w-1.5 h-1.5 rounded-full bg-muted/50 flex-shrink-0 mx-2"></span>
+          <span class="text-[9px] font-bold tracking-[0.2em] text-muted uppercase whitespace-nowrap">{t.annotations.step1}</span>
+        </div>
+
+        <div class="flow-card border-line/70">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="flow-icon-box bg-surface border-line/60">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <div class="text-left">
+              <div class="font-bold text-base text-primary leading-tight">{t.flow.step1.title}</div>
+              <div class="flow-sublabel text-muted">{t.flow.step1.label}</div>
+            </div>
+          </div>
+          <div class="flow-right-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beam connector 1 -->
+      <div class="beam-connector" data-flow-connector="1" aria-hidden="true">
+        <div class="beam-line"></div>
+        <div class="beam-dot"></div>
+      </div>
+
+      <!-- ── Step 2: Message Synchronization ── -->
+      <div class="relative w-full" data-flow-step="2">
+
+        <!-- Micro annotation: Automated (left side, lg+ only) -->
+        <div class="flow-anno flow-anno-left hidden lg:flex flex-row-reverse items-center absolute top-1/2 -translate-y-1/2 pointer-events-none" style="left: -9.5rem;">
+          <span class="block h-px w-8 bg-accent/40 flex-shrink-0"></span>
+          <span class="block w-1.5 h-1.5 rounded-full bg-accent/50 flex-shrink-0 mx-2"></span>
+          <span class="text-[9px] font-bold tracking-[0.2em] text-accent/60 uppercase whitespace-nowrap">{t.annotations.step2}</span>
+        </div>
+
+        <div class="flow-card border-accent/40 bg-card/80">
+          <div class="flex items-center gap-4 flex-1">
+            <div class="flow-icon-box bg-accent/10 border-accent/30">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+                <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+              </svg>
+            </div>
+            <div class="text-left">
+              <div class="font-bold text-base text-accent leading-tight">{t.flow.step2.title}</div>
+              <div class="flow-sublabel text-accent/50">{t.flow.step2.label}</div>
+            </div>
+          </div>
+          <div class="flow-right-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Beam connector 2 -->
+      <div class="beam-connector" data-flow-connector="2" aria-hidden="true">
+        <div class="beam-line accent"></div>
+        <div class="beam-dot accent"></div>
+      </div>
+
+      <!-- ── Step 3: Structured Vertical Flow ── -->
+      <div class="relative w-full" data-flow-step="3">
+
+        <!-- Micro annotation: Structured (right side, lg+ only) -->
+        <div class="flow-anno hidden lg:flex items-center absolute pointer-events-none" style="right: -9.5rem; top: 44px;">
+          <span class="block h-px w-8 bg-accent/50 flex-shrink-0"></span>
+          <span class="block w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0 mx-2"></span>
+          <span class="text-[9px] font-bold tracking-[0.2em] text-accent/80 uppercase whitespace-nowrap">{t.annotations.step3}</span>
+        </div>
+
+        <!-- Ghost depth layers + pulse rings -->
+        <div class="step3-wrapper">
+          <div class="card-pulse-ring rr1" aria-hidden="true"></div>
+          <div class="card-pulse-ring rr2" aria-hidden="true"></div>
+          <div class="card-pulse-ring rr3" aria-hidden="true"></div>
+          <div class="ghost-card ghost-2" aria-hidden="true"></div>
+          <div class="ghost-card ghost-1" aria-hidden="true"></div>
+
+          <!-- Primary card -->
+          <div class="step3-card">
+            <div class="step3-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-xl text-white mt-5 mb-1">{t.flow.step3.title}</h3>
+            <p class="text-[10px] font-bold tracking-[0.18em] text-white/40 uppercase mb-7">{t.flow.step3.label}</p>
+
+            <!-- Pipeline stages — light up sequentially via JS -->
+            <div class="pipeline-stages w-full">
+              {pipelineStages.map((stage, i) => (
+                <div
+                  class={`pipeline-stage${stage.success ? ' stage-final' : ''}`}
+                  data-ps={i}
+                >
+                  <span class="ps-dot"></span>
+                  <span class="ps-name">{stage.name}</span>
+                  <span class="ps-check">✓</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end flow -->
+
+    <!-- Metrics bar -->
+    <div class="grid grid-cols-3 gap-px bg-line rounded-xl overflow-hidden reveal reveal-delay-500 text-center">
+      {[t.metrics.uptime, t.metrics.conversion, t.metrics.manual].map((m) => (
+        <div class="bg-card px-4 py-8">
+          <div class="font-black text-3xl md:text-4xl text-primary mb-1">{m.value}</div>
+          <div class="text-[10px] font-medium tracking-[0.1em] text-muted uppercase">{m.label}</div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ─── Blueprint grid background ─────────────────────────── */
+.structure-section {
+  background-color: #080C11;
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.08) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* ─── Source cards ──────────────────────────────────────── */
+.source-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  background: #141B24;
+  border: 1px solid #1E293B;
+  border-radius: 12px;
+  color: #64748B;
+  transition: border-color 0.2s;
+}
+.source-card:hover { border-color: rgba(37, 99, 235, 0.3); }
+.source-icon  { color: #64748B; }
+.source-title { font-size: 12px; font-weight: 700; color: #94A3B8; text-align: center; line-height: 1.2; }
+.source-label { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; color: #334155; text-transform: uppercase; text-align: center; }
+
+/* ─── SVG converge draw animation ──────────────────────── */
+.cp {
+  transition: stroke-dashoffset 0.7s ease;
+}
+.cp-side {
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+}
+.cp-mid {
+  stroke-dasharray: 70;
+  stroke-dashoffset: 70;
+}
+.converge-dot-main,
+.converge-dot-halo {
+  opacity: 0;
+  transition: opacity 0.4s ease 0.6s;
+}
+.draw-converge .cp-side,
+.draw-converge .cp-mid        { stroke-dashoffset: 0; }
+.draw-converge .converge-dot-main { opacity: 0.75; }
+.draw-converge .converge-dot-halo { opacity: 0.12; }
+
+/* ─── Flow steps — sequential activation ────────────────── */
+[data-flow-step] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+[data-flow-step].stage-lit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Flow step cards ───────────────────────────────────── */
+.flow-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #141B24;
+  border: 1px solid;
+  border-radius: 14px;
+  padding: 20px 22px;
+}
+.flow-icon-box {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.flow-sublabel {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.flow-right-icon { opacity: 0.5; flex-shrink: 0; }
+
+/* ─── Beam connector — clip-path draw ───────────────────── */
+.beam-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px 0;
+}
+.beam-line {
+  width: 2px;
+  height: 52px;
+  background: linear-gradient(to bottom, rgba(30,41,59,0), rgba(51,65,85,0.85) 30%, rgba(51,65,85,0.85) 70%, rgba(30,41,59,0));
+  border-radius: 9999px;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.45s ease;
+}
+.beam-line.accent {
+  background: linear-gradient(to bottom, rgba(37,99,235,0), rgba(59,130,246,1) 30%, rgba(59,130,246,1) 70%, rgba(37,99,235,0));
+}
+[data-flow-connector].draw .beam-line {
+  clip-path: inset(0 0 0% 0);
+}
+.beam-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #334155;
+  border: 1px solid #475569;
+  margin-top: -1px;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.4s;
+}
+.beam-dot.accent {
+  background: #2563EB;
+  border-color: #3B82F6;
+}
+[data-flow-connector].draw .beam-dot {
+  opacity: 1;
+}
+
+/* ─── Micro annotation labels ───────────────────────────── */
+.flow-anno {
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.45s ease 0.2s, transform 0.45s ease 0.2s;
+}
+.flow-anno-left {
+  transform: translateX(-8px);
+}
+[data-flow-step].stage-lit .flow-anno {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Card pulse rings ──────────────────────────────────── */
+.card-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  border: 1px solid transparent;
+  pointer-events: none;
+  transform-origin: center center;
+  opacity: 0;
+  animation: cardPulse 3.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+  animation-play-state: paused;
+}
+.rr1 { animation-delay: 0s;    border-color: rgba(59, 130, 246, 0.45); }
+.rr2 { animation-delay: 1.13s; border-color: rgba(59, 130, 246, 0.28); }
+.rr3 { animation-delay: 2.26s; border-color: rgba(59, 130, 246, 0.14); }
+[data-flow-step].stage-lit .card-pulse-ring {
+  animation-play-state: running;
+}
+@keyframes cardPulse {
+  0%   { transform: scale(1.0);  opacity: 0.85; }
+  60%  { opacity: 0.3; }
+  100% { transform: scale(1.14); opacity: 0; }
+}
+
+/* ─── Photon laser on beam connectors ───────────────────── */
+.beam-line::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #94A3B8;
+  box-shadow: 0 0 5px 2px rgba(148, 163, 184, 0.5);
+  animation: photonTravel 3.6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.beam-line.accent::after {
+  background: white;
+  box-shadow: 0 0 6px 3px rgba(59, 130, 246, 0.8), 0 0 12px 5px rgba(37, 99, 235, 0.4);
+  animation-duration: 2.8s;
+}
+[data-flow-connector].draw .beam-line::after {
+  animation-play-state: running;
+}
+@keyframes photonTravel {
+  0%   { top: 0%;   opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ─── Step 3 wrapper + ghost depth layers ───────────────── */
+.step3-wrapper {
+  position: relative;
+  width: 100%;
+}
+.ghost-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  pointer-events: none;
+  background: linear-gradient(160deg, #2D5BE3 0%, #1E50D6 50%, #1A44C2 100%);
+}
+.ghost-1 {
+  transform: translate(5px, -5px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  opacity: 0.07;
+  z-index: 0;
+}
+.ghost-2 {
+  transform: translate(10px, -10px);
+  border: 1px solid rgba(59, 130, 246, 0.12);
+  opacity: 0.04;
+  z-index: 0;
+}
+
+/* ─── Step 3 primary card ───────────────────────────────── */
+.step3-card {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: linear-gradient(160deg, #2D5BE3 0%, #1E50D6 50%, #1A44C2 100%);
+  border-radius: 22px;
+  padding: 36px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.step3-icon-box {
+  position: relative;
+  z-index: 2;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── Pipeline stages ───────────────────────────────────── */
+.pipeline-stages {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.pipeline-stage {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.pipeline-stage:last-child { border-bottom: none; }
+.pipeline-stage.lit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.ps-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.pipeline-stage.lit .ps-dot {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+.stage-final.lit .ps-dot {
+  background: #22C55E;
+  border-color: #4ADE80;
+}
+.ps-name {
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.3s ease;
+}
+.pipeline-stage.lit .ps-name {
+  color: rgba(255, 255, 255, 0.88);
+}
+.ps-check {
+  font-size: 10px;
+  font-weight: 700;
+  color: transparent;
+  transition: color 0.25s ease 0.1s;
+}
+.pipeline-stage.lit .ps-check     { color: rgba(255, 255, 255, 0.5); }
+.stage-final.lit    .ps-check     { color: #4ADE80; }
+</style>
+
+<script>
+  const section = document.getElementById('structure');
+  if (section) {
+    const converge   = section.querySelector<HTMLElement>('.converge-connector');
+    const steps      = section.querySelectorAll<HTMLElement>('[data-flow-step]');
+    const connectors = section.querySelectorAll<HTMLElement>('[data-flow-connector]');
+    const stages     = section.querySelectorAll<HTMLElement>('[data-ps]');
+
+    const seq = (el: Element | null | undefined, cls: string, delay: number) => {
+      if (!el) return;
+      setTimeout(() => el.classList.add(cls), delay);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+
+        // 1. Converge SVG draws
+        seq(converge, 'draw-converge', 0);
+
+        // 2. Step 1 fades in
+        seq(steps[0], 'stage-lit', 250);
+
+        // 3. Connector 1 draws down
+        seq(connectors[0], 'draw', 600);
+
+        // 4. Step 2 fades in
+        seq(steps[1], 'stage-lit', 900);
+
+        // 5. Connector 2 draws down
+        seq(connectors[1], 'draw', 1200);
+
+        // 6. Step 3 fades in (card + ghost blocks)
+        seq(steps[2], 'stage-lit', 1500);
+
+        // 7. Pipeline stages light up one by one
+        stages.forEach((s, i) => seq(s, 'lit', 1750 + i * 180));
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(section);
+  }
+</script>

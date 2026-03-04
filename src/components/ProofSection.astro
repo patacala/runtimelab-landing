@@ -1,0 +1,403 @@
+---
+export interface Props {
+  t: {
+    badge: string;
+    sectionTitle: { line1: string; line2: string };
+    sectionSub: string;
+    industry: string;
+    situation: {
+      label: string;
+      context: string;
+      problems: { label: string; items: string[] };
+    };
+    built: { label: string; items: string[] };
+    result: {
+      label: string;
+      stat: string;
+      statLabel: string;
+      timeline: string;
+      metrics: Array<{ value: string; label: string }>;
+    };
+  };
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="proof"
+  class="proof-section"
+  aria-labelledby="proof-heading"
+>
+
+  <!-- ── Section header ── -->
+  <div class="proof-header reveal">
+    <span class="proof-badge">{t.badge}</span>
+    <h2 id="proof-heading" class="proof-title">
+      <span class="block proof-title-dim">{t.sectionTitle.line1}</span>
+      <span class="block proof-title-bright">{t.sectionTitle.line2}</span>
+    </h2>
+    <p class="proof-sub">{t.sectionSub}</p>
+  </div>
+
+  <!-- ── Main case study card ── -->
+  <div class="proof-card reveal reveal-delay-200">
+
+    <!-- Industry label bar -->
+    <div class="proof-card-top">
+      <span class="proof-industry">{t.industry}</span>
+      <span class="proof-dot-sep" aria-hidden="true"></span>
+      <span class="proof-anon">Anonymous — on request</span>
+    </div>
+
+    <div class="proof-card-body">
+
+      <!-- Left column: narrative -->
+      <div class="proof-left">
+
+        <!-- Context -->
+        <p class="proof-context">{t.situation.context}</p>
+
+        <!-- Problems (before) -->
+        <div class="proof-block">
+          <span class="proof-block-label proof-label-before">{t.situation.problems.label}</span>
+          <ul class="proof-list" role="list">
+            {t.situation.problems.items.map(item => (
+              <li class="proof-list-item proof-item-before">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Built (solution) -->
+        <div class="proof-block">
+          <span class="proof-block-label proof-label-built">{t.built.label}</span>
+          <ul class="proof-list" role="list">
+            {t.built.items.map(item => (
+              <li class="proof-list-item proof-item-built">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Vertical divider -->
+      <div class="proof-divider" aria-hidden="true"></div>
+
+      <!-- Right column: outcome -->
+      <div class="proof-right">
+
+        <span class="proof-block-label proof-label-result">{t.result.label}</span>
+
+        <!-- Hero stat -->
+        <div class="proof-stat-wrap">
+          <div class="proof-stat">{t.result.stat}</div>
+          <div class="proof-stat-label">{t.result.statLabel}</div>
+        </div>
+
+        <!-- Mini metric row -->
+        <div class="proof-metrics">
+          {t.result.metrics.map(m => (
+            <div class="proof-metric">
+              <span class="proof-metric-value">{m.value}</span>
+              <span class="proof-metric-label">{m.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Timeline statement -->
+        <p class="proof-timeline">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          {t.result.timeline}
+        </p>
+
+      </div>
+
+    </div><!-- /proof-card-body -->
+
+  </div><!-- /proof-card -->
+
+</section>
+
+<style>
+
+  /* ── Section shell — surface bg, lighter than neighbors ── */
+  .proof-section {
+    background-color: #10151C;
+    padding: clamp(80px, 12vw, 120px) clamp(24px, 6vw, 80px);
+  }
+
+  /* ── Section header ── */
+  .proof-header {
+    max-width: 680px;
+    margin: 0 auto clamp(48px, 6vw, 72px);
+    text-align: center;
+  }
+
+  .proof-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #22C55E;
+    background: rgba(34, 197, 94, 0.07);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+  }
+
+  .proof-title {
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.07;
+    margin-bottom: 18px;
+  }
+
+  .proof-title-dim    { color: rgba(248, 250, 252, 0.65); }
+  .proof-title-bright { color: #F8FAFC; }
+
+  .proof-sub {
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: #64748B;
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* ── Case study card ── */
+  .proof-card {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: rgba(11, 15, 20, 0.85);
+    border: 1px solid rgba(30, 41, 59, 0.75);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+  }
+
+  /* Industry label bar */
+  .proof-card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .proof-industry {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #3B82F6;
+    text-transform: uppercase;
+  }
+
+  .proof-dot-sep {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #334155;
+    flex-shrink: 0;
+  }
+
+  .proof-anon {
+    font-size: 11px;
+    color: #334155;
+    font-style: italic;
+  }
+
+  /* Card body: two-column */
+  .proof-card-body {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    min-height: 360px;
+  }
+
+  @media (max-width: 768px) {
+    .proof-card-body {
+      grid-template-columns: 1fr;
+    }
+    .proof-divider {
+      display: none;
+    }
+    .proof-right {
+      border-top: 1px solid rgba(30, 41, 59, 0.55);
+    }
+  }
+
+  /* Vertical divider between columns */
+  .proof-divider {
+    width: 1px;
+    background: rgba(30, 41, 59, 0.55);
+    margin: 28px 0;
+  }
+
+  /* Left column */
+  .proof-left {
+    padding: clamp(24px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .proof-context {
+    font-size: 15px;
+    font-weight: 500;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .proof-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .proof-block-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    align-self: flex-start;
+  }
+
+  .proof-label-before {
+    color: #EF4444;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.18);
+  }
+
+  .proof-label-built {
+    color: #60A5FA;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+  }
+
+  .proof-label-result {
+    color: #4ADE80;
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    margin-bottom: 4px;
+  }
+
+  .proof-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .proof-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .proof-list-item svg { flex-shrink: 0; margin-top: 2px; }
+
+  .proof-item-before { color: #64748B; }
+  .proof-item-built  { color: #94A3B8; }
+
+  /* Right column — outcome */
+  .proof-right {
+    padding: clamp(24px, 3vw, 36px);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    /* Very subtle green tint — success zone */
+    background: rgba(34, 197, 94, 0.025);
+  }
+
+  /* Hero stat */
+  .proof-stat-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .proof-stat {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 900;
+    color: #22C55E;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .proof-stat-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4ADE80;
+    opacity: 0.85;
+  }
+
+  /* Mini metrics */
+  .proof-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(30, 41, 59, 0.5);
+  }
+
+  .proof-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 10px 8px;
+    background: rgba(11, 15, 20, 0.5);
+    border: 1px solid rgba(30, 41, 59, 0.6);
+    border-radius: 8px;
+  }
+
+  .proof-metric-value {
+    font-size: 15px;
+    font-weight: 800;
+    color: #F8FAFC;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .proof-metric-label {
+    font-size: 10px;
+    color: #475569;
+    line-height: 1.3;
+  }
+
+  /* Timeline statement */
+  .proof-timeline {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid rgba(30, 41, 59, 0.4);
+  }
+
+  .proof-timeline svg { flex-shrink: 0; margin-top: 2px; }
+
+</style>

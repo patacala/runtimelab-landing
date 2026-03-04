@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Hero from '../../components/Hero.astro';
+import RealityCheck from '../../components/RealityCheck.astro';
+import StructureEmerges from '../../components/StructureEmerges.astro';
+import CapabilitiesSnapshot from '../../components/CapabilitiesSnapshot.astro';
+import Control from '../../components/Control.astro';
+import Decision from '../../components/Decision.astro';
+import WhoWeWorkWith from '../../components/WhoWeWorkWith.astro';
+import EngineeringAuthority from '../../components/EngineeringAuthority.astro';
+import ProofSection from '../../components/ProofSection.astro';
+import BookCall from '../../components/BookCall.astro';
+import Footer from '../../components/Footer.astro';
+
+import t from '../../i18n/es.json';
+---
+
+<BaseLayout
+  lang="es"
+  title="Runtime Lab — Estudio de Ingeniería"
+  description="Las herramientas desconectadas y el trabajo manual son el techo invisible de tus ingresos. Runtime Lab construye sistemas operacionales que escalan."
+>
+  <Nav t={t.nav} lang="es" />
+
+  <main id="main-content">
+    <Hero t={t.hero} />
+    <RealityCheck t={t.realityCheck} />
+    <StructureEmerges t={t.structure} />
+    <CapabilitiesSnapshot t={t.capabilities} />
+    <Control t={t.control} />
+    <Decision t={t.decision} />
+    <WhoWeWorkWith t={t.whoWeWorkWith} />
+    <EngineeringAuthority t={t.engineering} />
+    <ProofSection t={t.proof} />
+    <BookCall t={t.bookCall} />
+  </main>
+
+  <Footer t={t.footer} nav={{ logo: t.nav.logo }} />
+</BaseLayout>

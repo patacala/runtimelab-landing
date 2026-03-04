@@ -1,0 +1,134 @@
+---
+export interface Props {
+  t: {
+    title: string;
+    subtitle: string;
+    segments: Array<{ label: string; desc?: string }>;
+  };
+}
+const { t } = Astro.props;
+
+const segmentIcons = [
+  /* Contractors - wrench/tool */
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  /* Real Estate - building */
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>',
+  /* Local Service - map pin */
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  /* Professional Firms - briefcase */
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/></svg>',
+  /* Multi-location - nodes */
+  '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="19" r="3"/><circle cx="19" cy="19" r="3"/><path d="M12 8v3"/><path d="M8.5 17.5 12 14"/><path d="M15.5 17.5 12 14"/></svg>',
+];
+---
+
+<section
+  id="who-we-work-with"
+  class="bg-surface py-24 md:py-32 border-t border-line/50"
+  aria-labelledby="who-heading"
+>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="mb-12 reveal">
+      <h2
+        id="who-heading"
+        class="font-black text-primary leading-tight mb-4"
+        style="font-size: clamp(1.75rem, 3.5vw, 2.75rem); letter-spacing: -0.025em;"
+      >
+        {t.title}
+      </h2>
+      <p class="text-secondary text-lg max-w-xl leading-relaxed">
+        {t.subtitle}
+      </p>
+    </div>
+
+    <!-- Única lista: misma estructura para desktop y mobile (sin duplicar) -->
+    <div class="who-list reveal reveal-delay-100">
+      {t.segments.map((seg, i) => (
+        <div class="who-row">
+          <div class="who-icon" set:html={segmentIcons[i] ?? segmentIcons[0]} />
+          <div class="who-text">
+            <span class="who-label">{seg.label}</span>
+            {seg.desc && <p class="who-desc">{seg.desc}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .who-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .who-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding: 0.9rem 1.1rem;
+    background: #141B24;
+    border: 1px solid #1E293B;
+    border-radius: 12px;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .who-row:hover {
+    border-color: rgba(37, 99, 235, 0.3);
+    background: #141B24;
+  }
+
+  .who-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(37, 99, 235, 0.08);
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    border-radius: 10px;
+    color: #94A3B8;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .who-card:hover .who-icon {
+    color: #2563EB;
+    border-color: rgba(37, 99, 235, 0.35);
+  }
+
+  .who-icon :global(svg) {
+    animation: whoIconPulse 3s ease-in-out infinite;
+  }
+
+  .who-card:nth-child(2) .who-icon :global(svg) { animation-delay: 0.2s; }
+  .who-card:nth-child(3) .who-icon :global(svg) { animation-delay: 0.4s; }
+  .who-card:nth-child(4) .who-icon :global(svg) { animation-delay: 0.6s; }
+  .who-card:nth-child(5) .who-icon :global(svg) { animation-delay: 0.8s; }
+
+  @keyframes whoIconPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.85; transform: scale(0.98); }
+  }
+
+  .who-label {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #F8FAFC;
+  }
+
+  .who-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .who-desc {
+    font-size: 0.8125rem;
+    color: #94A3B8;
+    line-height: 1.4;
+  }
+</style>

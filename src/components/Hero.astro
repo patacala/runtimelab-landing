@@ -1,0 +1,532 @@
+---
+export interface Props {
+  t: {
+    title: { line1: string; line2: string };
+    sub: string;
+    cta: { primary: string };
+    scroll: string;
+    chips: { revenueLeak: string; leads: string; messages: string; tasks: string };
+    impactItems: string[];
+    credibility: string;
+  };
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="hero"
+  class="hero-section"
+  aria-label="Hero section"
+>
+
+  <!-- ── Full-bleed background layers (relative to section) ── -->
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-blueprint" id="hero-grid" aria-hidden="true"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
+
+  <!-- ── Constrained container — anchors chip positioning ── -->
+  <div class="hero-container">
+
+    <!-- ══ Floating Indicators Layer ══
+         All chips positioned as % of this container.
+         Never uses vw or viewport-relative values.  -->
+    <div class="hero-chips-layer" aria-hidden="true">
+
+      <!-- Left column (left: 2–16%) -->
+
+      <div class="chip chip-7" style="top: 10%; left: 7%;">
+        <span class="dot bg-muted"></span>
+        Pipeline
+        <span class="chip-sub" style="color:#334155;">idle</span>
+      </div>
+
+      <div class="chip-widget chip-2" style="top: 32%; left: 2%;">
+        <div class="widget-header">
+          <span class="dot bg-accent"></span>
+          <span class="widget-label">{t.chips.leads}</span>
+        </div>
+        <div class="widget-value">24</div>
+        <div class="widget-delta">↑ 12% this week</div>
+      </div>
+
+      <div class="chip chip-9" style="top: 64%; left: 4%;">
+        <span class="dot bg-accent"></span>
+        Follow-up
+        <span class="chip-sub">×7</span>
+      </div>
+
+      <div class="chip chip-4" style="bottom: 24%; left: 9%;">
+        <span class="dot bg-success"></span>
+        {t.chips.messages}
+        <span class="chip-sub">23 pending</span>
+      </div>
+
+      <div class="chip chip-error chip-6" style="bottom: 10%; left: 5%;">
+        <span class="dot bg-critical pulse-dot"></span>
+        ERROR_TIMEOUT
+      </div>
+
+      <!-- Right column (right: 2–16%) -->
+
+      <div class="chip chip-1" style="top: 10%; right: 7%;">
+        <span class="dot bg-yellow-400"></span>
+        {t.chips.revenueLeak}
+        <span class="chip-badge chip-badge-warn">–$1.8k</span>
+      </div>
+
+      <div class="chip chip-8" style="top: 24%; right: 9%;">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.08-4.93"/>
+        </svg>
+        CRM Sync
+        <span class="chip-sub text-success">✓</span>
+      </div>
+
+      <div class="chip chip-3" style="top: 54%; right: 5%;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        3 alerts
+        <span class="chip-badge chip-badge-blue">new</span>
+      </div>
+
+      <div class="chip-widget chip-10" style="bottom: 28%; right: 2%;">
+        <div class="widget-header">
+          <span class="dot bg-success"></span>
+          <span class="widget-label">Deal Closed</span>
+        </div>
+        <div class="widget-value text-success">+$4.2k</div>
+        <div class="widget-delta text-success">2 min ago</div>
+      </div>
+
+      <div class="chip chip-5" style="bottom: 14%; right: 7%;">
+        <span class="dot bg-critical pulse-dot"></span>
+        {t.chips.tasks}
+        <span class="chip-sub text-critical">overdue</span>
+      </div>
+
+    </div><!-- /hero-chips-layer -->
+
+    <!-- ══ Content Layer — safe zone, chips never enter ══ -->
+    <div class="hero-content">
+
+      <!-- Headline: line 1 setup, line 2 punchline (larger + brighter) -->
+      <h1 class="hero-headline">
+        <span class="block hero-line1">{t.title.line1}</span>
+        <span class="block hero-line2">{t.title.line2}</span>
+      </h1>
+
+      <!-- Supporting text -->
+      <p class="hero-sub" set:html={t.sub} />
+
+      <!-- Impact row -->
+      <div class="impact-row" aria-label="Business impact">
+        {t.impactItems.map((text, i) => (
+          <>
+            {i > 0 && <span class="impact-sep" aria-hidden="true"></span>}
+            <span class="impact-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              {text}
+            </span>
+          </>
+        ))}
+      </div>
+
+      <!-- CTA + credibility -->
+      <div class="hero-cta-wrap">
+        <a href="#reality-check" class="hero-cta">
+          {t.cta.primary}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+          </svg>
+        </a>
+        <p class="hero-credibility">{t.credibility}</p>
+      </div>
+
+    </div><!-- /hero-content -->
+
+  </div><!-- /hero-container -->
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-0 right-0 flex flex-col items-center gap-3 scroll-indicator" aria-hidden="true">
+    <span class="text-[9px] font-semibold tracking-[0.28em] text-muted uppercase">{t.scroll}</span>
+    <div class="scroll-line h-10"></div>
+  </div>
+
+</section>
+
+<style>
+
+  /* ══ Section ══ */
+  .hero-section {
+    background-color: #0B0F14;
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ══ Background Layer 1: Architectural glow ══ */
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 75% 55% at 50% 42%,
+      rgba(29, 78, 216, 0.22) 0%,
+      transparent 68%
+    );
+  }
+
+  /* ══ Background Layer 2: Blueprint grid — fades in, supports JS parallax ══ */
+  .hero-blueprint {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    will-change: transform;
+    animation: blueprintReveal 1.6s ease-out 0.8s forwards;
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  @keyframes blueprintReveal {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* ══ Background Layer 3: Film grain ══ */
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  /* ══ Background Layer 4: Edge vignette ══ */
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 45%, rgba(11, 15, 20, 0.7) 100%);
+  }
+
+  /* ══ Constrained container
+     Max 1400px, centered, holds both chips and content layers.
+     Chips are positioned as % of this container — never bleed to screen edges. ══ */
+  .hero-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-inline: clamp(24px, 6vw, 80px);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ══ Floating indicators layer
+     Absolute over the container, pointer-events none on layer
+     (individual chips re-enable pointer-events for hover glow). ══ */
+  .hero-chips-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Entrance: chips fade in at 600ms after headline appears */
+    opacity: 0;
+    animation: heroFade 500ms ease 600ms forwards;
+  }
+
+  /* ══ Content layer — text safe zone ══ */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    /* Responsive padding keeps text away from chip zones */
+    padding-top: clamp(80px, 14vh, 140px);
+    padding-bottom: clamp(60px, 12vh, 120px);
+  }
+
+  /* ══ Typography hierarchy
+     Line 1: setup phrase — slightly smaller, slightly dimmed
+     Line 2: punchline — dominant size, full brightness ══ */
+  .hero-headline {
+    letter-spacing: -0.025em;
+  }
+
+  .hero-line1 {
+    font-size: clamp(2.1rem, 4vw, 3.9rem);
+    font-weight: 600;
+    line-height: 1.05;
+    color: rgba(248, 250, 252, 0.68);
+    /* Stagger: 0ms */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 0ms forwards;
+  }
+
+  .hero-line2 {
+    font-size: clamp(2.6rem, 5.2vw, 4.8rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: #F8FAFC;
+    margin-top: 0.2em;
+    /* Stagger: 80ms after line 1 */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 80ms forwards;
+  }
+
+  /* ══ Supporting text — stagger 150ms ══ */
+  .hero-sub {
+    margin-top: 28px;
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    color: rgba(100, 116, 139, 0.9);
+    /* Stagger: 150ms */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 150ms forwards;
+  }
+
+  /* Style the <strong> injected via set:html */
+  .hero-sub :global(strong) {
+    color: #F8FAFC;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.5);
+    padding-bottom: 1px;
+  }
+
+  /* ══ Impact row — stagger 225ms ══ */
+  .impact-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 0;
+    margin-top: 18px;
+    /* Stagger: 225ms */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 225ms forwards;
+  }
+
+  .impact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #475569;
+    padding: 0 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .impact-sep {
+    width: 1px;
+    height: 12px;
+    background: #1E293B;
+    flex-shrink: 0;
+  }
+
+  /* ══ CTA wrap — stagger 300ms ══ */
+  .hero-cta-wrap {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Stagger: 300ms */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: #2563EB;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(99, 149, 255, 0.35);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-decoration: none;
+  }
+  .hero-cta:hover {
+    background: #1D4ED8;
+    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.45);
+    transform: translateY(-2px);
+  }
+  .hero-cta:active {
+    transform: translateY(0px);
+    transition-duration: 0.1s;
+    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
+  }
+
+  /* Credibility line below CTA */
+  .hero-credibility {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #94A3B8;
+    opacity: 0.6;
+    line-height: 1.5;
+  }
+
+  /* ══ Chip shared styles ══ */
+  .chip {
+    position: absolute;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    background: rgba(16, 21, 28, 0.82);
+    border: 1px solid rgba(30, 41, 59, 0.85);
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #94A3B8;
+    white-space: nowrap;
+    backdrop-filter: blur(10px);
+    will-change: transform;
+    /* Re-enable hover on individual chips */
+    pointer-events: auto;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .chip:hover {
+    box-shadow: 0 0 14px rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+
+  .chip-error {
+    background: rgba(239, 68, 68, 0.07);
+    border-color: rgba(239, 68, 68, 0.35);
+    color: #F87171;
+    font-size: 10px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .chip-badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .chip-badge-warn { background: rgba(234, 179, 8, 0.15); color: #EAB308; }
+  .chip-badge-blue { background: rgba(59, 130, 246, 0.15); color: #60A5FA; }
+
+  .chip-widget {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 14px;
+    background: rgba(16, 21, 28, 0.88);
+    border: 1px solid rgba(30, 41, 59, 0.9);
+    border-radius: 10px;
+    min-width: 110px;
+    backdrop-filter: blur(12px);
+    will-change: transform;
+    pointer-events: auto;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .chip-widget:hover {
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.18);
+    border-color: rgba(59, 130, 246, 0.28);
+  }
+
+  .widget-header { display: flex; align-items: center; gap: 6px; }
+  .widget-label  { font-size: 10px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; }
+  .widget-value  { font-size: 20px; font-weight: 800; color: #F8FAFC; letter-spacing: -0.03em; line-height: 1; }
+  .widget-delta  { font-size: 10px; color: #64748B; }
+  .dot           { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .chip-sub      { font-size: 10px; color: #64748B; }
+
+  /* ══ Float animations — very slow, max 6px translation ══ */
+  .chip-1  { animation: chipFloat1  8.0s ease-in-out infinite;       }
+  .chip-2  { animation: chipFloat2  9.5s ease-in-out infinite 1.4s;  }
+  .chip-3  { animation: chipFloat3  7.4s ease-in-out infinite 0.6s;  }
+  .chip-4  { animation: chipFloat4  9.2s ease-in-out infinite 2.8s;  }
+  .chip-5  { animation: chipFloat5 10.0s ease-in-out infinite 0.9s;  }
+  .chip-6  { animation: chipFloat6  8.6s ease-in-out infinite 3.5s;  }
+  .chip-7  { animation: chipFloat7  9.4s ease-in-out infinite 1.1s;  }
+  .chip-8  { animation: chipFloat8  7.2s ease-in-out infinite 2.2s;  }
+  .chip-9  { animation: chipFloat9  8.8s ease-in-out infinite 0.4s;  }
+  .chip-10 { animation: chipFloat10 8.0s ease-in-out infinite 1.8s;  }
+
+  @keyframes chipFloat1  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(2px)  } }
+  @keyframes chipFloat2  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(-3px) } }
+  @keyframes chipFloat3  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(2px)  } }
+  @keyframes chipFloat4  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-4px) translateX(3px)  } }
+  @keyframes chipFloat5  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(-2px) } }
+  @keyframes chipFloat6  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-4px) translateX(3px)  } }
+  @keyframes chipFloat7  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(-2px) } }
+  @keyframes chipFloat8  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(2px)  } }
+  @keyframes chipFloat9  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(-3px) } }
+  @keyframes chipFloat10 { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(2px)  } }
+
+  .pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
+  @keyframes pulseDot {
+    0%,100% { transform: scale(1);   opacity: 1; }
+    50%     { transform: scale(0.7); opacity: 0.5; }
+  }
+
+  /* ══ Entrance keyframes ══ */
+  @keyframes heroEntrance {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes heroFade {
+    to { opacity: 1; }
+  }
+
+  /* ══ Scroll indicator ══ */
+  .scroll-indicator {
+    opacity: 0;
+    animation: heroFade 600ms ease 1.3s forwards;
+  }
+
+  /* ══ Mobile — show only 3 indicators
+     chip-2 (Leads), chip-8 (CRM Sync), chip-10 (Deal Closed)
+     Repositioned to top-left, top-right, bottom-right corners. ══ */
+  @media (max-width: 767px) {
+    .chip-1, .chip-3, .chip-4, .chip-5, .chip-6, .chip-7, .chip-9 {
+      display: none;
+    }
+
+    /* Override inline styles with !important — prevents text collision */
+    .chip-2  { top: 10% !important; left: 3%   !important; }
+    .chip-8  { top: 10% !important; right: 3%  !important; left: auto !important; }
+    .chip-10 { bottom: 14% !important; right: 3% !important; top: auto !important; }
+  }
+
+</style>
+
+<script>
+  /* ── Grid parallax
+     Blueprint grid moves at 10% of scroll speed.
+     Creates depth without distraction. ── */
+  const grid = document.getElementById('hero-grid');
+  if (grid) {
+    window.addEventListener('scroll', () => {
+      grid.style.transform = `translateY(${window.scrollY * 0.1}px)`;
+    }, { passive: true });
+  }
+</script>

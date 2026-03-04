@@ -1,0 +1,337 @@
+{
+  "nav": {
+    "logo": "Runtime Lab",
+    "links": {
+      "work": "Our Work",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "cta": "Build with us"
+  },
+  "hero": {
+    "title": {
+      "line1": "Your business is growing.",
+      "line2": "Your control is not."
+    },
+    "sub": "We build systems that <strong>Connect</strong>  your tools, <strong>Automate</strong>  your workflows, and <strong>Help</strong> your business scale without chaos. ",
+    "cta": {
+      "primary": "See the Impact"
+    },
+    "scroll": "SCROLL TO REVEAL",
+    "chips": {
+      "revenueLeak": "Revenue Leak",
+      "leads": "Leads",
+      "messages": "Messages",
+      "tasks": "Tasks"
+    },
+    "impactItems": [
+      "Leads go cold",
+      "Follow-ups slip",
+      "Competitors close your deals"
+    ],
+    "credibility": "Built by engineers who scaled platforms for millions."
+  },
+  "realityCheck": {
+    "label": "ACT II — REALITY CHECK",
+    "blocks": [
+      {
+        "tag": "LEAD CAPTURE",
+        "question": "Missing leads?",
+        "micro": "Every unanswered notification is revenue that never entered your pipeline."
+      },
+      {
+        "tag": "RESPONSE TIME",
+        "question": "Slow responses?",
+        "micro": "First responder wins 78% of the time. You're not first."
+      },
+      {
+        "tag": "MANUAL ENTRY",
+        "question": "Manual tracking?",
+        "micro": "Manual entry scales linearly with every new mistake."
+      },
+      {
+        "tag": "REVENUE LOSS",
+        "question": "Lost deals?",
+        "micro": "$4,200/mo. Closed lost. Every week."
+      }
+    ]
+  },
+  "structure": {
+    "badge": "ACT III — STRUCTURE EMERGES",
+    "title": {
+      "chaos": "Chaos is not a scaling strategy.",
+      "structure": "Structure is."
+    },
+    "sub": "Every disconnected tool is a gap in your revenue pipeline. We close those gaps with engineered precision.",
+    "flow": {
+      "step1": {
+        "label": "INITIAL CHAOS STATE",
+        "title": "Fragmented Leads"
+      },
+      "step2": {
+        "label": "SNAP AND ALIGN PHASE",
+        "title": "Message Synchronization"
+      },
+      "step3": {
+        "label": "THE FINAL BLUEPRINT ARCHITECTURE",
+        "title": "Structured Vertical Flow",
+        "features": ["Unified Pipeline", "Auto-Follow", "Real-Time Analytics"]
+      }
+    },
+    "metrics": {
+      "uptime": { "value": "99.9%", "label": "System Uptime" },
+      "conversion": { "value": "4.2x", "label": "Pipeline Conversion" },
+      "manual": { "value": "Zero", "label": "Manual Gaps" }
+    },
+    "pipeline": ["Lead Captured", "Follow-up Triggered", "Appointment Booked", "Deal Closed"],
+    "annotations": { "step1": "Connected", "step2": "Automated", "step3": "Structured" }
+  },
+  "control": {
+    "actLabel": "ACT VI",
+    "title": "The result is clarity.",
+    "sub": "When your systems are aligned, your business operates with precision. No more chasing leads. No more missed follow-ups. No more revenue left on the table.",
+    "benefits": [
+      {
+        "icon": "clock",
+        "title": "Respond in seconds",
+        "desc": "Automated responses reach leads the moment they engage — before competitors can."
+      },
+      {
+        "icon": "diamond",
+        "title": "Close more clients",
+        "desc": "A structured pipeline means every lead gets the right message at the right time."
+      },
+      {
+        "icon": "moon",
+        "title": "Works while you sleep",
+        "desc": "Your system runs 24/7, qualifying leads and scheduling appointments automatically."
+      }
+    ]
+  },
+  "decision": {
+    "badge": "ACT VII — THE DECISION",
+    "title": {
+      "line1": "Stop improvising.",
+      "line2": "Start operating."
+    },
+    "sub": "You've seen what's possible. Now it's time to build the system that runs your business — so you can focus on growing it.",
+    "cta": {
+      "primary": "Build your system",
+      "secondary": "View Demo"
+    },
+    "attributes": ["ENTERPRISE", "GLOBAL OPS", "SYSTEMATIC", "VELOCITY"],
+    "dashboard": {
+      "label": "Example: Local Service Business",
+      "metrics": {
+        "leads": "12 Leads",
+        "followUps": "9 Follow-ups",
+        "appointments": "4 Appts",
+        "closed": "2 Closed"
+      },
+      "status": "System Status: Optimal",
+      "progress": "51%"
+    }
+  },
+  "engineering": {
+    "badge": "ENGINEERING AUTHORITY",
+    "title": {
+      "line1": "BUILT BY ENGINEERS WHO",
+      "line2": "SCALED FOR MILLIONS."
+    },
+    "sub": "We've architected systems for fintech, enterprise SaaS, and high-traffic platforms. Now we bring that same rigor to your business operations.",
+    "cta": {
+      "portfolio": "View Our Portfolio",
+      "specs": "Technical Specs"
+    },
+    "metrics": [
+      { "value": "2M+",   "label": "Active Daily Users",          "sub": "across 3 global regions" },
+      { "value": "26K+",  "label": "Enterprise Brands Supported", "sub": "on a single platform" },
+      { "value": "99.9%", "label": "Uptime SLA Delivered",        "sub": "across all client systems" },
+      { "value": "$0",    "label": "Revenue Lost to Downtime",     "sub": "in 5+ years of operation" }
+    ],
+    "timeline": {
+      "label": "ENGINEERING FEATS & MILESTONES",
+      "milestones": [
+        {
+          "year": "2018",
+          "title": "First Enterprise Client",
+          "desc": "Landed first Fortune-500 engagement — a 12-week sprint delivering a custom CRM integration for a 3,000-seat sales team.",
+          "stat": "3,000 seats",
+          "tag": "CRM INTEGRATION"
+        },
+        {
+          "year": "2021",
+          "title": "1M Concurrent Users",
+          "desc": "Redesigned real-time infrastructure for a live-streaming platform to sustain 1M CCU across 3 AWS regions with sub-50ms latency.",
+          "stat": "< 50ms latency",
+          "tag": "REAL-TIME INFRA"
+        },
+        {
+          "year": "2023",
+          "title": "26K+ Brand Integrations",
+          "desc": "Built the unified integration layer connecting 26,000+ brands to a global commerce platform processing $180M ARR.",
+          "stat": "$180M ARR",
+          "tag": "COMMERCE PLATFORM"
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "title": "What We Build",
+    "subtitle": "Three systems designed to bring structure and growth to your business.",
+    "blocks": [
+      {
+        "title": "Custom Business Systems",
+        "items": [
+          "Client portals",
+          "Internal dashboards",
+          "Workflow management tools",
+          "CRM integrations"
+        ],
+        "result": "Reduce manual admin work and operate with clarity."
+      },
+      {
+        "title": "Revenue-Focused Websites",
+        "items": [
+          "Conversion-driven design",
+          "Lead capture systems",
+          "Funnel structure",
+          "CRM connection"
+        ],
+        "result": "Turn more visitors into qualified clients."
+      },
+      {
+        "title": "Automation & AI Workflows",
+        "items": [
+          "Automated follow-ups",
+          "Lead routing",
+          "Appointment scheduling",
+          "Intelligent response systems"
+        ],
+        "result": "Respond faster. Close more deals."
+      }
+    ]
+  },
+  "whoWeWorkWith": {
+    "title": "Built for Growing Service Businesses",
+    "subtitle": "We work with companies that are growing fast but operating without structure.",
+    "segments": [
+      {
+        "label": "Contractors",
+        "desc": "Project-based crews juggling estimates, site visits, and lead requests across calls, forms, and messages."
+      },
+      {
+        "label": "Real Estate Teams",
+        "desc": "Multi-agent teams sharing buyer and seller inquiries across portals, inboxes, and personal CRMs."
+      },
+      {
+        "label": "Local Service Companies",
+        "desc": "Home and local services handling bookings through phone calls, DMs, web forms, and walk-ins."
+      },
+      {
+        "label": "Professional Firms",
+        "desc": "Advisory, legal, and financial firms relying on referrals and inbound leads without a structured follow-up."
+      },
+      {
+        "label": "Multi-location Operators",
+        "desc": "Brands managing demand across multiple locations, each running on different tools and processes."
+      }
+    ]
+  },
+  "proof": {
+    "badge": "CASE STUDY",
+    "sectionTitle": {
+      "line1": "Real systems.",
+      "line2": "Real numbers."
+    },
+    "sectionSub": "One example of what changes when the right operational infrastructure is in place.",
+    "industry": "LOCAL SERVICE BUSINESS",
+    "situation": {
+      "label": "THE SITUATION",
+      "context": "A growing service company losing clients to slow responses and disconnected manual operations.",
+      "problems": {
+        "label": "THE PROBLEM",
+        "items": [
+          "Leads lost to slow response times",
+          "No unified view of the pipeline",
+          "Manual follow-ups falling through the cracks"
+        ]
+      }
+    },
+    "built": {
+      "label": "WHAT WE BUILT",
+      "items": [
+        "Automated lead capture from all channels",
+        "Centralized client dashboard",
+        "Follow-up automation — 24/7"
+      ]
+    },
+    "result": {
+      "label": "THE RESULT",
+      "stat": "+37%",
+      "statLabel": "increase in booked calls",
+      "timeline": "Deployed in 14 days. ROI delivered in month one.",
+      "metrics": [
+        { "value": "14d", "label": "From kickoff to live" },
+        { "value": "0", "label": "Missed leads after go-live" },
+        { "value": "24/7", "label": "Automated follow-up" }
+      ]
+    }
+  },
+  "bookCall": {
+    "badge": "SCHEDULE A STRATEGY CALL",
+    "title": {
+      "line1": "Let's map your",
+      "line2": "next move."
+    },
+    "sub": "In 30 minutes, we'll review your current operations, identify the gaps costing you revenue, and outline exactly what we'd build — no fluff, no pressure.",
+    "trust": [
+      "30-minute focused session",
+      "Operations audit included",
+      "Custom roadmap, no templates",
+      "No commitment required"
+    ],
+    "form": {
+      "title": "Reserve your spot",
+      "name": {
+        "label": "Full Name",
+        "placeholder": "John Smith",
+        "error": "Please enter your name"
+      },
+      "email": {
+        "label": "Work Email",
+        "placeholder": "john@company.com",
+        "error": "Please enter a valid email"
+      },
+      "company": {
+        "label": "Company",
+        "placeholder": "Acme Inc.",
+        "optional": "optional"
+      },
+      "submit": "Book a Call"
+    },
+    "scheduled": {
+      "title": "Pick a time that works for you",
+      "sub": "Your info is saved. Select a time slot and we'll send a confirmation."
+    }
+  },
+  "footer": {
+    "tagline": "Engineering business systems for structured growth.",
+    "nav": {
+      "systems": "Systems",
+      "howItWorks": "How It Works",
+      "caseStudies": "Case Studies",
+      "contact": "Contact"
+    },
+    "contact": {
+      "email": "support@runtime-lab.com",
+      "phone": "+16452205559",
+      "address": "2125 Biscayne Blvd, Ste 204 #24417, Miami, Florida 33137, United States"
+    },
+    "legal": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "copyright": "© Runtime Lab {year}"
+    }
+  }
+}

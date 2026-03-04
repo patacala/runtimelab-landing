@@ -1,0 +1,213 @@
+---
+export interface Props {
+  t: {
+    badge: string;
+    title: { line1: string; line2: string };
+    sub: string;
+    cta: { primary: string; secondary: string };
+    attributes: string[];
+    dashboard: {
+      label: string;
+      metrics: { leads: string; followUps: string; appointments: string; closed: string };
+      status: string;
+      progress: string;
+    };
+  };
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="decision"
+  class="decision-section py-24 md:py-32 border-t border-line/50"
+  aria-labelledby="decision-heading"
+>
+  <!-- Radial glow with violet-indigo tones — distinct from the blue used in other sections -->
+  <div class="decision-glow" aria-hidden="true"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+
+    <!-- Top row: badge + title block -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
+
+      <!-- Left: text content -->
+      <div>
+        <!-- Massive headline -->
+        <h2
+          id="decision-heading"
+          class="font-black leading-[0.95] mb-8 reveal reveal-delay-100"
+          style="font-size: clamp(2.5rem, 5.5vw, 5rem); letter-spacing: -0.03em;"
+        >
+          <span class="block text-primary">{t.title.line1}</span>
+          <span class="block text-accent">{t.title.line2}</span>
+        </h2>
+
+        <p class="text-secondary text-lg max-w-lg leading-relaxed mb-10 reveal reveal-delay-200">
+          {t.sub}
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4 mb-10 reveal reveal-delay-300">
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 px-6 py-3.5 bg-accent hover:bg-accent-light text-white font-semibold rounded-lg transition-colors duration-200 text-base"
+          >
+            {t.cta.primary}
+          </a>
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 px-6 py-3.5 border border-line hover:border-accent/50 text-secondary hover:text-primary font-semibold rounded-lg transition-colors duration-200 text-base"
+          >
+            {t.cta.secondary}
+          </a>
+        </div>
+
+        <!-- Attribute tags -->
+        <div class="flex flex-wrap gap-2 reveal reveal-delay-400">
+          {t.attributes.map((attr) => (
+            <span class="px-3 py-1 bg-surface border border-line rounded text-[10px] font-bold tracking-[0.15em] text-muted uppercase">
+              {attr}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Dashboard mockup -->
+      <div class="reveal reveal-delay-200">
+        <div class="bg-card border border-line rounded-2xl overflow-hidden shadow-2xl">
+
+          <!-- Dashboard header -->
+          <div class="px-5 py-4 border-b border-line flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="flex gap-1.5" aria-hidden="true">
+                <span class="w-3 h-3 rounded-full bg-critical/60"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
+                <span class="w-3 h-3 rounded-full bg-success/60"></span>
+              </div>
+            </div>
+            <span class="text-[10px] text-muted font-medium">{t.dashboard.label}</span>
+            <div class="w-4"></div>
+          </div>
+
+          <!-- Dashboard body -->
+          <div class="p-5">
+            <div class="grid grid-cols-5 gap-4">
+
+              <!-- Left column: categories -->
+              <div class="col-span-2 space-y-1">
+                <div class="text-[9px] font-bold tracking-[0.15em] text-muted uppercase mb-3">PIPELINE</div>
+                {[
+                  { label: 'New Leads', value: '12', active: false },
+                  { label: 'Follow-ups', value: '9', active: true },
+                  { label: 'Appointments', value: '4', active: false },
+                  { label: 'Closed', value: '2', active: false },
+                  { label: 'Lost', value: '1', active: false },
+                ].map((row) => (
+                  <div class={`flex items-center justify-between px-3 py-2 rounded-lg text-xs ${row.active ? 'bg-success/10 border border-success/30' : 'bg-surface/80'}`}>
+                    <span class={row.active ? 'text-success font-medium' : 'text-secondary'}>{row.label}</span>
+                    <span class={`font-bold ${row.active ? 'text-success' : 'text-primary'}`}>{row.value}</span>
+                  </div>
+                ))}
+              </div>
+
+              <!-- Right column: stats + ring -->
+              <div class="col-span-3 flex flex-col gap-4">
+
+                <!-- Ring chart -->
+                <div class="flex items-center gap-4 bg-surface/60 rounded-xl p-4">
+                  <div class="relative flex-shrink-0" aria-label={`${t.dashboard.progress} conversion rate`}>
+                    <svg width="72" height="72" viewBox="0 0 72 72" class="ring-chart">
+                      <!-- Background ring -->
+                      <circle cx="36" cy="36" r="28" fill="none" stroke="#1E293B" stroke-width="8"/>
+                      <!-- Progress ring: 51% = 0.51 * 2π * 28 ≈ 89.7 -->
+                      <circle
+                        cx="36" cy="36" r="28"
+                        fill="none"
+                        stroke="#2563EB"
+                        stroke-width="8"
+                        stroke-dasharray="89.7 175.9"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                      <span class="text-base font-black text-primary">{t.dashboard.progress}</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="text-[10px] font-bold tracking-[0.1em] text-muted uppercase mb-1">CONVERSION</div>
+                    <div class="text-xs text-secondary">Active pipeline rate</div>
+                    <div class="text-[11px] text-accent font-semibold mt-1">↑ 12% this week</div>
+                  </div>
+                </div>
+
+                <!-- Mini stats grid -->
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="bg-surface/60 rounded-xl p-3">
+                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">LEADS</div>
+                    <div class="text-lg font-black text-primary">12</div>
+                  </div>
+                  <div class="bg-surface/60 rounded-xl p-3">
+                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">REVENUE</div>
+                    <div class="text-lg font-black text-primary">$4.2k</div>
+                  </div>
+                  <div class="bg-surface/60 rounded-xl p-3">
+                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">AVG RESP</div>
+                    <div class="text-lg font-black text-success">4s</div>
+                  </div>
+                  <div class="bg-surface/60 rounded-xl p-3">
+                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">APPTS</div>
+                    <div class="text-lg font-black text-primary">4</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Status bar -->
+            <div class="mt-4 pt-4 border-t border-line flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span
+                  class="w-2 h-2 rounded-full bg-success"
+                  style="animation: pulseDot 2s ease-in-out infinite;"
+                  aria-hidden="true"
+                ></span>
+                <span class="text-[11px] text-success font-medium">{t.dashboard.status}</span>
+              </div>
+              <span class="text-[10px] text-muted">Last sync: just now</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Deep dark base — maximum contrast with neighboring sections */
+  .decision-section {
+    position: relative;
+    background-color: #07090D;
+  }
+
+  /* Purple-violet radial glow — distinct hue from blue used elsewhere */
+  .decision-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 70% 55% at 50% 38%,
+        rgba(88, 28, 135, 0.11) 0%,
+        rgba(49, 46, 129, 0.07) 45%,
+        transparent 72%
+      );
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.8); opacity: 0.7; }
+  }
+
+  .ring-chart {
+    transform: rotate(-90deg);
+  }
+</style>

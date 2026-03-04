@@ -1,0 +1,173 @@
+---
+export interface Props {
+  t: {
+    actLabel: string;
+    title: string;
+    sub: string;
+    benefits: Array<{ icon: string; title: string; desc: string }>;
+  };
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="control"
+  class="control-section py-24 md:py-32"
+  aria-labelledby="control-heading"
+>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="control-layout">
+      <!-- Columna izquierda: título + párrafo (bloque editorial) -->
+      <div class="control-editorial reveal reveal-delay-100">
+        <h2
+          id="control-heading"
+          class="font-black text-primary mb-6"
+          style="font-size: clamp(2.25rem, 4vw, 3.75rem); line-height: 1.1; letter-spacing: -0.02em;"
+        >
+          {t.title}
+        </h2>
+        <p class="text-secondary text-lg leading-relaxed">
+          {t.sub}
+        </p>
+      </div>
+
+      <!-- Columna derecha: un solo panel con lista de beneficios (no 3 cards) -->
+      <div class="control-benefits reveal reveal-delay-200">
+        <ul class="control-benefits-list" role="list">
+          {t.benefits.map((benefit, i) => (
+            <li class="control-benefit-row">
+              <div class="control-benefit-icon" aria-hidden="true">
+                {benefit.icon === 'clock' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                )}
+                {benefit.icon === 'diamond' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M6 3h12l4 6-10 13L2 9z"/>
+                    <path d="M11 3L8 9l4 13 4-13-3-6"/>
+                    <path d="M2 9h20"/>
+                  </svg>
+                )}
+                {benefit.icon === 'moon' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                  </svg>
+                )}
+              </div>
+              <div class="control-benefit-text">
+                <h3 class="control-benefit-title">{benefit.title}</h3>
+                <p class="control-benefit-desc">{benefit.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .control-section {
+    background-color: #0B0F14;
+    /* Horizontal hairlines — texture break from CapabilitiesSnapshot's gradient above */
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(30, 41, 59, 0.16) 0px,
+      rgba(30, 41, 59, 0.16) 1px,
+      transparent 1px,
+      transparent 56px
+    );
+  }
+
+  .control-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    max-width: 1000px;
+  }
+
+  @media (min-width: 768px) {
+    .control-layout {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem 4rem;
+    }
+  }
+
+  .control-editorial {
+    min-width: 0;
+  }
+
+  .control-benefits {
+    background: #141B24;
+    border: 1px solid #1E293B;
+    border-radius: 16px;
+    padding: 1.5rem 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .control-benefits {
+      padding: 1.75rem 1.5rem;
+    }
+  }
+
+  .control-benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .control-benefit-row {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.7);
+    align-items: flex-start;
+  }
+
+  .control-benefit-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .control-benefit-row:first-child {
+    padding-top: 0;
+  }
+
+  .control-benefit-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .control-benefit-text {
+    min-width: 0;
+  }
+
+  .control-benefit-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #F8FAFC;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .control-benefit-desc {
+    font-size: 0.875rem;
+    color: #94A3B8;
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
