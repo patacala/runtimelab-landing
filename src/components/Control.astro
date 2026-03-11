@@ -71,15 +71,32 @@ const { t } = Astro.props;
 </section>
 
 <style>
+  /* Diagonal-line texture — distinct from horizontal blueprint grid on other sections */
   .control-section {
-    background-color: #0B0F14;
-    /* Horizontal hairlines — texture break from CapabilitiesSnapshot's gradient above */
-    background-image: repeating-linear-gradient(
-      0deg,
-      rgba(30, 41, 59, 0.16) 0px,
-      rgba(30, 41, 59, 0.16) 1px,
-      transparent 1px,
-      transparent 56px
+    background-color: #0E1825;
+    background-image:
+      repeating-linear-gradient(
+        -55deg,
+        rgba(37, 99, 235, 0.04) 0px,
+        rgba(37, 99, 235, 0.04) 1px,
+        transparent 1px,
+        transparent 38px
+      );
+    border-top: 1px solid rgba(30, 41, 59, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Radial glow centered left — counters the blue bias of Decision's violet glow */
+  .control-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 65% 60% at 20% 50%,
+      rgba(37, 99, 235, 0.07) 0%,
+      transparent 70%
     );
   }
 
@@ -171,3 +188,15 @@ const { t } = Astro.props;
     margin: 0;
   }
 </style>
+
+<script>
+  /* Subtle parallax on the diagonal background */
+  const ctrl = document.getElementById('control');
+  if (ctrl) {
+    window.addEventListener('scroll', () => {
+      const rect = ctrl.getBoundingClientRect();
+      const progress = -rect.top / (window.innerHeight + rect.height);
+      ctrl.style.backgroundPositionY = `${progress * 40}px`;
+    }, { passive: true });
+  }
+</script>

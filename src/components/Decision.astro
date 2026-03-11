@@ -19,195 +19,626 @@ const { t } = Astro.props;
 
 <section
   id="decision"
-  class="decision-section py-24 md:py-32 border-t border-line/50"
+  class="decision-section"
   aria-labelledby="decision-heading"
 >
-  <!-- Radial glow with violet-indigo tones — distinct from the blue used in other sections -->
   <div class="decision-glow" aria-hidden="true"></div>
 
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+  <div class="decision-inner">
 
-    <!-- Top row: badge + title block -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
+    <!-- Left: text content -->
+    <div class="decision-text">
+      <h2
+        id="decision-heading"
+        class="decision-headline reveal reveal-delay-100"
+      >
+        <span class="block text-primary">{t.title.line1}</span>
+        <span class="block text-accent">{t.title.line2}</span>
+      </h2>
 
-      <!-- Left: text content -->
-      <div>
-        <!-- Massive headline -->
-        <h2
-          id="decision-heading"
-          class="font-black leading-[0.95] mb-8 reveal reveal-delay-100"
-          style="font-size: clamp(2.5rem, 5.5vw, 5rem); letter-spacing: -0.03em;"
+      <p class="decision-sub reveal reveal-delay-200">
+        {t.sub}
+      </p>
+
+      <div class="decision-ctas reveal reveal-delay-300">
+        <a
+          href="#book-call"
+          class="decision-cta-primary"
         >
-          <span class="block text-primary">{t.title.line1}</span>
-          <span class="block text-accent">{t.title.line2}</span>
-        </h2>
-
-        <p class="text-secondary text-lg max-w-lg leading-relaxed mb-10 reveal reveal-delay-200">
-          {t.sub}
-        </p>
-
-        <!-- CTAs -->
-        <div class="flex flex-wrap gap-4 mb-10 reveal reveal-delay-300">
-          <a
-            href="#"
-            class="inline-flex items-center gap-2 px-6 py-3.5 bg-accent hover:bg-accent-light text-white font-semibold rounded-lg transition-colors duration-200 text-base"
-          >
-            {t.cta.primary}
-          </a>
-          <a
-            href="#"
-            class="inline-flex items-center gap-2 px-6 py-3.5 border border-line hover:border-accent/50 text-secondary hover:text-primary font-semibold rounded-lg transition-colors duration-200 text-base"
-          >
-            {t.cta.secondary}
-          </a>
-        </div>
-
-        <!-- Attribute tags -->
-        <div class="flex flex-wrap gap-2 reveal reveal-delay-400">
-          {t.attributes.map((attr) => (
-            <span class="px-3 py-1 bg-surface border border-line rounded text-[10px] font-bold tracking-[0.15em] text-muted uppercase">
-              {attr}
-            </span>
-          ))}
-        </div>
+          {t.cta.primary}
+        </a>
+        <a
+          href="#ai-demo"
+          class="decision-cta-secondary"
+        >
+          {t.cta.secondary}
+        </a>
       </div>
 
-      <!-- Right: Dashboard mockup -->
-      <div class="reveal reveal-delay-200">
-        <div class="bg-card border border-line rounded-2xl overflow-hidden shadow-2xl">
+      <div class="decision-attrs reveal reveal-delay-400">
+        {t.attributes.map((attr) => (
+          <span class="decision-attr">{attr}</span>
+        ))}
+      </div>
+    </div>
 
-          <!-- Dashboard header -->
-          <div class="px-5 py-4 border-b border-line flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <div class="flex gap-1.5" aria-hidden="true">
-                <span class="w-3 h-3 rounded-full bg-critical/60"></span>
-                <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
-                <span class="w-3 h-3 rounded-full bg-success/60"></span>
+    <!-- Right: animated dashboard -->
+    <div class="decision-dashboard reveal reveal-delay-200" id="decision-dashboard">
+      <div class="dash-card">
+
+        <!-- Header bar -->
+        <div class="dash-header">
+          <div class="dash-dots" aria-hidden="true">
+            <span class="w-3 h-3 rounded-full bg-red-500/60"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
+            <span class="w-3 h-3 rounded-full bg-green-500/60"></span>
+          </div>
+          <span class="dash-label">{t.dashboard.label}</span>
+          <div class="w-4"></div>
+        </div>
+
+        <!-- Body -->
+        <div class="dash-body">
+
+          <!-- Pipeline list -->
+          <div class="dash-pipeline">
+            <div class="dash-section-label">PIPELINE</div>
+            {[
+              { label: 'Nuevos Leads',  stat: '12', accent: false },
+              { label: 'Seguimientos',  stat: '9',  accent: true  },
+              { label: 'Citas',         stat: '4',  accent: false },
+              { label: 'Cerrados',      stat: '2',  accent: false },
+              { label: 'Perdidos',      stat: '1',  accent: false },
+            ].map((row) => (
+              <div class={`dash-row${row.accent ? ' dash-row--active' : ''}`}>
+                <span class="dash-row-label">{row.label}</span>
+                <span class="dash-row-val" data-target={row.stat}>0</span>
               </div>
-            </div>
-            <span class="text-[10px] text-muted font-medium">{t.dashboard.label}</span>
-            <div class="w-4"></div>
+            ))}
           </div>
 
-          <!-- Dashboard body -->
-          <div class="p-5">
-            <div class="grid grid-cols-5 gap-4">
+          <!-- Right column: ring + stats -->
+          <div class="dash-right">
 
-              <!-- Left column: categories -->
-              <div class="col-span-2 space-y-1">
-                <div class="text-[9px] font-bold tracking-[0.15em] text-muted uppercase mb-3">PIPELINE</div>
-                {[
-                  { label: 'New Leads', value: '12', active: false },
-                  { label: 'Follow-ups', value: '9', active: true },
-                  { label: 'Appointments', value: '4', active: false },
-                  { label: 'Closed', value: '2', active: false },
-                  { label: 'Lost', value: '1', active: false },
-                ].map((row) => (
-                  <div class={`flex items-center justify-between px-3 py-2 rounded-lg text-xs ${row.active ? 'bg-success/10 border border-success/30' : 'bg-surface/80'}`}>
-                    <span class={row.active ? 'text-success font-medium' : 'text-secondary'}>{row.label}</span>
-                    <span class={`font-bold ${row.active ? 'text-success' : 'text-primary'}`}>{row.value}</span>
-                  </div>
-                ))}
+            <!-- Ring chart -->
+            <div class="dash-ring-wrap">
+              <div class="dash-ring-chart" aria-label="51% tasa de conversión">
+                <svg width="80" height="80" viewBox="0 0 80 80" class="dash-ring-svg">
+                  <circle cx="40" cy="40" r="30" fill="none" stroke="#1E293B" stroke-width="8"/>
+                  <circle
+                    cx="40" cy="40" r="30"
+                    fill="none"
+                    stroke="#2563EB"
+                    stroke-width="8"
+                    stroke-linecap="round"
+                    class="dash-ring-progress"
+                    stroke-dasharray="0 188.5"
+                  />
+                </svg>
+                <div class="dash-ring-label">
+                  <span class="dash-ring-pct" data-target="51">0</span>
+                  <span class="dash-ring-pct-sym">%</span>
+                </div>
               </div>
-
-              <!-- Right column: stats + ring -->
-              <div class="col-span-3 flex flex-col gap-4">
-
-                <!-- Ring chart -->
-                <div class="flex items-center gap-4 bg-surface/60 rounded-xl p-4">
-                  <div class="relative flex-shrink-0" aria-label={`${t.dashboard.progress} conversion rate`}>
-                    <svg width="72" height="72" viewBox="0 0 72 72" class="ring-chart">
-                      <!-- Background ring -->
-                      <circle cx="36" cy="36" r="28" fill="none" stroke="#1E293B" stroke-width="8"/>
-                      <!-- Progress ring: 51% = 0.51 * 2π * 28 ≈ 89.7 -->
-                      <circle
-                        cx="36" cy="36" r="28"
-                        fill="none"
-                        stroke="#2563EB"
-                        stroke-width="8"
-                        stroke-dasharray="89.7 175.9"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                      <span class="text-base font-black text-primary">{t.dashboard.progress}</span>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="text-[10px] font-bold tracking-[0.1em] text-muted uppercase mb-1">CONVERSION</div>
-                    <div class="text-xs text-secondary">Active pipeline rate</div>
-                    <div class="text-[11px] text-accent font-semibold mt-1">↑ 12% this week</div>
-                  </div>
-                </div>
-
-                <!-- Mini stats grid -->
-                <div class="grid grid-cols-2 gap-2">
-                  <div class="bg-surface/60 rounded-xl p-3">
-                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">LEADS</div>
-                    <div class="text-lg font-black text-primary">12</div>
-                  </div>
-                  <div class="bg-surface/60 rounded-xl p-3">
-                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">REVENUE</div>
-                    <div class="text-lg font-black text-primary">$4.2k</div>
-                  </div>
-                  <div class="bg-surface/60 rounded-xl p-3">
-                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">AVG RESP</div>
-                    <div class="text-lg font-black text-success">4s</div>
-                  </div>
-                  <div class="bg-surface/60 rounded-xl p-3">
-                    <div class="text-[9px] text-muted uppercase tracking-wider mb-1">APPTS</div>
-                    <div class="text-lg font-black text-primary">4</div>
-                  </div>
-                </div>
+              <div class="dash-ring-meta">
+                <div class="dash-ring-title">CONVERSIÓN</div>
+                <div class="dash-ring-sub">tasa del pipeline</div>
+                <div class="dash-ring-trend">↑ 12% esta semana</div>
               </div>
             </div>
 
-            <!-- Status bar -->
-            <div class="mt-4 pt-4 border-t border-line flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span
-                  class="w-2 h-2 rounded-full bg-success"
-                  style="animation: pulseDot 2s ease-in-out infinite;"
-                  aria-hidden="true"
-                ></span>
-                <span class="text-[11px] text-success font-medium">{t.dashboard.status}</span>
+            <!-- Mini stats -->
+            <div class="dash-stats">
+              <div class="dash-stat">
+                <div class="dash-stat-label">LEADS</div>
+                <div class="dash-stat-val" data-target="12" data-prefix="">0</div>
               </div>
-              <span class="text-[10px] text-muted">Last sync: just now</span>
+              <div class="dash-stat">
+                <div class="dash-stat-label">INGRESOS</div>
+                <div class="dash-stat-val" data-target="4200" data-prefix="$" data-suffix="k" data-divisor="1000">$0k</div>
+              </div>
+              <div class="dash-stat dash-stat--green">
+                <div class="dash-stat-label">RESP. PROM.</div>
+                <div class="dash-stat-val" data-target="3" data-prefix="" data-suffix="s">0s</div>
+              </div>
+              <div class="dash-stat">
+                <div class="dash-stat-label">CITAS</div>
+                <div class="dash-stat-val" data-target="4">0</div>
+              </div>
             </div>
+
           </div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="dash-footer">
+          <div class="dash-status">
+            <span class="dash-status-dot" aria-hidden="true"></span>
+            <span>{t.dashboard.status}</span>
+          </div>
+          <span class="dash-sync">Última sync: ahora mismo</span>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
 <style>
-  /* Deep dark base — maximum contrast with neighboring sections */
   .decision-section {
     position: relative;
     background-color: #07090D;
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    border-top: 1px solid rgba(30, 41, 59, 0.5);
+    overflow: hidden;
   }
 
-  /* Purple-violet radial glow — distinct hue from blue used elsewhere */
   .decision-glow {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background:
-      radial-gradient(
-        ellipse 70% 55% at 50% 38%,
-        rgba(88, 28, 135, 0.11) 0%,
-        rgba(49, 46, 129, 0.07) 45%,
-        transparent 72%
-      );
+    background: radial-gradient(
+      ellipse 70% 55% at 50% 38%,
+      rgba(88, 28, 135, 0.11) 0%,
+      rgba(49, 46, 129, 0.07) 45%,
+      transparent 72%
+    );
+  }
+
+  .decision-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-inline: clamp(20px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 900px) {
+    .decision-inner {
+      /* minmax(0, 1fr) prevents text from expanding the column past its share */
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  /* ── Left: text ── */
+  .decision-text {
+    min-width: 0;
+  }
+
+  .decision-headline {
+    font-size: clamp(2.25rem, 4vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .decision-sub {
+    font-size: clamp(1rem, 1.6vw, 1.125rem);
+    color: #94A3B8;
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 2rem;
+  }
+
+  .decision-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .decision-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    background: #2563EB;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: 10px;
+    border: 1px solid rgba(99, 149, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .decision-cta-primary:hover {
+    background: #1D4ED8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(37, 99, 235, 0.4);
+  }
+
+  .decision-cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border: 1px solid rgba(30, 41, 59, 0.9);
+    color: #94A3B8;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .decision-cta-secondary:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #F8FAFC;
+  }
+
+  .decision-attrs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .decision-attr {
+    padding: 4px 10px;
+    background: rgba(16, 21, 28, 0.8);
+    border: 1px solid rgba(30, 41, 59, 0.8);
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #475569;
+    text-transform: uppercase;
+  }
+
+  /* ── Dashboard ── */
+  .decision-dashboard {
+    min-width: 0;
+  }
+
+  .dash-card {
+    background: #10151C;
+    border: 1px solid rgba(30, 41, 59, 0.9);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .dash-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(7, 9, 13, 0.7);
+    border-bottom: 1px solid rgba(30, 41, 59, 0.6);
+  }
+
+  .dash-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .dash-label {
+    font-size: 10px;
+    color: #334155;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .dash-body {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    padding: 16px;
+  }
+
+  @media (max-width: 480px) {
+    .dash-body { grid-template-columns: 1fr; }
+  }
+
+  /* Pipeline */
+  .dash-pipeline {
+    padding-right: 16px;
+    border-right: 1px solid rgba(30, 41, 59, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  @media (max-width: 480px) {
+    .dash-pipeline {
+      border-right: none;
+      border-bottom: 1px solid rgba(30, 41, 59, 0.5);
+      padding-right: 0;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+  }
+
+  .dash-section-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #334155;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .dash-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    background: transparent;
+    transition: background 0.2s;
+  }
+
+  .dash-row--active {
+    background: rgba(34, 197, 94, 0.07);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+
+  .dash-row-label {
+    color: #64748B;
+    font-size: 11px;
+  }
+
+  .dash-row--active .dash-row-label {
+    color: #22C55E;
+    font-weight: 600;
+  }
+
+  .dash-row-val {
+    font-weight: 800;
+    color: #F8FAFC;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    min-width: 20px;
+    text-align: right;
+  }
+
+  .dash-row--active .dash-row-val {
+    color: #22C55E;
+  }
+
+  /* Right column */
+  .dash-right {
+    padding-left: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .dash-right { padding-left: 0; }
+  }
+
+  /* Ring */
+  .dash-ring-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(16, 21, 28, 0.6);
+    border: 1px solid rgba(30, 41, 59, 0.6);
+    border-radius: 10px;
+    padding: 12px;
+  }
+
+  .dash-ring-chart {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .dash-ring-svg {
+    transform: rotate(-90deg);
+  }
+
+  .dash-ring-progress {
+    transition: stroke-dasharray 1.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dash-ring-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+  }
+
+  .dash-ring-pct {
+    font-size: 17px;
+    font-weight: 900;
+    color: #F8FAFC;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dash-ring-pct-sym {
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748B;
+    align-self: flex-end;
+    margin-bottom: 2px;
+  }
+
+  .dash-ring-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .dash-ring-title {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #475569;
+    text-transform: uppercase;
+  }
+
+  .dash-ring-sub {
+    font-size: 11px;
+    color: #64748B;
+  }
+
+  .dash-ring-trend {
+    font-size: 11px;
+    font-weight: 600;
+    color: #2563EB;
+    margin-top: 2px;
+  }
+
+  /* Mini stats */
+  .dash-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .dash-stat {
+    background: rgba(16, 21, 28, 0.6);
+    border: 1px solid rgba(30, 41, 59, 0.6);
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .dash-stat--green .dash-stat-val { color: #22C55E; }
+
+  .dash-stat-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #334155;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .dash-stat-val {
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #F8FAFC;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Footer */
+  .dash-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-top: 1px solid rgba(30, 41, 59, 0.5);
+    background: rgba(7, 9, 13, 0.5);
+  }
+
+  .dash-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #22C55E;
+    font-weight: 600;
+  }
+
+  .dash-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22C55E;
+    animation: pulseDot 2s ease-in-out infinite;
   }
 
   @keyframes pulseDot {
     0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(0.8); opacity: 0.7; }
+    50% { transform: scale(0.8); opacity: 0.6; }
   }
 
-  .ring-chart {
-    transform: rotate(-90deg);
+  .dash-sync {
+    font-size: 10px;
+    color: #334155;
   }
 </style>
+
+<script>
+  /* ── Dashboard animation: fires when section is 30% visible ── */
+  (function () {
+    const section = document.getElementById('decision');
+    if (!section) return;
+
+    let animated = false;
+
+    /* Count-up helper */
+    function countUp(
+      el: HTMLElement,
+      from: number,
+      to: number,
+      duration: number,
+      format?: (n: number) => string
+    ) {
+      const start = performance.now();
+      function tick(now: number) {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3); // ease-out-cubic
+        const value = Math.round(from + (to - from) * ease);
+        el.textContent = format ? format(value) : String(value);
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function animateDashboard() {
+      /* Ring chart */
+      const ring = section.querySelector<SVGCircleElement>('.dash-ring-progress');
+      if (ring) {
+        /* circumference = 2π * 30 ≈ 188.5; 51% = 96.1 */
+        setTimeout(() => {
+          ring.style.strokeDasharray = '96.1 188.5';
+        }, 200);
+      }
+
+      /* Ring percentage label */
+      const pct = section.querySelector<HTMLElement>('.dash-ring-pct');
+      if (pct) setTimeout(() => countUp(pct, 0, 51, 1600), 200);
+
+      /* Pipeline row counts */
+      const rows = section.querySelectorAll<HTMLElement>('.dash-row-val[data-target]');
+      rows.forEach((el, i) => {
+        const target = parseInt(el.dataset.target ?? '0', 10);
+        setTimeout(() => countUp(el, 0, target, 1200), 300 + i * 80);
+      });
+
+      /* Mini stat values */
+      const stats = section.querySelectorAll<HTMLElement>('.dash-stat-val[data-target]');
+      stats.forEach((el, i) => {
+        const target = parseInt(el.dataset.target ?? '0', 10);
+        const prefix = el.dataset.prefix ?? '';
+        const suffix = el.dataset.suffix ?? '';
+        const divisor = el.dataset.divisor ? parseFloat(el.dataset.divisor) : 1;
+        setTimeout(() => {
+          countUp(el, 0, target, 1300, (n) => {
+            const display = divisor !== 1 ? (n / divisor).toFixed(1) : String(n);
+            return `${prefix}${display}${suffix}`;
+          });
+        }, 400 + i * 100);
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].intersectionRatio >= 0.3 && !animated) {
+          animated = true;
+          animateDashboard();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(section);
+  })();
+</script>

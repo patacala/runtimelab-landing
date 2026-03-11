@@ -1,0 +1,455 @@
+---
+export interface Props {
+  t: {
+    title: string;
+    sub: string;
+    clientLabel: string;
+    aiLabel: string;
+    messages: Array<{ role: 'client' | 'ai'; text: string }>;
+  };
+}
+const { t } = Astro.props;
+---
+
+<section
+  id="ai-demo"
+  class="ai-demo-section"
+  aria-labelledby="ai-demo-heading"
+>
+  <!-- Decorative glow -->
+  <div class="ai-demo-glow" aria-hidden="true"></div>
+
+  <div class="ai-demo-container">
+
+    <div class="ai-demo-header reveal">
+      <h2 id="ai-demo-heading" class="ai-demo-title">{t.title}</h2>
+      <p class="ai-demo-sub">{t.sub}</p>
+    </div>
+
+    <div class="chat-card reveal reveal-delay-100">
+      <!-- Terminal bar -->
+      <div class="chat-bar" aria-hidden="true">
+        <div class="chat-dots">
+          <span class="chat-dot chat-dot--red"></span>
+          <span class="chat-dot chat-dot--yellow"></span>
+          <span class="chat-dot chat-dot--green"></span>
+        </div>
+        <span class="chat-bar-label">Sistema IA — en línea</span>
+        <div class="chat-status-pill">
+          <span class="chat-status-dot"></span>
+          <span>activo</span>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat-messages" id="ai-chat-messages" role="log" aria-live="polite">
+        {t.messages.map((msg, i) => (
+          <div
+            class={`chat-bubble-wrap chat-bubble-wrap--${msg.role}`}
+            data-index={i}
+            style="opacity:0; transform:translateY(10px)"
+          >
+            <span class={`chat-label chat-label--${msg.role}`}>
+              {msg.role === 'client' ? t.clientLabel : t.aiLabel}
+            </span>
+            <div class={`chat-bubble chat-bubble--${msg.role}`}>
+              {msg.text}
+            </div>
+          </div>
+        ))}
+
+        <!-- Typing indicator -->
+        <div class="chat-typing" id="chat-typing" aria-label="El sistema está respondiendo" style="opacity:0">
+          <span class="chat-label chat-label--ai">{t.aiLabel}</span>
+          <div class="typing-bubble">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer bar -->
+      <div class="chat-footer" aria-hidden="true">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span>Conversación cifrada · respuesta en &lt; 3 segundos</span>
+      </div>
+    </div>
+
+    <!-- Trust indicators below chat -->
+    <div class="ai-trust-row reveal reveal-delay-200">
+      <div class="ai-trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Responde en segundos</span>
+      </div>
+      <div class="ai-trust-sep" aria-hidden="true"></div>
+      <div class="ai-trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Califica al paciente</span>
+      </div>
+      <div class="ai-trust-sep" aria-hidden="true"></div>
+      <div class="ai-trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Agenda sin intervención</span>
+      </div>
+      <div class="ai-trust-sep" aria-hidden="true"></div>
+      <div class="ai-trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>24/7 sin descanso</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* ── Terminal/scan-line background — distinct from blueprint grid ── */
+  .ai-demo-section {
+    position: relative;
+    background-color: #07111E;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 28px,
+        rgba(37, 99, 235, 0.028) 28px,
+        rgba(37, 99, 235, 0.028) 29px
+      );
+    padding: clamp(4.5rem, 9vw, 8rem) 0 clamp(4rem, 8vw, 7rem);
+    border-top: 1px solid rgba(30, 41, 59, 0.5);
+    overflow: hidden;
+  }
+
+  /* Subtle top/bottom gradient overlay to blend scanlines */
+  .ai-demo-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, #07111E 0%, transparent 12%, transparent 88%, #07111E 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ai-demo-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 70% 50% at 50% 60%,
+      rgba(37, 99, 235, 0.09) 0%,
+      transparent 70%
+    );
+    z-index: 0;
+  }
+
+  .ai-demo-container {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding-inline: clamp(20px, 5vw, 48px);
+  }
+
+  /* ── Header ── */
+  .ai-demo-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .ai-demo-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: #F8FAFC;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+
+  .ai-demo-sub {
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    color: #64748B;
+    line-height: 1.65;
+  }
+
+  /* ── Chat card ── */
+  .chat-card {
+    background: #0C1524;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(37, 99, 235, 0.05),
+      0 8px 48px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Terminal bar */
+  .chat-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    background: rgba(7, 10, 18, 0.8);
+    border-bottom: 1px solid rgba(37, 99, 235, 0.15);
+  }
+
+  .chat-dots {
+    display: flex;
+    gap: 5px;
+  }
+
+  .chat-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .chat-dot--red    { background: rgba(239, 68, 68, 0.7); }
+  .chat-dot--yellow { background: rgba(234, 179, 8, 0.7); }
+  .chat-dot--green  { background: rgba(34, 197, 94, 0.7); }
+
+  .chat-bar-label {
+    flex: 1;
+    font-size: 11px;
+    font-weight: 600;
+    color: #334155;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .chat-status-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #22C55E;
+    letter-spacing: 0.05em;
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 100px;
+    padding: 2px 8px;
+  }
+
+  .chat-status-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #22C55E;
+    animation: pulseDot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  /* Messages area */
+  .chat-messages {
+    padding: 24px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* Bubble wrap */
+  .chat-bubble-wrap {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+
+  .chat-bubble-wrap--client {
+    align-self: flex-start;
+    align-items: flex-start;
+  }
+
+  .chat-bubble-wrap--ai {
+    align-self: flex-end;
+    align-items: flex-end;
+  }
+
+  /* Spacing between turns */
+  .chat-bubble-wrap--ai + .chat-bubble-wrap--client,
+  .chat-bubble-wrap--client + .chat-bubble-wrap--ai {
+    margin-top: 12px;
+  }
+
+  /* Label */
+  .chat-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .chat-label--client { color: #475569; }
+  .chat-label--ai     { color: rgba(59, 130, 246, 0.7); }
+
+  /* Bubble */
+  .chat-bubble {
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .chat-bubble--client {
+    background: rgba(30, 41, 59, 0.8);
+    color: #CBD5E1;
+    border-radius: 12px 12px 12px 3px;
+  }
+
+  .chat-bubble--ai {
+    background: rgba(37, 99, 235, 0.13);
+    border: 1px solid rgba(37, 99, 235, 0.28);
+    color: #E2E8F0;
+    border-radius: 12px 12px 3px 12px;
+  }
+
+  /* Typing indicator */
+  .chat-typing {
+    align-self: flex-end;
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    transition: opacity 0.35s ease;
+  }
+
+  .typing-bubble {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 16px;
+    background: rgba(37, 99, 235, 0.1);
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    border-radius: 12px 12px 3px 12px;
+  }
+
+  .typing-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.55);
+    animation: typingBounce 1.2s ease-in-out infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typingBounce {
+    0%, 60%, 100% { transform: translateY(0);   opacity: 0.4; }
+    30%           { transform: translateY(-5px); opacity: 1;   }
+  }
+
+  /* Footer bar */
+  .chat-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: rgba(7, 10, 18, 0.6);
+    border-top: 1px solid rgba(37, 99, 235, 0.1);
+    font-size: 11px;
+    color: #334155;
+    letter-spacing: 0.03em;
+  }
+
+  /* Trust row */
+  .ai-trust-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 0;
+    margin-top: 20px;
+  }
+
+  .ai-trust-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #475569;
+    padding: 0 14px;
+    font-weight: 500;
+  }
+
+  .ai-trust-sep {
+    width: 1px;
+    height: 14px;
+    background: rgba(30, 41, 59, 0.8);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    .ai-trust-sep { display: none; }
+    .ai-trust-row { gap: 10px; flex-direction: column; align-items: flex-start; padding-left: 4px; }
+  }
+</style>
+
+<script>
+  /* Parallax on scanline background */
+  (function () {
+    const demo = document.getElementById('ai-demo');
+    if (demo) {
+      window.addEventListener('scroll', () => {
+        const rect = demo.getBoundingClientRect();
+        const progress = -rect.top / (window.innerHeight + rect.height);
+        demo.style.backgroundPositionY = `${progress * 30}px`;
+      }, { passive: true });
+    }
+  })();
+
+  (function () {
+    const section = document.getElementById('ai-demo');
+    if (!section) return;
+
+    const bubbles = Array.from(
+      section.querySelectorAll<HTMLElement>('.chat-bubble-wrap')
+    );
+    const typing = section.querySelector<HTMLElement>('#chat-typing');
+    let triggered = false;
+
+    function playConversation() {
+      if (triggered) return;
+      triggered = true;
+
+      bubbles.forEach((bubble, i) => {
+        const isAI = bubble.classList.contains('chat-bubble-wrap--ai');
+        const delay = i * 900;
+
+        /* Show typing indicator just before each AI bubble */
+        if (isAI && typing) {
+          setTimeout(() => {
+            typing.style.opacity = '1';
+          }, delay - 600);
+          setTimeout(() => {
+            if (typing) typing.style.opacity = '0';
+          }, delay - 100);
+        }
+
+        setTimeout(() => {
+          bubble.style.opacity = '1';
+          bubble.style.transform = 'translateY(0)';
+        }, delay);
+      });
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          playConversation();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(section);
+  })();
+</script>

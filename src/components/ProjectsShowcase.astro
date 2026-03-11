@@ -1,0 +1,485 @@
+---
+export interface Props {
+  t: {
+    badge: string;
+    sectionTitle: { line1: string; line2: string };
+    sectionSub: string;
+    items: Array<{
+      type?: 'app' | 'web';
+      industry: string;
+      title: string;
+      description: string;
+      image: string;
+      imageAlt: string;
+      built: { label: string; items: string[] };
+      metrics: Array<{ value: string; label: string }>;
+    }>;
+  };
+}
+
+const { t } = Astro.props;
+const total = t.items.length;
+---
+
+<section id="projects" aria-labelledby="projects-heading" class="projects-section">
+
+  <!-- Header -->
+  <div class="projects-header reveal">
+    <span class="showcase-badge">{t.badge}</span>
+    <h2 id="projects-heading" class="showcase-title">
+      <span>{t.sectionTitle.line1}</span>
+      <span class="accent">{t.sectionTitle.line2}</span>
+    </h2>
+    <p class="showcase-sub">{t.sectionSub}</p>
+  </div>
+
+  <!-- Ticker carousel -->
+  <div class="ticker-wrapper reveal" style="--reveal-delay:150ms">
+    <!-- track duplicated so the loop is seamless at -50% -->
+    <div class="ticker-track">
+
+      {/* — original set — */}
+      {t.items.map((project, i) => (
+        <article class={`slide${project.type === 'web' ? ' slide--web' : ''}`} aria-label={project.title}>
+          <div class="slide-img-col">
+            <div class="slide-img-frame">
+              <img
+                src={project.image}
+                alt={project.imageAlt}
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </div>
+            <span class="slide-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+
+          <div class="slide-content-panel">
+            <span class="industry-badge">{project.industry}</span>
+            <div class="slide-content-inner">
+              <div class="slide-top">
+                <h3 class="slide-title">{project.title}</h3>
+                <p class="slide-desc">{project.description}</p>
+              </div>
+
+              <div class="slide-built">
+                <span class="built-label">{project.built.label}</span>
+                <ul class="built-list">
+                  {project.built.items.map(item => (
+                    <li class="built-item">
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <circle cx="8" cy="8" r="7" stroke="#2563EB" stroke-width="1.5"/>
+                        <path d="M5 8l2 2 4-4" stroke="#2563EB" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="slide-metrics">
+                {project.metrics.map(m => (
+                  <div class="metric">
+                    <span class="metric-val">{m.value}</span>
+                    <span class="metric-lbl">{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+
+      {/* — cloned set (aria-hidden) — */}
+      {t.items.map((project, i) => (
+        <article class={`slide${project.type === 'web' ? ' slide--web' : ''}`} aria-hidden="true">
+          <div class="slide-img-col">
+            <span class="industry-badge">{project.industry}</span>
+            <div class="slide-img-frame">
+              <img
+                src={project.image}
+                alt={project.imageAlt}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <span class="slide-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          </div>
+
+          <div class="slide-content-panel">
+            <div class="slide-content-inner">
+              <div class="slide-top">
+                <h3 class="slide-title">{project.title}</h3>
+                <p class="slide-desc">{project.description}</p>
+              </div>
+
+              <div class="slide-built">
+                <span class="built-label">{project.built.label}</span>
+                <ul class="built-list">
+                  {project.built.items.map(item => (
+                    <li class="built-item">
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <circle cx="8" cy="8" r="7" stroke="#2563EB" stroke-width="1.5"/>
+                        <path d="M5 8l2 2 4-4" stroke="#2563EB" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="slide-metrics">
+                {project.metrics.map(m => (
+                  <div class="metric">
+                    <span class="metric-val">{m.value}</span>
+                    <span class="metric-lbl">{m.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+
+    </div>
+  </div>
+
+</section>
+
+<style>
+  /* ── Section ── */
+  .projects-section {
+    background: #0B0F14;
+    padding: clamp(80px, 10vw, 130px) 0 clamp(60px, 8vw, 100px);
+    overflow: hidden;
+  }
+
+  /* ── Header ── */
+  .projects-header {
+    max-width: 680px;
+    margin: 0 auto clamp(48px, 7vw, 72px);
+    padding: 0 clamp(20px, 5vw, 60px);
+    text-align: center;
+  }
+
+  .showcase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: #2563EB;
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+  }
+
+  .showcase-title {
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: #F8FAFC;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .showcase-title .accent { color: #2563EB; }
+
+  .showcase-sub {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: #64748B;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── Ticker wrapper ── */
+  .ticker-wrapper {
+    overflow: hidden;
+    cursor: default;
+  }
+
+  /* ── Track — animates continuously ── */
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .ticker-track {
+    height: 950px;
+    display: flex;
+    width: max-content;
+    animation: ticker 100s linear infinite;
+  }
+
+  /* Pause on hover */
+  .ticker-wrapper:hover .ticker-track {
+    animation-play-state: paused;
+  }
+
+  /* ── Each slide — fixed width = 100vw ── */
+  .slide {
+    width: 70vw;
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 52% 48%;
+    padding: clamp(32px, 5vw, 64px) 0;
+  }
+
+  @media (max-width: 860px) {
+    .slide {
+      grid-template-columns: 1fr;
+      padding: clamp(24px, 5vw, 40px) 0;
+    }
+  }
+
+  /* ── Image column ── */
+  .slide-img-col {
+    padding: 0 clamp(20px, 3vw, 40px) 0 clamp(20px, 3vw, 48px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .slide-img-frame {
+    border-radius: 53px;
+    overflow: hidden;
+    max-height: clamp(300px, 38vw, 800px);
+  }
+
+  .slide-img-frame img {
+    width: 400px;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  @media (max-width: 860px) {
+    .slide-img-col {
+      padding: 0 clamp(16px, 5vw, 32px);
+    }
+    .slide-img-frame {
+      max-height: 240px;
+    }
+  }
+
+  .industry-badge {
+    position: absolute;
+    top: 14px;
+    left: calc(clamp(20px, 3vw, 48px) + 14px);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #60A5FA;
+    background: rgba(11, 15, 20, 0.82);
+    border: 1px solid rgba(37, 99, 235, 0.35);
+    border-radius: 100px;
+    padding: 5px 12px;
+    backdrop-filter: blur(12px);
+    z-index: 2;
+    text-transform: uppercase;
+  }
+
+  .slide-num {
+    position: absolute;
+    bottom: 0;
+    left: calc(clamp(20px, 3vw, 48px) + 14px);
+    font-size: clamp(5rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: rgba(255, 255, 255, 0.04);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ── Content panel ── */
+  .slide-content-panel {
+    display: flex;
+    padding: clamp(24px, 4vw, 48px) clamp(28px, 4vw, 56px) clamp(24px, 4vw, 48px) clamp(24px, 3vw, 40px);
+    background: #0D1117;
+    position: relative;
+    border-left: 1px solid rgba(30, 41, 59, 0.4);
+  }
+
+  @media (max-width: 860px) {
+    .slide-content-panel {
+      border-left: none;
+      border-top: 1px solid rgba(30, 41, 59, 0.4);
+      padding: clamp(24px, 5vw, 40px) clamp(16px, 5vw, 32px);
+    }
+  }
+
+  .slide-content-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(ellipse at top left, rgba(37, 99, 235, 0.07), transparent 70%);
+    pointer-events: none;
+  }
+
+  .slide-content-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    width: 100%;
+  }
+
+  .slide-top {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .slide-tag {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #2563EB;
+    text-transform: uppercase;
+  }
+
+  .slide-title {
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+    font-weight: 800;
+    color: #F8FAFC;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+
+  .slide-desc {
+    font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+    color: #64748B;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* ── Built ── */
+  .slide-built {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(30, 41, 59, 0.7);
+    border-bottom: 1px solid rgba(30, 41, 59, 0.7);
+  }
+
+  .built-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: #334155;
+    text-transform: uppercase;
+  }
+
+  .built-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .built-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 0.85rem;
+    color: #94A3B8;
+    line-height: 1.4;
+  }
+
+  .built-item svg { flex-shrink: 0; }
+
+  /* ── Metrics ── */
+  .slide-metrics {
+    display: flex;
+    gap: 0;
+  }
+
+  .metric {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-right: 16px;
+    border-right: 1px solid rgba(30, 41, 59, 0.6);
+  }
+
+  .metric:last-child {
+    border-right: none;
+    padding-right: 0;
+    padding-left: 16px;
+  }
+
+  .metric:not(:first-child):not(:last-child) {
+    padding-left: 16px;
+  }
+
+  .metric-val {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 900;
+    color: #2563EB;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .metric-lbl {
+    font-size: 0.72rem;
+    color: #475569;
+    line-height: 1.35;
+  }
+
+  /* ── Web projects — landscape browser frame ── */
+  .slide--web {
+    grid-template-columns: 60% 40%;
+  }
+
+  .slide--web .slide-img-col {
+    align-items: flex-start;
+    padding-top: clamp(28px, 3.5vw, 48px);
+    padding-bottom: clamp(28px, 3.5vw, 48px);
+  }
+
+  .slide--web .slide-img-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9.5;
+    max-height: none;
+    border-radius: 10px;
+  }
+
+  .slide--web .slide-img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  /* ── Reveal ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity  0.6s ease var(--reveal-delay, 0ms),
+      transform 0.6s ease var(--reveal-delay, 0ms);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>

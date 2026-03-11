@@ -66,7 +66,7 @@ const mvOffsetY = ['-22px', '26px', '16px', '-28px'] as const;
           </div>
 
           <!-- Microcopy sub-line -->
-          <p class="mt-5 text-muted text-[11px] tracking-[0.06em] uppercase font-medium reveal reveal-delay-200 max-w-[30rem]">
+          <p class="rc-micro reveal reveal-delay-200">
             {block.micro}
           </p>
 
@@ -170,6 +170,17 @@ const mvOffsetY = ['-22px', '26px', '16px', '-28px'] as const;
 </section>
 
 <style>
+/* ─── Microcopy sub-line ─────────────────────────────────── */
+.rc-micro {
+  margin-top: clamp(24px, 4vh, 40px);
+  font-size: clamp(0.8rem, 1.4vw, 0.9375rem);
+  color: #475569;
+  line-height: 1.65;
+  max-width: 28rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
 /* ─── Diagonal grid overlay ─────────────────────────────── */
 .rc-diag-grid {
   position: absolute;

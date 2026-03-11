@@ -6,120 +6,185 @@
       "services": "Services",
       "contact": "Contact"
     },
-    "cta": "Build with us"
+    "cta": "Book a free call"
   },
   "hero": {
     "title": {
-      "line1": "Your business is growing.",
-      "line2": "Your control is not."
+      "line1": "Turn visitors into",
+      "line2": "clients automatically."
     },
-    "sub": "We build systems that <strong>Connect</strong>  your tools, <strong>Automate</strong>  your workflows, and <strong>Help</strong> your business scale without chaos. ",
+    "sub": "We build websites connected to AI agents that <strong>respond</strong> to your clients instantly, <strong>qualify</strong> leads, and <strong>book appointments</strong> automatically.",
     "cta": {
-      "primary": "See the Impact"
+      "primary": "Book a free call"
     },
     "scroll": "SCROLL TO REVEAL",
     "chips": {
-      "revenueLeak": "Revenue Leak",
-      "leads": "Leads",
-      "messages": "Messages",
-      "tasks": "Tasks"
+      "revenueLeak": "No response",
+      "leads": "Lost lead",
+      "messages": "No follow-up",
+      "tasks": "Missed booking"
     },
-    "impactItems": [
-      "Leads go cold",
-      "Follow-ups slip",
-      "Competitors close your deals"
-    ],
-    "credibility": "Built by engineers who scaled platforms for millions."
+    "impactItems": [],
+    "credibility": "Designed for businesses that want more clients without manually answering every message.",
+    "flowSteps": [
+      "Visitor lands on your site",
+      "AI responds instantly",
+      "Lead qualified",
+      "Appointment booked",
+      "New client"
+    ]
   },
   "realityCheck": {
-    "label": "ACT II — REALITY CHECK",
+    "label": "THE PROBLEM",
     "blocks": [
       {
         "tag": "LEAD CAPTURE",
         "question": "Missing leads?",
-        "micro": "Every unanswered notification is revenue that never entered your pipeline."
+        "micro": "When a client sends a message and no one responds within minutes, that client goes to your competitor."
       },
       {
         "tag": "RESPONSE TIME",
         "question": "Slow responses?",
-        "micro": "First responder wins 78% of the time. You're not first."
+        "micro": "Clients expect an immediate response. If you take more than a few minutes, the opportunity disappears."
       },
       {
-        "tag": "MANUAL ENTRY",
+        "tag": "MANUAL FOLLOW-UP",
         "question": "Manual tracking?",
-        "micro": "Manual entry scales linearly with every new mistake."
+        "micro": "Remembering to follow up with every prospect takes time and leads to costly mistakes."
       },
       {
-        "tag": "REVENUE LOSS",
-        "question": "Lost deals?",
-        "micro": "$4,200/mo. Closed lost. Every week."
+        "tag": "LOST CLIENTS",
+        "question": "Lost clients?",
+        "micro": "Without a system that captures, responds, and follows up, prospects never become clients."
       }
     ]
   },
   "structure": {
-    "badge": "ACT III — STRUCTURE EMERGES",
+    "badge": "HOW THE SYSTEM WORKS",
     "title": {
-      "chaos": "Chaos is not a scaling strategy.",
-      "structure": "Structure is."
+      "chaos": "Chaos doesn't scale.",
+      "structure": "Systems do."
     },
-    "sub": "Every disconnected tool is a gap in your revenue pipeline. We close those gaps with engineered precision.",
+    "sub": "We connect your website, artificial intelligence, and automation so every visitor gets an instant response and a clear path to becoming a client.",
     "flow": {
       "step1": {
-        "label": "INITIAL CHAOS STATE",
-        "title": "Fragmented Leads"
+        "label": "CAPTURE",
+        "title": "Visitor lands on your site"
       },
       "step2": {
-        "label": "SNAP AND ALIGN PHASE",
-        "title": "Message Synchronization"
+        "label": "INSTANT RESPONSE",
+        "title": "AI responds immediately"
       },
       "step3": {
-        "label": "THE FINAL BLUEPRINT ARCHITECTURE",
-        "title": "Structured Vertical Flow",
-        "features": ["Unified Pipeline", "Auto-Follow", "Real-Time Analytics"]
+        "label": "AUTOMATIC CONVERSION",
+        "title": "Appointment booked automatically",
+        "features": ["Lead qualified", "Booked on your calendar", "New client"]
       }
     },
     "metrics": {
       "uptime": { "value": "99.9%", "label": "System Uptime" },
       "conversion": { "value": "4.2x", "label": "Pipeline Conversion" },
-      "manual": { "value": "Zero", "label": "Manual Gaps" }
+      "manual": { "value": "Zero", "label": "Manual Processes" }
     },
-    "pipeline": ["Lead Captured", "Follow-up Triggered", "Appointment Booked", "Deal Closed"],
-    "annotations": { "step1": "Connected", "step2": "Automated", "step3": "Structured" }
+    "pipeline": ["Visits site", "AI responds", "Lead qualified", "Appointment booked"],
+    "annotations": { "step1": "Connected", "step2": "Automated", "step3": "Converted" }
+  },
+  "capabilities": {
+    "title": "The system that turns visitors into clients.",
+    "subtitle": "Four connected components working for your business 24/7.",
+    "blocks": [
+      {
+        "title": "Websites that convert",
+        "items": [
+          "Conversion-focused design",
+          "Lead capture forms",
+          "Fast-loading, mobile-first",
+          "Direct integration with the AI system"
+        ],
+        "result": "More visitors become real opportunities."
+      },
+      {
+        "title": "Automatic AI response",
+        "items": [
+          "Instant response, 24/7",
+          "Natural conversations in your language",
+          "Automatic lead qualification",
+          "No manual intervention needed"
+        ],
+        "result": "Every client gets an instant response, even after hours."
+      },
+      {
+        "title": "Automatic follow-up",
+        "items": [
+          "Scheduled follow-up messages",
+          "Automatic reminders",
+          "Cold lead reactivation",
+          "Full history per client"
+        ],
+        "result": "No prospect goes unanswered."
+      },
+      {
+        "title": "Automatic appointment booking",
+        "items": [
+          "Direct booking to your calendar",
+          "Automatic email confirmations",
+          "Reminders before the appointment",
+          "Google Calendar integration"
+        ],
+        "result": "Qualified leads book appointments directly on your calendar."
+      }
+    ]
+  },
+  "aiDemo": {
+    "title": "This is how the system responds to your clients.",
+    "sub": "While you're treating patients, the system responds, qualifies, and books — without you lifting a finger.",
+    "clientLabel": "Patient",
+    "aiLabel": "AI System",
+    "messages": [
+      { "role": "client", "text": "Hi, I've had a toothache since last night. Do you have any availability today?" },
+      { "role": "ai",     "text": "Hi there! So sorry to hear that. Yes, we have urgent care slots available today. How strong is the pain from 1 to 10?" },
+      { "role": "client", "text": "About a 7. It gets worse with cold drinks." },
+      { "role": "ai",     "text": "Got it — that's really helpful info for the doctor. For today we have 3:00pm or 5:30pm available. Which works best for you?" },
+      { "role": "client", "text": "3pm please." },
+      { "role": "ai",     "text": "Perfect. I've booked you with Dr. González today at 3:00pm. Can I get your full name to set up your record?" },
+      { "role": "client", "text": "Sure, it's Maria Rodriguez." },
+      { "role": "ai",     "text": "All set, Maria 🦷 Appointment confirmed for today at 3:00pm. I just sent you a text with the office address and what to bring. Feel better soon — see you shortly! ✓" }
+    ]
   },
   "control": {
-    "actLabel": "ACT VI",
-    "title": "The result is clarity.",
-    "sub": "When your systems are aligned, your business operates with precision. No more chasing leads. No more missed follow-ups. No more revenue left on the table.",
+    "actLabel": "THE RESULT",
+    "title": "When everything is connected, your business stops improvising.",
+    "sub": "Visitors become leads. Leads get instant responses. Clients book appointments automatically.",
     "benefits": [
       {
         "icon": "clock",
         "title": "Respond in seconds",
-        "desc": "Automated responses reach leads the moment they engage — before competitors can."
+        "desc": "Your system responds instantly, before the client loses interest or contacts your competitor."
       },
       {
         "icon": "diamond",
         "title": "Close more clients",
-        "desc": "A structured pipeline means every lead gets the right message at the right time."
+        "desc": "Every lead gets automatic follow-up with the right message at the right time."
       },
       {
         "icon": "moon",
         "title": "Works while you sleep",
-        "desc": "Your system runs 24/7, qualifying leads and scheduling appointments automatically."
+        "desc": "Your system runs 24/7, qualifying leads and booking appointments without you lifting a finger."
       }
     ]
   },
   "decision": {
-    "badge": "ACT VII — THE DECISION",
+    "badge": "TAKE THE NEXT STEP",
     "title": {
-      "line1": "Stop improvising.",
-      "line2": "Start operating."
+      "line1": "Stop chasing clients.",
+      "line2": "Capture them automatically."
     },
-    "sub": "You've seen what's possible. Now it's time to build the system that runs your business — so you can focus on growing it.",
+    "sub": "We build systems that work for your business 24/7.",
     "cta": {
-      "primary": "Build your system",
+      "primary": "Book a free call",
       "secondary": "View Demo"
     },
-    "attributes": ["ENTERPRISE", "GLOBAL OPS", "SYSTEMATIC", "VELOCITY"],
+    "attributes": ["AUTO CAPTURE", "SECONDS RESPONSE", "24/7", "MORE CLIENTS"],
     "dashboard": {
       "label": "Example: Local Service Business",
       "metrics": {
@@ -132,13 +197,39 @@
       "progress": "51%"
     }
   },
+  "whoWeWorkWith": {
+    "title": "For businesses that want more clients",
+    "subtitle": "We work with growing companies that receive leads but can't respond fast enough.",
+    "segments": [
+      {
+        "label": "Contractors",
+        "desc": "They get inquiries via WhatsApp, forms, and calls — and can't keep up with all of them."
+      },
+      {
+        "label": "Dentists & clinics",
+        "desc": "Patients ask after hours and appointments get lost due to lack of follow-up."
+      },
+      {
+        "label": "Real estate agents",
+        "desc": "Leads go cold because no one contacts them within the first few minutes."
+      },
+      {
+        "label": "Local service businesses",
+        "desc": "Owners who want to scale without hiring more customer service staff."
+      },
+      {
+        "label": "Growing companies",
+        "desc": "Teams looking to automate their lead capture process without losing the personal touch."
+      }
+    ]
+  },
   "engineering": {
-    "badge": "ENGINEERING AUTHORITY",
+    "badge": "BUILT BY ENGINEERS",
     "title": {
       "line1": "BUILT BY ENGINEERS WHO",
       "line2": "SCALED FOR MILLIONS."
     },
-    "sub": "We've architected systems for fintech, enterprise SaaS, and high-traffic platforms. Now we bring that same rigor to your business operations.",
+    "sub": "Systems designed to capture and convert clients automatically. The same technical rigor we apply to enterprise platforms, now in service of your business.",
     "cta": {
       "portfolio": "View Our Portfolio",
       "specs": "Technical Specs"
@@ -150,7 +241,7 @@
       { "value": "$0",    "label": "Revenue Lost to Downtime",     "sub": "in 5+ years of operation" }
     ],
     "timeline": {
-      "label": "ENGINEERING FEATS & MILESTONES",
+      "label": "REAL PROJECTS. MEASURABLE RESULTS.",
       "milestones": [
         {
           "year": "2018",
@@ -176,120 +267,133 @@
       ]
     }
   },
-  "capabilities": {
-    "title": "What We Build",
-    "subtitle": "Three systems designed to bring structure and growth to your business.",
-    "blocks": [
-      {
-        "title": "Custom Business Systems",
-        "items": [
-          "Client portals",
-          "Internal dashboards",
-          "Workflow management tools",
-          "CRM integrations"
-        ],
-        "result": "Reduce manual admin work and operate with clarity."
-      },
-      {
-        "title": "Revenue-Focused Websites",
-        "items": [
-          "Conversion-driven design",
-          "Lead capture systems",
-          "Funnel structure",
-          "CRM connection"
-        ],
-        "result": "Turn more visitors into qualified clients."
-      },
-      {
-        "title": "Automation & AI Workflows",
-        "items": [
-          "Automated follow-ups",
-          "Lead routing",
-          "Appointment scheduling",
-          "Intelligent response systems"
-        ],
-        "result": "Respond faster. Close more deals."
-      }
-    ]
-  },
-  "whoWeWorkWith": {
-    "title": "Built for Growing Service Businesses",
-    "subtitle": "We work with companies that are growing fast but operating without structure.",
-    "segments": [
-      {
-        "label": "Contractors",
-        "desc": "Project-based crews juggling estimates, site visits, and lead requests across calls, forms, and messages."
-      },
-      {
-        "label": "Real Estate Teams",
-        "desc": "Multi-agent teams sharing buyer and seller inquiries across portals, inboxes, and personal CRMs."
-      },
-      {
-        "label": "Local Service Companies",
-        "desc": "Home and local services handling bookings through phone calls, DMs, web forms, and walk-ins."
-      },
-      {
-        "label": "Professional Firms",
-        "desc": "Advisory, legal, and financial firms relying on referrals and inbound leads without a structured follow-up."
-      },
-      {
-        "label": "Multi-location Operators",
-        "desc": "Brands managing demand across multiple locations, each running on different tools and processes."
-      }
-    ]
-  },
-  "proof": {
-    "badge": "CASE STUDY",
+  "projects": {
+    "badge": "REAL PROJECTS",
     "sectionTitle": {
-      "line1": "Real systems.",
-      "line2": "Real numbers."
+      "line1": "Examples of systems",
+      "line2": "we've built."
     },
-    "sectionSub": "One example of what changes when the right operational infrastructure is in place.",
-    "industry": "LOCAL SERVICE BUSINESS",
-    "situation": {
-      "label": "THE SITUATION",
-      "context": "A growing service company losing clients to slow responses and disconnected manual operations.",
-      "problems": {
-        "label": "THE PROBLEM",
-        "items": [
-          "Leads lost to slow response times",
-          "No unified view of the pipeline",
-          "Manual follow-ups falling through the cracks"
+    "sectionSub": "Each system is designed to capture leads and convert them into clients automatically.",
+    "items": [
+      {
+        "type": "app",
+        "industry": "TALENT MARKETPLACE",
+        "title": "ContactMyApp — Professional Talent Marketplace",
+        "description": "ContactMyApp redefines how professionals get hired. Talent publishes their skills and services in a dynamic marketplace where quality is rewarded with verified ratings — giving every professional real visibility and a proven track record that clients trust. More than a classifieds board: a reputation engine built to convert.",
+        "image": "/assets/proyects/app1.png",
+        "imageAlt": "ContactMyApp talent marketplace platform",
+        "built": {
+          "label": "WHAT WE BUILT",
+          "items": [
+            "Professional profiles with verified skills, portfolio and services listing",
+            "Smart rating & review engine that ranks professionals by quality of work",
+            "Discovery system matching clients to the right talent by specialty, location and reputation"
+          ]
+        },
+        "metrics": [
+          { "value": "Multi", "label": "industry talent platform" },
+          { "value": "5★",    "label": "quality-driven ranking system" },
+          { "value": "Seed",  "label": "active investment round" }
+        ]
+      },
+      {
+        "type": "app",
+        "industry": "PROPTECH · MOBILE APP",
+        "title": "Homee — Intelligent Neighborhood Finder",
+        "description": "Moving is one of life's biggest decisions — and most people make it with incomplete information. Homee analyzes what matters most: distance to work, proximity to schools, hospitals, restaurants, parks, and neighborhood safety scores. Then it shows users exactly what life will look like if they move there. Not just listings — lifestyle intelligence.",
+        "image": "/assets/proyects/app2.png",
+        "imageAlt": "Homee neighborhood finder mobile app",
+        "built": {
+          "label": "WHAT WE BUILT",
+          "items": [
+            "Multi-variable lifestyle scoring engine analyzing each neighborhood",
+            "Interactive map with safety, amenities, and commute time overlays",
+            "Personalized neighborhood ranking based on user-defined preferences"
+          ]
+        },
+        "metrics": [
+          { "value": "12+",  "label": "lifestyle variables analyzed per area" },
+          { "value": "3+",   "label": "cities mapped at launch" },
+          { "value": "Seed", "label": "active investment round" }
+        ]
+      },
+      {
+        "type": "web",
+        "industry": "HEALTHCARE",
+        "title": "Hospital Universidad del Norte — Patient Digital Experience",
+        "description": "One of Colombia's leading university hospitals needed a digital presence that matched its medical excellence. We rebuilt their institutional website and developed a secure patient portal where over 2 million users can access lab results and diagnostic imaging online — eliminating paperwork, cutting wait times, and delivering clinical results instantly.",
+        "image": "/assets/proyects/hospitalun.png",
+        "imageAlt": "Hospital Universidad del Norte patient portal and website",
+        "built": {
+          "label": "WHAT WE BUILT",
+          "items": [
+            "Institutional website redesigned for trust, clarity, and accessibility",
+            "Secure portal for lab results and diagnostic imaging — available 24/7",
+            "Patient-data architecture aligned with healthcare privacy standards"
+          ]
+        },
+        "metrics": [
+          { "value": "2M+",  "label": "patients with digital access to results" },
+          { "value": "24/7", "label": "results available online, no wait" },
+          { "value": "0",    "label": "critical downtime since launch" }
+        ]
+      },
+      {
+        "type": "web",
+        "industry": "TELECOMMUNICATIONS",
+        "title": "GPS Starr — Fleet Intelligence System",
+        "description": "A Colombian telecommunications enterprise needed full visibility and control over its vehicle fleet. We delivered a fully custom GPS tracking solution end-to-end — from hardware sourcing and device configuration (imported directly from China) to software integration and deployment in Colombia — with real-time monitoring, route history, and operational alerts.",
+        "image": "/assets/proyects/gpsstart.png",
+        "imageAlt": "GPS Starr fleet tracking and control platform",
+        "built": {
+          "label": "WHAT WE BUILT",
+          "items": [
+            "GPS hardware imported from China, configured and deployed in Colombia",
+            "Real-time fleet tracking with live position, speed, and operational alerts",
+            "Web-based control dashboard with full route history and reporting"
+          ]
+        },
+        "metrics": [
+          { "value": "Real", "label": "time GPS tracking across entire fleet" },
+          { "value": "100%", "label": "custom end-to-end build" },
+          { "value": "HW+SW", "label": "hardware and software integrated" }
+        ]
+      },
+      {
+        "type": "web",
+        "industry": "ENTERPRISE SAAS",
+        "title": "SignTrack — Document Control & Approval Platform",
+        "description": "Approval workflows that rely on email chains, printed forms, or shared spreadsheets create risk, delay, and zero accountability. SignTrack gives companies a structured digital workflow for purchase approvals and document sign-off — with a complete legal audit trail for every action, at every step, for every document.",
+        "image": "/assets/proyects/signtrack.png",
+        "imageAlt": "SignTrack document management and digital signature platform",
+        "built": {
+          "label": "WHAT WE BUILT",
+          "items": [
+            "Digital workflow engine for purchase approvals and multi-level sign-off",
+            "Legal-grade digital signature with full audit trail per document",
+            "Configurable for any document type — contracts, authorizations, compliance forms"
+          ]
+        },
+        "metrics": [
+          { "value": "100%", "label": "digital audit trail on every document" },
+          { "value": "0",    "label": "lost or unsigned approvals" },
+          { "value": "Any",  "label": "document type supported" }
         ]
       }
-    },
-    "built": {
-      "label": "WHAT WE BUILT",
-      "items": [
-        "Automated lead capture from all channels",
-        "Centralized client dashboard",
-        "Follow-up automation — 24/7"
-      ]
-    },
-    "result": {
-      "label": "THE RESULT",
-      "stat": "+37%",
-      "statLabel": "increase in booked calls",
-      "timeline": "Deployed in 14 days. ROI delivered in month one.",
-      "metrics": [
-        { "value": "14d", "label": "From kickoff to live" },
-        { "value": "0", "label": "Missed leads after go-live" },
-        { "value": "24/7", "label": "Automated follow-up" }
-      ]
-    }
+    ]
   },
   "bookCall": {
-    "badge": "SCHEDULE A STRATEGY CALL",
+    "badge": "BOOK YOUR FREE CALL",
     "title": {
-      "line1": "Let's map your",
-      "line2": "next move."
+      "line1": "Stop losing clients",
+      "line2": "to slow responses."
     },
-    "sub": "In 30 minutes, we'll review your current operations, identify the gaps costing you revenue, and outline exactly what we'd build — no fluff, no pressure.",
+    "sub": "In 30 minutes we'll show you how to build a system that captures and converts clients automatically — without hiring more staff.",
     "trust": [
-      "30-minute focused session",
-      "Operations audit included",
-      "Custom roadmap, no templates",
-      "No commitment required"
+      "No cost, no commitment",
+      "Audit of your current process",
+      "Personalized plan for your business",
+      "Clear result in 30 minutes"
     ],
     "form": {
       "title": "Reserve your spot",
@@ -308,7 +412,7 @@
         "placeholder": "Acme Inc.",
         "optional": "optional"
       },
-      "submit": "Book a Call"
+      "submit": "Book a call"
     },
     "scheduled": {
       "title": "Pick a time that works for you",
@@ -316,7 +420,7 @@
     }
   },
   "footer": {
-    "tagline": "Engineering business systems for structured growth.",
+    "tagline": "Systems that capture and convert clients automatically.",
     "nav": {
       "systems": "Systems",
       "howItWorks": "How It Works",

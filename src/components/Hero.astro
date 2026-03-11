@@ -8,9 +8,11 @@ export interface Props {
     chips: { revenueLeak: string; leads: string; messages: string; tasks: string };
     impactItems: string[];
     credibility: string;
+    flowSteps?: string[];
   };
 }
 const { t } = Astro.props;
+const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 ---
 
 <section
@@ -19,29 +21,24 @@ const { t } = Astro.props;
   aria-label="Hero section"
 >
 
-  <!-- ── Full-bleed background layers (relative to section) ── -->
   <div class="hero-glow" aria-hidden="true"></div>
   <div class="hero-blueprint" id="hero-grid" aria-hidden="true"></div>
   <div class="hero-grain" aria-hidden="true"></div>
   <div class="hero-vignette" aria-hidden="true"></div>
 
-  <!-- ── Constrained container — anchors chip positioning ── -->
-  <div class="hero-container">
+  <div class={`hero-container${hasFlow ? ' hero-container--two-col' : ''}`}>
 
-    <!-- ══ Floating Indicators Layer ══
-         All chips positioned as % of this container.
-         Never uses vw or viewport-relative values.  -->
+    <!-- Floating chips -->
     <div class="hero-chips-layer" aria-hidden="true">
 
-      <!-- Left column (left: 2–16%) -->
-
-      <div class="chip chip-7" style="top: 10%; left: 7%;">
+      <!-- Left column chips -->
+      <div class="chip chip-7" style="top: 8%; left: 6%;">
         <span class="dot bg-muted"></span>
         Pipeline
         <span class="chip-sub" style="color:#334155;">idle</span>
       </div>
 
-      <div class="chip-widget chip-2" style="top: 32%; left: 2%;">
+      <div class="chip-widget chip-2" style="top: 28%; left: 1%;">
         <div class="widget-header">
           <span class="dot bg-accent"></span>
           <span class="widget-label">{t.chips.leads}</span>
@@ -50,32 +47,31 @@ const { t } = Astro.props;
         <div class="widget-delta">↑ 12% this week</div>
       </div>
 
-      <div class="chip chip-9" style="top: 64%; left: 4%;">
+      <div class="chip chip-9" style="top: 60%; left: 3%;">
         <span class="dot bg-accent"></span>
         Follow-up
         <span class="chip-sub">×7</span>
       </div>
 
-      <div class="chip chip-4" style="bottom: 24%; left: 9%;">
+      <div class="chip chip-4" style="bottom: 22%; left: 5%;">
         <span class="dot bg-success"></span>
         {t.chips.messages}
         <span class="chip-sub">23 pending</span>
       </div>
 
-      <div class="chip chip-error chip-6" style="bottom: 10%; left: 5%;">
+      <div class="chip chip-error chip-6" style="bottom: 8%; left: 4%;">
         <span class="dot bg-critical pulse-dot"></span>
         ERROR_TIMEOUT
       </div>
 
-      <!-- Right column (right: 2–16%) -->
-
-      <div class="chip chip-1" style="top: 10%; right: 7%;">
+      <!-- Right column chips -->
+      <div class="chip chip-1" style="top: 8%; right: 6%;">
         <span class="dot bg-yellow-400"></span>
         {t.chips.revenueLeak}
         <span class="chip-badge chip-badge-warn">–$1.8k</span>
       </div>
 
-      <div class="chip chip-8" style="top: 24%; right: 9%;">
+      <div class="chip chip-8" style="top: 22%; right: 8%;">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round">
           <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.08-4.93"/>
         </svg>
@@ -83,7 +79,7 @@ const { t } = Astro.props;
         <span class="chip-sub text-success">✓</span>
       </div>
 
-      <div class="chip chip-3" style="top: 54%; right: 5%;">
+      <div class="chip chip-3" style="top: 52%; right: 4%;">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>
         </svg>
@@ -91,7 +87,7 @@ const { t } = Astro.props;
         <span class="chip-badge chip-badge-blue">new</span>
       </div>
 
-      <div class="chip-widget chip-10" style="bottom: 28%; right: 2%;">
+      <div class="chip-widget chip-10" style="bottom: 26%; right: 1%;">
         <div class="widget-header">
           <span class="dot bg-success"></span>
           <span class="widget-label">Deal Closed</span>
@@ -100,7 +96,7 @@ const { t } = Astro.props;
         <div class="widget-delta text-success">2 min ago</div>
       </div>
 
-      <div class="chip chip-5" style="bottom: 14%; right: 7%;">
+      <div class="chip chip-5" style="bottom: 12%; right: 6%;">
         <span class="dot bg-critical pulse-dot"></span>
         {t.chips.tasks}
         <span class="chip-sub text-critical">overdue</span>
@@ -108,41 +104,80 @@ const { t } = Astro.props;
 
     </div><!-- /hero-chips-layer -->
 
-    <!-- ══ Content Layer — safe zone, chips never enter ══ -->
-    <div class="hero-content">
+    <!-- Content -->
+    <div class={`hero-content${hasFlow ? ' hero-content--two-col' : ''}`}>
 
-      <!-- Headline: line 1 setup, line 2 punchline (larger + brighter) -->
-      <h1 class="hero-headline">
-        <span class="block hero-line1">{t.title.line1}</span>
-        <span class="block hero-line2">{t.title.line2}</span>
-      </h1>
+      <!-- Left column: text -->
+      <div class="hero-text-col">
+        <h1 class="hero-headline">
+          <span class="block hero-line1">{t.title.line1}</span>
+          <span class="block hero-line2">{t.title.line2}</span>
+        </h1>
 
-      <!-- Supporting text -->
-      <p class="hero-sub" set:html={t.sub} />
+        <p class="hero-sub" set:html={t.sub} />
 
-      <!-- Impact row -->
-      <div class="impact-row" aria-label="Business impact">
-        {t.impactItems.map((text, i) => (
-          <>
-            {i > 0 && <span class="impact-sep" aria-hidden="true"></span>}
-            <span class="impact-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              {text}
-            </span>
-          </>
-        ))}
+        {!hasFlow && t.impactItems.length > 0 && (
+          <div class="impact-row" aria-label="Business impact">
+            {t.impactItems.map((text, i) => (
+              <>
+                {i > 0 && <span class="impact-sep" aria-hidden="true"></span>}
+                <span class="impact-item">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  {text}
+                </span>
+              </>
+            ))}
+          </div>
+        )}
+
+        <div class="hero-cta-wrap">
+          <a href="#book-call" class="hero-cta">
+            {t.cta.primary}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+            </svg>
+          </a>
+          <p class="hero-credibility">{t.credibility}</p>
+        </div>
       </div>
 
-      <!-- CTA + credibility -->
-      <div class="hero-cta-wrap">
-        <a href="#reality-check" class="hero-cta">
-          {t.cta.primary}
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
-          </svg>
-        </a>
-        <p class="hero-credibility">{t.credibility}</p>
-      </div>
+      <!-- Right column: timeline flow diagram -->
+      {hasFlow && (
+        <div class="hero-flow-col" aria-hidden="true">
+          <div class="flow-diagram">
+            <!-- Vertical connector line — positioned at center of dots -->
+            <div class="flow-track"></div>
+
+            {t.flowSteps!.map((step, i) => {
+              const isFinal = i === t.flowSteps!.length - 1;
+              return (
+                <div
+                  class={`flow-node${isFinal ? ' flow-node--final' : ''}`}
+                  style={`animation-delay: ${380 + i * 90}ms`}
+                >
+                  <!-- Dot column -->
+                  <div class="flow-dot-col">
+                    <div class="flow-dot">
+                      {isFinal ? (
+                        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                      ) : (
+                        <span class="flow-dot-core"></span>
+                      )}
+                    </div>
+                  </div>
+                  <!-- Node body -->
+                  <div class="flow-node-body">
+                    <span class="flow-node-num">{String(i + 1).padStart(2, '0')}</span>
+                    <span class="flow-node-label">{step}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
     </div><!-- /hero-content -->
 
@@ -158,7 +193,6 @@ const { t } = Astro.props;
 
 <style>
 
-  /* ══ Section ══ */
   .hero-section {
     background-color: #0B0F14;
     position: relative;
@@ -166,58 +200,35 @@ const { t } = Astro.props;
     overflow: hidden;
   }
 
-  /* ══ Background Layer 1: Architectural glow ══ */
   .hero-glow {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(
-      ellipse 75% 55% at 50% 42%,
-      rgba(29, 78, 216, 0.22) 0%,
-      transparent 68%
-    );
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 75% 55% at 50% 42%, rgba(29,78,216,0.22) 0%, transparent 68%);
   }
 
-  /* ══ Background Layer 2: Blueprint grid — fades in, supports JS parallax ══ */
   .hero-blueprint {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    will-change: transform;
+    position: absolute; inset: 0; pointer-events: none;
+    opacity: 0; will-change: transform;
     animation: blueprintReveal 1.6s ease-out 0.8s forwards;
     background-image:
-      linear-gradient(rgba(37, 99, 235, 0.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
+      linear-gradient(rgba(37,99,235,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37,99,235,0.045) 1px, transparent 1px);
     background-size: 56px 56px;
   }
+  @keyframes blueprintReveal { from{opacity:0} to{opacity:1} }
 
-  @keyframes blueprintReveal {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
-  /* ══ Background Layer 3: Film grain ══ */
   .hero-grain {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+    position: absolute; inset: 0; pointer-events: none;
     opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 180px 180px;
   }
 
-  /* ══ Background Layer 4: Edge vignette ══ */
   .hero-vignette {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 45%, rgba(11, 15, 20, 0.7) 100%);
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 45%, rgba(11,15,20,0.7) 100%);
   }
 
-  /* ══ Constrained container
-     Max 1400px, centered, holds both chips and content layers.
-     Chips are positioned as % of this container — never bleed to screen edges. ══ */
+  /* ── Container ── */
   .hero-container {
     position: relative;
     max-width: 1400px;
@@ -229,46 +240,71 @@ const { t } = Astro.props;
     justify-content: center;
   }
 
-  /* ══ Floating indicators layer
-     Absolute over the container, pointer-events none on layer
-     (individual chips re-enable pointer-events for hover glow). ══ */
+  /* ── Chips layer ── */
   .hero-chips-layer {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    /* Entrance: chips fade in at 600ms after headline appears */
     opacity: 0;
     animation: heroFade 500ms ease 600ms forwards;
   }
 
-  /* ══ Content layer — text safe zone ══ */
+  /* In two-col desktop: hide left chips that overlap with the text column */
+  @media (min-width: 960px) {
+    .hero-container--two-col .chip-2,
+    .hero-container--two-col .chip-4,
+    .hero-container--two-col .chip-9 {
+      display: none;
+    }
+  }
+
+  /* ── Content: default centered ── */
   .hero-content {
     position: relative;
     z-index: 10;
     max-width: 720px;
     width: 100%;
     text-align: center;
-    /* Responsive padding keeps text away from chip zones */
     padding-top: clamp(80px, 14vh, 140px);
     padding-bottom: clamp(60px, 12vh, 120px);
   }
 
-  /* ══ Typography hierarchy
-     Line 1: setup phrase — slightly smaller, slightly dimmed
-     Line 2: punchline — dominant size, full brightness ══ */
-  .hero-headline {
-    letter-spacing: -0.025em;
+  /* ── Content: two-column ── */
+  .hero-content--two-col {
+    max-width: 1100px;
+    text-align: left;
+    /* Sit higher — less top padding than centered variant */
+    padding-top: clamp(40px, 7vh, 80px);
+    padding-bottom: clamp(40px, 7vh, 80px);
   }
+
+  @media (min-width: 960px) {
+    .hero-content--two-col {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-content--two-col .hero-sub {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .hero-content--two-col .hero-cta-wrap {
+      align-items: flex-start;
+    }
+  }
+
+  /* ── Typography ── */
+  .hero-headline { letter-spacing: -0.025em; }
 
   .hero-line1 {
     font-size: clamp(2.1rem, 4vw, 3.9rem);
     font-weight: 600;
     line-height: 1.05;
-    color: rgba(248, 250, 252, 0.68);
-    /* Stagger: 0ms */
+    color: rgba(248,250,252,0.68);
     opacity: 0;
     transform: translateY(10px);
-    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 0ms forwards;
+    animation: heroEntrance 500ms cubic-bezier(0.22,1,0.36,1) 0ms forwards;
   }
 
   .hero-line2 {
@@ -277,13 +313,21 @@ const { t } = Astro.props;
     line-height: 1.05;
     color: #F8FAFC;
     margin-top: 0.2em;
-    /* Stagger: 80ms after line 1 */
     opacity: 0;
     transform: translateY(10px);
-    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 80ms forwards;
+    animation: heroEntrance 500ms cubic-bezier(0.22,1,0.36,1) 80ms forwards;
   }
 
-  /* ══ Supporting text — stagger 150ms ══ */
+  /* Larger headline in two-col — has 1fr left column so there's room */
+  @media (min-width: 960px) {
+    .hero-content--two-col .hero-line1 {
+      font-size: clamp(2.4rem, 3.8vw, 3.8rem);
+    }
+    .hero-content--two-col .hero-line2 {
+      font-size: clamp(3rem, 4.8vw, 4.6rem);
+    }
+  }
+
   .hero-sub {
     margin-top: 28px;
     font-size: clamp(0.95rem, 1.8vw, 1.15rem);
@@ -291,166 +335,227 @@ const { t } = Astro.props;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.7;
-    color: rgba(100, 116, 139, 0.9);
-    /* Stagger: 150ms */
+    color: rgba(100,116,139,0.9);
     opacity: 0;
     transform: translateY(10px);
-    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 150ms forwards;
+    animation: heroEntrance 500ms cubic-bezier(0.22,1,0.36,1) 150ms forwards;
   }
 
-  /* Style the <strong> injected via set:html */
   .hero-sub :global(strong) {
     color: #F8FAFC;
     font-weight: 700;
-    border-bottom: 1px solid rgba(59, 130, 246, 0.5);
+    border-bottom: 1px solid rgba(59,130,246,0.5);
     padding-bottom: 1px;
   }
 
-  /* ══ Impact row — stagger 225ms ══ */
   .impact-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px 0;
-    margin-top: 18px;
-    /* Stagger: 225ms */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 225ms forwards;
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 8px 0; margin-top: 18px;
+    opacity: 0; transform: translateY(10px);
+    animation: heroEntrance 500ms cubic-bezier(0.22,1,0.36,1) 225ms forwards;
   }
-
   .impact-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 500;
-    color: #475569;
-    padding: 0 14px;
-    letter-spacing: 0.02em;
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 500; color: #475569;
+    padding: 0 14px; letter-spacing: 0.02em;
   }
+  .impact-sep { width: 1px; height: 12px; background: #1E293B; flex-shrink: 0; }
 
-  .impact-sep {
-    width: 1px;
-    height: 12px;
-    background: #1E293B;
-    flex-shrink: 0;
-  }
-
-  /* ══ CTA wrap — stagger 300ms ══ */
   .hero-cta-wrap {
     margin-top: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Stagger: 300ms */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: heroEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
+    display: flex; flex-direction: column; align-items: center;
+    opacity: 0; transform: translateY(10px);
+    animation: heroEntrance 500ms cubic-bezier(0.22,1,0.36,1) 300ms forwards;
   }
 
   .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 32px;
-    background: #2563EB;
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 12px;
-    border: 1px solid rgba(99, 149, 255, 0.35);
-    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
-    transition: background 0.2s, box-shadow 0.2s, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 32px; background: #2563EB; color: white;
+    font-weight: 600; font-size: 1rem; border-radius: 12px;
+    border: 1px solid rgba(99,149,255,0.35);
+    box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
     text-decoration: none;
   }
   .hero-cta:hover {
     background: #1D4ED8;
-    box-shadow: 0 8px 28px rgba(37, 99, 235, 0.45);
+    box-shadow: 0 8px 28px rgba(37,99,235,0.45);
     transform: translateY(-2px);
   }
-  .hero-cta:active {
-    transform: translateY(0px);
-    transition-duration: 0.1s;
-    box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
-  }
+  .hero-cta:active { transform: translateY(0px); transition-duration: 0.1s; }
 
-  /* Credibility line below CTA */
   .hero-credibility {
-    margin-top: 12px;
-    font-size: 14px;
-    color: #94A3B8;
-    opacity: 0.6;
-    line-height: 1.5;
+    margin-top: 12px; font-size: 13px;
+    color: #94A3B8; opacity: 0.6; line-height: 1.5; max-width: 360px;
   }
 
-  /* ══ Chip shared styles ══ */
-  .chip {
-    position: absolute;
-    z-index: 10;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 11px;
-    background: rgba(16, 21, 28, 0.82);
-    border: 1px solid rgba(30, 41, 59, 0.85);
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 500;
-    color: #94A3B8;
-    white-space: nowrap;
-    backdrop-filter: blur(10px);
-    will-change: transform;
-    /* Re-enable hover on individual chips */
-    pointer-events: auto;
-    transition: box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-  .chip:hover {
-    box-shadow: 0 0 14px rgba(59, 130, 246, 0.2);
-    border-color: rgba(59, 130, 246, 0.3);
+  /* ══ Flow Diagram — timeline with aligned track ══ */
+  .hero-flow-col {
+    opacity: 0;
+    animation: heroEntrance 600ms cubic-bezier(0.22,1,0.36,1) 350ms forwards;
   }
 
-  .chip-error {
-    background: rgba(239, 68, 68, 0.07);
-    border-color: rgba(239, 68, 68, 0.35);
-    color: #F87171;
-    font-size: 10px;
-    font-family: 'Courier New', monospace;
-    letter-spacing: 0.04em;
-  }
-
-  .chip-badge {
-    font-size: 9px;
-    font-weight: 700;
-    padding: 1px 6px;
-    border-radius: 4px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .chip-badge-warn { background: rgba(234, 179, 8, 0.15); color: #EAB308; }
-  .chip-badge-blue { background: rgba(59, 130, 246, 0.15); color: #60A5FA; }
-
-  .chip-widget {
-    position: absolute;
-    z-index: 10;
+  .flow-diagram {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    padding: 10px 14px;
-    background: rgba(16, 21, 28, 0.88);
-    border: 1px solid rgba(30, 41, 59, 0.9);
+    /* No padding-left here — track alignment is calculated from node structure */
+  }
+
+  /*
+    Track alignment math:
+    - .flow-dot-col: width 28px, centers the dot
+    - dot center is at x = 14px from flow-diagram left
+    - track left = 14px - 0.5px (half stroke) ≈ 14px
+  */
+  .flow-track {
+    position: absolute;
+    left: 13px;        /* exact center of 28px dot-col (13.5px ≈ 14px) */
+    top: 20px;
+    bottom: 20px;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      rgba(37,99,235,0.0) 0%,
+      rgba(37,99,235,0.4) 15%,
+      rgba(37,99,235,0.55) 50%,
+      rgba(37,99,235,0.4) 85%,
+      rgba(37,99,235,0.0) 100%
+    );
+    pointer-events: none;
+  }
+
+  .flow-node {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 0;
+    opacity: 0;
+    animation: heroEntrance 500ms cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+
+  /* Dot column: fixed 28px wide so track center (14px) = dot center */
+  .flow-dot-col {
+    width: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .flow-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #0B0F14;
+    border: 1.5px solid rgba(37,99,235,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .flow-dot-core {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(37,99,235,0.6);
+  }
+
+  .flow-node--final .flow-dot {
+    width: 24px;
+    height: 24px;
+    background: #2563EB;
+    border-color: rgba(59,130,246,0.7);
+    box-shadow: 0 0 18px rgba(37,99,235,0.55);
+  }
+
+  .flow-node:hover .flow-dot {
+    border-color: rgba(37,99,235,0.8);
+    box-shadow: 0 0 12px rgba(37,99,235,0.3);
+  }
+
+  .flow-node-body {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    background: rgba(16,21,28,0.65);
+    border: 1px solid rgba(30,41,59,0.8);
     border-radius: 10px;
-    min-width: 110px;
-    backdrop-filter: blur(12px);
-    will-change: transform;
-    pointer-events: auto;
+    flex: 1;
+    backdrop-filter: blur(6px);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .flow-node:hover .flow-node-body {
+    border-color: rgba(37,99,235,0.3);
+    background: rgba(16,21,28,0.9);
+  }
+
+  .flow-node--final .flow-node-body {
+    background: rgba(37,99,235,0.1);
+    border-color: rgba(37,99,235,0.38);
+  }
+
+  .flow-node-num {
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.06em;
+    color: rgba(37,99,235,0.5);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .flow-node--final .flow-node-num { color: #60A5FA; }
+
+  .flow-node-label {
+    font-size: 0.875rem; font-weight: 600;
+    color: #94A3B8; line-height: 1.3;
+  }
+  .flow-node--final .flow-node-label { color: #F8FAFC; font-weight: 700; }
+
+  /* ── Mobile ── */
+  @media (max-width: 959px) {
+    .hero-content--two-col { text-align: center; }
+    .hero-content--two-col .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-content--two-col .hero-cta-wrap { align-items: center; }
+    .hero-flow-col { display: none; }
+  }
+
+  /* ── Chips ── */
+  .chip {
+    position: absolute; z-index: 10;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 11px;
+    background: rgba(16,21,28,0.82); border: 1px solid rgba(30,41,59,0.85);
+    border-radius: 8px; font-size: 11px; font-weight: 500; color: #94A3B8;
+    white-space: nowrap; backdrop-filter: blur(10px);
+    will-change: transform; pointer-events: auto;
     transition: box-shadow 0.25s ease, border-color 0.25s ease;
   }
-  .chip-widget:hover {
-    box-shadow: 0 0 16px rgba(59, 130, 246, 0.18);
-    border-color: rgba(59, 130, 246, 0.28);
+  .chip:hover { box-shadow: 0 0 14px rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.3); }
+
+  .chip-error {
+    background: rgba(239,68,68,0.07); border-color: rgba(239,68,68,0.35);
+    color: #F87171; font-size: 10px; font-family: 'Courier New', monospace; letter-spacing: 0.04em;
   }
+
+  .chip-badge { font-size: 9px; font-weight: 700; padding: 1px 6px; border-radius: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .chip-badge-warn { background: rgba(234,179,8,0.15); color: #EAB308; }
+  .chip-badge-blue { background: rgba(59,130,246,0.15); color: #60A5FA; }
+
+  .chip-widget {
+    position: absolute; z-index: 10;
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 10px 14px;
+    background: rgba(16,21,28,0.88); border: 1px solid rgba(30,41,59,0.9);
+    border-radius: 10px; min-width: 110px;
+    backdrop-filter: blur(12px); will-change: transform; pointer-events: auto;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .chip-widget:hover { box-shadow: 0 0 16px rgba(59,130,246,0.18); border-color: rgba(59,130,246,0.28); }
 
   .widget-header { display: flex; align-items: center; gap: 6px; }
   .widget-label  { font-size: 10px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -459,7 +564,7 @@ const { t } = Astro.props;
   .dot           { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
   .chip-sub      { font-size: 10px; color: #64748B; }
 
-  /* ══ Float animations — very slow, max 6px translation ══ */
+  /* Float animations */
   .chip-1  { animation: chipFloat1  8.0s ease-in-out infinite;       }
   .chip-2  { animation: chipFloat2  9.5s ease-in-out infinite 1.4s;  }
   .chip-3  { animation: chipFloat3  7.4s ease-in-out infinite 0.6s;  }
@@ -471,47 +576,28 @@ const { t } = Astro.props;
   .chip-9  { animation: chipFloat9  8.8s ease-in-out infinite 0.4s;  }
   .chip-10 { animation: chipFloat10 8.0s ease-in-out infinite 1.8s;  }
 
-  @keyframes chipFloat1  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(2px)  } }
-  @keyframes chipFloat2  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(-3px) } }
-  @keyframes chipFloat3  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(2px)  } }
-  @keyframes chipFloat4  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-4px) translateX(3px)  } }
-  @keyframes chipFloat5  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(-2px) } }
-  @keyframes chipFloat6  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-4px) translateX(3px)  } }
-  @keyframes chipFloat7  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(-2px) } }
-  @keyframes chipFloat8  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(2px)  } }
-  @keyframes chipFloat9  { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-6px) translateX(-3px) } }
-  @keyframes chipFloat10 { 0%,100%{transform:translateY(0)     } 50%{transform:translateY(-5px) translateX(2px)  } }
+  @keyframes chipFloat1  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px) translateX(2px)}  }
+  @keyframes chipFloat2  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px) translateX(-3px)} }
+  @keyframes chipFloat3  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px) translateX(2px)}  }
+  @keyframes chipFloat4  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px) translateX(3px)}  }
+  @keyframes chipFloat5  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px) translateX(-2px)} }
+  @keyframes chipFloat6  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px) translateX(3px)}  }
+  @keyframes chipFloat7  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px) translateX(-2px)} }
+  @keyframes chipFloat8  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px) translateX(2px)}  }
+  @keyframes chipFloat9  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px) translateX(-3px)} }
+  @keyframes chipFloat10 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px) translateX(2px)}  }
 
   .pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
-  @keyframes pulseDot {
-    0%,100% { transform: scale(1);   opacity: 1; }
-    50%     { transform: scale(0.7); opacity: 0.5; }
-  }
+  @keyframes pulseDot { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(0.7);opacity:0.5} }
 
-  /* ══ Entrance keyframes ══ */
-  @keyframes heroEntrance {
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes heroEntrance { to{opacity:1;transform:translateY(0)} }
+  @keyframes heroFade { to{opacity:1} }
 
-  @keyframes heroFade {
-    to { opacity: 1; }
-  }
+  .scroll-indicator { opacity: 0; animation: heroFade 600ms ease 1.3s forwards; }
 
-  /* ══ Scroll indicator ══ */
-  .scroll-indicator {
-    opacity: 0;
-    animation: heroFade 600ms ease 1.3s forwards;
-  }
-
-  /* ══ Mobile — show only 3 indicators
-     chip-2 (Leads), chip-8 (CRM Sync), chip-10 (Deal Closed)
-     Repositioned to top-left, top-right, bottom-right corners. ══ */
+  /* Mobile: keep only 3 chips */
   @media (max-width: 767px) {
-    .chip-1, .chip-3, .chip-4, .chip-5, .chip-6, .chip-7, .chip-9 {
-      display: none;
-    }
-
-    /* Override inline styles with !important — prevents text collision */
+    .chip-1,.chip-3,.chip-4,.chip-5,.chip-6,.chip-7,.chip-9 { display: none; }
     .chip-2  { top: 10% !important; left: 3%   !important; }
     .chip-8  { top: 10% !important; right: 3%  !important; left: auto !important; }
     .chip-10 { bottom: 14% !important; right: 3% !important; top: auto !important; }
@@ -520,13 +606,10 @@ const { t } = Astro.props;
 </style>
 
 <script>
-  /* ── Grid parallax
-     Blueprint grid moves at 10% of scroll speed.
-     Creates depth without distraction. ── */
   const grid = document.getElementById('hero-grid');
   if (grid) {
     window.addEventListener('scroll', () => {
-      grid.style.transform = `translateY(${window.scrollY * 0.1}px)`;
+      grid.style.transform = `translateY(${window.scrollY * 0.08}px)`;
     }, { passive: true });
   }
 </script>

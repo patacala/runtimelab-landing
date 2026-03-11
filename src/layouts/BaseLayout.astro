@@ -68,5 +68,37 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
 
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     </script>
+
+    <!-- Subtle global parallax: section backgrounds shift at 5-8% scroll speed -->
+    <script>
+      (function () {
+        const parallaxSections = [
+          { id: 'capabilities', speed: 0.06 },
+          { id: 'projects',     speed: 0.05 },
+          { id: 'who-we-work',  speed: 0.06 },
+        ];
+
+        const targets: Array<{ el: HTMLElement; speed: number }> = [];
+
+        parallaxSections.forEach(({ id, speed }) => {
+          const el = document.getElementById(id);
+          if (el) targets.push({ el, speed });
+        });
+
+        if (targets.length === 0) return;
+
+        function updateParallax() {
+          const scrollY = window.scrollY;
+          targets.forEach(({ el, speed }) => {
+            const rect = el.getBoundingClientRect();
+            const centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
+            el.style.backgroundPositionY = `calc(50% + ${centerOffset * speed}px)`;
+          });
+        }
+
+        window.addEventListener('scroll', updateParallax, { passive: true });
+        updateParallax();
+      })();
+    </script>
   </body>
 </html>
