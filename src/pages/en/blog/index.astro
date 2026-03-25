@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import BlogCard from '../../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import t from '../../../i18n/en.json';
+
+const allPosts = await getCollection('blog', ({ data }) => data.lang === 'en');
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))];
+---
+
+<BaseLayout
+  lang="en"
+  title="RuntimeLab Blog — Web Development, AI Agents, Automations"
+  description="Articles about professional web development, AI agents, business automations, and custom software. Learn how intelligent systems grow your business."
+  keywords="web development blog, AI agents blog, business automations, custom software blog"
+  hreflangEs="https://runtime-lab.com/blog"
+  hreflangEn="https://runtime-lab.com/en/blog"
+>
+  <Nav t={t.nav} lang="en" />
+
+  <main id="main-content" class="blog-main">
+    <div class="blog-container">
+
+      <!-- Header -->
+      <header class="blog-header">
+        <span class="blog-badge">BLOG</span>
+        <h1 class="blog-title">Resources to grow your business with intelligent systems</h1>
+        <p class="blog-sub">Articles on web development, AI agents, automations, and custom software — written by the RuntimeLab team.</p>
+      </header>
+
+      <!-- Tag filter -->
+      {allTags.length > 0 && (
+        <div class="blog-tags-filter" id="tags-filter">
+          <button class="blog-tag-btn active" data-tag="all">All</button>
+          {allTags.map(tag => (
+            <button class="blog-tag-btn" data-tag={tag}>{tag}</button>
+          ))}
+        </div>
+      )}
+
+      <!-- Posts grid -->
+      {posts.length > 0 ? (
+        <div class="blog-grid" id="posts-grid">
+          {posts.map(post => (
+            <div class="blog-post-item" data-tags={JSON.stringify(post.data.tags)}>
+              <BlogCard
+                title={post.data.title}
+                description={post.data.description}
+                pubDate={post.data.pubDate}
+                tags={post.data.tags}
+                slug={post.slug}
+                lang="en"
+                coverImage={post.data.coverImage}
+                readingTime={post.data.readingTime}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="blog-empty">
+          <p>Coming soon — articles on the way.</p>
+        </div>
+      )}
+
+    </div>
+  </main>
+
+  <Footer t={t.footer} nav={{ logo: t.nav.logo }} lang="en" />
+</BaseLayout>
+
+<style>
+  .blog-main {
+    padding-top: 74px;
+    min-height: 80vh;
+  }
+  .blog-container {
+    max-width: 76rem;
+    margin: 0 auto;
+    padding: 60px 1.5rem 80px;
+  }
+
+  .blog-header {
+    max-width: 44rem;
+    margin-bottom: 48px;
+  }
+  .blog-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #3B82F6;
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.2);
+    border-radius: 100px;
+    padding: 5px 14px;
+    margin-bottom: 16px;
+  }
+  .blog-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #F8FAFC;
+    line-height: 1.15;
+    margin-bottom: 14px;
+  }
+  .blog-sub {
+    font-size: 1rem;
+    color: #94A3B8;
+    line-height: 1.7;
+  }
+
+  .blog-tags-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  .blog-tag-btn {
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(30,41,59,0.7);
+    background: transparent;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .blog-tag-btn:hover { color: #94A3B8; border-color: rgba(30,41,59,1); }
+  .blog-tag-btn.active {
+    background: rgba(37,99,235,0.1);
+    border-color: rgba(37,99,235,0.3);
+    color: #3B82F6;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .blog-post-item.hidden { display: none; }
+
+  .blog-empty {
+    text-align: center;
+    padding: 80px 0;
+    color: #475569;
+    font-size: 1rem;
+  }
+</style>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.blog-tag-btn');
+  const postItems = document.querySelectorAll<HTMLElement>('.blog-post-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      postItems.forEach(item => {
+        if (tag === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          const tags: string[] = JSON.parse(item.dataset.tags || '[]');
+          item.classList.toggle('hidden', !tags.includes(tag));
+        }
+      });
+    });
+  });
+</script>

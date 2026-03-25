@@ -1,0 +1,171 @@
+---
+import ServicePage from '../../components/ServicePage.astro';
+import nav from '../../i18n/es.json';
+
+const data = {
+  lang: 'es' as const,
+  meta: {
+    title: 'Desarrollo de Páginas Web Profesionales | RuntimeLab',
+    description: 'Diseñamos y desarrollamos páginas web profesionales optimizadas para conversión, velocidad y SEO. Tu sitio captura leads automáticamente y los envía a tu sistema de IA y CRM.',
+    keywords: 'desarrollo de páginas web, páginas web profesionales, diseño web, desarrollo web para empresas, web que convierte, sitio web profesional',
+    hreflangEs: 'https://runtime-lab.com/servicios/desarrollo-web',
+    hreflangEn: 'https://runtime-lab.com/en/services/web-development',
+  },
+  nav: nav.nav,
+  footer: nav.footer,
+  hero: {
+    badge: 'PÁGINAS WEB',
+    title: 'Páginas web profesionales que capturan y convierten clientes',
+    sub: 'Diseñamos y desarrollamos tu sitio web con foco en conversión: carga rápida, mobile-first, SEO optimizado y conectado a tus agentes de IA y CRM para que cada visita se convierta en una oportunidad.',
+    cta: 'Agendar llamada gratuita',
+    ctaHref: '/#decision',
+  },
+  benefitsTitle: '¿Por qué tu web necesita ser más que un catálogo?',
+  benefits: [
+    {
+      icon: 'chart' as const,
+      title: 'Diseñada para convertir',
+      desc: 'Cada elemento de tu web — textos, CTA, formularios y flujo — está pensado para guiar al visitante a convertirse en lead.',
+    },
+    {
+      icon: 'zap' as const,
+      title: 'Carga en menos de 2 segundos',
+      desc: 'Optimizamos imágenes, código y hosting para que tu web cargue rápido en cualquier dispositivo. La velocidad es un factor SEO clave.',
+    },
+    {
+      icon: 'globe' as const,
+      title: 'SEO técnico incluido',
+      desc: 'Meta tags, schema markup, sitemap, robots.txt, hreflang y Core Web Vitals optimizados desde el primer día.',
+    },
+    {
+      icon: 'bot' as const,
+      title: 'Conectada a tu IA y CRM',
+      desc: 'Integramos formularios y widgets de chat directamente con tus agentes de IA y tu CRM para que no se pierda ningún lead.',
+    },
+  ],
+  process: {
+    title: 'Cómo desarrollamos tu página web',
+    sub: 'Un proceso claro en 4 pasos, de cero a una web publicada y optimizada.',
+    steps: [
+      {
+        num: '01',
+        title: 'Descubrimiento y estrategia',
+        desc: 'Analizamos tu negocio, competencia y audiencia objetivo. Definimos la arquitectura de información, keywords principales y objetivos de conversión.',
+      },
+      {
+        num: '02',
+        title: 'Diseño UI/UX y prototipo',
+        desc: 'Creamos el diseño visual completo: wireframes, paleta de colores, tipografía y disposición de secciones. Apruebas antes de que escribamos una línea de código.',
+      },
+      {
+        num: '03',
+        title: 'Desarrollo y optimización',
+        desc: 'Construimos tu web con código limpio, optimizado para velocidad y SEO. Integramos formularios, tracking y conectamos con tus sistemas existentes.',
+      },
+      {
+        num: '04',
+        title: 'Lanzamiento y seguimiento',
+        desc: 'Publicamos tu web, configuramos Google Analytics, Search Console y te entregamos un reporte inicial. Soporte post-lanzamiento incluido.',
+      },
+    ],
+  },
+  useCases: {
+    title: '¿Para qué tipo de negocio desarrollamos webs?',
+    items: [
+      {
+        label: 'Clínicas y consultorios',
+        desc: 'Web con formularios de cita previa, información de servicios y agente de IA para responder preguntas frecuentes y calificar pacientes.',
+      },
+      {
+        label: 'Agencias de servicios',
+        desc: 'Landing pages de alta conversión con portfolio, testimonios, calculadora de precios y CTA directo a llamada o WhatsApp.',
+      },
+      {
+        label: 'Negocios locales',
+        desc: 'Presencia profesional con SEO local, Google Business integrado y formularios conectados al CRM para dar seguimiento a cada consulta.',
+      },
+      {
+        label: 'SaaS y startups',
+        desc: 'Webs de producto con demos interactivas, páginas de pricing, integración con herramientas de automatización y análisis de conversión.',
+      },
+      {
+        label: 'Inmobiliarias y constructoras',
+        desc: 'Catálogos de propiedades, formularios de contacto con calificación automática de leads y seguimiento por CRM omnichannel.',
+      },
+      {
+        label: 'E-commerce y tiendas',
+        desc: 'Tiendas optimizadas para SEO y conversión, con checkout simplificado e integración con sistemas de gestión de inventario.',
+      },
+    ],
+  },
+  cta: {
+    title: 'Tu negocio merece una web que trabaje por ti.',
+    sub: 'En 30 minutos te mostramos qué posibilidades tiene tu web actual y cómo podemos transformarla en tu mejor vendedor.',
+    button: 'Agendar llamada gratuita',
+    href: '/#decision',
+  },
+  related: {
+    title: 'Otros servicios relacionados',
+    items: [
+      { label: 'Agentes IA', href: '/servicios/agentes-ia' },
+      { label: 'Automatizaciones', href: '/servicios/automatizaciones' },
+      { label: 'Software a Medida', href: '/servicios/software-a-medida' },
+    ],
+  },
+  schemas: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Desarrollo de Páginas Web Profesionales",
+      "description": "Diseñamos y desarrollamos páginas web profesionales optimizadas para conversión, velocidad y SEO.",
+      "provider": { "@id": "https://runtime-lab.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "Mexico" },
+      "serviceType": "Web Development",
+      "url": "https://runtime-lab.com/servicios/desarrollo-web"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Cómo desarrollamos tu página web profesional",
+      "description": "Proceso de 4 pasos para crear una página web profesional que convierte",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Descubrimiento y estrategia",
+          "text": "Analizamos tu negocio, competencia y audiencia objetivo. Definimos arquitectura, keywords y objetivos de conversión."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Diseño UI/UX y prototipo",
+          "text": "Creamos el diseño visual completo: wireframes, paleta de colores, tipografía y disposición de secciones."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Desarrollo y optimización",
+          "text": "Construimos tu web con código limpio, optimizado para velocidad y SEO, con integraciones a tus sistemas."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Lanzamiento y seguimiento",
+          "text": "Publicamos tu web, configuramos analytics y entregamos reporte inicial con soporte post-lanzamiento."
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://runtime-lab.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://runtime-lab.com/#capabilities" },
+        { "@type": "ListItem", "position": 3, "name": "Desarrollo Web", "item": "https://runtime-lab.com/servicios/desarrollo-web" }
+      ]
+    }
+  ],
+};
+---
+
+<ServicePage data={data} />

@@ -4,7 +4,15 @@
     "links": {
       "work": "How It Works",
       "services": "Services",
-      "contact": "Contact"
+      "contact": "Contact",
+      "blog": "Blog",
+      "servicesItems": {
+        "web": "Web Development",
+        "aiAgents": "AI Agents",
+        "automations": "Automations",
+        "software": "Custom Software",
+        "viewAll": "View all services"
+      }
     },
     "cta": "Book a free call"
   },

@@ -1,0 +1,157 @@
+---
+import ServicePage from '../../../components/ServicePage.astro';
+import nav from '../../../i18n/en.json';
+
+const data = {
+  lang: 'en' as const,
+  meta: {
+    title: 'Custom Software Development for Businesses | RuntimeLab',
+    description: 'We build custom software: internal platforms, client portals, dashboards, and integrated systems with scalable architecture. When off-the-shelf tools are not enough.',
+    keywords: 'custom software development, bespoke software, software development company, internal platforms, business dashboards, client portals, custom web applications',
+    hreflangEs: 'https://runtime-lab.com/servicios/software-a-medida',
+    hreflangEn: 'https://runtime-lab.com/en/services/custom-software',
+  },
+  nav: nav.nav,
+  footer: nav.footer,
+  hero: {
+    badge: 'CUSTOM SOFTWARE',
+    title: 'Custom software built to scale with your operations',
+    sub: 'When off-the-shelf tools fall short, we build exactly what your business needs: internal platforms, client portals, management dashboards, and systems integrated with your existing infrastructure.',
+    cta: 'Book a free call',
+    ctaHref: '/en/#decision',
+  },
+  benefitsTitle: 'Why custom software instead of generic tools?',
+  benefits: [
+    {
+      icon: 'code' as const,
+      title: 'Built for your exact process',
+      desc: 'You don\'t adapt your business to the software — the software adapts to your business. Every flow, rule, and view designed for how your team operates.',
+    },
+    {
+      icon: 'zap' as const,
+      title: 'Integrates with existing systems',
+      desc: 'We connect with your APIs, databases, payment tools, ERPs, and any system you already use — no friction, no data silos.',
+    },
+    {
+      icon: 'shield' as const,
+      title: 'Scalable architecture',
+      desc: 'We build with the same practices we use on enterprise platforms: clean code, tests, CI/CD, and a design that scales without rewrites.',
+    },
+    {
+      icon: 'chart' as const,
+      title: 'You own the code',
+      desc: 'The code is yours. No monthly licenses, no vendor lock-in, no user limits, no gated features. Your software, forever.',
+    },
+  ],
+  process: {
+    title: 'How we build your custom software',
+    sub: 'An agile, transparent development process with frequent deliveries.',
+    steps: [
+      {
+        num: '01',
+        title: 'Discovery and definition',
+        desc: 'We map your current processes, identify the problems the software must solve, and define scope, architecture, and tech stack.',
+      },
+      {
+        num: '02',
+        title: 'Product design',
+        desc: 'We create wireframes, interactive prototypes, and the UI design. Validated by your team before we begin development.',
+      },
+      {
+        num: '03',
+        title: 'Sprint-based development',
+        desc: 'We develop in 2-week cycles with functional deliveries. You review and give feedback every sprint before we proceed.',
+      },
+      {
+        num: '04',
+        title: 'QA and testing',
+        desc: 'Unit tests, integration tests, and real user testing. We verify performance, security, and compatibility across all scenarios.',
+      },
+      {
+        num: '05',
+        title: 'Deployment and support',
+        desc: 'We deploy to your infrastructure or the cloud, set up CI/CD, document the system, and provide post-launch technical support.',
+      },
+    ],
+  },
+  useCases: {
+    title: 'What types of software do we build?',
+    items: [
+      {
+        label: 'Internal management platforms',
+        desc: 'Systems to manage operations, teams, inventory, production, or any internal process you currently run in spreadsheets.',
+      },
+      {
+        label: 'Client portals',
+        desc: 'Spaces where your clients can view project status, invoices, documents, or access services independently.',
+      },
+      {
+        label: 'Dashboards and analytics',
+        desc: 'Real-time visualization of your KPIs across sales, operations, finance, or any area, with data unified from multiple sources.',
+      },
+      {
+        label: 'Integrations and middleware',
+        desc: 'Integration layer connecting systems that don\'t talk to each other: ERPs, CRMs, payment platforms, third-party APIs, and databases.',
+      },
+      {
+        label: 'SaaS applications',
+        desc: 'If you have a digital product idea, we build the MVP with core features to validate the market and scale afterward.',
+      },
+      {
+        label: 'AI-powered tools',
+        desc: 'Applications integrating language models (GPT, Claude) to automate analysis, content generation, or decision-making.',
+      },
+    ],
+  },
+  cta: {
+    title: 'Does your operation need more than what generic tools offer?',
+    sub: 'Book a call and we\'ll analyze whether custom software is the right fit and what architecture would work best for your case.',
+    button: 'Book a free call',
+    href: '/en/#decision',
+  },
+  related: {
+    title: 'Related services',
+    items: [
+      { label: 'Automations', href: '/en/services/automations' },
+      { label: 'AI Agents', href: '/en/services/ai-agents' },
+      { label: 'Web Development', href: '/en/services/web-development' },
+    ],
+  },
+  schemas: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Custom Software Development",
+      "description": "Development of custom software: internal platforms, portals, dashboards, and integrated systems with scalable architecture.",
+      "provider": { "@id": "https://runtime-lab.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "serviceType": "Custom Software Development",
+      "url": "https://runtime-lab.com/en/services/custom-software"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How we build custom software",
+      "description": "5-stage agile process for building tailored software",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Discovery and definition", "text": "Map processes and define scope, architecture, and tech stack." },
+        { "@type": "HowToStep", "position": 2, "name": "Product design", "text": "Wireframes, interactive prototypes, and UI design validated by your team." },
+        { "@type": "HowToStep", "position": 3, "name": "Sprint-based development", "text": "2-week cycles with functional deliveries and continuous feedback." },
+        { "@type": "HowToStep", "position": 4, "name": "QA and testing", "text": "Unit, integration, performance, and security testing." },
+        { "@type": "HowToStep", "position": 5, "name": "Deployment and support", "text": "Production deploy, CI/CD setup, documentation, and post-launch support." }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://runtime-lab.com/en/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://runtime-lab.com/en/#capabilities" },
+        { "@type": "ListItem", "position": 3, "name": "Custom Software", "item": "https://runtime-lab.com/en/services/custom-software" }
+      ]
+    }
+  ],
+};
+---
+
+<ServicePage data={data} />

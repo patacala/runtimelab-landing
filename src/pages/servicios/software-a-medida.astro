@@ -1,0 +1,157 @@
+---
+import ServicePage from '../../components/ServicePage.astro';
+import nav from '../../i18n/es.json';
+
+const data = {
+  lang: 'es' as const,
+  meta: {
+    title: 'Software a Medida para Empresas | Desarrollo de Software | RuntimeLab',
+    description: 'Desarrollamos software a medida: plataformas internas, portales, dashboards y sistemas personalizados con arquitectura escalable. Cuando las herramientas genéricas no son suficientes.',
+    keywords: 'software a medida, desarrollo de software, software personalizado, plataforma a medida, dashboard empresarial, portal web, software empresarial, aplicaciones a medida',
+    hreflangEs: 'https://runtime-lab.com/servicios/software-a-medida',
+    hreflangEn: 'https://runtime-lab.com/en/services/custom-software',
+  },
+  nav: nav.nav,
+  footer: nav.footer,
+  hero: {
+    badge: 'SOFTWARE A MEDIDA',
+    title: 'Software a medida construido para escalar con tu operación',
+    sub: 'Cuando las herramientas genéricas se quedan cortas, construimos exactamente lo que tu negocio necesita: plataformas internas, portales de clientes, dashboards de gestión y sistemas integrados con tu infraestructura existente.',
+    cta: 'Agendar llamada gratuita',
+    ctaHref: '/#decision',
+  },
+  benefitsTitle: '¿Por qué software a medida en lugar de herramientas genéricas?',
+  benefits: [
+    {
+      icon: 'code' as const,
+      title: 'Construido para tu proceso exacto',
+      desc: 'No adaptas tu negocio al software, el software se adapta a tu negocio. Cada flujo, regla y vista diseñada para cómo opera tu equipo.',
+    },
+    {
+      icon: 'zap' as const,
+      title: 'Integración con sistemas existentes',
+      desc: 'Conectamos con tus APIs, bases de datos, herramientas de pago, ERP y cualquier sistema que ya uses, sin fricciones ni silos de datos.',
+    },
+    {
+      icon: 'shield' as const,
+      title: 'Arquitectura escalable',
+      desc: 'Construimos con las mismas prácticas que usamos en plataformas enterprise: código limpio, tests, CI/CD y diseño que escala sin reescribir.',
+    },
+    {
+      icon: 'chart' as const,
+      title: 'Tú eres el dueño',
+      desc: 'El código es tuyo. Sin licencias mensuales, sin dependencia de proveedores externos, sin límites de usuarios ni funcionalidades bloqueadas.',
+    },
+  ],
+  process: {
+    title: 'Cómo desarrollamos tu software a medida',
+    sub: 'Un proceso de desarrollo ágil, transparente y con entregas frecuentes.',
+    steps: [
+      {
+        num: '01',
+        title: 'Descubrimiento y definición',
+        desc: 'Mapeamos tus procesos actuales, identificamos los problemas que el software debe resolver y definimos el alcance, arquitectura y stack tecnológico.',
+      },
+      {
+        num: '02',
+        title: 'Diseño de producto',
+        desc: 'Creamos wireframes, prototipos interactivos y el diseño de la interfaz. Validamos con tu equipo antes de comenzar el desarrollo.',
+      },
+      {
+        num: '03',
+        title: 'Desarrollo por sprints',
+        desc: 'Desarrollamos en ciclos de 2 semanas con entregas funcionales. Revisas y das feedback en cada sprint antes de continuar al siguiente.',
+      },
+      {
+        num: '04',
+        title: 'QA y pruebas',
+        desc: 'Pruebas unitarias, de integración y con usuarios reales. Verificamos rendimiento, seguridad y compatibilidad en todos los escenarios.',
+      },
+      {
+        num: '05',
+        title: 'Despliegue y soporte',
+        desc: 'Desplegamos en tu infraestructura o en la nube, configuramos CI/CD, documentamos el sistema y ofrecemos soporte técnico post-lanzamiento.',
+      },
+    ],
+  },
+  useCases: {
+    title: '¿Qué tipo de software desarrollamos?',
+    items: [
+      {
+        label: 'Plataformas internas de gestión',
+        desc: 'Sistemas para gestionar operaciones, equipos, inventario, producción o cualquier proceso interno que hoy haces en hojas de cálculo.',
+      },
+      {
+        label: 'Portales de clientes',
+        desc: 'Espacios donde tus clientes pueden ver el estado de sus proyectos, facturas, documentos o acceder a servicios de forma autónoma.',
+      },
+      {
+        label: 'Dashboards y analytics',
+        desc: 'Visualización en tiempo real de tus KPIs de ventas, operaciones, finanzas o cualquier área, con datos de múltiples fuentes unificados.',
+      },
+      {
+        label: 'Integraciones y middleware',
+        desc: 'Capa de integración que conecta sistemas que no se hablan entre sí: ERP, CRM, plataformas de pago, APIs de terceros y bases de datos.',
+      },
+      {
+        label: 'Aplicaciones SaaS',
+        desc: 'Si tienes una idea de producto digital, construimos el MVP con las funcionalidades core para validar el mercado y escalar después.',
+      },
+      {
+        label: 'Herramientas de IA personalizadas',
+        desc: 'Aplicaciones que integran modelos de lenguaje (GPT, Claude) para automatizar análisis, generación de contenido o toma de decisiones.',
+      },
+    ],
+  },
+  cta: {
+    title: '¿Tu operación necesita más de lo que ofrecen las herramientas genéricas?',
+    sub: 'Agenda una llamada y analizamos si necesitas software a medida y cuál sería la mejor arquitectura para tu caso.',
+    button: 'Agendar llamada gratuita',
+    href: '/#decision',
+  },
+  related: {
+    title: 'Otros servicios relacionados',
+    items: [
+      { label: 'Automatizaciones', href: '/servicios/automatizaciones' },
+      { label: 'Agentes IA', href: '/servicios/agentes-ia' },
+      { label: 'Páginas Web', href: '/servicios/desarrollo-web' },
+    ],
+  },
+  schemas: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Software a Medida para Empresas",
+      "description": "Desarrollo de software personalizado: plataformas internas, portales, dashboards y sistemas integrados con arquitectura escalable.",
+      "provider": { "@id": "https://runtime-lab.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "Mexico" },
+      "serviceType": "Custom Software Development",
+      "url": "https://runtime-lab.com/servicios/software-a-medida"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Cómo desarrollamos software a medida",
+      "description": "Proceso ágil de 5 etapas para construir software personalizado",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Descubrimiento y definición", "text": "Mapeamos procesos y definimos alcance, arquitectura y stack tecnológico." },
+        { "@type": "HowToStep", "position": 2, "name": "Diseño de producto", "text": "Wireframes, prototipos y diseño de interfaz validados antes del desarrollo." },
+        { "@type": "HowToStep", "position": 3, "name": "Desarrollo por sprints", "text": "Ciclos de 2 semanas con entregas funcionales y feedback continuo." },
+        { "@type": "HowToStep", "position": 4, "name": "QA y pruebas", "text": "Pruebas unitarias, de integración, rendimiento y seguridad." },
+        { "@type": "HowToStep", "position": 5, "name": "Despliegue y soporte", "text": "Despliegue en producción, CI/CD, documentación y soporte post-lanzamiento." }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://runtime-lab.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://runtime-lab.com/#capabilities" },
+        { "@type": "ListItem", "position": 3, "name": "Software a Medida", "item": "https://runtime-lab.com/servicios/software-a-medida" }
+      ]
+    }
+  ],
+};
+---
+
+<ServicePage data={data} />

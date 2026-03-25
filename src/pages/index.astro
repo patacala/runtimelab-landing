@@ -14,12 +14,162 @@ import BookCall from '../components/BookCall.astro';
 import Footer from '../components/Footer.astro';
 
 import t from '../i18n/es.json';
+
+const homeSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "name": [
+      "Páginas Web",
+      "Agentes IA",
+      "Automatizaciones",
+      "Software a Medida",
+      "Blog",
+      "Agendar llamada"
+    ],
+    "url": [
+      "https://runtime-lab.com/servicios/desarrollo-web",
+      "https://runtime-lab.com/servicios/agentes-ia",
+      "https://runtime-lab.com/servicios/automatizaciones",
+      "https://runtime-lab.com/servicios/software-a-medida",
+      "https://runtime-lab.com/blog",
+      "https://runtime-lab.com/#decision"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://runtime-lab.com",
+    "name": "RuntimeLab",
+    "description": "Desarrollo web, agentes de IA, automatizaciones y software a medida",
+    "inLanguage": "es",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://runtime-lab.com/blog?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Servicios de RuntimeLab",
+    "description": "Servicios de desarrollo web, agentes de IA, automatizaciones y software a medida",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Service",
+          "name": "Desarrollo de Páginas Web",
+          "description": "Diseñamos páginas web profesionales optimizadas para conversión, carga rápida y SEO. Tu sitio captura leads y los envía directo a tu sistema.",
+          "url": "https://runtime-lab.com/servicios/desarrollo-web",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Service",
+          "name": "Agentes de Inteligencia Artificial",
+          "description": "Creamos agentes de IA que responden, califican leads y agendan citas automáticamente, disponibles 24/7 desde cualquier canal.",
+          "url": "https://runtime-lab.com/servicios/agentes-ia",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Service",
+          "name": "Automatizaciones de Negocio",
+          "description": "Construimos workflows inteligentes con n8n que conectan tus herramientas, eliminan tareas manuales y escalan tu operación automáticamente.",
+          "url": "https://runtime-lab.com/servicios/automatizaciones",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Service",
+          "name": "Software a Medida",
+          "description": "Desarrollamos plataformas, dashboards y sistemas personalizados con arquitectura escalable para empresas que necesitan más que herramientas genéricas.",
+          "url": "https://runtime-lab.com/servicios/software-a-medida",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "Service",
+          "name": "CRM Omnichannel",
+          "description": "Centralizamos todas tus conversaciones de WhatsApp, email, web y redes en una sola bandeja, con gestión de pipeline y IA integrada.",
+          "url": "https://runtime-lab.com/#capabilities",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué es un agente de IA y cómo puede ayudar a mi negocio?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Un agente de IA es un sistema automatizado que responde mensajes, califica leads y agenda citas por ti, disponible 24/7 en WhatsApp, email y web. Permite que tu negocio atienda clientes automáticamente sin intervención manual."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cuánto tarda en implementarse una página web profesional?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El desarrollo de una página web profesional tarda entre 2 y 4 semanas, dependiendo de la complejidad. Incluye diseño orientado a conversión, integración con formularios, optimización SEO y conexión con tus sistemas de IA y CRM."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué son las automatizaciones de negocio?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Las automatizaciones de negocio son workflows que conectan tus herramientas (CRM, email, WhatsApp, calendarios) para ejecutar tareas automáticamente: enviar seguimientos, calificar leads, agendar citas y notificar a tu equipo sin trabajo manual."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué incluye el software a medida?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El software a medida incluye plataformas internas, portales de clientes, dashboards de gestión e integraciones con APIs existentes. Lo construimos con arquitectura escalable para que tu operación crezca sin limitaciones técnicas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Pueden integrar todos los servicios entre sí?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Diseñamos todos los servicios (web, IA, automatizaciones y CRM) para que trabajen como un sistema único: el visitante llega a tu web, el agente de IA responde, el CRM centraliza la conversación y las automatizaciones dan seguimiento automático."
+        }
+      }
+    ]
+  }
+];
 ---
 
 <BaseLayout
   lang="es"
-  title="RuntimeLab — Web, Agentes IA, Automatización y CRM"
-  description="Construimos sistemas inteligentes que conectan tu web, agentes de IA, automatizaciones y CRM omnichannel para captar, atender y convertir clientes automáticamente."
+  title="RuntimeLab — Desarrollo Web, Agentes IA, Automatización | Software a Medida"
+  description="Construimos páginas web profesionales, agentes de IA, automatizaciones y CRM omnichannel que trabajan juntos para captar y convertir clientes. Software de desarrollo a medida para negocios que quieren crecer."
+  keywords="páginas web, desarrollo web, agentes ia, agentes de inteligencia artificial, automatizaciones, software a medida, desarrollo de software, CRM omnichannel"
+  schemas={homeSchemas}
 >
   <Nav t={t.nav} lang="es" />
 

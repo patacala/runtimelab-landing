@@ -1,0 +1,151 @@
+---
+import ServicePage from '../../../components/ServicePage.astro';
+import nav from '../../../i18n/en.json';
+
+const data = {
+  lang: 'en' as const,
+  meta: {
+    title: 'Professional Web Development Services | RuntimeLab',
+    description: 'We design and build professional websites optimized for conversion, speed, and SEO. Your site captures leads automatically and connects to your AI agents and CRM system.',
+    keywords: 'web development, professional websites, website design, business website, conversion-optimized website, website for small business, custom website development',
+    hreflangEs: 'https://runtime-lab.com/servicios/desarrollo-web',
+    hreflangEn: 'https://runtime-lab.com/en/services/web-development',
+  },
+  nav: nav.nav,
+  footer: nav.footer,
+  hero: {
+    badge: 'WEB DEVELOPMENT',
+    title: 'Professional websites that capture and convert clients',
+    sub: 'We design and build your website with a focus on conversion: fast-loading, mobile-first, SEO-optimized, and connected to your AI agents and CRM so every visit becomes an opportunity.',
+    cta: 'Book a free call',
+    ctaHref: '/en/#decision',
+  },
+  benefitsTitle: 'Why your website needs to be more than a brochure',
+  benefits: [
+    {
+      icon: 'chart' as const,
+      title: 'Designed to convert',
+      desc: 'Every element of your website — copy, CTAs, forms, and flow — is built to guide visitors into becoming qualified leads.',
+    },
+    {
+      icon: 'zap' as const,
+      title: 'Loads in under 2 seconds',
+      desc: 'We optimize images, code, and hosting so your website loads fast on every device. Speed is a critical SEO factor.',
+    },
+    {
+      icon: 'globe' as const,
+      title: 'Technical SEO included',
+      desc: 'Meta tags, schema markup, sitemap, robots.txt, hreflang, and Core Web Vitals optimized from day one.',
+    },
+    {
+      icon: 'bot' as const,
+      title: 'Connected to your AI and CRM',
+      desc: 'We integrate forms and chat widgets directly with your AI agents and CRM so no lead is ever lost.',
+    },
+  ],
+  process: {
+    title: 'How we build your website',
+    sub: 'A clear 4-step process from zero to a published, optimized website.',
+    steps: [
+      {
+        num: '01',
+        title: 'Discovery and strategy',
+        desc: 'We analyze your business, competitors, and target audience. We define information architecture, primary keywords, and conversion goals.',
+      },
+      {
+        num: '02',
+        title: 'UI/UX design and prototype',
+        desc: 'We create the full visual design: wireframes, color palette, typography, and section layout. You approve before we write a single line of code.',
+      },
+      {
+        num: '03',
+        title: 'Development and optimization',
+        desc: 'We build your site with clean, speed-optimized, SEO-ready code. We integrate forms, tracking, and connect to your existing systems.',
+      },
+      {
+        num: '04',
+        title: 'Launch and monitoring',
+        desc: 'We publish your site, configure Google Analytics and Search Console, and deliver an initial performance report. Post-launch support included.',
+      },
+    ],
+  },
+  useCases: {
+    title: 'What types of businesses do we build websites for?',
+    items: [
+      {
+        label: 'Clinics and healthcare',
+        desc: 'Websites with appointment booking, service information, and AI agents that answer FAQs and qualify patient inquiries.',
+      },
+      {
+        label: 'Service agencies',
+        desc: 'High-conversion landing pages with portfolio, testimonials, pricing calculators, and direct CTAs to call or WhatsApp.',
+      },
+      {
+        label: 'Local businesses',
+        desc: 'Professional presence with local SEO, Google Business integration, and forms connected to your CRM for lead follow-up.',
+      },
+      {
+        label: 'SaaS and startups',
+        desc: 'Product websites with interactive demos, pricing pages, automation tool integration, and conversion analytics.',
+      },
+      {
+        label: 'Real estate',
+        desc: 'Property catalogs, contact forms with automatic lead qualification, and CRM-connected follow-up workflows.',
+      },
+      {
+        label: 'E-commerce and retail',
+        desc: 'SEO and conversion-optimized stores with streamlined checkout and inventory management system integration.',
+      },
+    ],
+  },
+  cta: {
+    title: 'Your business deserves a website that works for you.',
+    sub: 'In 30 minutes we\'ll show you the potential of your current web presence and how we can turn it into your best sales tool.',
+    button: 'Book a free call',
+    href: '/en/#decision',
+  },
+  related: {
+    title: 'Related services',
+    items: [
+      { label: 'AI Agents', href: '/en/services/ai-agents' },
+      { label: 'Automations', href: '/en/services/automations' },
+      { label: 'Custom Software', href: '/en/services/custom-software' },
+    ],
+  },
+  schemas: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Professional Web Development Services",
+      "description": "Design and development of professional websites optimized for conversion, speed, and SEO.",
+      "provider": { "@id": "https://runtime-lab.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "United States" },
+      "serviceType": "Web Development",
+      "url": "https://runtime-lab.com/en/services/web-development"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How we build your professional website",
+      "description": "4-step process for creating a professional conversion-optimized website",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Discovery and strategy", "text": "Analyze your business, competitors, and audience. Define architecture and conversion goals." },
+        { "@type": "HowToStep", "position": 2, "name": "UI/UX design and prototype", "text": "Create the full visual design with wireframes, colors, and layout." },
+        { "@type": "HowToStep", "position": 3, "name": "Development and optimization", "text": "Build with clean, speed-optimized, SEO-ready code with all integrations." },
+        { "@type": "HowToStep", "position": 4, "name": "Launch and monitoring", "text": "Publish, configure analytics, deliver performance report with post-launch support." }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://runtime-lab.com/en/" },
+        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://runtime-lab.com/en/#capabilities" },
+        { "@type": "ListItem", "position": 3, "name": "Web Development", "item": "https://runtime-lab.com/en/services/web-development" }
+      ]
+    }
+  ],
+};
+---
+
+<ServicePage data={data} />

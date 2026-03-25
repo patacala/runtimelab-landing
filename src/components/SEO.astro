@@ -6,6 +6,10 @@ export interface Props {
   ogImage?: string;
   lang?: 'en' | 'es';
   type?: 'website' | 'article';
+  keywords?: string;
+  schemas?: object[];
+  hreflangEs?: string;
+  hreflangEn?: string;
 }
 
 const {
@@ -15,6 +19,10 @@ const {
   ogImage = '/assets/og-image.png',
   lang = 'en',
   type = 'website',
+  keywords,
+  schemas = [],
+  hreflangEs = 'https://runtime-lab.com/',
+  hreflangEn = 'https://runtime-lab.com/en/',
 } = Astro.props;
 
 const canonical = String(canonicalURL);
@@ -25,6 +33,7 @@ const ogImageAbsolute = ogImage.startsWith('http')
 const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://runtime-lab.com/#organization",
   "name": "RuntimeLab",
   "url": "https://runtime-lab.com",
   "logo": "https://runtime-lab.com/assets/logo.png",
@@ -54,15 +63,16 @@ const webpage = {
 <!-- Primary -->
 <title>{title}</title>
 <meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
 <link rel="canonical" href={canonical} />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#0B0F14" />
 <meta name="color-scheme" content="dark" />
 
 <!-- Hreflang -->
-<link rel="alternate" hreflang="es" href="https://runtime-lab.com/" />
-<link rel="alternate" hreflang="en" href="https://runtime-lab.com/en/" />
-<link rel="alternate" hreflang="x-default" href="https://runtime-lab.com/" />
+<link rel="alternate" hreflang="es" href={hreflangEs} />
+<link rel="alternate" hreflang="en" href={hreflangEn} />
+<link rel="alternate" hreflang="x-default" href={hreflangEs} />
 
 <!-- Open Graph -->
 <meta property="og:type" content={type} />
@@ -86,3 +96,8 @@ const webpage = {
 
 <!-- Structured Data: WebPage -->
 <script type="application/ld+json" set:html={JSON.stringify(webpage)} />
+
+<!-- Additional Schemas (FAQPage, ItemList, Service, HowTo, Article, BreadcrumbList) -->
+{schemas.map(schema => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

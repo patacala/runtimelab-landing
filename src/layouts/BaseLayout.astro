@@ -7,6 +7,10 @@ export interface Props {
   description?: string;
   ogImage?: string;
   lang?: 'en' | 'es';
+  keywords?: string;
+  schemas?: object[];
+  hreflangEs?: string;
+  hreflangEn?: string;
 }
 
 const {
@@ -14,6 +18,10 @@ const {
   description = 'Construimos sistemas que conectan tus herramientas, automatizan tus flujos de trabajo y ayudan a tu negocio a crecer sin el caos.',
   ogImage = '/assets/og-image.png',
   lang = 'es',
+  keywords,
+  schemas,
+  hreflangEs,
+  hreflangEn,
 } = Astro.props;
 
 const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astro.url;
@@ -30,6 +38,10 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
       canonicalURL={canonicalURL}
       ogImage={ogImage}
       lang={lang}
+      keywords={keywords}
+      schemas={schemas}
+      hreflangEs={hreflangEs}
+      hreflangEn={hreflangEn}
     />
 
     <!-- Favicon -->

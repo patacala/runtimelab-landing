@@ -1,0 +1,503 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+export interface ServiceStep {
+  num: string;
+  title: string;
+  desc: string;
+}
+
+export interface ServiceBenefit {
+  icon: 'clock' | 'zap' | 'shield' | 'code' | 'globe' | 'bot' | 'chart' | 'check';
+  title: string;
+  desc: string;
+}
+
+export interface ServiceUseCase {
+  label: string;
+  desc: string;
+}
+
+export interface RelatedService {
+  label: string;
+  href: string;
+}
+
+export interface ServicePageData {
+  lang: 'en' | 'es';
+  meta: {
+    title: string;
+    description: string;
+    keywords: string;
+    hreflangEs: string;
+    hreflangEn: string;
+  };
+  nav: any;
+  footer: any;
+  hero: {
+    badge: string;
+    title: string;
+    sub: string;
+    cta: string;
+    ctaHref: string;
+  };
+  benefits: ServiceBenefit[];
+  benefitsTitle: string;
+  process: {
+    title: string;
+    sub?: string;
+    steps: ServiceStep[];
+  };
+  useCases: {
+    title: string;
+    items: ServiceUseCase[];
+  };
+  cta: {
+    title: string;
+    sub: string;
+    button: string;
+    href: string;
+  };
+  related: {
+    title: string;
+    items: RelatedService[];
+  };
+  schemas: object[];
+}
+
+const { data } = Astro.props as { data: ServicePageData };
+
+const iconPaths: Record<string, string> = {
+  clock: 'M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8h4v2h-6V7h2v5z',
+  zap: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  code: 'M16 18l6-6-6-6M8 6l-6 6 6 6',
+  globe: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0 0a15.3 15.3 0 0 0 4-10 15.3 15.3 0 0 0-4-10 15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10zM2 12h20',
+  bot: 'M12 8V4H8M12 8V4h4M12 8v4M9 21H7a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M9 21h6M9 21v-4M15 21v-4M9 17h6',
+  chart: 'M18 20V10M12 20V4M6 20v-6',
+  check: 'M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3',
+};
+---
+
+<BaseLayout
+  lang={data.lang}
+  title={data.meta.title}
+  description={data.meta.description}
+  keywords={data.meta.keywords}
+  schemas={data.schemas}
+  hreflangEs={data.meta.hreflangEs}
+  hreflangEn={data.meta.hreflangEn}
+>
+  <Nav t={data.nav} lang={data.lang} />
+
+  <main id="main-content">
+    <!-- ── Hero ── -->
+    <section class="sp-hero">
+      <div class="sp-hero-bg" aria-hidden="true"></div>
+      <div class="sp-container">
+        <div class="sp-hero-inner">
+          <span class="sp-badge">{data.hero.badge}</span>
+          <h1 class="sp-h1">{data.hero.title}</h1>
+          <p class="sp-hero-sub">{data.hero.sub}</p>
+          <a href={data.hero.ctaHref} class="sp-cta-primary">
+            {data.hero.cta}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Benefits ── -->
+    <section class="sp-section">
+      <div class="sp-container">
+        <h2 class="sp-section-title reveal">{data.benefitsTitle}</h2>
+        <div class="sp-benefits-grid">
+          {data.benefits.map((b) => (
+            <div class="sp-benefit-card reveal">
+              <div class="sp-benefit-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={iconPaths[b.icon] ?? iconPaths.check} />
+                </svg>
+              </div>
+              <h3 class="sp-benefit-title">{b.title}</h3>
+              <p class="sp-benefit-desc">{b.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Process (HowTo) ── -->
+    <section class="sp-section sp-section-alt">
+      <div class="sp-container">
+        <h2 class="sp-section-title reveal">{data.process.title}</h2>
+        {data.process.sub && <p class="sp-section-sub reveal">{data.process.sub}</p>}
+        <ol class="sp-steps" role="list">
+          {data.process.steps.map((step) => (
+            <li class="sp-step reveal">
+              <div class="sp-step-num" aria-hidden="true">{step.num}</div>
+              <div class="sp-step-content">
+                <h3 class="sp-step-title">{step.title}</h3>
+                <p class="sp-step-desc">{step.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── Use Cases ── -->
+    <section class="sp-section">
+      <div class="sp-container">
+        <h2 class="sp-section-title reveal">{data.useCases.title}</h2>
+        <div class="sp-usecases-grid">
+          {data.useCases.items.map((uc) => (
+            <div class="sp-usecase reveal">
+              <div class="sp-usecase-dot" aria-hidden="true"></div>
+              <div>
+                <h3 class="sp-usecase-label">{uc.label}</h3>
+                <p class="sp-usecase-desc">{uc.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="sp-cta-section" id="contact">
+      <div class="sp-container">
+        <div class="sp-cta-inner reveal">
+          <h2 class="sp-cta-title">{data.cta.title}</h2>
+          <p class="sp-cta-sub">{data.cta.sub}</p>
+          <a href={data.cta.href} class="sp-cta-primary sp-cta-lg">
+            {data.cta.button}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Related Services ── -->
+    <section class="sp-section sp-related">
+      <div class="sp-container">
+        <h2 class="sp-related-title">{data.related.title}</h2>
+        <div class="sp-related-grid">
+          {data.related.items.map((r) => (
+            <a href={r.href} class="sp-related-card reveal">
+              {r.label}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer t={data.footer} nav={{ logo: data.nav.logo }} lang={data.lang} />
+</BaseLayout>
+
+<style>
+  /* ── Layout ── */
+  .sp-container {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── Hero ── */
+  .sp-hero {
+    position: relative;
+    padding: 140px 0 80px;
+    overflow: hidden;
+  }
+  .sp-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(37,99,235,0.12) 0%, transparent 70%),
+      linear-gradient(180deg, rgba(37,99,235,0.04) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .sp-hero-inner {
+    max-width: 44rem;
+    position: relative;
+  }
+  .sp-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #3B82F6;
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.2);
+    border-radius: 100px;
+    padding: 5px 14px;
+    margin-bottom: 20px;
+  }
+  .sp-h1 {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #F8FAFC;
+    margin-bottom: 20px;
+  }
+  .sp-hero-sub {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #94A3B8;
+    margin-bottom: 32px;
+    max-width: 38rem;
+  }
+
+  /* ── CTA button ── */
+  .sp-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: #2563EB;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: 1px solid rgba(99,149,255,0.35);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+  }
+  .sp-cta-primary:hover {
+    background: #1D4ED8;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(37,99,235,0.45);
+  }
+  .sp-cta-lg { padding: 16px 36px; font-size: 16px; }
+
+  /* ── Sections ── */
+  .sp-section {
+    padding: 80px 0;
+    border-top: 1px solid rgba(30,41,59,0.4);
+  }
+  .sp-section-alt {
+    background: #10151C;
+  }
+  .sp-section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #F8FAFC;
+    margin-bottom: 48px;
+  }
+  .sp-section-sub {
+    font-size: 1rem;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-top: -32px;
+    margin-bottom: 48px;
+    max-width: 38rem;
+  }
+
+  /* ── Benefits ── */
+  .sp-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .sp-benefit-card {
+    background: #10151C;
+    border: 1px solid rgba(30,41,59,0.6);
+    border-radius: 14px;
+    padding: 28px 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .sp-benefit-card:hover {
+    border-color: rgba(37,99,235,0.3);
+    transform: translateY(-2px);
+  }
+  .sp-benefit-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: #3B82F6;
+  }
+  .sp-benefit-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #F1F5F9;
+    margin-bottom: 8px;
+  }
+  .sp-benefit-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #64748B;
+  }
+
+  /* ── Steps ── */
+  .sp-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 54rem;
+  }
+  .sp-step {
+    display: flex;
+    gap: 24px;
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .sp-step:last-child { padding-bottom: 0; }
+  .sp-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, rgba(37,99,235,0.3), transparent);
+  }
+  .sp-step-num {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #3B82F6;
+    letter-spacing: 0.01em;
+  }
+  .sp-step-content { padding-top: 8px; }
+  .sp-step-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #F1F5F9;
+    margin-bottom: 8px;
+  }
+  .sp-step-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #64748B;
+  }
+
+  /* ── Use Cases ── */
+  .sp-usecases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .sp-usecase {
+    display: flex;
+    gap: 16px;
+    background: #10151C;
+    border: 1px solid rgba(30,41,59,0.6);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .sp-usecase:hover { border-color: rgba(37,99,235,0.25); }
+  .sp-usecase-dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-top: 6px;
+    border-radius: 50%;
+    background: #2563EB;
+    box-shadow: 0 0 8px rgba(37,99,235,0.5);
+  }
+  .sp-usecase-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin-bottom: 6px;
+  }
+  .sp-usecase-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #64748B;
+  }
+
+  /* ── CTA Section ── */
+  .sp-cta-section {
+    padding: 100px 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(37,99,235,0.08) 0%, transparent 70%);
+    border-top: 1px solid rgba(30,41,59,0.4);
+    text-align: center;
+  }
+  .sp-cta-inner { max-width: 36rem; margin: 0 auto; }
+  .sp-cta-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #F8FAFC;
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+  .sp-cta-sub {
+    font-size: 1rem;
+    color: #94A3B8;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  /* ── Related ── */
+  .sp-related {
+    background: #0B0F14;
+  }
+  .sp-related-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .sp-related-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .sp-related-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(16,21,28,0.8);
+    border: 1px solid rgba(30,41,59,0.7);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #94A3B8;
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .sp-related-card:hover {
+    color: #E2E8F0;
+    border-color: rgba(37,99,235,0.3);
+    background: rgba(37,99,235,0.06);
+  }
+  .sp-related-card svg { color: #475569; transition: color 0.15s, transform 0.15s; }
+  .sp-related-card:hover svg { color: #3B82F6; transform: translateX(2px); }
+</style>

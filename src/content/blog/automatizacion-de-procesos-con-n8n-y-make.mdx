@@ -1,0 +1,179 @@
+---
+title: "Automatización de procesos con n8n y Make: guía práctica para negocios"
+description: "Aprende cómo usar n8n y Make para automatizar los procesos repetitivos de tu negocio: seguimiento de leads, recordatorios, reportes y más. Con ejemplos concretos y flujos reales."
+pubDate: 2026-02-25
+tags: ["automatizaciones", "n8n", "make", "workflows"]
+lang: "es"
+readingTime: 9
+---
+
+Si tu equipo dedica horas cada semana a copiar datos entre sistemas, enviar correos de seguimiento manualmente o preparar reportes que siempre dicen lo mismo — este artículo te va a cambiar la perspectiva sobre lo que es posible.
+
+Las herramientas de automatización como **n8n** y **Make** (antes Integromat) permiten conectar aplicaciones y automatizar flujos de trabajo completos sin necesidad de programar. En esta guía te explicamos cómo funcionan, cuándo usar cada una y ejemplos concretos de automatizaciones que puedes implementar hoy.
+
+## ¿Qué es una automatización de procesos?
+
+Una automatización de procesos es un flujo de trabajo que se ejecuta automáticamente cuando se cumple una condición específica.
+
+**Ejemplo básico:**
+> Cuando alguien llena el formulario de contacto en mi web → Enviar email de bienvenida + Crear registro en CRM + Notificar por WhatsApp al equipo de ventas
+
+Sin automatización, esto requiere que alguien revise el email, copie los datos al CRM y luego avise al equipo. Con automatización, todo ocurre en segundos, sin intervención humana.
+
+## n8n vs. Make: ¿cuál elegir?
+
+Ambas son herramientas de automatización visual (drag-and-drop), pero tienen diferencias importantes:
+
+### n8n
+- **Open source** — puedes instalarlo en tu propio servidor
+- Mayor control sobre datos y privacidad
+- Curva de aprendizaje un poco más técnica
+- Mejor para flujos complejos y personalizados
+- Tiene nodo de IA integrado (ideal para automatizaciones con LLMs)
+- Modelo de precios: free plan + cloud o self-hosted
+
+### Make (antes Integromat)
+- **SaaS** — más fácil de empezar sin servidor propio
+- Interfaz visual más intuitiva para principiantes
+- Mejor documentación y comunidad para usuarios no técnicos
+- Excelente para conectar apps populares (Google Workspace, Salesforce, HubSpot)
+- Modelo de precios: por operaciones mensuales
+
+**¿Cuándo usar cada una?**
+- **n8n**: cuando necesitas flujos complejos, privacidad de datos, integración con IA o tienes equipo técnico
+- **Make**: cuando quieres empezar rápido, conectar apps conocidas y prefieres una interfaz más amigable
+
+En RuntimeLab usamos principalmente n8n para clientes que requieren integraciones de IA, y Make para automatizaciones más estándar.
+
+## 5 automatizaciones que cualquier negocio puede implementar hoy
+
+### 1. Seguimiento automático de nuevos leads
+
+**Trigger:** Nuevo formulario enviado en tu web
+
+**Flujo:**
+1. Captura los datos del formulario (nombre, email, teléfono, servicio)
+2. Crea el contacto en el CRM (HubSpot, Pipedrive, o el tuyo)
+3. Envía email personalizado de bienvenida
+4. Envía mensaje de WhatsApp de confirmación al lead
+5. Notifica al equipo de ventas por Slack o email
+6. Agenda recordatorio para llamar en 2 horas si no hay respuesta
+
+**Tiempo ahorrado:** 15-20 minutos por lead en trabajo manual
+
+---
+
+### 2. Recordatorios automáticos de citas
+
+**Trigger:** Cita creada en Google Calendar
+
+**Flujo:**
+1. 24 horas antes: enviar recordatorio por WhatsApp y email
+2. 2 horas antes: enviar recordatorio final con link de confirmación
+3. Si el cliente confirma → marcar como confirmado en el CRM
+4. Si el cliente cancela → liberar el slot y notificar al equipo
+5. Si no hay respuesta → notificar al equipo para seguimiento manual
+
+**Impacto:** reducción del 30-50% en no-shows y cancelaciones de último minuto
+
+---
+
+### 3. Pipeline de ventas automatizado
+
+**Trigger:** Cambio de etapa en CRM
+
+**Flujo (ejemplo para etapa "Propuesta enviada"):**
+1. Al enviar propuesta → crear tarea de seguimiento en 3 días
+2. Si no hay respuesta en 3 días → enviar email de seguimiento automático
+3. Si no hay respuesta en 7 días → segundo seguimiento con diferente ángulo
+4. Si no hay respuesta en 14 días → mover a "Frío" y notificar al vendedor
+5. Si acepta → mover a "Cerrado" + disparar flujo de onboarding
+
+**Resultado:** ningún lead se pierde en el pipeline por falta de seguimiento
+
+---
+
+### 4. Reportes semanales automáticos
+
+**Trigger:** Cada lunes a las 8am
+
+**Flujo:**
+1. Consultar CRM: leads de la semana, cierres, propuestas enviadas
+2. Consultar Google Analytics: visitas web, conversiones, fuentes de tráfico
+3. Consultar herramienta de pagos: ingresos de la semana
+4. Compilar todos los datos en un formato estructurado
+5. Generar reporte en Google Docs o Notion
+6. Enviar por email a los directivos
+
+**Tiempo ahorrado:** 2-3 horas de preparación manual cada semana
+
+---
+
+### 5. Gestión de reseñas y reputación
+
+**Trigger:** Nueva reseña en Google Business
+
+**Flujo:**
+1. Detectar nueva reseña y su calificación
+2. Si es positiva (4-5 estrellas): notificar al equipo para responder y agradecer
+3. Si es negativa (1-3 estrellas): alertar inmediatamente al gerente + crear tarea urgente
+4. Registrar todas las reseñas en hoja de cálculo para seguimiento
+5. Enviar resumen semanal de reputación al equipo
+
+**Impacto:** tiempo de respuesta a reseñas negativas reducido de días a horas
+
+## Cómo empezar a automatizar: el método correcto
+
+### Paso 1: Identificar los procesos más repetitivos
+
+Haz la pregunta: **"¿Qué tareas hace mi equipo más de 5 veces a la semana que siempre siguen el mismo patrón?"**
+
+Ejemplos comunes:
+- Responder "¿cuánto cuesta X?"
+- Confirmar recepción de documentos
+- Enviar links de pago
+- Actualizar estados en hojas de cálculo
+- Crear carpetas para nuevos clientes
+- Enviar facturas mensuales
+
+### Paso 2: Mapear el flujo actual
+
+Antes de automatizar, documenta el proceso tal como es:
+- ¿Qué inicia el proceso? (trigger)
+- ¿Qué pasos se siguen?
+- ¿Qué sistemas están involucrados?
+- ¿Qué decisiones se toman en el camino?
+
+### Paso 3: Empezar con el flujo más simple
+
+La tentación es automatizar todo de golpe. Error. Empieza con el flujo más claro y de mayor impacto. Verifica que funciona bien antes de agregar complejidad.
+
+### Paso 4: Medir el impacto
+
+Antes de automatizar: mide cuánto tiempo toma el proceso. Después de automatizar: verifica el tiempo ahorrado y cualquier problema que haya surgido.
+
+## Errores comunes al automatizar
+
+**Error 1: Automatizar procesos rotos**
+Si el proceso manual es caótico o inconsistente, automatizarlo solo amplifica el caos. Primero define el proceso correcto, luego automatízalo.
+
+**Error 2: No tener plan de contingencia**
+Las automatizaciones pueden fallar. ¿Qué pasa si el CRM está caído? ¿Si el email no llega? Siempre define qué debe pasar cuando algo falla.
+
+**Error 3: Over-engineering en el inicio**
+No necesitas un workflow de 40 pasos desde el día 1. Empieza simple, valida que funciona, luego agrega capas.
+
+**Error 4: No monitorear**
+Una automatización que nadie supervisa es una bomba de tiempo. Revisa logs, errores y resultados regularmente, especialmente al inicio.
+
+## ¿Cuánto tiempo toma implementar automatizaciones?
+
+- **Automatización básica** (un trigger + 2-3 acciones): 1-4 horas
+- **Automatización media** (múltiples pasos + condiciones): 1-3 días
+- **Flujo complejo** (integraciones múltiples + IA + lógica de negocio): 1-2 semanas
+
+El mayor tiempo no está en la configuración técnica, sino en definir correctamente el proceso y validar que funciona con casos reales.
+
+---
+
+¿Quieres ver qué procesos de tu negocio se pueden automatizar con mayor impacto? En RuntimeLab hacemos un [análisis de automatización gratuito](/servicios/automatizaciones) — en 30 minutos identificamos los 3 flujos de mayor ROI para tu operación.

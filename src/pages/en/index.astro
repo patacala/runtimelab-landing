@@ -14,12 +14,164 @@ import BookCall from '../../components/BookCall.astro';
 import Footer from '../../components/Footer.astro';
 
 import t from '../../i18n/en.json';
+
+const homeSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SiteNavigationElement",
+    "name": [
+      "Web Development",
+      "AI Agents",
+      "Automations",
+      "Custom Software",
+      "Blog",
+      "Book a call"
+    ],
+    "url": [
+      "https://runtime-lab.com/en/services/web-development",
+      "https://runtime-lab.com/en/services/ai-agents",
+      "https://runtime-lab.com/en/services/automations",
+      "https://runtime-lab.com/en/services/custom-software",
+      "https://runtime-lab.com/en/blog",
+      "https://runtime-lab.com/en/#decision"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://runtime-lab.com/en",
+    "name": "RuntimeLab",
+    "description": "Web development, AI agents, automations and custom software",
+    "inLanguage": "en",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://runtime-lab.com/en/blog?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "RuntimeLab Services",
+    "description": "Web development, AI agents, automations, and custom software services",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Service",
+          "name": "Web Development",
+          "description": "We design professional websites optimized for conversion, fast loading, and SEO. Your site captures leads and feeds them directly into your system.",
+          "url": "https://runtime-lab.com/en/services/web-development",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Service",
+          "name": "AI Agents",
+          "description": "We build AI agents that respond, qualify leads, and book appointments automatically, available 24/7 from any channel.",
+          "url": "https://runtime-lab.com/en/services/ai-agents",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Service",
+          "name": "Business Automations",
+          "description": "We build intelligent workflows with n8n that connect your tools, eliminate manual tasks, and scale your operation automatically.",
+          "url": "https://runtime-lab.com/en/services/automations",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "Service",
+          "name": "Custom Software Development",
+          "description": "We develop platforms, dashboards, and custom systems with scalable architecture for businesses that need more than generic tools.",
+          "url": "https://runtime-lab.com/en/services/custom-software",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "item": {
+          "@type": "Service",
+          "name": "Omnichannel CRM",
+          "description": "We centralize all your WhatsApp, email, web, and social conversations in a single inbox with pipeline management and integrated AI.",
+          "url": "https://runtime-lab.com/en/#capabilities",
+          "provider": { "@id": "https://runtime-lab.com/#organization" }
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an AI agent and how can it help my business?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An AI agent is an automated system that responds to messages, qualifies leads, and books appointments on your behalf, available 24/7 on WhatsApp, email, and web. It allows your business to serve clients automatically without manual intervention."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to build a professional website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Building a professional website takes 2 to 4 weeks depending on complexity. This includes conversion-focused design, form integration, SEO optimization, and connection to your AI and CRM systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are business automations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Business automations are workflows that connect your tools (CRM, email, WhatsApp, calendars) to execute tasks automatically: send follow-ups, qualify leads, book appointments, and notify your team without manual work."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does custom software development include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Custom software development includes internal platforms, client portals, management dashboards, and API integrations with existing systems. We build with scalable architecture so your operation grows without technical limitations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can all your services be integrated together?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We design all services (web, AI, automations, and CRM) to work as one unified system: the visitor lands on your site, the AI agent responds, the CRM centralizes the conversation, and automations handle automatic follow-up."
+        }
+      }
+    ]
+  }
+];
 ---
 
 <BaseLayout
   lang="en"
-  title="RuntimeLab — Web, AI Agents, Automation & CRM"
-  description="We build intelligent systems connecting your website, AI agents, automations, and omnichannel CRM to capture, engage, and convert clients automatically."
+  title="RuntimeLab — Web Development, AI Agents, Automation & Custom Software"
+  description="We build professional websites, AI agents, automations, and omnichannel CRM that work together to capture and convert clients. Custom software development for businesses ready to grow."
+  keywords="web development, websites, AI agents, artificial intelligence agents, automations, custom software development, omnichannel CRM"
+  schemas={homeSchemas}
+  hreflangEs="https://runtime-lab.com/"
+  hreflangEn="https://runtime-lab.com/en/"
 >
   <Nav t={t.nav} lang="en" />
 

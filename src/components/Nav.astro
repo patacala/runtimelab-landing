@@ -2,7 +2,19 @@
 export interface Props {
   t: {
     logo: string;
-    links: { work: string; services: string; contact: string };
+    links: {
+      work: string;
+      services: string;
+      contact: string;
+      blog: string;
+      servicesItems: {
+        web: string;
+        aiAgents: string;
+        automations: string;
+        software: string;
+        viewAll: string;
+      };
+    };
     cta: string;
   };
   lang: 'en' | 'es';
@@ -11,6 +23,20 @@ const { t, lang } = Astro.props;
 const langHref   = lang === 'es' ? '/en' : '/';
 const langLabel  = lang === 'en' ? 'ES' : 'EN';
 const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English';
+const basePath = lang === 'es' ? '/' : '/en/';
+const serviceLinks = lang === 'es'
+  ? {
+      web: '/servicios/desarrollo-web',
+      ai: '/servicios/agentes-ia',
+      auto: '/servicios/automatizaciones',
+      software: '/servicios/software-a-medida',
+    }
+  : {
+      web: '/en/services/web-development',
+      ai: '/en/services/ai-agents',
+      auto: '/en/services/automations',
+      software: '/en/services/custom-software',
+    };
 ---
 
 <header id="nav" class="nav-header" role="banner">
@@ -21,8 +47,8 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
   <nav class="nav-inner" aria-label="Main navigation">
 
     <!-- ── Logo ── -->
-    <a href="/" class="nav-logo" aria-label="RuntimeLab">
-      <img src="/assets/logo.png" width="170"  alt="RuntimeLab" class="logo-img" />
+    <a href={basePath} class="nav-logo" aria-label="RuntimeLab">
+      <img src="/assets/logo.png" width="170" alt="RuntimeLab — Software, Web y Agentes IA" class="logo-img" />
     </a>
 
     <!-- ── Right side: links + CTA + hamburger ── -->
@@ -30,9 +56,40 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
 
       <!-- Desktop links -->
       <ul class="nav-links" role="list">
-        <li><a href="#structure"     class="nav-link">{t.links.work}</a></li>
-        <li><a href="#capabilities"  class="nav-link">{t.links.services}</a></li>
-        <li><a href="#contact"       class="nav-link">{t.links.contact}</a></li>
+        <li><a href={`${basePath}#structure`} class="nav-link">{t.links.work}</a></li>
+        <li class="nav-dropdown-parent">
+          <button class="nav-link nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true" id="services-trigger">
+            {t.links.services}
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="chevron-icon">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="nav-dropdown" id="services-dropdown" role="menu" aria-labelledby="services-trigger">
+            <a href={serviceLinks.web} class="nav-dropdown-item" role="menuitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              {t.links.servicesItems.web}
+            </a>
+            <a href={serviceLinks.ai} class="nav-dropdown-item" role="menuitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              {t.links.servicesItems.aiAgents}
+            </a>
+            <a href={serviceLinks.auto} class="nav-dropdown-item" role="menuitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              {t.links.servicesItems.automations}
+            </a>
+            <a href={serviceLinks.software} class="nav-dropdown-item" role="menuitem">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              {t.links.servicesItems.software}
+            </a>
+            <div class="nav-dropdown-divider" aria-hidden="true"></div>
+            <a href={`${basePath}#capabilities`} class="nav-dropdown-item nav-dropdown-all" role="menuitem">
+              {t.links.servicesItems.viewAll}
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </li>
+        <li><a href={`${basePath}#contact`} class="nav-link">{t.links.contact}</a></li>
+        <li><a href={`${basePath}blog`} class="nav-link">{t.links.blog}</a></li>
       </ul>
 
       <!-- Language toggle -->
@@ -46,7 +103,7 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
       </a>
 
       <!-- CTA -->
-      <a href="#decision" class="nav-cta">
+      <a href={`${basePath}#decision`} class="nav-cta">
         {t.cta}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
@@ -77,27 +134,41 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
   >
     <ul class="mobile-links">
       <li>
-        <a href="#structure" class="mobile-link">
+        <a href={`${basePath}#structure`} class="mobile-link">
           <span class="mobile-num">01</span>
           {t.links.work}
         </a>
       </li>
       <li>
-        <a href="#capabilities" class="mobile-link">
+        <button class="mobile-link mobile-services-trigger" id="mobile-services-trigger" aria-expanded="false">
           <span class="mobile-num">02</span>
           {t.links.services}
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="mobile-chevron" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <ul class="mobile-services-list hidden" id="mobile-services-list">
+          <li><a href={serviceLinks.web} class="mobile-service-link">{t.links.servicesItems.web}</a></li>
+          <li><a href={serviceLinks.ai} class="mobile-service-link">{t.links.servicesItems.aiAgents}</a></li>
+          <li><a href={serviceLinks.auto} class="mobile-service-link">{t.links.servicesItems.automations}</a></li>
+          <li><a href={serviceLinks.software} class="mobile-service-link">{t.links.servicesItems.software}</a></li>
+          <li><a href={`${basePath}#capabilities`} class="mobile-service-link mobile-service-all">{t.links.servicesItems.viewAll}</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href={`${basePath}#contact`} class="mobile-link">
+          <span class="mobile-num">03</span>
+          {t.links.contact}
         </a>
       </li>
       <li>
-        <a href="#contact" class="mobile-link">
-          <span class="mobile-num">03</span>
-          {t.links.contact}
+        <a href={`${basePath}blog`} class="mobile-link">
+          <span class="mobile-num">04</span>
+          {t.links.blog}
         </a>
       </li>
     </ul>
 
     <div class="mobile-cta-wrap">
-      <a href="#decision" class="mobile-cta">
+      <a href={`${basePath}#decision`} class="mobile-cta">
         {t.cta}
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
@@ -157,42 +228,6 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
     flex-shrink: 0;
   }
 
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-    background: rgba(37, 99, 235, 0.1);
-    border: 1px solid rgba(37, 99, 235, 0.22);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s, border-color 0.2s;
-  }
-  .nav-logo:hover .logo-icon {
-    background: rgba(37, 99, 235, 0.2);
-    border-color: rgba(59, 130, 246, 0.45);
-  }
-
-  .logo-text {
-    font-size: 14px;
-    font-weight: 700;
-    color: #F8FAFC;
-    letter-spacing: -0.01em;
-    transition: color 0.2s;
-  }
-  .nav-logo:hover .logo-text { color: #93C5FD; }
-
-  .logo-badge {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: #3B82F6;
-    background: rgba(37, 99, 235, 0.1);
-    border: 1px solid rgba(37, 99, 235, 0.18);
-    border-radius: 4px;
-    padding: 2px 6px;
-  }
-
   /* ── Right block ── */
   .nav-right {
     display: flex;
@@ -213,21 +248,101 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
   @media (min-width: 768px) { .nav-links { display: flex; } }
 
   .nav-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 5px;
     padding: 7px 15px;
     font-size: 14px;
     font-weight: 500;
     color: #64748B;
     text-decoration: none;
     border-radius: 7px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
     transition: color 0.15s, background 0.15s;
     white-space: nowrap;
     letter-spacing: 0.01em;
+    font-family: inherit;
   }
   .nav-link:hover {
     color: #CBD5E1;
     background: rgba(255, 255, 255, 0.05);
   }
+
+  /* ── Services Dropdown ── */
+  .nav-dropdown-parent {
+    position: relative;
+  }
+
+  .nav-dropdown-trigger .chevron-icon {
+    transition: transform 0.2s ease;
+  }
+  .nav-dropdown-trigger[aria-expanded="true"] .chevron-icon {
+    transform: rotate(180deg);
+  }
+  .nav-dropdown-trigger[aria-expanded="true"] {
+    color: #CBD5E1;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: rgba(16, 21, 28, 0.97);
+    border: 1px solid rgba(30, 41, 59, 0.7);
+    border-radius: 12px;
+    padding: 6px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    z-index: 100;
+  }
+  .nav-dropdown.open {
+    display: block;
+    animation: dropdownIn 0.15s ease forwards;
+  }
+
+  @keyframes dropdownIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+
+  .nav-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #94A3B8;
+    text-decoration: none;
+    transition: background 0.12s, color 0.12s;
+    white-space: nowrap;
+  }
+  .nav-dropdown-item:hover {
+    background: rgba(37, 99, 235, 0.1);
+    color: #E2E8F0;
+  }
+  .nav-dropdown-item svg { color: #475569; flex-shrink: 0; }
+  .nav-dropdown-item:hover svg { color: #3B82F6; }
+
+  .nav-dropdown-divider {
+    height: 1px;
+    background: rgba(30, 41, 59, 0.6);
+    margin: 4px 6px;
+  }
+
+  .nav-dropdown-all {
+    color: #3B82F6;
+    font-weight: 600;
+    justify-content: space-between;
+  }
+  .nav-dropdown-all:hover { background: rgba(37, 99, 235, 0.12); color: #60A5FA; }
 
   /* ── Language toggle (desktop) ── */
   .lang-toggle {
@@ -253,7 +368,7 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
     background: rgba(255, 255, 255, 0.04);
   }
 
-  /* ── CTA button — solid, clean ── */
+  /* ── CTA button ── */
   .nav-cta {
     display: none;
     align-items: center;
@@ -341,6 +456,12 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
     font-weight: 500;
     color: #94A3B8;
     text-decoration: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: inherit;
     transition: background 0.15s, color 0.15s;
   }
   .mobile-link:hover {
@@ -357,6 +478,46 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
     font-variant-numeric: tabular-nums;
     transition: color 0.15s;
     min-width: 20px;
+  }
+
+  .mobile-services-trigger { justify-content: flex-start; }
+  .mobile-chevron {
+    margin-left: auto;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .mobile-services-trigger[aria-expanded="true"] .mobile-chevron {
+    transform: rotate(180deg);
+  }
+
+  .mobile-services-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 4px 46px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .mobile-services-list.hidden { display: none; }
+
+  .mobile-service-link {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748B;
+    text-decoration: none;
+    transition: background 0.12s, color 0.12s;
+  }
+  .mobile-service-link:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: #CBD5E1;
+  }
+  .mobile-service-all {
+    color: #3B82F6;
+    font-weight: 600;
+    margin-top: 4px;
   }
 
   .mobile-cta-wrap {
@@ -404,6 +565,7 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
 </style>
 
 <script>
+  // Mobile hamburger toggle
   const toggle = document.getElementById('mobile-menu-toggle');
   const menu   = document.getElementById('mobile-menu');
 
@@ -413,11 +575,48 @@ const langAriaLabel = lang === 'en' ? 'Cambiar a Español' : 'Switch to English'
     menu?.classList.toggle('hidden', isOpen);
   });
 
-  // Close menu when a link inside it is clicked
+  // Close mobile menu when non-service anchor links are clicked
   menu?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       toggle?.setAttribute('aria-expanded', 'false');
       menu.classList.add('hidden');
     });
+  });
+
+  // Mobile services submenu toggle
+  const mobileServicesTrigger = document.getElementById('mobile-services-trigger');
+  const mobileServicesList = document.getElementById('mobile-services-list');
+
+  mobileServicesTrigger?.addEventListener('click', () => {
+    const isOpen = mobileServicesTrigger.getAttribute('aria-expanded') === 'true';
+    mobileServicesTrigger.setAttribute('aria-expanded', String(!isOpen));
+    mobileServicesList?.classList.toggle('hidden', isOpen);
+  });
+
+  // Desktop dropdown toggle
+  const servicesTrigger = document.getElementById('services-trigger');
+  const servicesDropdown = document.getElementById('services-dropdown');
+
+  servicesTrigger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = servicesTrigger.getAttribute('aria-expanded') === 'true';
+    servicesTrigger.setAttribute('aria-expanded', String(!isOpen));
+    servicesDropdown?.classList.toggle('open', !isOpen);
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!servicesTrigger?.contains(e.target as Node) && !servicesDropdown?.contains(e.target as Node)) {
+      servicesTrigger?.setAttribute('aria-expanded', 'false');
+      servicesDropdown?.classList.remove('open');
+    }
+  });
+
+  // Close dropdown on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      servicesTrigger?.setAttribute('aria-expanded', 'false');
+      servicesDropdown?.classList.remove('open');
+    }
   });
 </script>

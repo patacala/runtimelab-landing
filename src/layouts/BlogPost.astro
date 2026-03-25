@@ -1,0 +1,426 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import navEs from '../i18n/es.json';
+import navEn from '../i18n/en.json';
+
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  coverImage?: string;
+  tags: string[];
+  author?: string;
+  lang: 'en' | 'es';
+  slug: string;
+  readingTime?: number;
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  coverImage,
+  tags,
+  author = 'RuntimeLab',
+  lang,
+  slug,
+  readingTime,
+} = Astro.props;
+
+const t = lang === 'es' ? navEs : navEn;
+const formattedDate = new Intl.DateTimeFormat(lang === 'es' ? 'es-MX' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+}).format(pubDate);
+
+const canonicalUrl = lang === 'es'
+  ? `https://runtime-lab.com/blog/${slug}`
+  : `https://runtime-lab.com/en/blog/${slug}`;
+
+const hreflangEs = lang === 'es' ? canonicalUrl : `https://runtime-lab.com/blog/${slug}`;
+const hreflangEn = lang === 'en' ? canonicalUrl : `https://runtime-lab.com/en/blog/${slug}`;
+
+const blogPath = lang === 'es' ? '/blog' : '/en/blog';
+const homePath = lang === 'es' ? '/' : '/en/';
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": pubDate.toISOString(),
+  "author": {
+    "@type": "Organization",
+    "@id": "https://runtime-lab.com/#organization",
+    "name": author,
+  },
+  "publisher": {
+    "@id": "https://runtime-lab.com/#organization"
+  },
+  "url": canonicalUrl,
+  "inLanguage": lang,
+  ...(coverImage ? { "image": `https://runtime-lab.com${coverImage}` } : {}),
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": lang === 'es' ? 'Inicio' : 'Home', "item": `https://runtime-lab.com${homePath}` },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `https://runtime-lab.com${blogPath}` },
+    { "@type": "ListItem", "position": 3, "name": title, "item": canonicalUrl },
+  ]
+};
+---
+
+<BaseLayout
+  lang={lang}
+  title={`${title} | RuntimeLab Blog`}
+  description={description}
+  ogImage={coverImage ?? '/assets/og-image.png'}
+  type="article"
+  schemas={[articleSchema, breadcrumbSchema]}
+  hreflangEs={hreflangEs}
+  hreflangEn={hreflangEn}
+>
+  <Nav t={t.nav} lang={lang} />
+
+  <main id="main-content" class="blog-post-main">
+
+    <!-- ── Header ── -->
+    <header class="post-header">
+      <div class="post-container">
+        <nav class="post-breadcrumb" aria-label="Breadcrumb">
+          <a href={homePath} class="breadcrumb-link">{lang === 'es' ? 'Inicio' : 'Home'}</a>
+          <span aria-hidden="true">/</span>
+          <a href={blogPath} class="breadcrumb-link">Blog</a>
+          <span aria-hidden="true">/</span>
+          <span class="breadcrumb-current">{title}</span>
+        </nav>
+
+        <div class="post-tags">
+          {tags.map(tag => (
+            <span class="post-tag">{tag}</span>
+          ))}
+        </div>
+
+        <h1 class="post-title">{title}</h1>
+        <p class="post-description">{description}</p>
+
+        <div class="post-meta">
+          <span class="post-author">{author}</span>
+          <span class="post-dot" aria-hidden="true">·</span>
+          <time datetime={pubDate.toISOString()} class="post-date">{formattedDate}</time>
+          {readingTime && (
+            <>
+              <span class="post-dot" aria-hidden="true">·</span>
+              <span class="post-reading-time">
+                {readingTime} {lang === 'es' ? 'min de lectura' : 'min read'}
+              </span>
+            </>
+          )}
+        </div>
+      </div>
+    </header>
+
+    <!-- ── Cover Image ── -->
+    {coverImage && (
+      <div class="post-cover-wrap">
+        <div class="post-container">
+          <img
+            src={coverImage}
+            alt={title}
+            class="post-cover"
+            width="800"
+            height="420"
+            loading="eager"
+          />
+        </div>
+      </div>
+    )}
+
+    <!-- ── Content ── -->
+    <article class="post-content-wrap">
+      <div class="post-container">
+        <div class="post-content prose">
+          <slot />
+        </div>
+
+        <!-- ── CTA at the end ── -->
+        <div class="post-cta-block">
+          <p class="post-cta-title">
+            {lang === 'es'
+              ? '¿Quieres implementar esto en tu negocio?'
+              : 'Want to implement this in your business?'}
+          </p>
+          <p class="post-cta-sub">
+            {lang === 'es'
+              ? 'Agenda una llamada gratuita y te mostramos cómo hacerlo en 30 minutos.'
+              : 'Book a free call and we\'ll show you how to do it in 30 minutes.'}
+          </p>
+          <a
+            href={`${homePath}#decision`}
+            class="post-cta-btn"
+          >
+            {lang === 'es' ? 'Agendar llamada gratuita' : 'Book a free call'}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- ── Back to blog ── -->
+        <div class="post-back">
+          <a href={blogPath} class="post-back-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5"/><path d="m12 5-7 7 7 7"/>
+            </svg>
+            {lang === 'es' ? 'Volver al blog' : 'Back to blog'}
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <Footer t={t.footer} nav={{ logo: t.nav.logo }} lang={lang} />
+</BaseLayout>
+
+<style>
+  .blog-post-main {
+    padding-top: 74px;
+  }
+
+  .post-container {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* ── Header ── */
+  .post-header {
+    padding: 48px 0 40px;
+    border-bottom: 1px solid rgba(30, 41, 59, 0.4);
+    background: linear-gradient(180deg, rgba(37,99,235,0.04) 0%, transparent 100%);
+  }
+
+  .post-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: #475569;
+  }
+  .breadcrumb-link {
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .breadcrumb-link:hover { color: #94A3B8; }
+  .breadcrumb-current { color: #64748B; }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .post-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3B82F6;
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.2);
+    border-radius: 100px;
+    padding: 3px 10px;
+  }
+
+  .post-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #F8FAFC;
+    margin-bottom: 16px;
+  }
+
+  .post-description {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: #94A3B8;
+    margin-bottom: 24px;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #64748B;
+  }
+  .post-author { color: #94A3B8; font-weight: 500; }
+  .post-dot { color: #334155; }
+  .post-date, .post-reading-time { color: #64748B; }
+
+  /* ── Cover ── */
+  .post-cover-wrap {
+    padding: 32px 0 0;
+  }
+  .post-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(30,41,59,0.5);
+    object-fit: cover;
+  }
+
+  /* ── Content ── */
+  .post-content-wrap {
+    padding: 48px 0 80px;
+  }
+
+  .prose {
+    color: #CBD5E1;
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 100%;
+  }
+
+  .prose :global(h2) {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #F1F5F9;
+    margin: 2.5rem 0 1rem;
+    line-height: 1.3;
+  }
+  .prose :global(h3) {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #E2E8F0;
+    margin: 2rem 0 0.75rem;
+    line-height: 1.4;
+  }
+  .prose :global(p) {
+    margin-bottom: 1.25rem;
+    color: #94A3B8;
+  }
+  .prose :global(ul), .prose :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+    color: #94A3B8;
+  }
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+  .prose :global(strong) { color: #E2E8F0; font-weight: 600; }
+  .prose :global(em) { color: #CBD5E1; }
+  .prose :global(a) {
+    color: #3B82F6;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(59,130,246,0.3);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .prose :global(a:hover) { color: #60A5FA; border-color: #60A5FA; }
+  .prose :global(blockquote) {
+    border-left: 3px solid #2563EB;
+    padding: 12px 20px;
+    margin: 1.5rem 0;
+    background: rgba(37,99,235,0.06);
+    border-radius: 0 8px 8px 0;
+    color: #CBD5E1;
+    font-style: italic;
+  }
+  .prose :global(code) {
+    background: rgba(30,41,59,0.7);
+    border: 1px solid rgba(30,41,59,0.8);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.875em;
+    color: #93C5FD;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  }
+  .prose :global(pre) {
+    background: #0D1117;
+    border: 1px solid rgba(30,41,59,0.7);
+    border-radius: 10px;
+    padding: 20px 24px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    color: #E2E8F0;
+  }
+  .prose :global(hr) {
+    border: none;
+    height: 1px;
+    background: rgba(30,41,59,0.5);
+    margin: 2.5rem 0;
+  }
+
+  /* ── Post CTA ── */
+  .post-cta-block {
+    margin-top: 56px;
+    padding: 36px 32px;
+    background: rgba(37,99,235,0.06);
+    border: 1px solid rgba(37,99,235,0.2);
+    border-radius: 16px;
+    text-align: center;
+  }
+  .post-cta-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #F1F5F9;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .post-cta-sub {
+    font-size: 14px;
+    color: #94A3B8;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .post-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: #2563EB;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 14px rgba(37,99,235,0.35);
+  }
+  .post-cta-btn:hover {
+    background: #1D4ED8;
+    transform: translateY(-1px);
+  }
+
+  /* ── Back link ── */
+  .post-back { margin-top: 40px; }
+  .post-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748B;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .post-back-link:hover { color: #94A3B8; }
+</style>

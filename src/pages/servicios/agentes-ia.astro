@@ -1,0 +1,157 @@
+---
+import ServicePage from '../../components/ServicePage.astro';
+import nav from '../../i18n/es.json';
+
+const data = {
+  lang: 'es' as const,
+  meta: {
+    title: 'Agentes de Inteligencia Artificial para Negocios | RuntimeLab',
+    description: 'Creamos agentes de IA que responden clientes, califican leads y agendan citas automáticamente, disponibles 24/7 en WhatsApp, web y email. Implementación en menos de 2 semanas.',
+    keywords: 'agentes ia, agentes de inteligencia artificial, AI agents, chatbot con IA, agente ia para negocios, automatización con IA, respuesta automática clientes',
+    hreflangEs: 'https://runtime-lab.com/servicios/agentes-ia',
+    hreflangEn: 'https://runtime-lab.com/en/services/ai-agents',
+  },
+  nav: nav.nav,
+  footer: nav.footer,
+  hero: {
+    badge: 'AGENTES IA',
+    title: 'Agentes de IA que atienden, califican y agendan por ti — 24/7',
+    sub: 'Implementamos agentes de inteligencia artificial que responden al instante desde cualquier canal: WhatsApp, web, email o redes sociales. Sin intervención manual, sin horarios limitados, sin leads perdidos.',
+    cta: 'Agendar llamada gratuita',
+    ctaHref: '/#decision',
+  },
+  benefitsTitle: 'Lo que un agente de IA hace por tu negocio',
+  benefits: [
+    {
+      icon: 'zap' as const,
+      title: 'Respuesta instantánea 24/7',
+      desc: 'Tu agente de IA responde en segundos, cualquier día, a cualquier hora. Ningún lead se pierde por falta de respuesta.',
+    },
+    {
+      icon: 'check' as const,
+      title: 'Calificación automática de leads',
+      desc: 'El agente hace las preguntas correctas, evalúa la intención de compra y clasifica cada lead según tu criterio antes de pasarlo a tu equipo.',
+    },
+    {
+      icon: 'clock' as const,
+      title: 'Agendamiento sin intervención',
+      desc: 'Consulta disponibilidad, ofrece horarios y confirma citas directamente en tu calendario, sin que tu equipo tenga que hacer nada.',
+    },
+    {
+      icon: 'bot' as const,
+      title: 'Conversaciones naturales',
+      desc: 'Entrenamos el agente con el tono, vocabulario y conocimiento de tu negocio. Tus clientes sienten que hablan con alguien de tu equipo.',
+    },
+  ],
+  process: {
+    title: 'Cómo implementamos tu agente de IA',
+    sub: 'De cero a un agente de IA funcionando en menos de 2 semanas.',
+    steps: [
+      {
+        num: '01',
+        title: 'Auditoría de conversaciones',
+        desc: 'Analizamos tus conversaciones actuales: qué preguntan tus clientes, cómo respondes, qué frena la conversión. Definimos los flujos del agente.',
+      },
+      {
+        num: '02',
+        title: 'Entrenamiento y personalización',
+        desc: 'Entrenamos el agente con el conocimiento de tu negocio, tu tono de comunicación y las reglas de calificación que tú defines.',
+      },
+      {
+        num: '03',
+        title: 'Integración con tus canales',
+        desc: 'Conectamos el agente a WhatsApp Business, tu web, email y cualquier canal que uses. También lo integramos con tu CRM y calendario.',
+      },
+      {
+        num: '04',
+        title: 'Pruebas y ajustes',
+        desc: 'Probamos el agente con escenarios reales, ajustamos respuestas y flujos hasta que funcione exactamente como necesitas.',
+      },
+      {
+        num: '05',
+        title: 'Lanzamiento y monitoreo',
+        desc: 'Activamos el agente, monitoreamos las primeras conversaciones y hacemos ajustes en tiempo real para optimizar los resultados.',
+      },
+    ],
+  },
+  useCases: {
+    title: '¿Qué tipo de negocios usan agentes de IA?',
+    items: [
+      {
+        label: 'Clínicas y centros de salud',
+        desc: 'El agente responde preguntas sobre servicios, califica síntomas urgentes y agenda citas directamente en el calendario del médico.',
+      },
+      {
+        label: 'Inmobiliarias',
+        desc: 'Responde consultas de propiedades, califica la intención de compra/renta y agenda visitas con el agente en minutos.',
+      },
+      {
+        label: 'Servicios profesionales',
+        desc: 'Abogados, contadores, consultores: el agente filtra consultas, explica servicios y agenda llamadas de diagnóstico automáticamente.',
+      },
+      {
+        label: 'Educación y academias',
+        desc: 'Responde preguntas sobre cursos, horarios y precios. Captura datos del interesado y lo guía al proceso de inscripción.',
+      },
+      {
+        label: 'Retail y e-commerce',
+        desc: 'Atiende consultas post-venta, rastreo de pedidos y resolución de incidencias sin intervención del equipo de soporte.',
+      },
+      {
+        label: 'Restaurantes y hospitality',
+        desc: 'Gestiona reservaciones, responde preguntas sobre el menú y confirma eventos especiales automáticamente.',
+      },
+    ],
+  },
+  cta: {
+    title: 'Tu agente de IA puede estar activo esta semana.',
+    sub: 'Agenda una llamada y en 30 minutos te mostramos cómo funciona un agente de IA aplicado exactamente a tu negocio.',
+    button: 'Agendar llamada gratuita',
+    href: '/#decision',
+  },
+  related: {
+    title: 'Otros servicios relacionados',
+    items: [
+      { label: 'Páginas Web', href: '/servicios/desarrollo-web' },
+      { label: 'Automatizaciones', href: '/servicios/automatizaciones' },
+      { label: 'Software a Medida', href: '/servicios/software-a-medida' },
+    ],
+  },
+  schemas: [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Agentes de Inteligencia Artificial para Negocios",
+      "description": "Implementación de agentes de IA que responden clientes, califican leads y agendan citas automáticamente 24/7.",
+      "provider": { "@id": "https://runtime-lab.com/#organization" },
+      "areaServed": { "@type": "Country", "name": "Mexico" },
+      "serviceType": "AI Agent Development",
+      "url": "https://runtime-lab.com/servicios/agentes-ia"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Cómo implementamos un agente de inteligencia artificial",
+      "description": "Proceso de 5 pasos para implementar un agente de IA en tu negocio",
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Auditoría de conversaciones", "text": "Analizamos tus conversaciones actuales para definir los flujos del agente." },
+        { "@type": "HowToStep", "position": 2, "name": "Entrenamiento y personalización", "text": "Entrenamos el agente con el conocimiento y tono de tu negocio." },
+        { "@type": "HowToStep", "position": 3, "name": "Integración con canales", "text": "Conectamos el agente a WhatsApp, web, email y tu CRM." },
+        { "@type": "HowToStep", "position": 4, "name": "Pruebas y ajustes", "text": "Probamos con escenarios reales y ajustamos hasta funcionar perfectamente." },
+        { "@type": "HowToStep", "position": 5, "name": "Lanzamiento y monitoreo", "text": "Activamos el agente y monitoreamos las primeras conversaciones." }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://runtime-lab.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://runtime-lab.com/#capabilities" },
+        { "@type": "ListItem", "position": 3, "name": "Agentes IA", "item": "https://runtime-lab.com/servicios/agentes-ia" }
+      ]
+    }
+  ],
+};
+---
+
+<ServicePage data={data} />

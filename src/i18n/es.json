@@ -4,7 +4,15 @@
     "links": {
       "work": "Cómo Funciona",
       "services": "Servicios",
-      "contact": "Contacto"
+      "contact": "Contacto",
+      "blog": "Blog",
+      "servicesItems": {
+        "web": "Páginas Web",
+        "aiAgents": "Agentes IA",
+        "automations": "Automatizaciones",
+        "software": "Software a Medida",
+        "viewAll": "Ver todos los servicios"
+      }
     },
     "cta": "Agendar llamada gratuita"
   },
