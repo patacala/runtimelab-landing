@@ -168,7 +168,7 @@ const { t } = Astro.props;
   .decision-section {
     position: relative;
     background-color: #07090D;
-    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    padding: clamp(5rem, 8vw, 7rem) 0;
     border-top: 1px solid rgba(30, 41, 59, 0.5);
     overflow: hidden;
   }
@@ -227,9 +227,9 @@ const { t } = Astro.props;
   }
 
   .decision-sub {
-    font-size: clamp(1rem, 1.6vw, 1.125rem);
-    color: #94A3B8;
-    line-height: 1.7;
+    font-size: clamp(1.0625rem, 1.6vw, 1.125rem);
+    color: #CBD5E1;
+    line-height: 1.75;
     max-width: 420px;
     margin-bottom: 2rem;
   }
@@ -239,6 +239,14 @@ const { t } = Astro.props;
     flex-wrap: wrap;
     gap: 12px;
     margin-bottom: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .decision-ctas {
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 2.5rem;
+    }
   }
 
   .decision-cta-primary {
@@ -260,6 +268,15 @@ const { t } = Astro.props;
     background: #1D4ED8;
     transform: translateY(-1px);
     box-shadow: 0 8px 24px rgba(37, 99, 235, 0.42), 0 4px 16px rgba(15, 23, 42, 0.5);
+  }
+
+  @media (max-width: 600px) {
+    .decision-cta-primary {
+      padding: 16px 32px;
+      font-size: 1.0625rem;
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   .decision-cta-secondary {

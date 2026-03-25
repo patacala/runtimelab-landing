@@ -170,7 +170,7 @@ const { t } = Astro.props;
   .bc-section {
     position: relative;
     background: #0B0F14;
-    padding: clamp(80px, 12vw, 128px) 0;
+    padding: clamp(5rem, 10vw, 8rem) 0;
     overflow: hidden;
   }
 
@@ -247,9 +247,9 @@ const { t } = Astro.props;
   .bc-title-bright { color: #F8FAFC; }
 
   .bc-sub {
-    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-    line-height: 1.76;
-    color: #64748B;
+    font-size: clamp(1rem, 1.5vw, 1.05rem);
+    line-height: 1.8;
+    color: #94A3B8;
     max-width: 440px;
     margin-bottom: 36px;
   }
@@ -271,6 +271,13 @@ const { t } = Astro.props;
     font-size: 14px;
     font-weight: 500;
     color: #94A3B8;
+  }
+
+  @media (max-width: 600px) {
+    .bc-trust-item {
+      font-size: 15px;
+      color: #CBD5E1;
+    }
   }
 
   /* Availability badge */
@@ -418,6 +425,14 @@ const { t } = Astro.props;
       box-shadow 0.2s,
       transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
       opacity 0.15s;
+  }
+
+  @media (max-width: 600px) {
+    .bc-submit {
+      padding: 16px 28px;
+      font-size: 1.0625rem;
+      margin-top: 16px;
+    }
   }
 
   .bc-submit:hover:not(:disabled) {

@@ -36,6 +36,7 @@ const { t } = Astro.props;
             loop
             muted
             playsinline
+            preload="none"
             aria-hidden="true"
           ></video>
         </div>
@@ -125,8 +126,8 @@ const { t } = Astro.props;
   /* ── Section — color plano idéntico al fondo del video ── */
   .ai-demo-section {
     position: relative;
-    background-color: #0D0719;
-    padding: clamp(4.5rem, 9vw, 8rem) 0 clamp(4rem, 8vw, 7rem);
+    background-color: #0D0819;
+    padding: clamp(5rem, 9vw, 8rem) 0 clamp(5rem, 8vw, 7rem);
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     overflow: hidden;
   }
@@ -186,9 +187,9 @@ const { t } = Astro.props;
   }
 
   .ai-demo-sub {
-    font-size: clamp(0.875rem, 1.5vw, 1rem);
-    color: #64748B;
-    line-height: 1.65;
+    font-size: clamp(0.9375rem, 1.5vw, 1rem);
+    color: #94A3B8;
+    line-height: 1.7;
   }
 
   /* ── Video: círculo perfecto con fade radial via mask ── */
@@ -197,8 +198,8 @@ const { t } = Astro.props;
     width: min(100%, 480px);
     aspect-ratio: 1 / 1;
     margin: 0 auto;
-    -webkit-mask-image: radial-gradient(circle at center, black 42%, transparent 68%);
-    mask-image: radial-gradient(circle at center, black 42%, transparent 68%);
+    -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 70%);
+    mask-image: radial-gradient(circle at center, black 45%, transparent 70%);
   }
 
   .ai-video-wrap video {
@@ -206,6 +207,13 @@ const { t } = Astro.props;
     height: 100%;
     object-fit: cover;
     display: block;
+  }
+
+  @media (max-width: 600px) {
+    .ai-video-wrap {
+      -webkit-mask-image: radial-gradient(circle at center, black 48%, transparent 72%);
+      mask-image: radial-gradient(circle at center, black 48%, transparent 72%);
+    }
   }
 
   /* ── Chat card ── */
@@ -320,8 +328,14 @@ const { t } = Astro.props;
     text-transform: uppercase;
     margin-bottom: 4px;
   }
-  .chat-label--client { color: #475569; }
-  .chat-label--ai     { color: rgba(59, 130, 246, 0.7); }
+  .chat-label--client { color: #64748B; }
+  .chat-label--ai     { color: rgba(59, 130, 246, 0.8); }
+
+  @media (max-width: 600px) {
+    .chat-label {
+      font-size: 10px;
+    }
+  }
 
   /* Bubble */
   .chat-bubble {
@@ -329,6 +343,13 @@ const { t } = Astro.props;
     border-radius: 12px;
     font-size: 0.875rem;
     line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .chat-bubble {
+      font-size: 0.9375rem;
+      padding: 11px 15px;
+    }
   }
 
   .chat-bubble--client {
@@ -389,8 +410,14 @@ const { t } = Astro.props;
     background: rgba(7, 10, 18, 0.6);
     border-top: 1px solid rgba(37, 99, 235, 0.1);
     font-size: 11px;
-    color: #334155;
+    color: #475569;
     letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 600px) {
+    .chat-footer {
+      font-size: 12px;
+    }
   }
 
   /* Trust row */
@@ -408,9 +435,16 @@ const { t } = Astro.props;
     align-items: center;
     gap: 6px;
     font-size: 12px;
-    color: #475569;
+    color: #64748B;
     padding: 0 14px;
     font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .ai-trust-item {
+      font-size: 13px;
+      color: #94A3B8;
+    }
   }
 
   .ai-trust-sep {
@@ -442,18 +476,6 @@ const { t } = Astro.props;
 </style>
 
 <script>
-  /* Parallax on scanline background */
-  (function () {
-    const demo = document.getElementById('ai-demo');
-    if (demo) {
-      window.addEventListener('scroll', () => {
-        const rect = demo.getBoundingClientRect();
-        const progress = -rect.top / (window.innerHeight + rect.height);
-        demo.style.backgroundPositionY = `${progress * 30}px`;
-      }, { passive: true });
-    }
-  })();
-
   (function () {
     const section = document.getElementById('ai-demo');
     if (!section) return;

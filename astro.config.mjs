@@ -8,4 +8,17 @@ export default defineConfig({
     tailwind(),
     sitemap(),
   ],
+  build: {
+    inlineStylesheets: 'auto',
+  },
+  vite: {
+    build: {
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+      },
+    },
+  },
 });

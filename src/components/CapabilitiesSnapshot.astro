@@ -76,7 +76,7 @@ const iconMap: Record<string, string> = {
   .cap-section {
     position: relative;
     background-color: #080C14;
-    padding: clamp(5rem, 10vw, 8rem) 0;
+    padding: clamp(5rem, 9vw, 8rem) 0;
     border-top: 1px solid rgba(30, 41, 59, 0.5);
     overflow: hidden;
   }
@@ -113,9 +113,9 @@ const iconMap: Record<string, string> = {
   }
 
   .cap-subtitle {
-    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
-    color: #64748B;
-    line-height: 1.6;
+    font-size: clamp(1rem, 1.6vw, 1.1rem);
+    color: #94A3B8;
+    line-height: 1.7;
     max-width: 640px;
     margin: 0 auto;
   }
@@ -237,6 +237,13 @@ const iconMap: Record<string, string> = {
     font-size: 0.8125rem;
     color: #94A3B8;
     line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .cap-item {
+      font-size: 0.875rem;
+      color: #CBD5E1;
+    }
   }
 
   .cap-item svg {

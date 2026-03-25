@@ -106,15 +106,18 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 
     <!-- Cubo: posición absoluta libre de restricciones del grid -->
     <div class="hero-cube-col" aria-hidden="true">
-      <img
-        src="/assets/sections/hero_cube.png"
-        alt=""
-        class="hero-cube-img"
-        loading="eager"
-        decoding="async"
-        width="781"
-        height="656"
-      />
+      <picture>
+        <source srcset="/assets/sections/hero_cube.webp" type="image/webp" />
+        <img
+          src="/assets/sections/hero_cube.png"
+          alt=""
+          class="hero-cube-img"
+          loading="eager"
+          decoding="async"
+          width="781"
+          height="656"
+        />
+      </picture>
     </div>
 
     <!-- Content: sólo texto, alineado a la izquierda -->

@@ -1184,21 +1184,15 @@
   }
 
   // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(customizeToggleButton, 100);
-      setTimeout(customizeToggleButton, 300);
-      setTimeout(customizeToggleButton, 600);
-      setTimeout(setupToggleObserver, 500);
-      setTimeout(initCustomUI, 500);
-    });
-  } else {
-    setTimeout(customizeToggleButton, 100);
-    setTimeout(customizeToggleButton, 300);
-    setTimeout(customizeToggleButton, 600);
-    setTimeout(customizeToggleButton, 1000);
-    setTimeout(customizeToggleButton, 2000);
+  function init() {
+    customizeToggleButton();
     setTimeout(setupToggleObserver, 500);
     setTimeout(initCustomUI, 500);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
+  } else {
+    setTimeout(init, 100);
   }
 </script>

@@ -35,20 +35,31 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- n8n Chat Widget stylesheet (must load before our overrides) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
-
-    <!-- Fonts -->
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-    />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <!-- Fonts with async loading -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      />
+    </noscript>
+
+    <!-- n8n Chat Widget stylesheet (deferred) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css"
+      media="print"
+      onload="this.media='all'"
     />
   </head>
   <body class="bg-bg text-primary font-sans antialiased overflow-x-hidden">
@@ -79,21 +90,19 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
     <!-- Subtle global parallax: section backgrounds shift at 5-8% scroll speed -->
     <script>
       (function () {
-        const parallaxSections = [
+        const targets = [];
+        [
           { id: 'capabilities', speed: 0.06 },
-          { id: 'projects',     speed: 0.05 },
-          { id: 'who-we-work',  speed: 0.06 },
-        ];
-
-        const targets: Array<{ el: HTMLElement; speed: number }> = [];
-
-        parallaxSections.forEach(({ id, speed }) => {
+          { id: 'projects', speed: 0.05 },
+          { id: 'who-we-work', speed: 0.06 },
+        ].forEach(({ id, speed }) => {
           const el = document.getElementById(id);
           if (el) targets.push({ el, speed });
         });
 
         if (targets.length === 0) return;
 
+        let ticking = false;
         function updateParallax() {
           const scrollY = window.scrollY;
           targets.forEach(({ el, speed }) => {
@@ -101,9 +110,15 @@ const canonicalURL = Astro.site ? new URL(Astro.url.pathname, Astro.site) : Astr
             const centerOffset = rect.top + rect.height / 2 - window.innerHeight / 2;
             el.style.backgroundPositionY = `calc(50% + ${centerOffset * speed}px)`;
           });
+          ticking = false;
         }
 
-        window.addEventListener('scroll', updateParallax, { passive: true });
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+          }
+        }, { passive: true });
         updateParallax();
       })();
     </script>
