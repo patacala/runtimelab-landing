@@ -2,7 +2,7 @@
   "nav": {
     "logo": "RuntimeLab",
     "links": {
-      "work": "Lo que Hacemos",
+      "work": "Cómo Funciona",
       "services": "Servicios",
       "contact": "Contacto"
     },
@@ -10,10 +10,10 @@
   },
   "hero": {
     "title": {
-      "line1": "Convierte visitantes en",
-      "line2": "clientes automáticamente."
+      "line1": "Construimos el sistema que",
+      "line2": "tu negocio necesita para crecer."
     },
-    "sub": "Construimos páginas web conectadas con agentes de IA que <strong>responden</strong> a tus clientes al instante, <strong>califican</strong> los leads y <strong>agendan citas</strong> automáticamente.",
+    "sub": "Diseñamos <strong>páginas web</strong>, <strong>agentes de IA</strong>, <strong>automatizaciones</strong> y un <strong>CRM omnichannel</strong> que trabajan juntos para captar, atender y convertir clientes — sin que tengas que hacer nada manualmente.",
     "cta": {
       "primary": "Agendar llamada gratuita"
     },
@@ -25,12 +25,12 @@
       "tasks": "Cita perdida"
     },
     "impactItems": [],
-    "credibility": "Diseñado para negocios que quieren más clientes sin responder manualmente cada mensaje.",
+    "credibility": "Web · Agentes IA · Automatización · CRM Omnichannel · Software a Medida",
     "flowSteps": [
       "Visitante llega a tu web",
       "IA responde al instante",
       "Lead calificado",
-      "Cita agendada",
+      "CRM centraliza la conversación",
       "Nuevo cliente"
     ]
   },
@@ -43,42 +43,42 @@
         "micro": "Cuando un cliente envía un mensaje y nadie responde en minutos, ese cliente se va con tu competencia."
       },
       {
-        "tag": "TIEMPO DE RESPUESTA",
-        "question": "¿Respuestas lentas?",
-        "micro": "Los clientes esperan respuesta inmediata. Si tardas más de unos minutos, la oportunidad desaparece."
+        "tag": "CONVERSACIONES DISPERSAS",
+        "question": "¿Canales desconectados?",
+        "micro": "WhatsApp, email, formularios, redes sociales — cada canal es una isla. Las conversaciones se pierden entre herramientas."
       },
       {
-        "tag": "GESTIÓN MANUAL",
-        "question": "¿Seguimiento manual?",
-        "micro": "Recordar escribir a cada prospecto y dar seguimiento consume tiempo y genera errores costosos."
+        "tag": "OPERACIÓN MANUAL",
+        "question": "¿Todo a mano?",
+        "micro": "Copiar datos entre sistemas, dar seguimiento manual y agendar citas uno a uno consume tu tiempo y genera errores costosos."
       },
       {
-        "tag": "PÉRDIDA DE CLIENTES",
-        "question": "¿Clientes perdidos?",
-        "micro": "Sin un sistema que capture, responda y haga seguimiento, los prospectos nunca se convierten en clientes."
+        "tag": "SIN SISTEMA",
+        "question": "¿Sin control?",
+        "micro": "Sin un sistema que conecte tu web, tus conversaciones y tus procesos, el crecimiento se convierte en caos."
       }
     ]
   },
   "structure": {
-    "badge": "CÓMO FUNCIONA EL SISTEMA",
+    "badge": "CÓMO FUNCIONA",
     "title": {
       "chaos": "El caos no escala.",
       "structure": "Los sistemas sí."
     },
-    "sub": "Conectamos tu página web, inteligencia artificial y automatización para que cada visitante tenga una respuesta inmediata y un camino claro hacia convertirse en cliente.",
+    "sub": "Conectamos tu página web, agentes de IA, automatizaciones y CRM para que cada visitante tenga una respuesta inmediata y un camino claro hacia convertirse en cliente.",
     "flow": {
       "step1": {
         "label": "CAPTURA",
         "title": "Visitante llega a tu web"
       },
       "step2": {
-        "label": "RESPUESTA INMEDIATA",
-        "title": "IA responde al instante"
+        "label": "RESPUESTA + CALIFICACIÓN",
+        "title": "IA responde y califica al instante"
       },
       "step3": {
         "label": "CONVERSIÓN AUTOMÁTICA",
-        "title": "Cita agendada automáticamente",
-        "features": ["Lead calificado", "Cita en tu calendario", "Nuevo cliente"]
+        "title": "CRM centraliza y convierte",
+        "features": ["Lead calificado", "Conversación centralizada", "Nuevo cliente"]
       }
     },
     "metrics": {
@@ -86,60 +86,75 @@
       "conversion": { "value": "4.2x", "label": "Conversión del pipeline" },
       "manual": { "value": "Cero", "label": "Procesos manuales" }
     },
-    "pipeline": ["Visita la web", "Responde la IA", "Lead calificado", "Cita agendada"],
-    "annotations": { "step1": "Conectado", "step2": "Automatizado", "step3": "Convertido" }
+    "pipeline": ["Visita la web", "IA responde", "Lead calificado", "Cliente convertido"],
+    "annotations": { "step1": "Conectado", "step2": "Automatizado", "step3": "Centralizado" }
   },
   "capabilities": {
-    "title": "El sistema que convierte visitantes en clientes.",
-    "subtitle": "Cuatro componentes conectados que trabajan para tu negocio 24/7.",
+    "title": "Todo lo que tu negocio necesita para crecer.",
+    "subtitle": "Cinco servicios conectados que forman un sistema completo de captación, atención y conversión.",
     "blocks": [
       {
+        "icon": "globe",
         "title": "Páginas web que convierten",
         "items": [
           "Diseño orientado a conversión",
-          "Formularios y captura de leads",
-          "Carga rápida y móvil primero",
-          "Integración directa con el sistema de IA"
+          "Formularios inteligentes de captura",
+          "Carga rápida y mobile-first",
+          "Integración directa con IA y CRM"
         ],
-        "result": "Más visitantes se convierten en oportunidades reales."
+        "result": "Tu web no solo se ve bien — captura leads y los envía directo al sistema."
       },
       {
-        "title": "Respuesta automática con IA",
+        "icon": "bot",
+        "title": "Agentes IA que atienden por ti",
         "items": [
-          "Respuesta al instante, 24/7",
+          "Respuesta instantánea 24/7",
           "Conversaciones naturales en tu idioma",
-          "Calificación automática del lead",
-          "Sin intervención manual"
+          "Calificación automática de leads",
+          "Agendamiento de citas sin intervención"
         ],
-        "result": "Cada cliente recibe respuesta al instante, incluso fuera de horario."
+        "result": "Cada cliente recibe atención inmediata, incluso fuera de horario."
       },
       {
-        "title": "Seguimiento automático",
+        "icon": "zap",
+        "title": "Automatizaciones con IA",
         "items": [
-          "Mensajes de seguimiento programados",
-          "Recordatorios automáticos",
-          "Reactivación de leads fríos",
-          "Historial completo por cliente"
+          "Workflows inteligentes con n8n",
+          "Seguimiento y recordatorios automáticos",
+          "Integraciones con tus herramientas actuales",
+          "Escalamiento y notificaciones por reglas"
         ],
-        "result": "Ningún prospecto queda sin respuesta."
+        "result": "Tu operación corre sola: menos trabajo manual, menos errores."
       },
       {
-        "title": "Agenda de citas automática",
+        "icon": "inbox",
+        "title": "CRM omnichannel",
         "items": [
-          "Agendamiento directo en tu calendario",
-          "Confirmaciones automáticas por correo",
-          "Recordatorios antes de la cita",
-          "Integración con Google Calendar"
+          "Bandeja unificada: WhatsApp, web, email, redes",
+          "Historial completo de cada conversación",
+          "Gestión de pipeline y estados de leads",
+          "Conversaciones gestionadas por IA desde cualquier canal"
         ],
-        "result": "Los leads calificados reservan citas directo en tu calendario."
+        "result": "Todas tus conversaciones en un solo lugar, organizadas y sin perder nada."
+      },
+      {
+        "icon": "code",
+        "title": "Software a medida",
+        "items": [
+          "Plataformas internas y portales",
+          "Dashboards y herramientas de gestión",
+          "Integraciones con APIs y sistemas existentes",
+          "Arquitectura escalable para crecer contigo"
+        ],
+        "result": "Cuando necesitas más que automatización, construimos el software que tu operación necesita."
       }
     ]
   },
   "aiDemo": {
-    "title": "Así responde el sistema a tus clientes.",
-    "sub": "Mientras tú atiendes tu consultorio, el sistema responde, califica y agenda — sin que tengas que hacer nada.",
-    "clientLabel": "Paciente",
-    "aiLabel": "Sistema IA",
+    "title": "Así responde tu agente IA a tus clientes.",
+    "sub": "Mientras tú te enfocas en lo que importa, el sistema responde, califica y agenda — automáticamente, desde cualquier canal.",
+    "clientLabel": "Cliente",
+    "aiLabel": "Agente IA",
     "messages": [
       { "role": "client", "text": "Hola, me ha dolido una muela desde ayer en la noche. ¿Tienen cita disponible hoy?" },
       { "role": "ai",     "text": "¡Hola! Qué pena que estés pasándola mal. Sí, tenemos citas de urgencia disponibles para hoy. ¿Me puedes decir qué tan fuerte es el dolor, del 1 al 10?" },
@@ -148,28 +163,28 @@
       { "role": "client", "text": "Las 3pm por favor." },
       { "role": "ai",     "text": "Perfecto. Te agendé con el Dr. González hoy a las 3:00pm. ¿Me confirmas tu nombre completo para registrarte en el sistema?" },
       { "role": "client", "text": "Claro, soy María Rodríguez." },
-      { "role": "ai",     "text": "Listo, María 🦷 Cita confirmada para hoy a las 3:00pm. Te acabo de enviar un mensaje de texto con la dirección del consultorio y los documentos que necesitas traer. ¡Nos vemos pronto, que te mejores! ✓" }
+      { "role": "ai",     "text": "Listo, María. Cita confirmada para hoy a las 3:00pm. Te acabo de enviar un mensaje con la dirección y los documentos que necesitas traer. ¡Nos vemos pronto! ✓" }
     ]
   },
   "control": {
     "actLabel": "EL RESULTADO",
     "title": "Cuando todo está conectado, tu negocio deja de improvisar.",
-    "sub": "Los visitantes se convierten en leads. Los leads reciben respuestas inmediatas. Los clientes agendan citas automáticamente.",
+    "sub": "Los visitantes se convierten en leads. Los leads reciben respuestas inmediatas. Las conversaciones se centralizan. Los clientes se cierran automáticamente.",
     "benefits": [
       {
         "icon": "clock",
         "title": "Responde en segundos",
-        "desc": "Tu sistema responde al instante, antes de que el cliente pierda el interés o contacte a tu competencia."
+        "desc": "Tu sistema responde al instante desde cualquier canal, antes de que el cliente pierda el interés."
       },
       {
         "icon": "diamond",
         "title": "Cierra más clientes",
-        "desc": "Cada lead recibe seguimiento automático con el mensaje correcto en el momento correcto."
+        "desc": "Cada lead recibe seguimiento automático y sus conversaciones quedan centralizadas en el CRM."
       },
       {
         "icon": "moon",
         "title": "Trabaja mientras duermes",
-        "desc": "Tu sistema opera 24/7, calificando leads y agendando citas sin que tengas que hacer nada."
+        "desc": "Tu sistema opera 24/7: web, IA, automatizaciones y CRM trabajando juntos sin intervención."
       }
     ]
   },
@@ -177,14 +192,14 @@
     "badge": "DA EL SIGUIENTE PASO",
     "title": {
       "line1": "Deja de perseguir clientes.",
-      "line2": "Captura automáticamente."
+      "line2": "Construye el sistema."
     },
-    "sub": "Creamos sistemas que trabajan para tu negocio 24/7.",
+    "sub": "Web, agentes IA, automatizaciones y CRM — todo conectado para tu negocio.",
     "cta": {
       "primary": "Agendar llamada gratuita",
       "secondary": "Ver Demo"
     },
-    "attributes": ["CAPTURA AUTOMÁTICA", "RESPUESTA EN SEGUNDOS", "24/7", "MÁS CLIENTES"],
+    "attributes": ["WEB", "AGENTES IA", "AUTOMATIZACIÓN", "CRM OMNICHANNEL", "SOFTWARE"],
     "dashboard": {
       "label": "Ejemplo: Negocio Local de Servicios",
       "metrics": {
@@ -198,28 +213,28 @@
     }
   },
   "whoWeWorkWith": {
-    "title": "Para negocios que quieren más clientes",
-    "subtitle": "Trabajamos con empresas en crecimiento que reciben leads pero no los pueden atender a tiempo.",
+    "title": "Para negocios que quieren crecer con sistema",
+    "subtitle": "Trabajamos con empresas que necesitan captar más clientes, organizar sus conversaciones y automatizar su operación.",
     "segments": [
       {
-        "label": "Contratistas",
-        "desc": "Reciben consultas por WhatsApp, formularios y llamadas — y no dan abasto para responder a todas."
+        "label": "Contratistas y servicios",
+        "desc": "Reciben consultas por WhatsApp, formularios y llamadas — y necesitan un sistema que responda y organice todo."
       },
       {
-        "label": "Dentistas y clínicas",
-        "desc": "Pacientes que preguntan fuera de horario y citas que se pierden por falta de seguimiento."
+        "label": "Clínicas y consultorios",
+        "desc": "Pacientes que preguntan fuera de horario, citas que se pierden y canales dispersos que nadie centraliza."
       },
       {
         "label": "Agentes inmobiliarios",
-        "desc": "Leads que se enfrían porque nadie los contacta en los primeros minutos."
+        "desc": "Leads que se enfrían porque nadie los contacta en los primeros minutos ni les da seguimiento."
       },
       {
-        "label": "Negocios de servicio local",
-        "desc": "Propietarios que quieren escalar sin contratar más personal de atención."
+        "label": "Negocios en crecimiento",
+        "desc": "Empresas que necesitan escalar su captación y atención sin duplicar su equipo."
       },
       {
-        "label": "Empresas en crecimiento",
-        "desc": "Equipos que buscan automatizar el proceso de captación sin perder el trato personal."
+        "label": "Empresas con operación compleja",
+        "desc": "Equipos que necesitan software a medida, integraciones y automatizaciones más allá de herramientas genéricas."
       }
     ]
   },
@@ -229,10 +244,10 @@
       "line1": "CONSTRUIDO POR INGENIEROS QUE",
       "line2": "ESCALARON PARA MILLONES."
     },
-    "sub": "Sistemas diseñados para capturar y convertir clientes automáticamente. El mismo rigor técnico que aplicamos a plataformas enterprise, ahora al servicio de tu negocio.",
+    "sub": "El mismo rigor técnico que aplicamos a plataformas enterprise, ahora al servicio de tu negocio. Desde una landing hasta un sistema completo con IA, automatización y CRM.",
     "cta": {
-      "portfolio": "Ver Nuestro Portfolio",
-      "specs": "Especificaciones Técnicas"
+      "portfolio": "Agendar Llamada",
+      "specs": "Ver Servicios"
     },
     "metrics": [
       { "value": "2M+",   "label": "Usuarios Activos Diarios",     "sub": "en 3 regiones globales" },
@@ -267,128 +282,13 @@
       ]
     }
   },
-  "projects": {
-    "badge": "PROYECTOS REALES",
-    "sectionTitle": {
-      "line1": "Ejemplos de sistemas",
-      "line2": "que hemos construido."
-    },
-    "sectionSub": "Cada sistema está diseñado para capturar leads y convertirlos en clientes automáticamente.",
-    "items": [
-      {
-        "type": "app",
-        "industry": "MARKETPLACE DE TALENTO",
-        "title": "ContactMyApp — Marketplace de Talento Profesional",
-        "description": "ContactMyApp redefine la forma en que los profesionales consiguen clientes. El talento publica sus habilidades y servicios en un marketplace dinámico donde la calidad se premia con calificaciones verificadas — dándole a cada profesional visibilidad real y un historial comprobado que genera confianza. No es un clasificado: es un motor de reputación diseñado para convertir.",
-        "image": "/assets/proyects/app1.png",
-        "imageAlt": "Plataforma marketplace de talento ContactMyApp",
-        "built": {
-          "label": "LO QUE CONSTRUIMOS",
-          "items": [
-            "Perfil profesional con habilidades verificadas, portafolio y listado de servicios",
-            "Motor de calificaciones y reseñas que posiciona a los mejores por calidad",
-            "Sistema de descubrimiento que conecta clientes con el talento ideal por especialidad, ciudad y reputación"
-          ]
-        },
-        "metrics": [
-          { "value": "Multi", "label": "industria — plataforma de talento" },
-          { "value": "5★",    "label": "sistema de ranking por calidad" },
-          { "value": "Seed",  "label": "ronda de inversión activa" }
-        ]
-      },
-      {
-        "type": "app",
-        "industry": "PROPTECH · APP MOBILE",
-        "title": "Homee — Buscador Inteligente de Vecindarios",
-        "description": "Mudarse es una de las decisiones más importantes de la vida — y la mayoría la toma con información incompleta. Homee analiza lo que más importa: distancia al trabajo, cercanía a colegios, hospitales, restaurantes, parques e indicadores de seguridad por zona. Luego muestra exactamente cómo será la vida del usuario si se muda allí. No solo propiedades — inteligencia de estilo de vida.",
-        "image": "/assets/proyects/app2.png",
-        "imageAlt": "App mobile Homee buscador inteligente de vecindarios",
-        "built": {
-          "label": "LO QUE CONSTRUIMOS",
-          "items": [
-            "Motor de calificación multivariable que evalúa cada vecindario con precisión",
-            "Mapa interactivo con capas de seguridad, servicios y tiempo de desplazamiento",
-            "Ranking personalizado de barrios según las preferencias del usuario"
-          ]
-        },
-        "metrics": [
-          { "value": "+12", "label": "variables de estilo de vida analizadas por zona" },
-          { "value": "3+",  "label": "ciudades mapeadas desde el lanzamiento" },
-          { "value": "Seed", "label": "ronda de inversión activa" }
-        ]
-      },
-      {
-        "type": "web",
-        "industry": "SALUD",
-        "title": "Hospital Universidad del Norte — Experiencia Digital del Paciente",
-        "description": "Uno de los hospitales universitarios líderes de Colombia necesitaba una presencia digital a la altura de su excelencia médica. Reconstruimos su sitio institucional y desarrollamos un portal seguro donde más de 2 millones de pacientes pueden consultar resultados de laboratorio e imágenes diagnósticas en línea — eliminando el papel, reduciendo tiempos de espera y entregando resultados clínicos al instante.",
-        "image": "/assets/proyects/hospitalun.png",
-        "imageAlt": "Portal de pacientes y sitio web Hospital Universidad del Norte",
-        "built": {
-          "label": "LO QUE CONSTRUIMOS",
-          "items": [
-            "Sitio institucional rediseñado para generar confianza, claridad y accesibilidad",
-            "Portal seguro de resultados de laboratorio e imágenes diagnósticas disponible 24/7",
-            "Arquitectura de datos alineada con estándares de privacidad del paciente"
-          ]
-        },
-        "metrics": [
-          { "value": "+2M", "label": "pacientes con acceso digital a resultados" },
-          { "value": "24/7", "label": "resultados disponibles en línea, sin espera" },
-          { "value": "0",   "label": "interrupciones críticas desde el lanzamiento" }
-        ]
-      },
-      {
-        "type": "web",
-        "industry": "TELECOMUNICACIONES",
-        "title": "GPS Starr — Sistema de Inteligencia de Flota",
-        "description": "Una empresa de telecomunicaciones colombiana necesitaba visibilidad total y control sobre su flota de vehículos. Diseñamos y desplegamos una solución de rastreo GPS 100% a medida de principio a fin — desde la importación y configuración de dispositivos directamente desde China hasta la integración de software y puesta en marcha en Colombia — con monitoreo en tiempo real, historial de rutas y alertas operativas.",
-        "image": "/assets/proyects/gpsstart.png",
-        "imageAlt": "Plataforma de rastreo y control de flota GPS Starr",
-        "built": {
-          "label": "LO QUE CONSTRUIMOS",
-          "items": [
-            "Hardware GPS importado desde China, configurado y desplegado en Colombia",
-            "Rastreo de flota en tiempo real con posición, velocidad y alertas operativas",
-            "Dashboard web de control con historial completo de rutas y reportes"
-          ]
-        },
-        "metrics": [
-          { "value": "Real", "label": "time — rastreo GPS de toda la flota" },
-          { "value": "100%", "label": "desarrollo a medida de principio a fin" },
-          { "value": "HW+SW", "label": "hardware y software integrados" }
-        ]
-      },
-      {
-        "type": "web",
-        "industry": "ENTERPRISE SAAS",
-        "title": "SignTrack — Plataforma de Control Documental y Aprobaciones",
-        "description": "Los procesos de aprobación que dependen de correos, formularios impresos o hojas de cálculo generan riesgo, demoras y cero trazabilidad. SignTrack le da a las empresas un flujo digital estructurado para gestionar compras, firmar documentos y llevar el control legal de cada acción — en cada paso, para cada documento.",
-        "image": "/assets/proyects/signtrack.png",
-        "imageAlt": "Plataforma SignTrack de gestión documental y firma digital",
-        "built": {
-          "label": "LO QUE CONSTRUIMOS",
-          "items": [
-            "Motor de flujo digital para aprobaciones de compras y firma multinivel",
-            "Firma digital con trazabilidad legal completa por cada documento",
-            "Configurable para cualquier tipo de documento — contratos, autorizaciones, formularios de cumplimiento"
-          ]
-        },
-        "metrics": [
-          { "value": "100%", "label": "trazabilidad digital en cada documento" },
-          { "value": "0",    "label": "aprobaciones perdidas o sin firma" },
-          { "value": "Any",  "label": "tipo de documento soportado" }
-        ]
-      }
-    ]
-  },
   "bookCall": {
     "badge": "AGENDA TU LLAMADA GRATUITA",
     "title": {
       "line1": "Deja de perder clientes",
-      "line2": "por responder tarde."
+      "line2": "por no tener sistema."
     },
-    "sub": "En 30 minutos te mostramos cómo crear un sistema que capture y convierta clientes automáticamente — sin contratar más personal.",
+    "sub": "En 30 minutos te mostramos cómo conectar tu web, agentes IA, automatizaciones y CRM para captar y convertir clientes — sin contratar más personal.",
     "trust": [
       "Sin costo, sin compromiso",
       "Auditoría de tu proceso actual",
@@ -420,11 +320,11 @@
     }
   },
   "footer": {
-    "tagline": "Sistemas que capturan y convierten clientes automáticamente.",
+    "tagline": "Sistemas inteligentes para captar, atender y convertir clientes.",
     "nav": {
-      "systems": "Sistemas",
+      "systems": "Servicios",
       "howItWorks": "Cómo Funciona",
-      "caseStudies": "Casos de Éxito",
+      "caseStudies": "Credenciales",
       "contact": "Contacto"
     },
     "contact": {

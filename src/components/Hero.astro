@@ -32,7 +32,7 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
     <div class="hero-chips-layer" aria-hidden="true">
 
       <!-- Left column chips -->
-      <div class="chip chip-7" style="top: 8%; left: 6%;">
+      <!-- <div class="chip chip-7" style="top: 8%; left: 6%;">
         <span class="dot bg-muted"></span>
         Pipeline
         <span class="chip-sub" style="color:#334155;">idle</span>
@@ -62,7 +62,7 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
       <div class="chip chip-error chip-6" style="bottom: 8%; left: 4%;">
         <span class="dot bg-critical pulse-dot"></span>
         ERROR_TIMEOUT
-      </div>
+      </div> -->
 
       <!-- Right column chips -->
       <div class="chip chip-1" style="top: 8%; right: 6%;">
@@ -104,81 +104,51 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 
     </div><!-- /hero-chips-layer -->
 
-    <!-- Content -->
-    <div class={`hero-content${hasFlow ? ' hero-content--two-col' : ''}`}>
+    <!-- Cubo: posición absoluta libre de restricciones del grid -->
+    <div class="hero-cube-col" aria-hidden="true">
+      <img
+        src="/assets/sections/hero_cube.png"
+        alt=""
+        class="hero-cube-img"
+        loading="eager"
+        decoding="async"
+        width="781"
+        height="656"
+      />
+    </div>
 
-      <!-- Left column: text -->
-      <div class="hero-text-col">
-        <h1 class="hero-headline">
-          <span class="block hero-line1">{t.title.line1}</span>
-          <span class="block hero-line2">{t.title.line2}</span>
-        </h1>
+    <!-- Content: sólo texto, alineado a la izquierda -->
+    <div class="hero-content hero-content--left">
+      <h1 class="hero-headline">
+        <span class="block hero-line1">{t.title.line1}</span>
+        <span class="block hero-line2">{t.title.line2}</span>
+      </h1>
 
-        <p class="hero-sub" set:html={t.sub} />
+      <p class="hero-sub" set:html={t.sub} />
 
-        {!hasFlow && t.impactItems.length > 0 && (
-          <div class="impact-row" aria-label="Business impact">
-            {t.impactItems.map((text, i) => (
-              <>
-                {i > 0 && <span class="impact-sep" aria-hidden="true"></span>}
-                <span class="impact-item">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  {text}
-                </span>
-              </>
-            ))}
-          </div>
-        )}
-
-        <div class="hero-cta-wrap">
-          <a href="#book-call" class="hero-cta">
-            {t.cta.primary}
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
-            </svg>
-          </a>
-          <p class="hero-credibility">{t.credibility}</p>
-        </div>
-      </div>
-
-      <!-- Right column: timeline flow diagram -->
-      {hasFlow && (
-        <div class="hero-flow-col" aria-hidden="true">
-          <div class="flow-diagram">
-            <!-- Vertical connector line — positioned at center of dots -->
-            <div class="flow-track"></div>
-
-            {t.flowSteps!.map((step, i) => {
-              const isFinal = i === t.flowSteps!.length - 1;
-              return (
-                <div
-                  class={`flow-node${isFinal ? ' flow-node--final' : ''}`}
-                  style={`animation-delay: ${380 + i * 90}ms`}
-                >
-                  <!-- Dot column -->
-                  <div class="flow-dot-col">
-                    <div class="flow-dot">
-                      {isFinal ? (
-                        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                          <polyline points="20 6 9 17 4 12"/>
-                        </svg>
-                      ) : (
-                        <span class="flow-dot-core"></span>
-                      )}
-                    </div>
-                  </div>
-                  <!-- Node body -->
-                  <div class="flow-node-body">
-                    <span class="flow-node-num">{String(i + 1).padStart(2, '0')}</span>
-                    <span class="flow-node-label">{step}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+      {t.impactItems.length > 0 && (
+        <div class="impact-row" aria-label="Business impact">
+          {t.impactItems.map((text, i) => (
+            <>
+              {i > 0 && <span class="impact-sep" aria-hidden="true"></span>}
+              <span class="impact-item">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                {text}
+              </span>
+            </>
+          ))}
         </div>
       )}
 
+      <div class="hero-cta-wrap">
+        <a href="#contact" class="hero-cta">
+          {t.cta.primary}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+          </svg>
+        </a>
+        <p class="hero-credibility">{t.credibility}</p>
+      </div>
     </div><!-- /hero-content -->
 
   </div><!-- /hero-container -->
@@ -202,7 +172,9 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 
   .hero-glow {
     position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 75% 55% at 50% 42%, rgba(29,78,216,0.22) 0%, transparent 68%);
+    background:
+      radial-gradient(ellipse 75% 55% at 46% 40%, rgba(37,99,235,0.24) 0%, transparent 68%),
+      radial-gradient(ellipse 40% 30% at 82% 18%, rgba(99,102,241,0.14) 0%, transparent 74%);
   }
 
   .hero-blueprint {
@@ -216,6 +188,38 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
   }
   @keyframes blueprintReveal { from{opacity:0} to{opacity:1} }
 
+  /* ── Cubo: absoluto en la mitad derecha del hero ── */
+  .hero-cube-col {
+    position: absolute;
+    right: -7%;
+    top: 26%;
+    width: 66%;
+    max-width: 920px;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    animation: heroEntrance 700ms cubic-bezier(0.22,1,0.36,1) 220ms forwards;
+  }
+
+  .hero-cube-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter:
+      drop-shadow(0 0 80px rgba(96,165,250,0.42))
+      drop-shadow(0 0 200px rgba(37,99,235,0.24))
+      drop-shadow(0 40px 80px rgba(15,23,42,0.7));
+    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 9%, rgba(0, 0, 0, 0.82) 35%, rgba(0, 0, 0, 0.38) 55%, rgba(0, 0, 0, 0.08) 70%, transparent 84%);
+    mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 9%, rgba(0, 0, 0, 0.82) 35%, rgba(0, 0, 0, 0.38) 55%, rgba(0, 0, 0, 0.08) 70%, transparent 84%);
+    will-change: transform;
+  }
+
+  @keyframes cubeFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg);   }
+    35%       { transform: translateY(-14px) rotate(0.4deg); }
+    65%       { transform: translateY(-8px) rotate(-0.3deg); }
+  }
+
   .hero-grain {
     position: absolute; inset: 0; pointer-events: none;
     opacity: 0.035;
@@ -225,7 +229,9 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 
   .hero-vignette {
     position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 45%, rgba(11,15,20,0.7) 100%);
+    background:
+      radial-gradient(ellipse 100% 100% at 50% 50%, transparent 42%, rgba(11,15,20,0.72) 100%),
+      linear-gradient(180deg, rgba(99,102,241,0.03) 0%, transparent 24%);
   }
 
   /* ── Container ── */
@@ -237,7 +243,7 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   /* ── Chips layer ── */
@@ -246,50 +252,43 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
     inset: 0;
     pointer-events: none;
     opacity: 0;
+    z-index: 20;
     animation: heroFade 500ms ease 600ms forwards;
   }
 
-  /* In two-col desktop: hide left chips that overlap with the text column */
+  /* Desktop: ocultar chips del lado izquierdo para no tapar el texto */
   @media (min-width: 960px) {
-    .hero-container--two-col .chip-2,
-    .hero-container--two-col .chip-4,
-    .hero-container--two-col .chip-9 {
+    .chip-2, .chip-4, .chip-6, .chip-7, .chip-9 {
       display: none;
     }
   }
 
-  /* ── Content: default centered ── */
+  /* ── Content ── */
   .hero-content {
     position: relative;
-    z-index: 10;
-    max-width: 720px;
+    z-index: 20;
     width: 100%;
     text-align: center;
     padding-top: clamp(80px, 14vh, 140px);
     padding-bottom: clamp(60px, 12vh, 120px);
   }
 
-  /* ── Content: two-column ── */
-  .hero-content--two-col {
-    max-width: 1100px;
-    text-align: left;
-    /* Sit higher — less top padding than centered variant */
-    padding-top: clamp(40px, 7vh, 80px);
-    padding-bottom: clamp(40px, 7vh, 80px);
-  }
-
+  /* Desktop: texto pegado a la izquierda */
   @media (min-width: 960px) {
-    .hero-content--two-col {
-      display: grid;
-      grid-template-columns: 1fr 360px;
-      gap: 56px;
-      align-items: center;
+    .hero-content--left {
+      max-width: 560px;
+      text-align: left;
+      padding-top: clamp(40px, 7vh, 80px);
+      padding-bottom: clamp(40px, 7vh, 80px);
     }
-    .hero-content--two-col .hero-sub {
+    .hero-content--left .hero-sub {
       margin-left: 0;
       margin-right: 0;
     }
-    .hero-content--two-col .hero-cta-wrap {
+    .hero-content--left .impact-row {
+      justify-content: flex-start;
+    }
+    .hero-content--left .hero-cta-wrap {
       align-items: flex-start;
     }
   }
@@ -311,7 +310,10 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
     font-size: clamp(2.6rem, 5.2vw, 4.8rem);
     font-weight: 700;
     line-height: 1.05;
-    color: #F8FAFC;
+    background: linear-gradient(90deg, #F8FAFC 0%, #BFDBFE 62%, #C4B5FD 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-top: 0.2em;
     opacity: 0;
     transform: translateY(10px);
@@ -370,16 +372,17 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 
   .hero-cta {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 14px 32px; background: #2563EB; color: white;
+    padding: 14px 32px; background: #2563EB;
+    color: white;
     font-weight: 600; font-size: 1rem; border-radius: 12px;
     border: 1px solid rgba(99,149,255,0.35);
-    box-shadow: 0 4px 20px rgba(37,99,235,0.3);
+    box-shadow: 0 6px 20px rgba(37,99,235,0.3), 0 2px 10px rgba(15,23,42,0.4);
     transition: background 0.2s, box-shadow 0.2s, transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
     text-decoration: none;
   }
   .hero-cta:hover {
     background: #1D4ED8;
-    box-shadow: 0 8px 28px rgba(37,99,235,0.45);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.42), 0 4px 14px rgba(15,23,42,0.5);
     transform: translateY(-2px);
   }
   .hero-cta:active { transform: translateY(0px); transition-duration: 0.1s; }
@@ -518,10 +521,9 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 
   /* ── Mobile ── */
   @media (max-width: 959px) {
-    .hero-content--two-col { text-align: center; }
-    .hero-content--two-col .hero-sub { margin-left: auto; margin-right: auto; }
-    .hero-content--two-col .hero-cta-wrap { align-items: center; }
-    .hero-flow-col { display: none; }
+    .hero-cube-col {
+      display: none;
+    }
   }
 
   /* ── Chips ── */

@@ -177,12 +177,18 @@ const { t } = Astro.props;
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(
-      ellipse 70% 55% at 50% 38%,
-      rgba(88, 28, 135, 0.11) 0%,
-      rgba(49, 46, 129, 0.07) 45%,
-      transparent 72%
-    );
+    background:
+      radial-gradient(
+        ellipse 70% 55% at 50% 38%,
+        rgba(88, 28, 135, 0.11) 0%,
+        rgba(49, 46, 129, 0.07) 45%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 46% 34% at 10% 88%,
+        rgba(99, 102, 241, 0.12) 0%,
+        transparent 74%
+      );
   }
 
   .decision-inner {
@@ -245,15 +251,15 @@ const { t } = Astro.props;
     font-weight: 600;
     font-size: 0.9375rem;
     border-radius: 10px;
-    border: 1px solid rgba(99, 149, 255, 0.3);
-    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+    border: 1px solid rgba(99, 149, 255, 0.32);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3), 0 2px 12px rgba(15, 23, 42, 0.45);
     text-decoration: none;
     transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   }
   .decision-cta-primary:hover {
     background: #1D4ED8;
     transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(37, 99, 235, 0.4);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.42), 0 4px 16px rgba(15, 23, 42, 0.5);
   }
 
   .decision-cta-secondary {
@@ -569,6 +575,7 @@ const { t } = Astro.props;
   (function () {
     const section = document.getElementById('decision');
     if (!section) return;
+    const decisionSection = section;
 
     let animated = false;
 
@@ -593,7 +600,7 @@ const { t } = Astro.props;
 
     function animateDashboard() {
       /* Ring chart */
-      const ring = section.querySelector<SVGCircleElement>('.dash-ring-progress');
+      const ring = decisionSection.querySelector<SVGCircleElement>('.dash-ring-progress');
       if (ring) {
         /* circumference = 2π * 30 ≈ 188.5; 51% = 96.1 */
         setTimeout(() => {
@@ -602,18 +609,18 @@ const { t } = Astro.props;
       }
 
       /* Ring percentage label */
-      const pct = section.querySelector<HTMLElement>('.dash-ring-pct');
+      const pct = decisionSection.querySelector<HTMLElement>('.dash-ring-pct');
       if (pct) setTimeout(() => countUp(pct, 0, 51, 1600), 200);
 
       /* Pipeline row counts */
-      const rows = section.querySelectorAll<HTMLElement>('.dash-row-val[data-target]');
+      const rows = decisionSection.querySelectorAll<HTMLElement>('.dash-row-val[data-target]');
       rows.forEach((el, i) => {
         const target = parseInt(el.dataset.target ?? '0', 10);
         setTimeout(() => countUp(el, 0, target, 1200), 300 + i * 80);
       });
 
       /* Mini stat values */
-      const stats = section.querySelectorAll<HTMLElement>('.dash-stat-val[data-target]');
+      const stats = decisionSection.querySelectorAll<HTMLElement>('.dash-stat-val[data-target]');
       stats.forEach((el, i) => {
         const target = parseInt(el.dataset.target ?? '0', 10);
         const prefix = el.dataset.prefix ?? '';
@@ -639,6 +646,6 @@ const { t } = Astro.props;
       { threshold: 0.3 }
     );
 
-    observer.observe(section);
+    observer.observe(decisionSection);
   })();
 </script>

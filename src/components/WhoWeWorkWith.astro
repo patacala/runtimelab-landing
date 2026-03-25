@@ -24,7 +24,7 @@ const segmentIcons = [
 
 <section
   id="who-we-work-with"
-  class="bg-surface py-24 md:py-32 border-t border-line/50"
+  class="who-section py-24 md:py-32 border-t border-line/50"
   aria-labelledby="who-heading"
 >
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -59,26 +59,42 @@ const segmentIcons = [
 </section>
 
 <style>
+  .who-section {
+    background:
+      radial-gradient(ellipse 55% 35% at 82% 12%, rgba(99, 102, 241, 0.12) 0%, transparent 68%),
+      #10151C;
+  }
+
   .who-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  @media (min-width: 860px) {
+    .who-list {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
   }
 
   .who-row {
     display: flex;
     align-items: flex-start;
     gap: 0.875rem;
-    padding: 0.9rem 1.1rem;
-    background: #141B24;
-    border: 1px solid #1E293B;
+    padding: 1rem 1.1rem;
+    background: linear-gradient(160deg, rgba(20, 27, 36, 0.98) 0%, rgba(20, 27, 36, 0.88) 100%);
+    border: 1px solid rgba(51, 65, 85, 0.7);
     border-radius: 12px;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 26px rgba(2, 6, 23, 0.26);
   }
 
   .who-row:hover {
-    border-color: rgba(37, 99, 235, 0.3);
-    background: #141B24;
+    border-color: rgba(59, 130, 246, 0.4);
+    background: linear-gradient(160deg, rgba(20, 27, 36, 1) 0%, rgba(30, 41, 59, 0.78) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 34px rgba(37, 99, 235, 0.14), 0 8px 28px rgba(2, 6, 23, 0.34);
   }
 
   .who-icon {
@@ -89,25 +105,25 @@ const segmentIcons = [
     align-items: center;
     justify-content: center;
     background: rgba(37, 99, 235, 0.08);
-    border: 1px solid rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(37, 99, 235, 0.22);
     border-radius: 10px;
-    color: #94A3B8;
+    color: #93C5FD;
     transition: color 0.2s ease, border-color 0.2s ease;
   }
 
-  .who-card:hover .who-icon {
-    color: #2563EB;
-    border-color: rgba(37, 99, 235, 0.35);
+  .who-row:hover .who-icon {
+    color: #60A5FA;
+    border-color: rgba(99, 102, 241, 0.46);
   }
 
   .who-icon :global(svg) {
     animation: whoIconPulse 3s ease-in-out infinite;
   }
 
-  .who-card:nth-child(2) .who-icon :global(svg) { animation-delay: 0.2s; }
-  .who-card:nth-child(3) .who-icon :global(svg) { animation-delay: 0.4s; }
-  .who-card:nth-child(4) .who-icon :global(svg) { animation-delay: 0.6s; }
-  .who-card:nth-child(5) .who-icon :global(svg) { animation-delay: 0.8s; }
+  .who-row:nth-child(2) .who-icon :global(svg) { animation-delay: 0.2s; }
+  .who-row:nth-child(3) .who-icon :global(svg) { animation-delay: 0.4s; }
+  .who-row:nth-child(4) .who-icon :global(svg) { animation-delay: 0.6s; }
+  .who-row:nth-child(5) .who-icon :global(svg) { animation-delay: 0.8s; }
 
   @keyframes whoIconPulse {
     0%, 100% { opacity: 1; transform: scale(1); }

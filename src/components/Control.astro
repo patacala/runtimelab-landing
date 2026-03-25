@@ -64,6 +64,9 @@ const { t } = Astro.props;
             </li>
           ))}
         </ul>
+        <div class="w-full flex justify-center mt-5">
+          <img src="/assets/sections/control.svg" alt="Control Demo" class="control-demo-image" />
+        </div>
       </div>
     </div>
 
@@ -75,6 +78,11 @@ const { t } = Astro.props;
   .control-section {
     background-color: #0E1825;
     background-image:
+      radial-gradient(
+        ellipse 80% 60% at 95% 8%,
+        rgba(99, 102, 241, 0.09) 0%,
+        transparent 55%
+      ),
       repeating-linear-gradient(
         -55deg,
         rgba(37, 99, 235, 0.04) 0px,
@@ -120,10 +128,11 @@ const { t } = Astro.props;
   }
 
   .control-benefits {
-    background: #141B24;
-    border: 1px solid #1E293B;
+    background: linear-gradient(160deg, rgba(20, 27, 36, 0.98) 0%, rgba(20, 27, 36, 0.9) 72%, rgba(99, 102, 241, 0.08) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.28);
     border-radius: 16px;
     padding: 1.5rem 1.25rem;
+    box-shadow: 0 10px 36px rgba(37, 99, 235, 0.12);
   }
 
   @media (min-width: 768px) {
@@ -163,8 +172,8 @@ const { t } = Astro.props;
     height: 40px;
     flex-shrink: 0;
     border-radius: 10px;
-    background: rgba(37, 99, 235, 0.1);
-    border: 1px solid rgba(37, 99, 235, 0.2);
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.14), rgba(99, 102, 241, 0.11));
+    border: 1px solid rgba(59, 130, 246, 0.22);
     display: flex;
     align-items: center;
     justify-content: center;
