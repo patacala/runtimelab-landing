@@ -18,13 +18,14 @@
   },
   "hero": {
     "title": {
-      "line1": "Construimos el sistema que",
-      "line2": "tu negocio necesita para crecer."
+      "line1": "Tu web debería <span class=\"hero-title-em\">generar clientes</span>.",
+      "line2": "Nosotros construimos el <span class=\"hero-title-em\">sistema</span> para que lo haga."
     },
-    "sub": "Diseñamos <strong>páginas web</strong>, <strong>agentes de IA</strong>, <strong>automatizaciones</strong> y un <strong>CRM omnichannel</strong> que trabajan juntos para captar, atender y convertir clientes — sin que tengas que hacer nada manualmente.",
+    "sub": "Diseñamos páginas web en Miami y en remoto para LATAM; las conectamos con sistemas que captan, atienden y convierten clientes automáticamente.",
     "cta": {
       "primary": "Agendar llamada gratuita"
     },
+    "ctaMicro": "En 30 minutos evaluamos cómo mejorar tu captación de clientes",
     "scroll": "DESLIZA PARA DESCUBRIR",
     "chips": {
       "revenueLeak": "Sin respuesta",
@@ -33,7 +34,7 @@
       "tasks": "Cita perdida"
     },
     "impactItems": [],
-    "credibility": "Web · Agentes IA · Automatización · CRM Omnichannel · Software a Medida",
+    "credibility": "Miami · Páginas web · IA · CRM · Software a medida",
     "flowSteps": [
       "Visitante llega a tu web",
       "IA responde al instante",

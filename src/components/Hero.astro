@@ -4,20 +4,23 @@ export interface Props {
     title: { line1: string; line2: string };
     sub: string;
     cta: { primary: string };
+    ctaMicro?: string;
     scroll: string;
     chips: { revenueLeak: string; leads: string; messages: string; tasks: string };
     impactItems: string[];
     credibility: string;
     flowSteps?: string[];
   };
+  /** Refinements for ES home: hierarchy, cube treatment, CTA emphasis */
+  conversionHero?: boolean;
 }
-const { t } = Astro.props;
+const { t, conversionHero = false } = Astro.props;
 const hasFlow = t.flowSteps && t.flowSteps.length > 0;
 ---
 
 <section
   id="hero"
-  class="hero-section"
+  class:list={['hero-section', conversionHero && 'hero-section--conversion']}
   aria-label="Hero section"
 >
 
@@ -123,8 +126,8 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
     <!-- Content: sólo texto, alineado a la izquierda -->
     <div class="hero-content hero-content--left">
       <h1 class="hero-headline">
-        <span class="block hero-line1">{t.title.line1}</span>
-        <span class="block hero-line2">{t.title.line2}</span>
+        <span class="block hero-line1" set:html={t.title.line1} />
+        <span class="block hero-line2" set:html={t.title.line2} />
       </h1>
 
       <p class="hero-sub" set:html={t.sub} />
@@ -150,6 +153,7 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
             <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
           </svg>
         </a>
+        {t.ctaMicro && <p class="hero-cta-micro">{t.ctaMicro}</p>}
         <p class="hero-credibility">{t.credibility}</p>
       </div>
     </div><!-- /hero-content -->
@@ -212,7 +216,7 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
       drop-shadow(0 0 80px rgba(96,165,250,0.42))
       drop-shadow(0 0 200px rgba(37,99,235,0.24))
       drop-shadow(0 40px 80px rgba(15,23,42,0.7));
-    -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 9%, rgba(0, 0, 0, 0.82) 35%, rgba(0, 0, 0, 0.38) 55%, rgba(0, 0, 0, 0.08) 70%, transparent 84%);
+    -webkit-mask-image: radial-gradient(ellipse 62% 62% at 50% 50%, black 9%, rgba(0, 0, 0, 0.82) 35%, rgba(0, 0, 0, 0.38) 55%, rgba(0, 0, 0, 0.08) 70%, transparent 84%);
     mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 9%, rgba(0, 0, 0, 0.82) 35%, rgba(0, 0, 0, 0.38) 55%, rgba(0, 0, 0, 0.08) 70%, transparent 84%);
     will-change: transform;
   }
@@ -235,6 +239,171 @@ const hasFlow = t.flowSteps && t.flowSteps.length > 0;
     background:
       radial-gradient(ellipse 100% 100% at 50% 50%, transparent 42%, rgba(11,15,20,0.72) 100%),
       linear-gradient(180deg, rgba(99,102,241,0.03) 0%, transparent 24%);
+  }
+
+  /* ── Conversion-focused home (ES): hierarchy, calmer cube, stronger CTA ── */
+  .hero-section--conversion .hero-blueprint {
+    animation: blueprintRevealSoft 1.65s ease-out 0.85s forwards;
+  }
+  @keyframes blueprintRevealSoft { from { opacity: 0; } to { opacity: 0.32; } }
+
+  .hero-section--conversion .hero-chips-layer {
+    animation: heroFadeSoft 560ms ease 880ms forwards;
+  }
+  @keyframes heroFadeSoft { to { opacity: 0.42; } }
+
+  .hero-cube-backdrop {
+    position: absolute;
+    inset: -12% -8% -10% -22%;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 62% 68% at 58% 42%, rgba(11, 15, 20, 0) 0%, rgba(11, 15, 20, 0.5) 48%, rgba(11, 15, 20, 0.88) 78%);
+    /* Misma lógica que el cubo: sin máscara se ve un rectángulo duro */
+    -webkit-mask-image: radial-gradient(
+      ellipse 72% 76% at 54% 46%,
+      black 8%,
+      rgba(0, 0, 0, 0.88) 34%,
+      rgba(0, 0, 0, 0.35) 62%,
+      rgba(0, 0, 0, 0.06) 78%,
+      transparent 90%
+    );
+    mask-image: radial-gradient(
+      ellipse 72% 76% at 54% 46%,
+      black 8%,
+      rgba(0, 0, 0, 0.88) 34%,
+      rgba(0, 0, 0, 0.35) 62%,
+      rgba(0, 0, 0, 0.06) 78%,
+      transparent 90%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+
+  .hero-section--conversion .hero-cube-col {
+    z-index: 4;
+  }
+
+  .hero-section--conversion .hero-cube-img {
+    position: relative;
+    z-index: 2;
+    /* Degradado radial explícito (antes solo heredaba; refuerzo para bordes del PNG/WebP) */
+    -webkit-mask-image: radial-gradient(
+      ellipse 62% 62% at 50% 50%,
+      black 6%,
+      rgba(0, 0, 0, 0.9) 26%,
+      rgba(0, 0, 0, 0.82) 38%,
+      rgba(0, 0, 0, 0.42) 54%,
+      rgba(0, 0, 0, 0.14) 70%,
+      rgba(0, 0, 0, 0.03) 82%,
+      transparent 92%
+    );
+    mask-image: radial-gradient(
+      ellipse 62% 62% at 50% 50%,
+      black 6%,
+      rgba(0, 0, 0, 0.9) 26%,
+      rgba(0, 0, 0, 0.82) 38%,
+      rgba(0, 0, 0, 0.42) 54%,
+      rgba(0, 0, 0, 0.14) 70%,
+      rgba(0, 0, 0, 0.03) 82%,
+      transparent 92%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    filter:
+      brightness(0.9)
+      contrast(1.03)
+      drop-shadow(0 0 64px rgba(96, 165, 250, 0.28))
+      drop-shadow(0 0 160px rgba(37, 99, 235, 0.16))
+      drop-shadow(0 36px 72px rgba(15, 23, 42, 0.65));
+  }
+
+  .hero-line1 :global(.hero-title-em) {
+    color: rgba(248, 250, 252, 0.94);
+    font-weight: 700;
+  }
+
+  .hero-section--conversion .hero-line1 {
+    animation-duration: 640ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hero-section--conversion .hero-line2 :global(.hero-title-em) {
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, #f8fafc 0%, #93c5fd 42%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-section--conversion .hero-line2 {
+    animation-delay: 105ms;
+    animation-duration: 640ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .hero-section--conversion .hero-sub {
+    margin-top: clamp(38px, 5.5vh, 56px);
+    max-width: 31rem;
+    line-height: 1.62;
+    color: rgba(148, 163, 184, 0.95);
+    animation-delay: 185ms;
+    animation-duration: 580ms;
+  }
+
+  .hero-section--conversion .hero-cta-wrap {
+    margin-top: clamp(28px, 4vh, 40px);
+    animation-delay: 300ms;
+  }
+
+  .hero-cta-micro {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.45;
+    color: #94a3b8;
+    max-width: 22rem;
+    text-align: center;
+  }
+
+  @media (min-width: 960px) {
+    .hero-cta-micro {
+      text-align: left;
+    }
+  }
+
+  .hero-section--conversion .hero-cta {
+    background: linear-gradient(180deg, #3b82f6 0%, #2563eb 52%, #1d4ed8 100%);
+    border: 1px solid rgba(147, 197, 253, 0.42);
+    box-shadow:
+      0 8px 28px rgba(37, 99, 235, 0.42),
+      0 0 0 1px rgba(59, 130, 246, 0.22),
+      0 2px 14px rgba(15, 23, 42, 0.45);
+  }
+
+  .hero-section--conversion .hero-cta:hover {
+    background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 45%, #2563eb 100%);
+    box-shadow:
+      0 14px 40px rgba(59, 130, 246, 0.48),
+      0 0 36px rgba(37, 99, 235, 0.32),
+      0 4px 18px rgba(15, 23, 42, 0.5);
+    transform: translateY(-3px);
+  }
+
+  .hero-section--conversion .hero-credibility {
+    margin-top: 12px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #64748b;
+    opacity: 0.5;
+    max-width: 22rem;
+    line-height: 1.5;
   }
 
   /* ── Container ── */

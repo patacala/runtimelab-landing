@@ -35,6 +35,9 @@ const { t } = Astro.props;
 
       <!-- Columna derecha: un solo panel con lista de beneficios (no 3 cards) -->
       <div class="control-benefits reveal reveal-delay-200">
+        <div class="w-full flex justify-center mb-5">
+          <img src="/assets/sections/control.svg" alt="Control Demo" class="control-demo-image" />
+        </div>
         <ul class="control-benefits-list" role="list">
           {t.benefits.map((benefit, i) => (
             <li class="control-benefit-row">
@@ -65,9 +68,6 @@ const { t } = Astro.props;
             </li>
           ))}
         </ul>
-        <div class="w-full flex justify-center mt-5">
-          <img src="/assets/sections/control.svg" alt="Control Demo" class="control-demo-image" />
-        </div>
       </div>
     </div>
 

@@ -41,7 +41,7 @@ const homeSchemas = [
     "@type": "WebSite",
     "url": "https://runtime-lab.com/en",
     "name": "RuntimeLab",
-    "description": "Web development, AI agents, automations and custom software",
+    "description": "Websites and web design in Miami; web development, AI agents, automations and custom software",
     "inLanguage": "en",
     "potentialAction": {
       "@type": "SearchAction",
@@ -64,9 +64,12 @@ const homeSchemas = [
         "item": {
           "@type": "Service",
           "name": "Web Development",
-          "description": "We design professional websites optimized for conversion, fast loading, and SEO. Your site captures leads and feeds them directly into your system.",
+          "description": "Professional websites for Miami businesses and remote LATAM clients: conversion, speed, and SEO. Your site captures leads and feeds your stack.",
           "url": "https://runtime-lab.com/en/services/web-development",
-          "provider": { "@id": "https://runtime-lab.com/#organization" }
+          "provider": { "@id": "https://runtime-lab.com/#organization" },
+          "areaServed": [
+            { "@type": "City", "name": "Miami", "containedInPlace": { "@type": "State", "name": "Florida", "containedInPlace": { "@type": "Country", "name": "United States" } } }
+          ]
         }
       },
       {
@@ -117,8 +120,31 @@ const homeSchemas = [
   },
   {
     "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://runtime-lab.com/en/#service-websites-miami",
+    "name": "Websites and web design in Miami",
+    "serviceType": "Web design and website development",
+    "description": "Professional websites for Miami and Florida businesses: conversion-focused design, SEO, speed, and integrations with AI agents and CRM.",
+    "url": "https://runtime-lab.com/en/services/web-development",
+    "provider": { "@id": "https://runtime-lab.com/#organization" },
+    "areaServed": [
+      { "@type": "City", "name": "Miami", "containedInPlace": { "@type": "State", "name": "Florida" } },
+      { "@type": "AdministrativeArea", "name": "Florida" },
+      { "@type": "Place", "name": "LATAM" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you build websites for businesses in Miami?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. RuntimeLab is based in Miami, Florida. We design and build professional websites for local businesses with a focus on conversion and SEO, connected to AI agents, automations, and CRM. We also work with clients across the US and LATAM remotely."
+        }
+      },
       {
         "@type": "Question",
         "name": "What is an AI agent and how can it help my business?",
@@ -166,9 +192,9 @@ const homeSchemas = [
 
 <BaseLayout
   lang="en"
-  title="RuntimeLab — Web Development, AI Agents, Automation & Custom Software"
-  description="We build professional websites, AI agents, automations, and omnichannel CRM that work together to capture and convert clients. Custom software development for businesses ready to grow."
-  keywords="web development, websites, AI agents, artificial intelligence agents, automations, custom software development, omnichannel CRM"
+  title="RuntimeLab — Websites & Web Design in Miami | AI, Automation & CRM"
+  description="Web design and websites in Miami for businesses that need more clients: conversion-focused sites with AI, automations, and omnichannel CRM. Also LATAM and remote projects."
+  keywords="Miami web design, Miami websites, web development Miami, business website Miami, web development, AI agents, artificial intelligence agents, automations, custom software development, omnichannel CRM, RuntimeLab"
   schemas={homeSchemas}
   hreflangEs="https://runtime-lab.com/"
   hreflangEn="https://runtime-lab.com/en/"

@@ -2,12 +2,15 @@
 import ServicePage from '../../components/ServicePage.astro';
 import nav from '../../i18n/es.json';
 
+// SEO focus keyword (contenido): agentes de IA para negocios
 const data = {
   lang: 'es' as const,
   meta: {
-    title: 'Agentes de Inteligencia Artificial para Negocios | RuntimeLab',
-    description: 'Creamos agentes de IA que responden clientes, califican leads y agendan citas automáticamente, disponibles 24/7 en WhatsApp, web y email. Implementación en menos de 2 semanas.',
-    keywords: 'agentes ia, agentes de inteligencia artificial, AI agents, chatbot con IA, agente ia para negocios, automatización con IA, respuesta automática clientes',
+    title: 'Agentes de IA para negocios | Atención, leads y citas 24/7 | RuntimeLab',
+    description:
+      'Agentes de inteligencia artificial que responden en segundos, califican leads y agendan citas en WhatsApp, web y email. Integración con CRM y calendario. Típicamente en producción en menos de dos semanas.',
+    keywords:
+      'agentes de IA, agentes de inteligencia artificial, agentes IA negocios, agente conversacional, chatbot IA WhatsApp, responder llamadas con IA, atención con inteligencia artificial, calificación de leads IA, agendar citas con IA, automatizar atención al cliente, asistente virtual empresas, implementación agentes IA, respuesta automática 24/7, IA para ventas, integración CRM IA, agente IA multicanal, conversaciones con IA, Pymes IA, RuntimeLab',
     hreflangEs: 'https://runtime-lab.com/servicios/agentes-ia',
     hreflangEn: 'https://runtime-lab.com/en/services/ai-agents',
   },
@@ -16,96 +19,199 @@ const data = {
   hero: {
     badge: 'AGENTES IA',
     title: 'Agentes de IA que atienden, califican y agendan por ti — 24/7',
-    sub: 'Implementamos agentes de inteligencia artificial que responden al instante desde cualquier canal: WhatsApp, web, email o redes sociales. Sin intervención manual, sin horarios limitados, sin leads perdidos.',
+    sub: 'Implementamos agentes de inteligencia artificial que responden al instante desde WhatsApp, web, email o redes. Misma voz de marca, reglas de negocio claras y mano a tu equipo cuando hace falta.',
     cta: 'Agendar llamada gratuita',
     ctaHref: '/#contact',
+    trustBullets: [
+      'Integración con WhatsApp Business, web y CRM',
+      'Iteración con datos reales tras el lanzamiento',
+      'Roadmap claro: descubrimiento → entrenamiento → producción',
+    ],
   },
-  benefitsTitle: 'Lo que un agente de IA hace por tu negocio',
-  benefits: [
+  visuals: {
+    hero: '/assets/sections/hero_cube.webp',
+    mid: '/assets/sections/crm_grid_seamless.png',
+  },
+  proof: {
+    items: [
+      { value: '<2 sem', label: 'Go-live típico' },
+      { value: '24/7', label: 'Disponibilidad' },
+      { value: 'Multi-canal', label: 'Canales' },
+    ],
+  },
+  painPoints: {
+    title: 'Cuando el cuello de botella es la velocidad de respuesta',
+    sub: 'No es solo “falta de personal”: es volumen, picos y expectativa de respuesta inmediata.',
+    intro:
+      'Si un lead espera horas, ya comparó con otro proveedor. Un agente de IA absorbe la primera línea sin sacrificar calidad ni tono.',
+    items: [
+      {
+        title: 'Leads que se enfrían por demora',
+        desc: 'Formularios y anuncios generan interés, pero si nadie contesta en minutos, la conversión cae. El agente responde siempre en el primer tramo crítico.',
+      },
+      {
+        title: 'Equipo saturado en preguntas repetitivas',
+        desc: 'Horarios, precios, ubicación y requisitos se repiten cientos de veces. Automatizar esa capa libera a ventas y operación para cerrar y entregar.',
+      },
+      {
+        title: 'Calendarios desalineados y doble agenda',
+        desc: 'Coordinar por chat es propenso a errores. El agente consulta disponibilidad real, confirma y registra en CRM sin fricción.',
+      },
+      {
+        title: 'Experiencia distinta según el canal',
+        desc: 'En WhatsApp se dice una cosa y en web otra. Centralizamos conocimiento y políticas para que todos los canales hablen la misma lengua.',
+      },
+    ],
+  },
+  featureBlocksTitle: 'Capacidades que sí se notan en ingresos',
+  featureBlocksSub: 'Flujos guiados, integraciones reales y trazabilidad — no un chat genérico pegado a tu web.',
+  featureBlocks: [
     {
       icon: 'zap' as const,
-      title: 'Respuesta instantánea 24/7',
-      desc: 'Tu agente de IA responde en segundos, cualquier día, a cualquier hora. Ningún lead se pierde por falta de respuesta.',
+      title: 'Primera respuesta en segundos, donde te escriban',
+      desc: 'Conectamos el agente a los canales que ya usas para que nadie espere a “horario de oficina” para avanzar en el embudo.',
+      bullets: [
+        'WhatsApp Business y mensajería',
+        'Web, formularios y enlaces de campaña',
+        'Email y notificaciones a tu equipo',
+      ],
+      image: '/assets/sections/build_verifid.png',
     },
     {
       icon: 'check' as const,
-      title: 'Calificación automática de leads',
-      desc: 'El agente hace las preguntas correctas, evalúa la intención de compra y clasifica cada lead según tu criterio antes de pasarlo a tu equipo.',
+      title: 'Calificación con tu playbook, no con respuestas sueltas',
+      desc: 'Definimos preguntas, ramas y criterios (BANT, sector, urgencia…) para que solo lleguen a humanos los casos que importan.',
+      bullets: ['Etiquetas y campos en CRM', 'Handoff con contexto completo', 'Reglas de escalamiento por SLA'],
+      reverse: true,
+      image: '/assets/sections/encrypted_credentials.png',
     },
     {
       icon: 'clock' as const,
-      title: 'Agendamiento sin intervención',
-      desc: 'Consulta disponibilidad, ofrece horarios y confirma citas directamente en tu calendario, sin que tu equipo tenga que hacer nada.',
-    },
-    {
-      icon: 'bot' as const,
-      title: 'Conversaciones naturales',
-      desc: 'Entrenamos el agente con el tono, vocabulario y conocimiento de tu negocio. Tus clientes sienten que hablan con alguien de tu equipo.',
+      title: 'Citas en calendario real, con confirmaciones',
+      desc: 'El agente ofrece huecos válidos, crea el evento y puede enviar recordatorios para reducir inasistencias.',
+      bullets: ['Google Calendar / Microsoft 365', 'Políticas de cancelación y reprogramación', 'Historial ligado al lead o paciente/cliente'],
+      image: '/assets/sections/security_standard.png',
     },
   ],
+  visualBreak: {
+    title: 'Un solo cerebro conversacional para ventas y operación',
+    sub: 'Menos herramientas sueltas: misma base de conocimiento, mismas reglas y métricas unificadas por canal.',
+    bullets: [
+      'Menos fricción entre marketing, ventas y soporte',
+      'Auditoría de conversaciones para mejorar prompts y flujos',
+      'Iteración semanal según objeciones reales',
+    ],
+  },
+  deliverables: {
+    title: 'Qué entregamos',
+    sub: 'Entregables pensados para que tu equipo pueda operar y evolucionar el agente sin depender de caja negra.',
+    spotlight: {
+      kicker: 'ENTREGABLES',
+      text: 'Flujos documentados, integraciones probadas en staging y criterios de éxito acordados antes del go-live.',
+    },
+    categories: [
+      {
+        name: 'Agente y conocimiento',
+        intro: 'Todo lo necesario para reproducir y ajustar el comportamiento del agente.',
+        items: [
+          'Diseño de flujos y ramas conversacionales',
+          'Base de conocimiento inicial y tono de marca',
+          'Reglas de calificación y escalamiento a humano',
+        ],
+        footer: 'Incluye handoff a tu equipo con sesión de transferencia.',
+      },
+      {
+        name: 'Integración y puesta en marcha',
+        intro: 'Conectores, pruebas y checklist antes de abrir a tráfico real.',
+        items: [
+          'Integración CRM / hojas / APIs que uses',
+          'Pruebas UAT con escenarios acordados',
+          'Monitoreo básico y registro de incidencias',
+        ],
+        image: '/assets/sections/self_host.png',
+        footer: 'Documentación operativa y contacto para iteraciones.',
+      },
+    ],
+  },
   process: {
     title: 'Cómo implementamos tu agente de IA',
-    sub: 'De cero a un agente de IA funcionando en menos de 2 semanas.',
+    sub: 'De descubrimiento a producción con hitos claros y espacio para ajustes con datos reales.',
     steps: [
       {
         num: '01',
         title: 'Auditoría de conversaciones',
-        desc: 'Analizamos tus conversaciones actuales: qué preguntan tus clientes, cómo respondes, qué frena la conversión. Definimos los flujos del agente.',
+        desc: 'Revisamos canales actuales, objeciones frecuentes y cuellos de botella. Definimos alcance del agente y métricas de éxito.',
       },
       {
         num: '02',
         title: 'Entrenamiento y personalización',
-        desc: 'Entrenamos el agente con el conocimiento de tu negocio, tu tono de comunicación y las reglas de calificación que tú defines.',
+        desc: 'Construimos conocimiento, tono y flujos. Alineamos calificación, políticas (precios, horarios) y mensajes prohibidos o sensibles.',
       },
       {
         num: '03',
-        title: 'Integración con tus canales',
-        desc: 'Conectamos el agente a WhatsApp Business, tu web, email y cualquier canal que uses. También lo integramos con tu CRM y calendario.',
+        title: 'Integración con canales y CRM',
+        desc: 'Conectamos WhatsApp, web, email y calendario. Sincronizamos campos en tu CRM para que cada conversación deje rastro útil.',
       },
       {
         num: '04',
-        title: 'Pruebas y ajustes',
-        desc: 'Probamos el agente con escenarios reales, ajustamos respuestas y flujos hasta que funcione exactamente como necesitas.',
+        title: 'Pruebas y hardening',
+        desc: 'Escenarios reales, casos límite y prueba de carga conversacional. Ajustamos hasta cumplir SLAs de respuesta y calidad acordados.',
       },
       {
         num: '05',
-        title: 'Lanzamiento y monitoreo',
-        desc: 'Activamos el agente, monitoreamos las primeras conversaciones y hacemos ajustes en tiempo real para optimizar los resultados.',
+        title: 'Lanzamiento y mejora continua',
+        desc: 'Go-live controlado, monitorización de primeras conversaciones y ciclo corto de mejoras según feedback y analytics.',
       },
     ],
   },
   useCases: {
-    title: '¿Qué tipo de negocios usan agentes de IA?',
+    title: '¿Dónde encaja mejor un agente de IA?',
+    sub: 'Sector importa menos que el patrón: alto volumen de preguntas repetitivas + necesidad de velocidad.',
     items: [
       {
-        label: 'Clínicas y centros de salud',
-        desc: 'El agente responde preguntas sobre servicios, califica síntomas urgentes y agenda citas directamente en el calendario del médico.',
+        label: 'Clínicas y salud',
+        desc: 'Triaje ligero de intención, información de servicios y agenda con profesionales — siempre dentro de marcos legales y sin dar diagnósticos.',
       },
       {
         label: 'Inmobiliarias',
-        desc: 'Responde consultas de propiedades, califica la intención de compra/renta y agenda visitas con el agente en minutos.',
+        desc: 'Respuesta a listados, filtro de presupuesto y zona, y visitas agendadas con recordatorios automáticos.',
       },
       {
         label: 'Servicios profesionales',
-        desc: 'Abogados, contadores, consultores: el agente filtra consultas, explica servicios y agenda llamadas de diagnóstico automáticamente.',
+        desc: 'Abogados, contadores, agencias: filtran consultas, explican paquetes y reservan llamadas de diagnóstico.',
       },
       {
         label: 'Educación y academias',
-        desc: 'Responde preguntas sobre cursos, horarios y precios. Captura datos del interesado y lo guía al proceso de inscripción.',
+        desc: 'Dudas sobre programas, fechas y precios; captura de datos y derivación a inscripción o asesor humano.',
       },
       {
         label: 'Retail y e-commerce',
-        desc: 'Atiende consultas post-venta, rastreo de pedidos y resolución de incidencias sin intervención del equipo de soporte.',
+        desc: 'Estado de pedido, políticas de devolución y escalamiento a humano cuando el caso lo requiere.',
       },
       {
         label: 'Restaurantes y hospitality',
-        desc: 'Gestiona reservaciones, responde preguntas sobre el menú y confirma eventos especiales automáticamente.',
+        desc: 'Reservas, menú, alergias frecuentes y confirmaciones por WhatsApp para reducir no-shows.',
+      },
+    ],
+  },
+  trust: {
+    title: 'Por qué trabajar con RuntimeLab',
+    blocks: [
+      {
+        number: '01',
+        title: 'Ingeniería, no solo prompts',
+        desc: 'Integraciones, manejo de errores, observabilidad y gobierno de contenido: lo que hace que un agente sobreviva al tráfico real.',
+      },
+      {
+        number: '02',
+        title: 'Transparencia en alcance y riesgos',
+        desc: 'Documentamos límites del modelo, casos a mano humana obligatoria y revisiones periódicas de seguridad conversacional.',
       },
     ],
   },
   cta: {
-    title: 'Tu agente de IA puede estar activo esta semana.',
-    sub: 'Agenda una llamada y en 30 minutos te mostramos cómo funciona un agente de IA aplicado exactamente a tu negocio.',
+    title: '¿Listo para dejar de perder leads por demora?',
+    sub: 'En una llamada corta te mostramos un esquema de flujos y canales para tu caso — sin slides genéricos.',
     button: 'Agendar llamada gratuita',
     href: '/#contact',
   },
@@ -119,37 +225,63 @@ const data = {
   },
   schemas: [
     {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Agentes de Inteligencia Artificial para Negocios",
-      "description": "Implementación de agentes de IA que responden clientes, califican leads y agendan citas automáticamente 24/7.",
-      "provider": { "@id": "https://runtime-lab.com/#organization" },
-      "areaServed": { "@type": "Country", "name": "Mexico" },
-      "serviceType": "AI Agent Development",
-      "url": "https://runtime-lab.com/servicios/agentes-ia"
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Agentes de inteligencia artificial para negocios',
+      description:
+        'Implementación de agentes de IA multicanal que responden al instante, califican leads y agendan citas con integración a CRM y calendario.',
+      provider: { '@id': 'https://runtime-lab.com/#organization' },
+      areaServed: { '@type': 'Country', name: 'Mexico' },
+      serviceType: 'AI Agent Development',
+      url: 'https://runtime-lab.com/servicios/agentes-ia',
     },
     {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "Cómo implementamos un agente de inteligencia artificial",
-      "description": "Proceso de 5 pasos para implementar un agente de IA en tu negocio",
-      "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Auditoría de conversaciones", "text": "Analizamos tus conversaciones actuales para definir los flujos del agente." },
-        { "@type": "HowToStep", "position": 2, "name": "Entrenamiento y personalización", "text": "Entrenamos el agente con el conocimiento y tono de tu negocio." },
-        { "@type": "HowToStep", "position": 3, "name": "Integración con canales", "text": "Conectamos el agente a WhatsApp, web, email y tu CRM." },
-        { "@type": "HowToStep", "position": 4, "name": "Pruebas y ajustes", "text": "Probamos con escenarios reales y ajustamos hasta funcionar perfectamente." },
-        { "@type": "HowToStep", "position": 5, "name": "Lanzamiento y monitoreo", "text": "Activamos el agente y monitoreamos las primeras conversaciones." }
-      ]
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'Cómo implementamos un agente de IA en tu negocio',
+      description: 'Proceso en cinco fases: auditoría, entrenamiento, integración, pruebas y lanzamiento con mejora continua.',
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Auditoría de conversaciones',
+          text: 'Revisamos canales y definimos alcance, flujos y métricas de éxito del agente.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Entrenamiento y personalización',
+          text: 'Construimos conocimiento, tono, calificación y políticas alineadas a tu negocio.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Integración con canales y CRM',
+          text: 'Conectamos WhatsApp, web, email, calendario y sincronización con tu CRM.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'Pruebas y hardening',
+          text: 'Pruebas con escenarios reales y ajustes hasta cumplir calidad y SLAs acordados.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 5,
+          name: 'Lanzamiento y mejora continua',
+          text: 'Go-live, monitorización y ciclo de mejoras con datos reales.',
+        },
+      ],
     },
     {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://runtime-lab.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://runtime-lab.com/#capabilities" },
-        { "@type": "ListItem", "position": 3, "name": "Agentes IA", "item": "https://runtime-lab.com/servicios/agentes-ia" }
-      ]
-    }
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://runtime-lab.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Servicios', item: 'https://runtime-lab.com/#capabilities' },
+        { '@type': 'ListItem', position: 3, name: 'Agentes IA', item: 'https://runtime-lab.com/servicios/agentes-ia' },
+      ],
+    },
   ],
 };
 ---

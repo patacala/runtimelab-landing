@@ -2,12 +2,15 @@
 import ServicePage from '../../components/ServicePage.astro';
 import nav from '../../i18n/es.json';
 
+// SEO focus: software a medida / desarrollo de software personalizado
 const data = {
   lang: 'es' as const,
   meta: {
-    title: 'Software a Medida para Empresas | Desarrollo de Software | RuntimeLab',
-    description: 'Desarrollamos software a medida: plataformas internas, portales, dashboards y sistemas personalizados con arquitectura escalable. Cuando las herramientas genéricas no son suficientes.',
-    keywords: 'software a medida, desarrollo de software, software personalizado, plataforma a medida, dashboard empresarial, portal web, software empresarial, aplicaciones a medida',
+    title: 'Software a medida para empresas | Desarrollo a la medida | RuntimeLab',
+    description:
+      'Plataformas internas, portales, dashboards e integraciones con arquitectura escalable, pruebas y CI/CD. Cuando el SaaS genérico no encaja, diseñamos y construimos el producto que tu operación necesita — con código que es tuyo.',
+    keywords:
+      'desarrollo de software, software a medida, aplicaciones a medida, desarrollo de software a medida, software personalizado, aplicaciones empresariales, plataforma interna, portal de clientes, dashboard empresarial, aplicaciones web a medida, integración ERP CRM, middleware APIs, arquitectura escalable, MVP producto digital, desarrollo ágil, código propio, sistemas integrados, software operaciones, RuntimeLab',
     hreflangEs: 'https://runtime-lab.com/servicios/software-a-medida',
     hreflangEn: 'https://runtime-lab.com/en/services/custom-software',
   },
@@ -15,97 +18,200 @@ const data = {
   footer: nav.footer,
   hero: {
     badge: 'SOFTWARE A MEDIDA',
-    title: 'Software a medida construido para escalar con tu operación',
-    sub: 'Cuando las herramientas genéricas se quedan cortas, construimos exactamente lo que tu negocio necesita: plataformas internas, portales de clientes, dashboards de gestión y sistemas integrados con tu infraestructura existente.',
+    title: 'Software hecho para tu proceso — no al revés',
+    sub: 'Diseñamos y desarrollamos sistemas que encajan con cómo trabajas hoy: reglas de negocio, roles, integraciones y reporting. Sin forzar plantillas ni pagar por funciones que no usarás.',
     cta: 'Agendar llamada gratuita',
     ctaHref: '/#contact',
+    trustBullets: [
+      'Sprints con entregas demostrables y feedback continuo',
+      'Integración con lo que ya usas (ERP, CRM, pagos, APIs)',
+      'Documentación, pruebas y camino claro a producción',
+    ],
   },
-  benefitsTitle: '¿Por qué software a medida en lugar de herramientas genéricas?',
-  benefits: [
+  visuals: {
+    hero: '/assets/sections/verified_node.png',
+    mid: '/assets/sections/self_host.png',
+  },
+  proof: {
+    items: [
+      { value: 'Ágil', label: 'Entregas' },
+      { value: 'Full-stack', label: 'Stack' },
+      { value: 'Tuyo', label: 'Código' },
+    ],
+  },
+  painPoints: {
+    title: 'Cuando el “software de caja” te frena',
+    sub: 'No siempre es un problema de precio: es de modelo de datos, permisos y flujos que ningún SaaS quiere soportar.',
+    intro:
+      'Si tu ventaja operativa vive en excepciones y reglas propias, necesitas una capa de software alineada a eso — no mil workarounds en hojas y correos.',
+    items: [
+      {
+        title: 'Workarounds en Excel y correo',
+        desc: 'Los equipos compensan límites del SaaS copiando datos y perdiendo trazabilidad. Un sistema a medida modela el flujo real y deja auditoría.',
+      },
+      {
+        title: 'Licencias por usuario que castigan el crecimiento',
+        desc: 'Cobrar por asiento penaliza escalar. Con software propio defines coste de infraestructura, no aranceles opacos por feature.',
+      },
+      {
+        title: 'Integraciones frágiles o inexistentes',
+        desc: 'Tu ERP y tu CRM no “hablan”. Construimos APIs, colas y sincronización con reglas de conflicto explícitas — no solo un Zap suelto.',
+      },
+      {
+        title: 'Roadmap ajeno a tu prioridad',
+        desc: 'El proveedor prioriza su mercado masivo. Tú priorizas tu margen y tu SLA interno: el backlog es tuyo cuando el producto es tuyo.',
+      },
+    ],
+  },
+  featureBlocksTitle: 'Qué construimos y cómo lo entregamos',
+  featureBlocksSub: 'De discovery a producción: diseño de producto, ingeniería y operación con criterios de calidad claros.',
+  featureBlocks: [
     {
       icon: 'code' as const,
-      title: 'Construido para tu proceso exacto',
-      desc: 'No adaptas tu negocio al software, el software se adapta a tu negocio. Cada flujo, regla y vista diseñada para cómo opera tu equipo.',
+      title: 'Dominio de negocio en código mantenible',
+      desc: 'Modelamos entidades, permisos y reglas como ciudadanos de primera clase — no como configuraciones imposibles de auditar.',
+      bullets: [
+        'Arquitectura alineada al tamaño del proyecto (sin sobre-ingeniería)',
+        'Contratos de API y capas de integración explícitas',
+        'Base para evolucionar sin reescribir cada año',
+      ],
+      image: '/assets/sections/build_verifid.png',
     },
     {
       icon: 'zap' as const,
-      title: 'Integración con sistemas existentes',
-      desc: 'Conectamos con tus APIs, bases de datos, herramientas de pago, ERP y cualquier sistema que ya uses, sin fricciones ni silos de datos.',
+      title: 'Integraciones que soportan carga real',
+      desc: 'Webhooks, batch, reintentos y observabilidad. Lo que debe ser idempotente lo es; lo que falla, se ve y se corrige.',
+      bullets: ['Conectores a sistemas legados y SaaS modernos', 'Colas y jobs para picos de volumen', 'Alertas y trazas por correlación'],
+      reverse: true,
+      image: '/assets/sections/encrypted_credentials.png',
     },
     {
       icon: 'shield' as const,
-      title: 'Arquitectura escalable',
-      desc: 'Construimos con las mismas prácticas que usamos en plataformas enterprise: código limpio, tests, CI/CD y diseño que escala sin reescribir.',
-    },
-    {
-      icon: 'chart' as const,
-      title: 'Tú eres el dueño',
-      desc: 'El código es tuyo. Sin licencias mensuales, sin dependencia de proveedores externos, sin límites de usuarios ni funcionalidades bloqueadas.',
+      title: 'Calidad, seguridad y despliegue serios',
+      desc: 'Pruebas automatizadas donde aportan, revisiones de seguridad básicas y pipelines de despliegue reproducibles.',
+      bullets: ['CI/CD hacia staging y producción', 'Buenas prácticas de secretos y accesos', 'Checklist de go-live acordado contigo'],
+      image: '/assets/sections/security_standard.png',
     },
   ],
+  visualBreak: {
+    title: 'Tu infraestructura, tu gobierno del producto',
+    sub: 'Desplegamos en la nube que elijas o en tus servidores. Tú decides políticas de backup, región y continuidad — nosotros implementamos y documentamos.',
+    bullets: [
+      'Menos dependencia de un único proveedor de app',
+      'Escalado horizontal o vertical según tráfico y presupuesto',
+      'Base lista para auditorías internas o de clientes enterprise',
+    ],
+  },
+  deliverables: {
+    title: 'Qué entregamos',
+    sub: 'No solo “código en un zip”: producto ejecutable, documentación y transferencia.',
+    spotlight: {
+      kicker: 'ENTREGABLES',
+      text: 'Cada hito incluye demo, criterios de aceptación y registro de decisiones técnicas para que el equipo pueda mantener el sistema.',
+    },
+    categories: [
+      {
+        name: 'Producto y experiencia',
+        intro: 'Desde wireframes hasta UI lista para usuarios finales.',
+        items: [
+          'Wireframes y prototipos validados con stakeholders',
+          'Interfaz coherente con roles y permisos',
+          'Manual de usuario o tours in-app según complejidad',
+        ],
+        footer: 'Incluye sesiones de revisión en cada sprint.',
+      },
+      {
+        name: 'Ingeniería y operación',
+        intro: 'Repositorio, entornos y camino a producción.',
+        items: [
+          'Código versionado y README de arranque local',
+          'Pipelines de build/test/deploy',
+          'Documentación de APIs y variables de entorno',
+        ],
+        image: '/assets/sections/crm_grid_seamless.png',
+        footer: 'Opcional: acuerdo de soporte o bolsa de horas post-lanzamiento.',
+      },
+    ],
+  },
   process: {
     title: 'Cómo desarrollamos tu software a medida',
-    sub: 'Un proceso de desarrollo ágil, transparente y con entregas frecuentes.',
+    sub: 'Transparencia en alcance, riesgos y prioridades — con entregas frecuentes para no ir a ciegas hasta el final.',
     steps: [
       {
         num: '01',
         title: 'Descubrimiento y definición',
-        desc: 'Mapeamos tus procesos actuales, identificamos los problemas que el software debe resolver y definimos el alcance, arquitectura y stack tecnológico.',
+        desc: 'Mapeamos procesos, dolor real y restricciones (legal, técnica, tiempo). Definimos MVP, métricas de éxito y arquitectura candidata.',
       },
       {
         num: '02',
         title: 'Diseño de producto',
-        desc: 'Creamos wireframes, prototipos interactivos y el diseño de la interfaz. Validamos con tu equipo antes de comenzar el desarrollo.',
+        desc: 'Flujos, wireframes y prototipo clickeable. Validamos con usuarios clave antes de comprometer meses de desarrollo.',
       },
       {
         num: '03',
         title: 'Desarrollo por sprints',
-        desc: 'Desarrollamos en ciclos de 2 semanas con entregas funcionales. Revisas y das feedback en cada sprint antes de continuar al siguiente.',
+        desc: 'Ciclos cortos con demo al cierre. Priorizamos el camino crítico y dejamos deuda técnica visible, no escondida.',
       },
       {
         num: '04',
-        title: 'QA y pruebas',
-        desc: 'Pruebas unitarias, de integración y con usuarios reales. Verificamos rendimiento, seguridad y compatibilidad en todos los escenarios.',
+        title: 'QA, rendimiento y seguridad',
+        desc: 'Pruebas automatizadas y manuales según riesgo. Pasamos por escenarios de carga razonables y checklist de seguridad básica.',
       },
       {
         num: '05',
-        title: 'Despliegue y soporte',
-        desc: 'Desplegamos en tu infraestructura o en la nube, configuramos CI/CD, documentamos el sistema y ofrecemos soporte técnico post-lanzamiento.',
+        title: 'Despliegue y transferencia',
+        desc: 'Producción con monitoreo mínimo viable, runbook de incidencias y sesión de handoff. Opcional: soporte continuado.',
       },
     ],
   },
   useCases: {
-    title: '¿Qué tipo de software desarrollamos?',
+    title: 'Tipos de productos que solemos construir',
+    sub: 'Si encaja en “operación + datos + usuarios internos o clientes”, probablemente podemos ayudarte.',
     items: [
       {
-        label: 'Plataformas internas de gestión',
-        desc: 'Sistemas para gestionar operaciones, equipos, inventario, producción o cualquier proceso interno que hoy haces en hojas de cálculo.',
+        label: 'Plataformas internas',
+        desc: 'Producción, inventario, asignación de tareas, aprobaciones — lo que hoy vive en hojas y correos con poca trazabilidad.',
       },
       {
-        label: 'Portales de clientes',
-        desc: 'Espacios donde tus clientes pueden ver el estado de sus proyectos, facturas, documentos o acceder a servicios de forma autónoma.',
+        label: 'Portales de clientes o partners',
+        desc: 'Estado de pedidos, documentos, facturación y autoservicio reducen carga en soporte y ventas.',
       },
       {
-        label: 'Dashboards y analytics',
-        desc: 'Visualización en tiempo real de tus KPIs de ventas, operaciones, finanzas o cualquier área, con datos de múltiples fuentes unificados.',
+        label: 'Dashboards y reporting',
+        desc: 'KPIs unificados desde varias fuentes, con exportación y permisos por área o rol.',
       },
       {
-        label: 'Integraciones y middleware',
-        desc: 'Capa de integración que conecta sistemas que no se hablan entre sí: ERP, CRM, plataformas de pago, APIs de terceros y bases de datos.',
+        label: 'Middleware e integraciones',
+        desc: 'Capa que traduce formatos, normaliza entidades y orquesta sincronización entre ERP, CRM y tiendas.',
       },
       {
-        label: 'Aplicaciones SaaS',
-        desc: 'Si tienes una idea de producto digital, construimos el MVP con las funcionalidades core para validar el mercado y escalar después.',
+        label: 'MVPs y SaaS temprano',
+        desc: 'Producto digital para validar mercado: auth, billing básico, métricas y base para escalar.',
       },
       {
-        label: 'Herramientas de IA personalizadas',
-        desc: 'Aplicaciones que integran modelos de lenguaje (GPT, Claude) para automatizar análisis, generación de contenido o toma de decisiones.',
+        label: 'Herramientas con IA embebida',
+        desc: 'Flujos que llaman a modelos de lenguaje con gobierno: prompts versionados, límites y registro de uso.',
+      },
+    ],
+  },
+  trust: {
+    title: 'Por qué RuntimeLab para software a medida',
+    blocks: [
+      {
+        number: '01',
+        title: 'Producto antes que hype técnico',
+        desc: 'Elegimos stack según restricciones reales — equipo, presupuesto, tiempo al mercado — no moda por moda.',
+      },
+      {
+        number: '02',
+        title: 'Continuidad con automatización e IA',
+        desc: 'Lo que construimos puede convivir con agentes y workflows: mismos eventos, mismas APIs, misma observabilidad.',
       },
     ],
   },
   cta: {
-    title: '¿Tu operación necesita más de lo que ofrecen las herramientas genéricas?',
-    sub: 'Agenda una llamada y analizamos si necesitas software a medida y cuál sería la mejor arquitectura para tu caso.',
+    title: '¿Tu operación ya superó lo que el SaaS puede modelar?',
+    sub: 'En una llamada acotamos si tiene sentido software a medida, un MVP o primero automatizar procesos — sin compromiso.',
     button: 'Agendar llamada gratuita',
     href: '/#contact',
   },
@@ -119,39 +225,66 @@ const data = {
   },
   schemas: [
     {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Software a Medida para Empresas",
-      "description": "Desarrollo de software personalizado: plataformas internas, portales, dashboards y sistemas integrados con arquitectura escalable.",
-      "provider": { "@id": "https://runtime-lab.com/#organization" },
-      "areaServed": { "@type": "Country", "name": "Mexico" },
-      "serviceType": "Custom Software Development",
-      "url": "https://runtime-lab.com/servicios/software-a-medida"
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Desarrollo de software a medida para empresas',
+      description:
+        'Plataformas internas, portales, dashboards e integraciones con arquitectura escalable, pruebas, CI/CD y despliegue en tu infraestructura o en la nube.',
+      provider: { '@id': 'https://runtime-lab.com/#organization' },
+      areaServed: { '@type': 'Country', name: 'Mexico' },
+      serviceType: 'Custom Software Development',
+      url: 'https://runtime-lab.com/servicios/software-a-medida',
     },
     {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "Cómo desarrollamos software a medida",
-      "description": "Proceso ágil de 5 etapas para construir software personalizado",
-      "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Descubrimiento y definición", "text": "Mapeamos procesos y definimos alcance, arquitectura y stack tecnológico." },
-        { "@type": "HowToStep", "position": 2, "name": "Diseño de producto", "text": "Wireframes, prototipos y diseño de interfaz validados antes del desarrollo." },
-        { "@type": "HowToStep", "position": 3, "name": "Desarrollo por sprints", "text": "Ciclos de 2 semanas con entregas funcionales y feedback continuo." },
-        { "@type": "HowToStep", "position": 4, "name": "QA y pruebas", "text": "Pruebas unitarias, de integración, rendimiento y seguridad." },
-        { "@type": "HowToStep", "position": 5, "name": "Despliegue y soporte", "text": "Despliegue en producción, CI/CD, documentación y soporte post-lanzamiento." }
-      ]
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'Cómo desarrollamos software a medida',
+      description: 'Cinco fases: descubrimiento, diseño de producto, sprints de desarrollo, QA y despliegue con transferencia.',
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Descubrimiento y definición',
+          text: 'Mapeo de procesos, MVP, métricas y arquitectura candidata.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Diseño de producto',
+          text: 'Wireframes y prototipo validado antes del desarrollo a gran escala.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Desarrollo por sprints',
+          text: 'Ciclos cortos con demos y priorización del camino crítico.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'QA, rendimiento y seguridad',
+          text: 'Pruebas según riesgo, rendimiento razonable y checklist de seguridad.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 5,
+          name: 'Despliegue y transferencia',
+          text: 'Producción, monitoreo mínimo, runbook y handoff al equipo.',
+        },
+      ],
     },
     {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://runtime-lab.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://runtime-lab.com/#capabilities" },
-        { "@type": "ListItem", "position": 3, "name": "Software a Medida", "item": "https://runtime-lab.com/servicios/software-a-medida" }
-      ]
-    }
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://runtime-lab.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Servicios', item: 'https://runtime-lab.com/#capabilities' },
+        { '@type': 'ListItem', position: 3, name: 'Software a medida', item: 'https://runtime-lab.com/servicios/software-a-medida' },
+      ],
+    },
   ],
 };
 ---
 
 <ServicePage data={data} />
+

@@ -2,12 +2,15 @@
 import ServicePage from '../../components/ServicePage.astro';
 import nav from '../../i18n/es.json';
 
+// SEO focus keyword: automatizaciones de negocio / workflows n8n Make
 const data = {
   lang: 'es' as const,
   meta: {
-    title: 'Automatizaciones de Negocio con IA | RuntimeLab',
-    description: 'Construimos automatizaciones inteligentes con n8n y Make que conectan tus herramientas, eliminan tareas manuales y escalan tu operación. Menos trabajo manual, menos errores, más crecimiento.',
-    keywords: 'automatizaciones de negocio, automatización con IA, automatización de procesos, workflows n8n, make automatizacion, automatizar empresa, automatización operativa',
+    title: 'Automatizaciones de negocio con n8n y Make | RuntimeLab',
+    description:
+      'Workflows que conectan CRM, WhatsApp, email y calendarios para eliminar tareas repetitivas, reducir errores y escalar sin multiplicar headcount. Priorizamos por ROI y dejamos todo documentado.',
+    keywords:
+      'automatizaciones, automatizaciones con IA, automatizar procesos, automatización de procesos, automatizaciones de negocio, workflows n8n, Make Integromat, integración CRM, automatizar leads, sincronización de datos, flujos de trabajo empresariales, automatizar WhatsApp negocio, automatización operativa, middleware APIs, alertas automáticas, reportes automáticos, eficiencia operativa, procesos repetitivos, RuntimeLab',
     hreflangEs: 'https://runtime-lab.com/servicios/automatizaciones',
     hreflangEn: 'https://runtime-lab.com/en/services/automations',
   },
@@ -15,97 +18,200 @@ const data = {
   footer: nav.footer,
   hero: {
     badge: 'AUTOMATIZACIONES',
-    title: 'Automatizaciones que eliminan el trabajo manual y escalan tu operación',
-    sub: 'Construimos workflows inteligentes que conectan tu CRM, email, WhatsApp, calendarios y herramientas para que las tareas repetitivas ocurran solas — sin que tu equipo tenga que intervenir.',
+    title: 'Automatizaciones que quitan trabajo manual y unen tus herramientas',
+    sub: 'Diseñamos e implementamos flujos en n8n y Make para que seguimientos, CRM, notificaciones y reportes ocurran solos — con logs, manejo de errores y trazabilidad.',
     cta: 'Agendar llamada gratuita',
     ctaHref: '/#contact',
+    trustBullets: [
+      'Priorización por impacto (no automatizar por automatizar)',
+      'Integraciones con APIs, webhooks y hojas de cálculo',
+      'Entrega documentada y transferible a tu equipo',
+    ],
   },
-  benefitsTitle: 'Qué cambia cuando automatizas tu operación',
-  benefits: [
+  visuals: {
+    hero: '/assets/sections/automate_lead_management_setup.png',
+    mid: '/assets/sections/crm_grid.png',
+  },
+  proof: {
+    items: [
+      { value: 'n8n / Make', label: 'Stacks' },
+      { value: '360°', label: 'Visibilidad' },
+      { value: 'ROI-first', label: 'Enfoque' },
+    ],
+  },
+  painPoints: {
+    title: 'Síntomas de una operación demasiado manual',
+    sub: 'Copiar datos entre sistemas no escala — y cada error cuesta caro en reputación o tiempo.',
+    intro:
+      'Automatizar no es “ahorrar clics”: es reducir latencia entre evento (nuevo lead, pago, ticket) y la acción correcta en el siguiente sistema.',
+    items: [
+      {
+        title: 'Datos duplicados entre CRM, email y hojas',
+        desc: 'Un mismo cliente aparece tres veces con distinto estado. Los flujos mantienen una sola fuente de verdad y propagan cambios en segundos.',
+      },
+      {
+        title: 'Seguimientos que dependen de recordar',
+        desc: 'Si el follow-up vive en la cabeza de alguien, se cae con vacaciones o picos de carga. Los workflows disparan mensajes y tareas con reglas claras.',
+      },
+      {
+        title: 'Reportes que roban horas cada semana',
+        desc: 'Exportar, limpiar y pegar en slides. Automatizamos extracción, formato y envío para que el equipo analice, no compile.',
+      },
+      {
+        title: 'Escalaciones reactivas en lugar de preventivas',
+        desc: 'Definimos SLAs: si no hay respuesta en X horas, notificar, reasignar o crear tarea de revisión — sin reuniones extra.',
+      },
+    ],
+  },
+  featureBlocksTitle: 'Qué construimos en la práctica',
+  featureBlocksSub: 'Orquestación real entre herramientas: disparadores, transformaciones, reintentos y alertas cuando algo falla.',
+  featureBlocks: [
     {
-      icon: 'clock' as const,
-      title: 'Cero tareas repetitivas',
-      desc: 'Seguimientos, recordatorios, actualizaciones de CRM, envíos de email y notificaciones ocurren automáticamente sin tocar nada.',
+      icon: 'zap' as const,
+      title: 'Workflows robustos, no “recetas” frágiles',
+      desc: 'Diseñamos ramas de error, colas y reintentos para integraciones HTTP, bases de datos y SaaS. Lo que debe ser idempotente, lo es.',
+      bullets: [
+        'Triggers por webhook, calendario o CRM',
+        'Mapeo y validación de payloads',
+        'Dead-letter o alertas a Slack/email interno',
+      ],
+      image: '/assets/sections/build_verifid.png',
     },
     {
       icon: 'shield' as const,
-      title: 'Menos errores humanos',
-      desc: 'Los procesos automatizados ejecutan exactamente lo que programas, sin olvidos, sin copiar datos mal, sin retrasos por carga de trabajo.',
-    },
-    {
-      icon: 'zap' as const,
-      title: 'Escalas sin contratar',
-      desc: 'Tu operación puede manejar 10x más volumen con el mismo equipo. Las automatizaciones no se cansan, no tienen límite de horario.',
+      title: 'Menos errores humanos en datos sensibles',
+      desc: 'Credenciales en secretos, permisos mínimos y registros de ejecución para auditoría. Menos copiar-pegar, menos fugas operativas.',
+      bullets: ['Secretos fuera del código', 'Logs con correlación por lead o ticket', 'Checklist de revisión antes de producción'],
+      reverse: true,
+      image: '/assets/sections/encrypted_credentials.png',
     },
     {
       icon: 'chart' as const,
-      title: 'Visibilidad total',
-      desc: 'Cada automatización registra sus ejecuciones. Sabes exactamente qué pasó con cada lead, cliente o proceso en todo momento.',
+      title: 'Visibilidad: qué corrió, cuándo y con qué resultado',
+      desc: 'Cada automatización deja rastro: útil para soporte, finanzas y mejora continua. Te enseñamos a leerlos sin depender de nosotros.',
+      bullets: ['Dashboards ligeros o reportes programados', 'Métricas de éxito / fallo por flujo', 'Runbooks para incidencias frecuentes'],
+      image: '/assets/sections/security_standard.png',
     },
   ],
+  visualBreak: {
+    title: 'De silos a un sistema que reacciona solo',
+    sub: 'Un evento en un canal dispara acciones coherentes en todos los demás: menos fricción entre ventas, operación y soporte.',
+    bullets: [
+      'Menos cuellos de botella entre herramientas',
+      'Onboarding de nuevos integrantes más simple',
+      'Base para añadir IA o agentes después',
+    ],
+  },
+  deliverables: {
+    title: 'Qué entregamos',
+    sub: 'No solo el flujo corriendo: documentación y criterios de mantenimiento.',
+    spotlight: {
+      kicker: 'ENTREGABLES',
+      text: 'Cada workflow incluye supuestos, dependencias externas y plan de rollback o pausa segura.',
+    },
+    categories: [
+      {
+        name: 'Diseño y construcción',
+        intro: 'Del mapa de proceso al flujo versionado en n8n o Make.',
+        items: [
+          'Diagrama AS-IS / TO-BE acordado contigo',
+          'Nodos, credenciales y entornos (prod / staging)',
+          'Pruebas con datos reales anonimizados cuando aplique',
+        ],
+        footer: 'Sesión de handoff con grabación opcional.',
+      },
+      {
+        name: 'Operación y evolución',
+        intro: 'Para que tu equipo pueda intervenir sin miedo a romper producción.',
+        items: [
+          'Runbook: cómo pausar, reejecutar y depurar',
+          'Lista de integraciones y contactos de API',
+          'Sugerencias de siguiente oleada de automatización',
+        ],
+        image: '/assets/sections/self_host.png',
+        footer: 'Podemos retener un SLA de mejoras si lo necesitas.',
+      },
+    ],
+  },
   process: {
     title: 'Cómo construimos tus automatizaciones',
-    sub: 'Analizamos tu operación, identificamos las tareas repetitivas de mayor impacto y las automatizamos paso a paso.',
+    sub: 'Descubrimiento breve, priorización por impacto y entregas incrementales.',
     steps: [
       {
         num: '01',
         title: 'Mapeo de procesos',
-        desc: 'Documentamos tus flujos actuales: qué tareas hace tu equipo manualmente, qué herramientas usas y dónde se pierden más tiempo y leads.',
+        desc: 'Entrevistamos a quien ejecuta la tarea hoy, listamos sistemas y documentamos tiempos, errores frecuentes y dependencias.',
       },
       {
         num: '02',
         title: 'Priorización por impacto',
-        desc: 'Identificamos las 3-5 automatizaciones que generarán mayor ahorro de tiempo y reducción de errores. Empezamos por las de mayor ROI.',
+        desc: 'Elegimos 3–5 automatizaciones con mayor ahorro de tiempo o reducción de riesgo. Acordamos métricas de éxito medibles.',
       },
       {
         num: '03',
         title: 'Construcción de workflows',
-        desc: 'Construimos los workflows en n8n o Make, conectamos las integraciones necesarias (CRM, email, WhatsApp, APIs) y configuramos las reglas de negocio.',
+        desc: 'Implementamos en n8n o Make, conectamos APIs y transformamos datos. Añadimos manejo de errores y notificaciones.',
       },
       {
         num: '04',
         title: 'Pruebas con datos reales',
-        desc: 'Ejecutamos las automatizaciones con datos reales de tu negocio, verificamos cada paso y ajustamos los flujos hasta funcionar perfectamente.',
+        desc: 'Corridas piloto, casos borde y validación con usuarios finales antes de abrir el grifo al 100%.',
       },
       {
         num: '05',
         title: 'Activación y documentación',
-        desc: 'Activamos las automatizaciones, documentamos cada flujo para tu equipo y te entregamos el control total sobre cada proceso.',
+        desc: 'Go-live, monitorización inicial y entrega de documentación + sesión de transferencia al equipo.',
       },
     ],
   },
   useCases: {
-    title: '¿Qué procesos puedes automatizar?',
+    title: 'Procesos que automatizamos a menudo',
+    sub: 'Patrones comunes en pymes y equipos en crecimiento.',
     items: [
       {
         label: 'Seguimiento de leads',
-        desc: 'Cuando alguien llena un formulario, el sistema envia un mensaje de bienvenida, notifica a tu equipo y actualiza el CRM automáticamente.',
+        desc: 'Formulario → CRM → mensaje de bienvenida → tarea al vendedor → recordatorio si no hay respuesta en X horas.',
       },
       {
         label: 'Recordatorios de citas',
-        desc: 'El sistema envía recordatorios por WhatsApp y email 24h y 1h antes de cada cita, reduciendo cancelaciones y no-shows.',
+        desc: 'Calendario → WhatsApp/email 24h y 1h antes → registro de confirmación o cancelación en CRM.',
       },
       {
         label: 'Onboarding de clientes',
-        desc: 'Al cerrar un cliente, el sistema crea el expediente, envía el contrato, agenda la llamada de inicio y notifica al equipo operativo.',
+        desc: 'Contrato firmado → carpetas, correos de bienvenida, tareas internas y avisos a operación.',
       },
       {
         label: 'Reportes automáticos',
-        desc: 'Genera y envía reportes semanales de leads, conversiones y pipeline a tu equipo sin que nadie tenga que preparar nada.',
+        desc: 'Extracción semanal de métricas, formato y envío a liderazgo sin tocar hojas a mano.',
       },
       {
-        label: 'Escalaciones por reglas',
-        desc: 'Si un lead no recibe respuesta en X horas, el sistema escala automáticamente al siguiente responsable y registra el evento.',
+        label: 'Escalaciones por SLA',
+        desc: 'Si un ticket o lead supera umbral de tiempo, reasignar, notificar y loguear para revisión.',
       },
       {
         label: 'Sincronización de datos',
-        desc: 'Mantén actualizados tu CRM, hojas de cálculo, plataformas de facturación y herramientas operativas sin copiar datos manualmente.',
+        desc: 'Mantener alineados CRM, facturación, inventario o spreadsheets con reglas de conflicto explícitas.',
+      },
+    ],
+  },
+  trust: {
+    title: 'Cómo trabajamos en RuntimeLab',
+    blocks: [
+      {
+        number: '01',
+        title: 'Automatización con criterio',
+        desc: 'Si un proceso está mal definido, automatizarlo solo acelera el caos. Ajustamos el flujo humano antes de codificarlo.',
+      },
+      {
+        number: '02',
+        title: 'Compatible con IA después',
+        desc: 'Los mismos eventos y webhooks alimentan agentes o clasificadores cuando quieras dar el siguiente salto.',
       },
     ],
   },
   cta: {
-    title: '¿Cuánto tiempo pierde tu equipo en tareas manuales?',
-    sub: 'En 30 minutos identificamos las 3 automatizaciones que más impacto tendrían en tu operación y te mostramos cómo implementarlas.',
+    title: '¿Cuántas horas semanales se van en copiar y pegar?',
+    sub: 'En una sesión corta identificamos candidatos de alto ROI y te decimos viabilidad técnica sin compromiso.',
     button: 'Agendar llamada gratuita',
     href: '/#contact',
   },
@@ -119,37 +225,63 @@ const data = {
   },
   schemas: [
     {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Automatizaciones de Negocio con IA",
-      "description": "Construcción de workflows inteligentes con n8n y Make para automatizar procesos operativos y eliminar tareas manuales.",
-      "provider": { "@id": "https://runtime-lab.com/#organization" },
-      "areaServed": { "@type": "Country", "name": "Mexico" },
-      "serviceType": "Business Process Automation",
-      "url": "https://runtime-lab.com/servicios/automatizaciones"
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Automatizaciones de negocio con n8n y Make',
+      description:
+        'Diseño e implementación de workflows que integran CRM, mensajería, calendarios y APIs para eliminar tareas manuales y escalar operaciones.',
+      provider: { '@id': 'https://runtime-lab.com/#organization' },
+      areaServed: { '@type': 'Country', name: 'Mexico' },
+      serviceType: 'Business Process Automation',
+      url: 'https://runtime-lab.com/servicios/automatizaciones',
     },
     {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "Cómo construimos automatizaciones de negocio",
-      "description": "Proceso de 5 pasos para automatizar tu operación con workflows inteligentes",
-      "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Mapeo de procesos", "text": "Documentamos tus flujos actuales e identificamos tareas manuales de alto impacto." },
-        { "@type": "HowToStep", "position": 2, "name": "Priorización por impacto", "text": "Identificamos las automatizaciones con mayor ROI para empezar por ellas." },
-        { "@type": "HowToStep", "position": 3, "name": "Construcción de workflows", "text": "Construimos los flujos en n8n o Make y conectamos todas las integraciones." },
-        { "@type": "HowToStep", "position": 4, "name": "Pruebas con datos reales", "text": "Ejecutamos las automatizaciones con datos reales y ajustamos hasta perfeccionar." },
-        { "@type": "HowToStep", "position": 5, "name": "Activación y documentación", "text": "Activamos los workflows y documentamos cada proceso para tu equipo." }
-      ]
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'Cómo construimos automatizaciones de negocio',
+      description: 'Cinco pasos: mapeo, priorización, construcción, pruebas y activación con documentación.',
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Mapeo de procesos',
+          text: 'Documentar flujos actuales, sistemas y puntos de fricción.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Priorización por impacto',
+          text: 'Seleccionar automatizaciones de mayor ROI y definir métricas.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Construcción de workflows',
+          text: 'Implementar en n8n o Make con integraciones y manejo de errores.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'Pruebas con datos reales',
+          text: 'Validar con datos reales y casos borde antes del go-live completo.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 5,
+          name: 'Activación y documentación',
+          text: 'Puesta en producción, monitorización inicial y transferencia al equipo.',
+        },
+      ],
     },
     {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://runtime-lab.com/" },
-        { "@type": "ListItem", "position": 2, "name": "Servicios", "item": "https://runtime-lab.com/#capabilities" },
-        { "@type": "ListItem", "position": 3, "name": "Automatizaciones", "item": "https://runtime-lab.com/servicios/automatizaciones" }
-      ]
-    }
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://runtime-lab.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Servicios', item: 'https://runtime-lab.com/#capabilities' },
+        { '@type': 'ListItem', position: 3, name: 'Automatizaciones', item: 'https://runtime-lab.com/servicios/automatizaciones' },
+      ],
+    },
   ],
 };
 ---

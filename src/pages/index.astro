@@ -41,7 +41,7 @@ const homeSchemas = [
     "@type": "WebSite",
     "url": "https://runtime-lab.com",
     "name": "RuntimeLab",
-    "description": "Desarrollo web, agentes de IA, automatizaciones y software a medida",
+    "description": "Páginas web y diseño web en Miami; desarrollo web, agentes de IA, automatizaciones y software a medida",
     "inLanguage": "es",
     "potentialAction": {
       "@type": "SearchAction",
@@ -64,9 +64,12 @@ const homeSchemas = [
         "item": {
           "@type": "Service",
           "name": "Desarrollo de Páginas Web",
-          "description": "Diseñamos páginas web profesionales optimizadas para conversión, carga rápida y SEO. Tu sitio captura leads y los envía directo a tu sistema.",
+          "description": "Diseñamos páginas web profesionales en Miami y remotas para LATAM: conversión, velocidad y SEO. Tu sitio captura leads y los envía a tu sistema.",
           "url": "https://runtime-lab.com/servicios/desarrollo-web",
-          "provider": { "@id": "https://runtime-lab.com/#organization" }
+          "provider": { "@id": "https://runtime-lab.com/#organization" },
+          "areaServed": [
+            { "@type": "City", "name": "Miami", "containedInPlace": { "@type": "State", "name": "Florida", "containedInPlace": { "@type": "Country", "name": "United States" } } }
+          ]
         }
       },
       {
@@ -117,8 +120,31 @@ const homeSchemas = [
   },
   {
     "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://runtime-lab.com/#service-paginas-web-miami",
+    "name": "Páginas web y diseño web en Miami",
+    "serviceType": "Diseño y desarrollo de sitios web",
+    "description": "Páginas web profesionales para negocios en Miami y Florida: enfoque en conversión, SEO, velocidad e integración con IA y CRM.",
+    "url": "https://runtime-lab.com/servicios/desarrollo-web",
+    "provider": { "@id": "https://runtime-lab.com/#organization" },
+    "areaServed": [
+      { "@type": "City", "name": "Miami", "containedInPlace": { "@type": "State", "name": "Florida" } },
+      { "@type": "AdministrativeArea", "name": "Florida" },
+      { "@type": "Place", "name": "LATAM" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Hacen páginas web para negocios en Miami?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. RuntimeLab tiene sede en Miami, Florida. Diseñamos y desarrollamos páginas web profesionales para empresas locales, con foco en conversión y SEO, y las conectamos con agentes de IA, automatizaciones y CRM. También trabajamos con clientes en el resto de EE. UU. y LATAM de forma remota."
+        }
+      },
       {
         "@type": "Question",
         "name": "¿Qué es un agente de IA y cómo puede ayudar a mi negocio?",
@@ -166,15 +192,15 @@ const homeSchemas = [
 
 <BaseLayout
   lang="es"
-  title="RuntimeLab — Desarrollo Web, Agentes IA, Automatización | Software a Medida"
-  description="Construimos páginas web profesionales, agentes de IA, automatizaciones y CRM omnichannel que trabajan juntos para captar y convertir clientes. Software de desarrollo a medida para negocios que quieren crecer."
-  keywords="páginas web, desarrollo web, agentes ia, agentes de inteligencia artificial, automatizaciones, software a medida, desarrollo de software, CRM omnichannel"
+  title="RuntimeLab — Páginas web en Miami | Diseño web, IA y sistemas que generan clientes"
+  description="Páginas web y diseño web en Miami para negocios que quieren más clientes: sitios que convierten, con IA, automatización y CRM. También LATAM y proyectos remotos."
+  keywords="páginas web Miami, diseño web Miami, crear página web Miami, agencia páginas web Miami, desarrollo web Miami, sitio web empresa Miami, páginas web Florida, desarrollo web, agentes de inteligencia artificial, automatizaciones, software a medida, CRM omnichannel, RuntimeLab"
   schemas={homeSchemas}
 >
   <Nav t={t.nav} lang="es" />
 
   <main id="main-content">
-    <Hero t={t.hero} />
+    <Hero t={t.hero} conversionHero />
     <RealityCheck t={t.realityCheck} />
     <StructureEmerges t={t.structure} />
     <CapabilitiesSnapshot t={t.capabilities} />

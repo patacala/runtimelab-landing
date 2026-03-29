@@ -2,12 +2,15 @@
 import ServicePage from '../../../components/ServicePage.astro';
 import nav from '../../../i18n/en.json';
 
+// SEO focus: business workflow automation, n8n, Make
 const data = {
   lang: 'en' as const,
   meta: {
-    title: 'Business Automations with AI — Workflow Automation | RuntimeLab',
-    description: 'We build intelligent automations with n8n and Make that connect your tools, eliminate manual tasks, and scale your operations. Less manual work, fewer errors, more growth.',
-    keywords: 'business automations, workflow automation, process automation, n8n workflows, make automations, automate business processes, operational automation',
+    title: 'Business automations with n8n & Make | RuntimeLab',
+    description:
+      'Workflows that connect CRM, WhatsApp, email, and calendars to remove repetitive work, cut errors, and scale without multiplying headcount. ROI-first delivery with full documentation.',
+    keywords:
+      'business automations, AI automation, automate business processes, workflow automation, process automation, n8n workflows, Make automations, Integromat, CRM integration, lead automation, data sync automation, operational automation, WhatsApp business automation, API middleware, automated reporting, SLA alerts, repetitive tasks, business efficiency, RuntimeLab',
     hreflangEs: 'https://runtime-lab.com/servicios/automatizaciones',
     hreflangEn: 'https://runtime-lab.com/en/services/automations',
   },
@@ -15,97 +18,196 @@ const data = {
   footer: nav.footer,
   hero: {
     badge: 'AUTOMATIONS',
-    title: 'Automations that eliminate manual work and scale your operations',
-    sub: 'We build intelligent workflows that connect your CRM, email, WhatsApp, calendars, and tools so repetitive tasks happen on their own — without your team ever having to intervene.',
+    title: 'Automations that remove manual work and connect your stack',
+    sub: 'We design and build flows in n8n and Make so follow-ups, CRM updates, notifications, and reports run on their own — with logs, error handling, and traceability.',
     cta: 'Book a free call',
     ctaHref: '/en/#contact',
+    trustBullets: [
+      'Prioritized by impact (no automation for its own sake)',
+      'Integrations via APIs, webhooks, and spreadsheets',
+      'Documented, transferable delivery to your team',
+    ],
   },
-  benefitsTitle: 'What changes when you automate your operations',
-  benefits: [
+  visuals: {
+    hero: '/assets/sections/automate_lead_management_setup.png',
+    mid: '/assets/sections/crm_grid.png',
+  },
+  proof: {
+    items: [
+      { value: 'n8n/Make', label: 'Stacks' },
+      { value: '360°', label: 'Visibility' },
+      { value: 'ROI', label: 'First' },
+    ],
+  },
+  painPoints: {
+    title: 'Signs your ops are too manual',
+    sub: 'Copying data between tools does not scale — and every mistake costs time or trust.',
+    intro:
+      'Automation is not about saving clicks: it is cutting latency between an event (new lead, payment, ticket) and the right action in the next system.',
+    items: [
+      {
+        title: 'Duplicate data across CRM, email, and sheets',
+        desc: 'One customer, three conflicting states. Flows keep a single source of truth and propagate changes in seconds.',
+      },
+      {
+        title: 'Follow-ups that depend on memory',
+        desc: 'If a follow-up lives in someone’s head, it breaks on PTO or busy weeks. Workflows fire messages and tasks with explicit rules.',
+      },
+      {
+        title: 'Reports that steal hours every week',
+        desc: 'Export, clean, paste into decks. We automate extraction, formatting, and delivery so the team analyzes instead of compiles.',
+      },
+      {
+        title: 'Reactive instead of preventive escalations',
+        desc: 'We encode SLAs: if no response in X hours, notify, reassign, or open a review task — without extra meetings.',
+      },
+    ],
+  },
+  featureBlocksTitle: 'What we actually build',
+  featureBlocksSub: 'Real orchestration: triggers, transforms, retries, and alerts when something breaks.',
+  featureBlocks: [
     {
-      icon: 'clock' as const,
-      title: 'Zero repetitive tasks',
-      desc: 'Follow-ups, reminders, CRM updates, email sends, and notifications happen automatically without anyone touching them.',
+      icon: 'zap' as const,
+      title: 'Resilient workflows, not fragile recipes',
+      desc: 'Branches for failure, queues, and retries for HTTP, databases, and SaaS APIs. Idempotency where it matters.',
+      bullets: ['Triggers via webhook, calendar, or CRM', 'Payload mapping and validation', 'Dead-letter queues or Slack/email alerts'],
+      image: '/assets/sections/build_verifid.png',
     },
     {
       icon: 'shield' as const,
-      title: 'Fewer human errors',
-      desc: 'Automated processes execute exactly what you program — no missed steps, no data entry mistakes, no delays from workload.',
-    },
-    {
-      icon: 'zap' as const,
-      title: 'Scale without hiring',
-      desc: 'Your operation can handle 10x the volume with the same team. Automations never tire and have no working-hours limit.',
+      title: 'Fewer human errors on sensitive data',
+      desc: 'Secrets in vaults, least privilege, and execution logs for audit. Less copy-paste, fewer operational leaks.',
+      bullets: ['Secrets outside source code', 'Logs correlated by lead or ticket', 'Pre-production review checklist'],
+      reverse: true,
+      image: '/assets/sections/encrypted_credentials.png',
     },
     {
       icon: 'chart' as const,
-      title: 'Full visibility',
-      desc: 'Every automation logs its executions. You know exactly what happened with every lead, client, or process at all times.',
+      title: 'Visibility: what ran, when, and the outcome',
+      desc: 'Every automation leaves a trail for support, finance, and continuous improvement. We teach you to read it independently.',
+      bullets: ['Light dashboards or scheduled reports', 'Per-flow success / failure metrics', 'Runbooks for common incidents'],
+      image: '/assets/sections/security_standard.png',
     },
   ],
+  visualBreak: {
+    title: 'From silos to a system that reacts on its own',
+    sub: 'One event in a channel drives coherent actions everywhere else — less friction between sales, ops, and support.',
+    bullets: [
+      'Fewer bottlenecks between tools',
+      'Easier onboarding for new teammates',
+      'Foundation to add AI or agents next',
+    ],
+  },
+  deliverables: {
+    title: 'What we deliver',
+    sub: 'Not only a running flow: documentation and maintenance criteria.',
+    spotlight: {
+      kicker: 'DELIVERABLES',
+      text: 'Each workflow lists assumptions, external dependencies, and a safe pause or rollback plan.',
+    },
+    categories: [
+      {
+        name: 'Design & build',
+        intro: 'From process map to versioned flow in n8n or Make.',
+        items: [
+          'Agreed AS-IS / TO-BE diagram',
+          'Nodes, credentials, and prod/staging environments',
+          'Tests with real or anonymized data when applicable',
+        ],
+        footer: 'Handoff session with optional recording.',
+      },
+      {
+        name: 'Operations & evolution',
+        intro: 'So your team can intervene without fear of breaking production.',
+        items: [
+          'Runbook: pause, replay, and debug',
+          'Integration list and API contacts',
+          'Suggestions for the next automation wave',
+        ],
+        image: '/assets/sections/self_host.png',
+        footer: 'We can retain an improvement SLA if you need it.',
+      },
+    ],
+  },
   process: {
     title: 'How we build your automations',
-    sub: 'We analyze your operations, identify the highest-impact repetitive tasks, and automate them step by step.',
+    sub: 'Short discovery, impact prioritization, incremental delivery.',
     steps: [
       {
         num: '01',
         title: 'Process mapping',
-        desc: 'We document your current workflows: what your team does manually, which tools you use, and where the most time and leads are lost.',
+        desc: 'We interview the person doing the work today, list systems, and document time spent, errors, and dependencies.',
       },
       {
         num: '02',
         title: 'Prioritization by impact',
-        desc: 'We identify the 3-5 automations that will generate the greatest time savings and error reduction. We start with the highest ROI.',
+        desc: 'We pick 3–5 automations with the highest time savings or risk reduction. We agree measurable success metrics.',
       },
       {
         num: '03',
         title: 'Workflow construction',
-        desc: 'We build the workflows in n8n or Make, connect required integrations (CRM, email, WhatsApp, APIs), and configure business rules.',
+        desc: 'We implement in n8n or Make, connect APIs, transform data, and add error handling and notifications.',
       },
       {
         num: '04',
         title: 'Testing with real data',
-        desc: 'We run automations with your real business data, verify each step, and adjust flows until everything works perfectly.',
+        desc: 'Pilot runs, edge cases, and validation with end users before opening the floodgates.',
       },
       {
         num: '05',
         title: 'Activation and documentation',
-        desc: 'We activate the automations, document every workflow for your team, and give you full control over each process.',
+        desc: 'Go-live, initial monitoring, documentation, and a transfer session to your team.',
       },
     ],
   },
   useCases: {
-    title: 'What processes can you automate?',
+    title: 'Processes we automate often',
+    sub: 'Common patterns for growing teams and SMBs.',
     items: [
       {
         label: 'Lead follow-up',
-        desc: 'When someone fills out a form, the system sends a welcome message, notifies your team, and updates the CRM automatically.',
+        desc: 'Form → CRM → welcome message → seller task → reminder if no reply in X hours.',
       },
       {
         label: 'Appointment reminders',
-        desc: 'The system sends WhatsApp and email reminders 24h and 1h before each appointment, reducing cancellations and no-shows.',
+        desc: 'Calendar → WhatsApp/email 24h and 1h before → log confirm or cancel in CRM.',
       },
       {
         label: 'Client onboarding',
-        desc: 'When a client closes, the system creates the file, sends the contract, books the kickoff call, and notifies the ops team.',
+        desc: 'Signed contract → folders, welcome emails, internal tasks, ops notifications.',
       },
       {
         label: 'Automatic reports',
-        desc: 'Generates and sends weekly lead, conversion, and pipeline reports to your team without anyone having to prepare anything.',
+        desc: 'Weekly metric pull, formatting, and delivery to leadership with zero manual sheets.',
       },
       {
-        label: 'Rule-based escalations',
-        desc: 'If a lead doesn\'t get a response within X hours, the system automatically escalates to the next responsible and logs the event.',
+        label: 'SLA escalations',
+        desc: 'If a ticket or lead exceeds a time threshold, reassign, notify, and log for review.',
       },
       {
         label: 'Data synchronization',
-        desc: 'Keep your CRM, spreadsheets, invoicing platforms, and operational tools in sync without manually copying data.',
+        desc: 'Keep CRM, billing, inventory, or spreadsheets aligned with explicit conflict rules.',
+      },
+    ],
+  },
+  trust: {
+    title: 'How we work at RuntimeLab',
+    blocks: [
+      {
+        number: '01',
+        title: 'Automation with judgment',
+        desc: 'If a process is poorly defined, automating only speeds up the mess. We fix the human flow before encoding it.',
+      },
+      {
+        number: '02',
+        title: 'Ready for AI later',
+        desc: 'The same events and webhooks can power agents or classifiers when you want the next step.',
       },
     ],
   },
   cta: {
-    title: 'How much time does your team spend on manual tasks?',
-    sub: 'In 30 minutes we\'ll identify the 3 automations that would have the biggest impact on your operations and show you how to implement them.',
+    title: 'How many hours a week go to copy-paste?',
+    sub: 'In a short session we surface high-ROI candidates and technical feasibility — no commitment required.',
     button: 'Book a free call',
     href: '/en/#contact',
   },
@@ -119,37 +221,63 @@ const data = {
   },
   schemas: [
     {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "Business Automations with AI",
-      "description": "Building intelligent workflows with n8n and Make to automate operational processes and eliminate manual tasks.",
-      "provider": { "@id": "https://runtime-lab.com/#organization" },
-      "areaServed": { "@type": "Country", "name": "United States" },
-      "serviceType": "Business Process Automation",
-      "url": "https://runtime-lab.com/en/services/automations"
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'Business automations with n8n and Make',
+      description:
+        'Design and implementation of workflows integrating CRM, messaging, calendars, and APIs to remove manual work and scale operations.',
+      provider: { '@id': 'https://runtime-lab.com/#organization' },
+      areaServed: { '@type': 'Country', name: 'United States' },
+      serviceType: 'Business Process Automation',
+      url: 'https://runtime-lab.com/en/services/automations',
     },
     {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "How we build business automations",
-      "description": "5-step process to automate your operations with intelligent workflows",
-      "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Process mapping", "text": "Document current workflows and identify high-impact manual tasks." },
-        { "@type": "HowToStep", "position": 2, "name": "Prioritization by impact", "text": "Identify the automations with the greatest ROI to start with." },
-        { "@type": "HowToStep", "position": 3, "name": "Workflow construction", "text": "Build flows in n8n or Make and connect all required integrations." },
-        { "@type": "HowToStep", "position": 4, "name": "Testing with real data", "text": "Run automations with real data and adjust flows until perfect." },
-        { "@type": "HowToStep", "position": 5, "name": "Activation and documentation", "text": "Activate workflows and document every process for the team." }
-      ]
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'How we build business automations',
+      description: 'Five steps: mapping, prioritization, build, testing, and activation with documentation.',
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Process mapping',
+          text: 'Document current workflows, systems, and friction points.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Prioritization by impact',
+          text: 'Select highest-ROI automations and define metrics.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Workflow construction',
+          text: 'Implement in n8n or Make with integrations and error handling.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'Testing with real data',
+          text: 'Validate with real data and edge cases before full go-live.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 5,
+          name: 'Activation and documentation',
+          text: 'Production launch, initial monitoring, and team handoff.',
+        },
+      ],
     },
     {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://runtime-lab.com/en/" },
-        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://runtime-lab.com/en/#capabilities" },
-        { "@type": "ListItem", "position": 3, "name": "Automations", "item": "https://runtime-lab.com/en/services/automations" }
-      ]
-    }
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://runtime-lab.com/en/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://runtime-lab.com/en/#capabilities' },
+        { '@type': 'ListItem', position: 3, name: 'Automations', item: 'https://runtime-lab.com/en/services/automations' },
+      ],
+    },
   ],
 };
 ---

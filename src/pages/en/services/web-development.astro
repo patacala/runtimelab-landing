@@ -1,13 +1,15 @@
 ---
-import ServicePage from '../../../components/ServicePage.astro';
+import WebDevPage from '../../../components/WebDevPage.astro';
 import nav from '../../../i18n/en.json';
 
 const data = {
   lang: 'en' as const,
   meta: {
-    title: 'Professional Web Development Services | RuntimeLab',
-    description: 'We design and build professional websites optimized for conversion, speed, and SEO. Your site captures leads automatically and connects to your AI agents and CRM system.',
-    keywords: 'web development, professional websites, website design, business website, conversion-optimized website, website for small business, custom website development',
+    title: 'Websites & Web Design in Miami | Professional Development | RuntimeLab',
+    description:
+      'Web design and websites for Miami businesses: conversion-focused, fast, and SEO-ready. AI agents and CRM integration. We also serve Florida, the US, and LATAM remotely.',
+    keywords:
+      'Miami web design, Miami website design, web development Miami, business website Miami, web development, website design, professional web design, business website, custom website development, company website, small business website, landing page, responsive web design, conversion-focused website, SEO-friendly website, website development services, CRM-ready website, AI-ready website, corporate website, build a business website, RuntimeLab',
     hreflangEs: 'https://runtime-lab.com/servicios/desarrollo-web',
     hreflangEn: 'https://runtime-lab.com/en/services/web-development',
   },
@@ -19,82 +21,183 @@ const data = {
     sub: 'We design and build your website with a focus on conversion: fast-loading, mobile-first, SEO-optimized, and connected to your AI agents and CRM so every visit becomes an opportunity.',
     cta: 'Book a free call',
     ctaHref: '/en/#contact',
+    trustBullets: ['Fast delivery, no surprises', 'Conversion-focused design', 'Ready to automate from day 1'],
   },
-  benefitsTitle: 'Why your website needs to be more than a brochure',
-  benefits: [
-    {
-      icon: 'chart' as const,
-      title: 'Designed to convert',
-      desc: 'Every element of your website — copy, CTAs, forms, and flow — is built to guide visitors into becoming qualified leads.',
-    },
-    {
-      icon: 'zap' as const,
-      title: 'Loads in under 2 seconds',
-      desc: 'We optimize images, code, and hosting so your website loads fast on every device. Speed is a critical SEO factor.',
-    },
-    {
-      icon: 'globe' as const,
-      title: 'Technical SEO included',
-      desc: 'Meta tags, schema markup, sitemap, robots.txt, hreflang, and Core Web Vitals optimized from day one.',
-    },
-    {
-      icon: 'bot' as const,
-      title: 'Connected to your AI and CRM',
-      desc: 'We integrate forms and chat widgets directly with your AI agents and CRM so no lead is ever lost.',
-    },
-  ],
+  painPoints: {
+    title: 'Most websites fail where it matters most',
+    intro: 'Your website can be your best salesperson or your biggest bottleneck. The difference comes down to these four critical points.',
+    items: [
+      {
+        icon: 'zap',
+        title: 'Slow load, lost visitors',
+        desc: 'A website that takes more than 3 seconds to load loses 40% of its traffic before anyone sees it.',
+      },
+      {
+        icon: 'chart',
+        title: 'No structure, no conversions',
+        desc: 'If your website doesn\'t guide visitors toward a specific action, it simply won\'t convert, regardless of design.',
+      },
+      {
+        icon: 'shield',
+        title: 'Generic design kills trust',
+        desc: 'A site that looks like a 2019 template sends the opposite signal from what your business needs: professionalism.',
+      },
+      {
+        icon: 'bot',
+        title: 'No automation, no follow-up',
+        desc: 'Capturing a lead without connecting it to your CRM means losing half the work before you start.',
+      },
+    ],
+  },
+  capabilities: {
+    title: 'What a Runtime Lab website delivers',
+    sub: 'Not features. Business outcomes.',
+    items: [
+      {
+        icon: 'chart',
+        title: 'Conversion-centered design',
+        desc: 'Every section, CTA, and form is designed to guide visitors into becoming clients. Nothing is decorative.',
+        highlight: true,
+      },
+      {
+        icon: 'zap',
+        title: 'Real speed',
+        desc: 'Core Web Vitals in the green, load time under 2s, Lighthouse above 90.',
+      },
+      {
+        icon: 'globe',
+        title: 'SEO from day 1',
+        desc: 'Meta tags, schema markup, sitemap, and semantic structure optimized from the start.',
+      },
+      {
+        icon: 'bot',
+        title: 'Direct system integration',
+        desc: 'Forms connected to your CRM, WhatsApp, and AI agents. No lead goes without follow-up.',
+      },
+      {
+        icon: 'code',
+        title: 'Code that lasts',
+        desc: 'Clean, modular architecture ready to grow without having to rebuild in 6 months.',
+      },
+      {
+        icon: 'check',
+        title: 'Analytics configured',
+        desc: 'GA4, Search Console, and custom events ready from launch.',
+      },
+    ],
+  },
   process: {
     title: 'How we build your website',
-    sub: 'A clear 4-step process from zero to a published, optimized website.',
+    sub: 'A 6-stage process, from strategy to production.',
     steps: [
       {
         num: '01',
         title: 'Discovery and strategy',
-        desc: 'We analyze your business, competitors, and target audience. We define information architecture, primary keywords, and conversion goals.',
+        desc: 'We analyze your business, competitors, and audience. We define conversion goals, primary keywords, and the value proposition that will guide the entire project.',
+        outcome: 'Validated strategic brief',
       },
       {
         num: '02',
-        title: 'UI/UX design and prototype',
-        desc: 'We create the full visual design: wireframes, color palette, typography, and section layout. You approve before we write a single line of code.',
+        title: 'Information architecture',
+        desc: 'We structure pages, sections, and navigation flows so visitors reach exactly where you need them — without friction.',
+        outcome: 'Sitemap and wireframes approved',
       },
       {
         num: '03',
-        title: 'Development and optimization',
-        desc: 'We build your site with clean, speed-optimized, SEO-ready code. We integrate forms, tracking, and connect to your existing systems.',
+        title: 'UI/UX design',
+        desc: 'We create the complete visual design: typography, colors, components, and section layout. You approve the prototype before we write a single line of code.',
+        outcome: 'Figma prototype approved',
       },
       {
         num: '04',
-        title: 'Launch and monitoring',
-        desc: 'We publish your site, configure Google Analytics and Search Console, and deliver an initial performance report. Post-launch support included.',
+        title: 'Development',
+        desc: 'We build your site with clean, optimized code. We integrate forms, tracking, CRM, and any other system you need connected.',
+        outcome: 'Functional website in staging',
+      },
+      {
+        num: '05',
+        title: 'Optimization',
+        desc: 'We audit speed, technical SEO, and mobile experience. We refine until Lighthouse > 90 and Core Web Vitals are in the green.',
+        outcome: 'Lighthouse > 90 — CWV green',
+      },
+      {
+        num: '06',
+        title: 'Launch',
+        desc: 'We publish your site, configure Google Analytics and Search Console, and deliver an initial performance report.',
+        outcome: 'Live site + analytics configured',
       },
     ],
   },
-  useCases: {
-    title: 'What types of businesses do we build websites for?',
+  inclusions: {
+    title: 'What every web project includes',
+    sub: 'No surprises. Everything you need to launch and grow.',
+    categories: [
+      {
+        name: 'Design and development',
+        items: [
+          'Custom UI design for your brand',
+          'Full responsive (mobile, tablet, desktop)',
+          'Clean, scalable code',
+        ],
+        image: '/assets/sections/crm_grid.png',
+      },
+      {
+        name: 'Conversion and performance',
+        items: [
+          'Conversion structure per section',
+          'Speed optimization (Lighthouse > 90)',
+          'Technical SEO from day 1',
+        ],
+        image: '/assets/sections/test.svg',
+      },
+      {
+        name: 'Integrations and data',
+        intro:
+          'Your site stays connected: we wire capture, messaging, and analytics so every visit and lead is traceable in the tools you already use.',
+        items: [
+          'Forms and lead capture with validation',
+          'CRM, WhatsApp Business, or transactional email hooks',
+          'Google Analytics 4, Search Console, and conversion events',
+          'Webhooks or endpoints ready for n8n, Make, Zapier, or your API',
+          'Documented pixels and tags (Meta, LinkedIn, etc. where relevant)',
+          'Short data map: what is sent, where it goes, and consent basics',
+        ],
+        footer:
+          'If you already run AI agents or automations, we leave the agreed connection points ready to turn on without rebuilding the site.',
+        image: '/assets/sections/crm_grid_seamless.png',
+      },
+    ],
+  },
+  idealFor: {
+    title: 'We build websites for these businesses',
+    sub: 'Every project is designed for the specific needs of your industry.',
+    items: [
+      { label: 'Clinics and healthcare', desc: 'Appointment capture and automated follow-up' },
+      { label: 'Service agencies', desc: 'Lead generation and project portfolio' },
+      { label: 'Local businesses', desc: 'Digital presence and call conversion' },
+      { label: 'SaaS and startups', desc: 'Landing optimized for trials and demos' },
+      { label: 'Real estate', desc: 'Property catalog and lead capture' },
+      { label: 'E-commerce', desc: 'Store optimized for conversion and speed' },
+    ],
+  },
+  trust: {
+    title: 'Why work with Runtime Lab',
     items: [
       {
-        label: 'Clinics and healthcare',
-        desc: 'Websites with appointment booking, service information, and AI agents that answer FAQs and qualify patient inquiries.',
+        title: 'Strategy before design',
+        desc: 'We understand your business before opening Figma. Every design decision has a conversion objective behind it. We don\'t make pretty websites that don\'t sell.',
       },
       {
-        label: 'Service agencies',
-        desc: 'High-conversion landing pages with portfolio, testimonials, pricing calculators, and direct CTAs to call or WhatsApp.',
+        title: 'Code that lasts',
+        desc: 'We don\'t use drag-and-drop builders. We write clean, optimized code that won\'t break in 6 months or require paid plugins to function.',
       },
       {
-        label: 'Local businesses',
-        desc: 'Professional presence with local SEO, Google Business integration, and forms connected to your CRM for lead follow-up.',
+        title: 'Connected to your sales system',
+        desc: 'Your website isn\'t a digital brochure. We integrate it with your automation tools, CRM, and AI agents so it generates real business.',
       },
       {
-        label: 'SaaS and startups',
-        desc: 'Product websites with interactive demos, pricing pages, automation tool integration, and conversion analytics.',
-      },
-      {
-        label: 'Real estate',
-        desc: 'Property catalogs, contact forms with automatic lead qualification, and CRM-connected follow-up workflows.',
-      },
-      {
-        label: 'E-commerce and retail',
-        desc: 'SEO and conversion-optimized stores with streamlined checkout and inventory management system integration.',
+        title: 'Measurable results',
+        desc: 'We configure proper tracking so you can see exactly which visits convert into clients. Real data from the very first day.',
       },
     ],
   },
@@ -103,6 +206,50 @@ const data = {
     sub: 'In 30 minutes we\'ll show you the potential of your current web presence and how we can turn it into your best sales tool.',
     button: 'Book a free call',
     href: '/en/#contact',
+  },
+  caseStudies: {
+    eyebrow: 'Implementation examples',
+    headline: 'How your website could perform',
+    subtext: 'Illustrative examples of how structure, design, and strategy shift outcomes — without real client names.',
+    featured: {
+      beforeLabel: 'Before',
+      afterLabel: 'After',
+      beforeImage: '/assets/sections/crm_grid.png',
+      afterImage: '/assets/sections/crm_grid_seamless.png',
+      beforeTitle: 'Unstructured layout with no clear conversion path',
+      beforeDesc: 'Weak hierarchy; visitors are not guided toward a single next step.',
+      afterTitle: 'Conversion-focused layout guiding users toward action',
+      afterDesc: 'Clear flow toward a CTA and lead capture in dedicated sections.',
+      comparisonNote:
+        'Conceptual illustration: the “after” state emphasizes visual hierarchy, a primary CTA, and capture wired to your CRM or AI agent.',
+      highlights: ['Clear CTA', 'Lead capture', 'Optimized hierarchy'],
+      floating: {
+        formTitle: 'Lead capture',
+        fieldPlaceholder: 'Visitor email',
+        formButton: 'Submit',
+        ctaPill: 'Book a demo',
+        analyticsLabel: 'Conversions',
+      },
+    },
+    secondary: [
+      {
+        industry: 'Operations & leads',
+        title: 'Automation visible from the homepage',
+        desc: 'Forms and paths wired to CRM: the site stops being a brochure and feeds the funnel.',
+        image: '/assets/sections/automate_lead_management_setup.png',
+        bullets: ['CTAs with a single intent', 'Mobile-first optimization', 'Lead capture integration'],
+      },
+      {
+        industry: 'Professional services',
+        title: 'Trust and clarity at a glance',
+        desc: 'Social proof, services, and contact structured to cut friction and repeat questions.',
+        image: '/assets/sections/build_verifid.png',
+        bullets: ['Clear information hierarchy', 'Credibility above the fold', 'Persistent contact CTA'],
+      },
+    ],
+    footerLine: 'Your business could be next.',
+    footerCta: 'Book a consultation',
+    footerCtaHref: '/en/#contact',
   },
   related: {
     title: 'Related services',
@@ -127,12 +274,14 @@ const data = {
       "@context": "https://schema.org",
       "@type": "HowTo",
       "name": "How we build your professional website",
-      "description": "4-step process for creating a professional conversion-optimized website",
+      "description": "6-stage process for creating a professional conversion-optimized website",
       "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Discovery and strategy", "text": "Analyze your business, competitors, and audience. Define architecture and conversion goals." },
-        { "@type": "HowToStep", "position": 2, "name": "UI/UX design and prototype", "text": "Create the full visual design with wireframes, colors, and layout." },
-        { "@type": "HowToStep", "position": 3, "name": "Development and optimization", "text": "Build with clean, speed-optimized, SEO-ready code with all integrations." },
-        { "@type": "HowToStep", "position": 4, "name": "Launch and monitoring", "text": "Publish, configure analytics, deliver performance report with post-launch support." }
+        { "@type": "HowToStep", "position": 1, "name": "Discovery and strategy", "text": "Analyze business, competitors, and audience. Define conversion goals and keywords." },
+        { "@type": "HowToStep", "position": 2, "name": "Information architecture", "text": "Structure pages, sections, and navigation flows for frictionless conversion." },
+        { "@type": "HowToStep", "position": 3, "name": "UI/UX design", "text": "Create the full visual design. Client approves prototype before development begins." },
+        { "@type": "HowToStep", "position": 4, "name": "Development", "text": "Build with clean, optimized code. Integrate forms, tracking, and CRM." },
+        { "@type": "HowToStep", "position": 5, "name": "Optimization", "text": "Audit speed, technical SEO, and mobile experience until Lighthouse > 90." },
+        { "@type": "HowToStep", "position": 6, "name": "Launch", "text": "Publish, configure analytics, and deliver initial performance report." }
       ]
     },
     {
@@ -148,4 +297,4 @@ const data = {
 };
 ---
 
-<ServicePage data={data} />
+<WebDevPage data={data} />

@@ -1,0 +1,2318 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+import '../styles/wd-landing-shared.css';
+
+export interface WebDevStep {
+  num: string;
+  title: string;
+  desc: string;
+  outcome: string;
+}
+
+export interface WebDevCapability {
+  icon: string;
+  title: string;
+  desc: string;
+  highlight?: boolean;
+}
+
+export interface WebDevInclusionCategory {
+  name: string;
+  items: string[];
+  /** Ruta pública (p. ej. /assets/sections/foo.png) */
+  image?: string;
+  /** Texto bajo el título (p. ej. card alta del bento) */
+  intro?: string;
+  /** Cierre o nota bajo la lista */
+  footer?: string;
+}
+
+export interface WebDevCaseStudyCard {
+  industry: string;
+  title: string;
+  desc: string;
+  image: string;
+  bullets: string[];
+}
+
+/** Sección “Implementation examples” (antes/después + grid), tema claro */
+export interface WebDevCaseStudies {
+  eyebrow: string;
+  headline: string;
+  subtext: string;
+  featured: {
+    beforeLabel: string;
+    afterLabel: string;
+    beforeImage: string;
+    afterImage: string;
+    beforeTitle: string;
+    beforeDesc: string;
+    afterTitle: string;
+    afterDesc: string;
+    /** Texto breve bajo el bloque comparativo (una línea) */
+    comparisonNote: string;
+    /** 2–3 tooltips sobre el mockup AFTER */
+    highlights: string[];
+    /** Mini UI decorativa (capas flotantes) */
+    floating: {
+      formTitle: string;
+      fieldPlaceholder: string;
+      formButton: string;
+      ctaPill: string;
+      analyticsLabel: string;
+    };
+  };
+  secondary: [WebDevCaseStudyCard, WebDevCaseStudyCard];
+  footerLine: string;
+  footerCta: string;
+  footerCtaHref: string;
+}
+
+export interface WebDevPageData {
+  lang: 'en' | 'es';
+  meta: {
+    title: string;
+    description: string;
+    keywords: string;
+    hreflangEs: string;
+    hreflangEn: string;
+  };
+  nav: any;
+  footer: any;
+  hero: {
+    badge: string;
+    title: string;
+    sub: string;
+    cta: string;
+    ctaHref: string;
+    trustBullets: string[];
+  };
+  painPoints: {
+    title: string;
+    intro: string;
+    items: { icon: string; title: string; desc: string }[];
+  };
+  capabilities: {
+    title: string;
+    sub: string;
+    items: WebDevCapability[];
+  };
+  process: {
+    title: string;
+    sub?: string;
+    steps: WebDevStep[];
+  };
+  inclusions: {
+    title: string;
+    sub: string;
+    categories: WebDevInclusionCategory[];
+  };
+  idealFor: {
+    title: string;
+    sub: string;
+    items: { label: string; desc: string }[];
+  };
+  trust: {
+    title: string;
+    items: { title: string; desc: string }[];
+  };
+  cta: {
+    title: string;
+    sub: string;
+    button: string;
+    href: string;
+  };
+  /** Ejemplos de implementación (antes/después), tras el CTA principal */
+  caseStudies: WebDevCaseStudies;
+  related: {
+    title: string;
+    items: { label: string; href: string }[];
+  };
+  schemas: object[];
+}
+
+const { data } = Astro.props as { data: WebDevPageData };
+
+const inclusionCategories = data.inclusions.categories;
+const inclusionsUseBento = inclusionCategories.length >= 3;
+
+const iconPaths: Record<string, string> = {
+  clock: 'M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm1-8h4v2h-6V7h2v5z',
+  zap: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  code: 'M16 18l6-6-6-6M8 6l-6 6 6 6',
+  globe: 'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0 0a15.3 15.3 0 0 0 4-10 15.3 15.3 0 0 0-4-10 15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10zM2 12h20',
+  bot: 'M12 8V4H8M12 8V4h4M12 8v4M9 21H7a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2M9 21h6M9 21v-4M15 21v-4M9 17h6',
+  chart: 'M18 20V10M12 20V4M6 20v-6',
+  check: 'M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3',
+};
+---
+
+<BaseLayout
+  lang={data.lang}
+  title={data.meta.title}
+  description={data.meta.description}
+  keywords={data.meta.keywords}
+  schemas={data.schemas}
+  hreflangEs={data.meta.hreflangEs}
+  hreflangEn={data.meta.hreflangEn}
+>
+  <Nav t={data.nav} lang={data.lang} />
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════════════════════
+         1. HERO
+    ══════════════════════════════════════════ -->
+    <section class="wd-hero">
+      <div class="wd-hero-bg" aria-hidden="true"></div>
+      <div class="wd-container wd-hero-layout">
+
+        <div class="wd-hero-left">
+          <span class="wd-badge">{data.hero.badge}</span>
+          <h1 class="wd-h1">{data.hero.title}</h1>
+          <p class="wd-hero-sub">{data.hero.sub}</p>
+
+          <a href={data.hero.ctaHref} class="wd-btn-primary">
+            {data.hero.cta}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+
+          <ul class="wd-trust-bullets" role="list">
+            {data.hero.trustBullets.map(b => (
+              <li class="wd-trust-bullet">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="wd-hero-right" aria-hidden="true" id="wd-hero-visual">
+          <div class="wd-hero-blob"></div>
+
+          <div class="wd-browser-card animate-float-2">
+            <div class="wd-browser-chrome">
+              <div class="wd-browser-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="wd-browser-url">runtime-lab.com</div>
+            </div>
+            <div class="wd-browser-body">
+              <div class="wd-page-hero-bar"></div>
+              <div class="wd-page-content">
+                <div class="wd-page-line wd-line-80"></div>
+                <div class="wd-page-line wd-line-60"></div>
+                <div class="wd-page-line wd-line-40"></div>
+                <div class="wd-page-btn"></div>
+              </div>
+              <div class="wd-page-grid">
+                <div class="wd-page-card"></div>
+                <div class="wd-page-card"></div>
+                <div class="wd-page-card"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wd-float-pill wd-pill-speed animate-float-1">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            &lt;2s load
+          </div>
+
+          <div class="wd-float-pill wd-pill-seo animate-float-3">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            SEO ✓
+          </div>
+
+          <div class="wd-float-pill wd-pill-conv animate-float-4">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 20V10M12 20V4M6 20v-6"/>
+            </svg>
+            +40% conv.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         2. SOCIAL PROOF STRIP
+    ══════════════════════════════════════════ -->
+    <section class="wd-proof-strip">
+      <div class="wd-container">
+        <div class="wd-proof-row reveal">
+          <div class="wd-proof-item">
+            <span class="wd-proof-val">&lt; 2s</span>
+            <span class="wd-proof-label">{data.lang === 'es' ? 'Carga promedio' : 'Average load'}</span>
+          </div>
+          <div class="wd-proof-sep" aria-hidden="true"></div>
+          <div class="wd-proof-item">
+            <span class="wd-proof-val">90+</span>
+            <span class="wd-proof-label">Lighthouse</span>
+          </div>
+          <div class="wd-proof-sep" aria-hidden="true"></div>
+          <div class="wd-proof-item">
+            <span class="wd-proof-val">100%</span>
+            <span class="wd-proof-label">Mobile-first</span>
+          </div>
+          <div class="wd-proof-sep" aria-hidden="true"></div>
+          <div class="wd-proof-item">
+            <span class="wd-proof-val">{data.lang === 'es' ? 'Día 1' : 'Day 1'}</span>
+            <span class="wd-proof-label">SEO</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         3. PAIN POINTS — Editorial layout
+    ══════════════════════════════════════════ -->
+    <section class="wd-section wd-section-dark">
+      <div class="wd-container">
+        <div class="wd-pain-layout">
+          <div class="wd-pain-intro reveal">
+            <h2 class="wd-section-title">{data.painPoints.title}</h2>
+            <p class="wd-pain-intro-text">{data.painPoints.intro}</p>
+          </div>
+
+          <div class="wd-pain-list">
+            {data.painPoints.items.map((item, i) => (
+              <div class={`wd-pain-item wd-pain-tone-${(i % 4) + 1} reveal reveal-delay-${(i + 1) * 100}`}>
+                <div class="wd-pain-icon" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d={iconPaths[item.icon] ?? iconPaths.check} />
+                  </svg>
+                </div>
+                <div class="wd-pain-content">
+                  <h3 class="wd-pain-title">{item.title}</h3>
+                  <p class="wd-pain-desc">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         4. CAPABILITIES — Large alternating blocks
+    ══════════════════════════════════════════ -->
+    <section class="wd-section wd-section-surface">
+      <div class="wd-container">
+        <div class="wd-section-header reveal">
+          <h2 class="wd-section-title">{data.capabilities.title}</h2>
+          <p class="wd-section-sub">{data.capabilities.sub}</p>
+        </div>
+
+        <!-- Block 1: Conversion Design (left text, right image) -->
+        <div class="wd-feature-block reveal">
+          <div class="wd-feature-content">
+            <div class="wd-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={iconPaths.chart} />
+              </svg>
+            </div>
+            <h3 class="wd-feature-title">{data.capabilities.items[0].title}</h3>
+            <p class="wd-feature-desc">{data.capabilities.items[0].desc}</p>
+            <ul class="wd-feature-list">
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'CTAs estratégicamente ubicados' : 'Strategically placed CTAs'}
+              </li>
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Flujo de usuario optimizado' : 'Optimized user flow'}
+              </li>
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Jerarquía visual clara' : 'Clear visual hierarchy'}
+              </li>
+            </ul>
+          </div>
+          <div class="wd-feature-visual">
+            <div class="wd-feature-frame">
+              <div class="wd-feature-placeholder wd-media-conv">
+                <div class="wd-media-mock">
+                  <div class="wd-media-top"><span></span><span></span><span></span></div>
+                  <div class="wd-media-body">
+                    <div class="wd-media-chart"></div>
+                    <div class="wd-media-cols"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Block 2: Speed & Performance (right text, left image) -->
+        <div class="wd-feature-block wd-feature-reverse reveal reveal-delay-200">
+          <div class="wd-feature-visual">
+            <div class="wd-feature-frame">
+              <div class="wd-feature-placeholder wd-media-speed">
+                <div class="wd-media-mock">
+                  <div class="wd-media-top"><span></span><span></span><span></span></div>
+                  <div class="wd-media-body">
+                    <div class="wd-media-line"></div>
+                    <div class="wd-media-line wd-media-line-short"></div>
+                    <div class="wd-media-meter"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wd-feature-content">
+            <div class="wd-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={iconPaths.zap} />
+              </svg>
+            </div>
+            <h3 class="wd-feature-title">{data.capabilities.items[1].title}</h3>
+            <p class="wd-feature-desc">{data.capabilities.items[1].desc}</p>
+            <ul class="wd-feature-list">
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                Core Web Vitals {data.lang === 'es' ? 'optimizados' : 'optimized'}
+              </li>
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Carga menor a 2s' : 'Load under 2s'}
+              </li>
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                Lighthouse 90+
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Block 3: Integration (left text, right image) -->
+        <div class="wd-feature-block reveal reveal-delay-400">
+          <div class="wd-feature-content">
+            <div class="wd-feature-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={iconPaths.bot} />
+              </svg>
+            </div>
+            <h3 class="wd-feature-title">{data.capabilities.items[3].title}</h3>
+            <p class="wd-feature-desc">{data.capabilities.items[3].desc}</p>
+            <ul class="wd-feature-list">
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Conexión con CRM' : 'CRM connection'}
+              </li>
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Agentes de IA integrados' : 'Integrated AI agents'}
+              </li>
+              <li class="wd-feature-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Seguimiento automatizado' : 'Automated follow-up'}
+              </li>
+            </ul>
+          </div>
+          <div class="wd-feature-visual">
+            <div class="wd-feature-frame">
+              <div class="wd-feature-placeholder wd-media-flow">
+                <div class="wd-media-mock">
+                  <div class="wd-media-flow-nodes"><span></span><span></span><span></span><span></span></div>
+                  <div class="wd-media-flow-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         4.5. VISUAL SHOWCASE — Large image block
+    ══════════════════════════════════════════ -->
+    <section class="wd-visual-section">
+      <div class="wd-visual-glow" aria-hidden="true"></div>
+      <div class="wd-container">
+        <div class="wd-visual-layout">
+          <div class="wd-visual-content reveal">
+            <h2 class="wd-visual-title">{data.lang === 'es' ? 'Diseño que convierte' : 'Design that converts'}</h2>
+            <p class="wd-visual-desc">
+              {data.lang === 'es'
+                ? 'Cada elemento está diseñado para guiar al visitante hacia la acción. No hacemos sitios bonitos que no venden.'
+                : 'Every element is designed to guide visitors toward action. We don\'t make pretty sites that don\'t sell.'}
+            </p>
+            <ul class="wd-visual-list" role="list">
+              <li class="wd-visual-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Jerarquía visual clara' : 'Clear visual hierarchy'}
+              </li>
+              <li class="wd-visual-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'CTAs estratégicos' : 'Strategic CTAs'}
+              </li>
+              <li class="wd-visual-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                {data.lang === 'es' ? 'Flujo sin fricción' : 'Frictionless flow'}
+              </li>
+            </ul>
+          </div>
+          <div class="wd-visual-image reveal">
+            <div class="wd-visual-frame">
+              <div class="wd-visual-placeholder wd-visual-mock-a">
+                <div class="wd-media-mock">
+                  <div class="wd-media-top"><span></span><span></span><span></span></div>
+                  <div class="wd-media-body">
+                    <div class="wd-media-chart"></div>
+                    <div class="wd-media-cols"><span></span><span></span><span></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         5. PROCESS — Sticky stack cards
+    ══════════════════════════════════════════ -->
+    <section class="wd-process-section">
+      <div class="wd-container">
+        <div class="wd-section-header reveal">
+          <h2 class="wd-section-title">{data.process.title}</h2>
+          {data.process.sub && <p class="wd-section-sub">{data.process.sub}</p>}
+        </div>
+      </div>
+
+      <div class="wd-stack-wrapper" role="list">
+
+        <!-- CARD 01 — Discovery: light/white -->
+        <article class="wd-stack-card wd-card-light" style="--card-z:1" role="listitem">
+          <div class="wd-stack-inner">
+            <div class="wd-stack-visual" aria-hidden="true">
+              <div class="wd-sim-window wd-sim-light">
+                <div class="wd-sim-chrome"><span class="wd-dot-r"></span><span class="wd-dot-y"></span><span class="wd-dot-g"></span><span class="wd-sim-url">brief.runtime-lab.com</span></div>
+                <div class="wd-sim-content">
+                  <div class="wd-brief-header-row">
+                    <div class="wd-brief-logo-block"><span class="wd-logo-sq"></span><span class="wd-logo-txt"></span></div>
+                    <span class="wd-brief-badge">Strategy brief</span>
+                  </div>
+                  <div class="wd-brief-section-title"></div>
+                  <div class="wd-brief-form">
+                    <div class="wd-form-group"><div class="wd-form-label"></div><div class="wd-form-input"></div></div>
+                    <div class="wd-form-group"><div class="wd-form-label"></div><div class="wd-form-input"></div></div>
+                    <div class="wd-form-checks">
+                      <div class="wd-form-check wd-check-on"><span class="wd-check-box"></span><span class="wd-check-text"></span></div>
+                      <div class="wd-form-check wd-check-on"><span class="wd-check-box"></span><span class="wd-check-text"></span></div>
+                      <div class="wd-form-check"><span class="wd-check-box"></span><span class="wd-check-text"></span></div>
+                    </div>
+                    <div class="wd-form-cta"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wd-stack-content">
+              <span class="wd-stack-num wd-num-light" aria-hidden="true">{data.process.steps[0].num}</span>
+              <h3 class="wd-stack-title wd-title-dark">{data.process.steps[0].title}</h3>
+              <p class="wd-stack-desc wd-desc-dark">{data.process.steps[0].desc}</p>
+              <div class="wd-stack-outcome wd-outcome-dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {data.process.steps[0].outcome}
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 02 — Architecture: blue -->
+        <article class="wd-stack-card wd-card-blue" style="--card-z:2" role="listitem">
+          <div class="wd-stack-inner">
+            <div class="wd-stack-visual" aria-hidden="true">
+              <div class="wd-sim-sitemap">
+                <div class="wd-sitemap-node wd-sn-root"><span>Home</span></div>
+                <div class="wd-sitemap-children">
+                  <div class="wd-sitemap-branch">
+                    <div class="wd-sitemap-connector"></div>
+                    <div class="wd-sitemap-node wd-sn-child"><span>{data.lang === 'es' ? 'Servicios' : 'Services'}</span></div>
+                    <div class="wd-sitemap-node wd-sn-grandchild"><span></span></div>
+                    <div class="wd-sitemap-node wd-sn-grandchild"><span></span></div>
+                  </div>
+                  <div class="wd-sitemap-branch">
+                    <div class="wd-sitemap-connector"></div>
+                    <div class="wd-sitemap-node wd-sn-child"><span>{data.lang === 'es' ? 'Nosotros' : 'About'}</span></div>
+                    <div class="wd-sitemap-node wd-sn-grandchild"><span></span></div>
+                  </div>
+                  <div class="wd-sitemap-branch">
+                    <div class="wd-sitemap-connector"></div>
+                    <div class="wd-sitemap-node wd-sn-child"><span>{data.lang === 'es' ? 'Contacto' : 'Contact'}</span></div>
+                  </div>
+                </div>
+                <div class="wd-sitemap-wire"></div>
+              </div>
+            </div>
+            <div class="wd-stack-content">
+              <span class="wd-stack-num wd-num-blue" aria-hidden="true">{data.process.steps[1].num}</span>
+              <h3 class="wd-stack-title wd-title-light">{data.process.steps[1].title}</h3>
+              <p class="wd-stack-desc wd-desc-light">{data.process.steps[1].desc}</p>
+              <div class="wd-stack-outcome wd-outcome-light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {data.process.steps[1].outcome}
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 03 — Design: purple -->
+        <article class="wd-stack-card wd-card-purple" style="--card-z:3" role="listitem">
+          <div class="wd-stack-inner">
+            <div class="wd-stack-visual" aria-hidden="true">
+              <div class="wd-sim-design">
+                <div class="wd-design-panel">
+                  <div class="wd-design-header">
+                    <div class="wd-dh-layers">
+                      <div class="wd-dh-layer wd-dh-active"></div>
+                      <div class="wd-dh-layer"></div>
+                      <div class="wd-dh-layer"></div>
+                    </div>
+                  </div>
+                  <div class="wd-design-canvas">
+                    <div class="wd-dc-hero"></div>
+                    <div class="wd-dc-grid">
+                      <div class="wd-dc-card"></div>
+                      <div class="wd-dc-card wd-dc-highlight"></div>
+                      <div class="wd-dc-card"></div>
+                    </div>
+                    <div class="wd-dc-cta"></div>
+                  </div>
+                </div>
+                <div class="wd-design-props">
+                  <div class="wd-dp-swatches">
+                    <span class="wd-swatch wd-sw-1"></span>
+                    <span class="wd-swatch wd-sw-2"></span>
+                    <span class="wd-swatch wd-sw-3"></span>
+                    <span class="wd-swatch wd-sw-4"></span>
+                  </div>
+                  <div class="wd-dp-typo">
+                    <div class="wd-typo-h"></div>
+                    <div class="wd-typo-p"></div>
+                    <div class="wd-typo-sm"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wd-stack-content">
+              <span class="wd-stack-num wd-num-purple" aria-hidden="true">{data.process.steps[2].num}</span>
+              <h3 class="wd-stack-title wd-title-light">{data.process.steps[2].title}</h3>
+              <p class="wd-stack-desc wd-desc-light">{data.process.steps[2].desc}</p>
+              <div class="wd-stack-outcome wd-outcome-light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DDD6FE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {data.process.steps[2].outcome}
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 04 — Development: dark -->
+        <article class="wd-stack-card wd-card-dark" style="--card-z:4" role="listitem">
+          <div class="wd-stack-inner">
+            <div class="wd-stack-visual" aria-hidden="true">
+              <div class="wd-sim-code">
+                <div class="wd-sim-chrome wd-chrome-dark"><span class="wd-dot-r"></span><span class="wd-dot-y"></span><span class="wd-dot-g"></span><span class="wd-code-tabs"><span class="wd-tab-active">index.astro</span><span>styles.css</span></span></div>
+                <div class="wd-code-body">
+                  <div class="wd-code-line"><span class="wd-ct-kw">import</span> <span class="wd-ct-id">Nav</span> <span class="wd-ct-kw">from</span> <span class="wd-ct-str">'./Nav.astro'</span></div>
+                  <div class="wd-code-line"><span class="wd-ct-kw">const</span> <span class="wd-ct-id">data</span> <span class="wd-ct-op">=</span> <span class="wd-ct-fn">await</span> <span class="wd-ct-id">fetchData</span><span class="wd-ct-op">()</span></div>
+                  <div class="wd-code-line"></div>
+                  <div class="wd-code-line"><span class="wd-ct-tag">&lt;section</span> <span class="wd-ct-attr">class</span><span class="wd-ct-op">=</span><span class="wd-ct-str">"hero"</span><span class="wd-ct-tag">&gt;</span></div>
+                  <div class="wd-code-line wd-indent"><span class="wd-ct-tag">&lt;h1&gt;</span><span class="wd-ct-op">&#123;</span><span class="wd-ct-id">data.title</span><span class="wd-ct-op">&#125;</span><span class="wd-ct-tag">&lt;/h1&gt;</span></div>
+                  <div class="wd-code-line wd-indent"><span class="wd-ct-tag">&lt;Nav</span> <span class="wd-ct-attr">items</span><span class="wd-ct-op">=</span><span class="wd-ct-op">&#123;</span><span class="wd-ct-id">nav</span><span class="wd-ct-op">&#125;</span> <span class="wd-ct-tag">/&gt;</span></div>
+                  <div class="wd-code-line"><span class="wd-ct-tag">&lt;/section&gt;</span></div>
+                  <div class="wd-code-line"></div>
+                  <div class="wd-code-line"><span class="wd-ct-comment">// CRM integration</span></div>
+                  <div class="wd-code-line"><span class="wd-ct-kw">await</span> <span class="wd-ct-fn">crm</span><span class="wd-ct-op">.</span><span class="wd-ct-id">push</span><span class="wd-ct-op">(lead)</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="wd-stack-content">
+              <span class="wd-stack-num wd-num-dark" aria-hidden="true">{data.process.steps[3].num}</span>
+              <h3 class="wd-stack-title wd-title-light">{data.process.steps[3].title}</h3>
+              <p class="wd-stack-desc wd-desc-light">{data.process.steps[3].desc}</p>
+              <div class="wd-stack-outcome wd-outcome-light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {data.process.steps[3].outcome}
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 05 — Optimization: light sky -->
+        <article class="wd-stack-card wd-card-sky" style="--card-z:5" role="listitem">
+          <div class="wd-stack-inner">
+            <div class="wd-stack-visual" aria-hidden="true">
+              <div class="wd-sim-perf">
+                <div class="wd-perf-gauge">
+                  <svg viewBox="0 0 160 100" class="wd-gauge-svg">
+                    <path d="M 20 90 A 60 60 0 0 1 140 90" fill="none" stroke="#E2E8F0" stroke-width="12" stroke-linecap="round"/>
+                    <path d="M 20 90 A 60 60 0 0 1 140 90" fill="none" stroke="#2563EB" stroke-width="12" stroke-linecap="round" stroke-dasharray="188" stroke-dashoffset="28"/>
+                    <text x="80" y="82" text-anchor="middle" class="wd-gauge-score">97</text>
+                    <text x="80" y="96" text-anchor="middle" class="wd-gauge-label">Performance</text>
+                  </svg>
+                </div>
+                <div class="wd-perf-vitals">
+                  <div class="wd-vital-row">
+                    <span class="wd-vital-name">LCP</span>
+                    <div class="wd-vital-bar"><div class="wd-vital-fill wd-vf-green" style="width:88%"></div></div>
+                    <span class="wd-vital-val">1.2s</span>
+                  </div>
+                  <div class="wd-vital-row">
+                    <span class="wd-vital-name">CLS</span>
+                    <div class="wd-vital-bar"><div class="wd-vital-fill wd-vf-green" style="width:96%"></div></div>
+                    <span class="wd-vital-val">0.02</span>
+                  </div>
+                  <div class="wd-vital-row">
+                    <span class="wd-vital-name">INP</span>
+                    <div class="wd-vital-bar"><div class="wd-vital-fill wd-vf-green" style="width:93%"></div></div>
+                    <span class="wd-vital-val">84ms</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wd-stack-content">
+              <span class="wd-stack-num wd-num-sky" aria-hidden="true">{data.process.steps[4].num}</span>
+              <h3 class="wd-stack-title wd-title-dark">{data.process.steps[4].title}</h3>
+              <p class="wd-stack-desc wd-desc-dark">{data.process.steps[4].desc}</p>
+              <div class="wd-stack-outcome wd-outcome-dark">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {data.process.steps[4].outcome}
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 06 — Launch: indigo -->
+        <article class="wd-stack-card wd-card-indigo" style="--card-z:6" role="listitem">
+          <div class="wd-stack-inner">
+            <div class="wd-stack-visual" aria-hidden="true">
+              <div class="wd-sim-analytics">
+                <div class="wd-analytics-header">
+                  <div class="wd-ah-title"></div>
+                  <div class="wd-ah-range"></div>
+                </div>
+                <div class="wd-analytics-stats">
+                  <div class="wd-stat-block"><span class="wd-stat-val">2,841</span><span class="wd-stat-lbl">{data.lang === 'es' ? 'Visitas' : 'Sessions'}</span><span class="wd-stat-up">↑ 34%</span></div>
+                  <div class="wd-stat-block"><span class="wd-stat-val">8.4%</span><span class="wd-stat-lbl">{data.lang === 'es' ? 'Conversión' : 'Conv. rate'}</span><span class="wd-stat-up">↑ 12%</span></div>
+                  <div class="wd-stat-block"><span class="wd-stat-val">241</span><span class="wd-stat-lbl">Leads</span><span class="wd-stat-up">↑ 51%</span></div>
+                </div>
+                <div class="wd-analytics-chart">
+                  <div class="wd-chart-bar" style="height:40%"></div>
+                  <div class="wd-chart-bar" style="height:55%"></div>
+                  <div class="wd-chart-bar" style="height:45%"></div>
+                  <div class="wd-chart-bar" style="height:70%"></div>
+                  <div class="wd-chart-bar" style="height:60%"></div>
+                  <div class="wd-chart-bar" style="height:85%"></div>
+                  <div class="wd-chart-bar wd-bar-active" style="height:100%"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wd-stack-content">
+              <span class="wd-stack-num wd-num-indigo" aria-hidden="true">{data.process.steps[5].num}</span>
+              <h3 class="wd-stack-title wd-title-light">{data.process.steps[5].title}</h3>
+              <p class="wd-stack-desc wd-desc-light">{data.process.steps[5].desc}</p>
+              <div class="wd-stack-outcome wd-outcome-light">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A5B4FC" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                {data.process.steps[5].outcome}
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         6. INCLUSIONS — Featured coverage cards
+    ══════════════════════════════════════════ -->
+    <section class="wd-section wd-section-surface wd-inclusions-section">
+      <div class="wd-container">
+        <div class="wd-section-header reveal">
+          <h2 class="wd-section-title">{data.inclusions.title}</h2>
+          <p class="wd-section-sub">{data.inclusions.sub}</p>
+        </div>
+
+        <div class="wd-inclusions-spotlight reveal">
+          <span class="wd-inclusions-spotlight-kicker">{data.lang === 'es' ? 'Entrega completa' : 'Complete delivery'}</span>
+          <p>{data.lang === 'es' ? 'No entregamos "solo diseño": construimos un sistema listo para captar, medir y escalar.' : 'We do not ship "just design": we build a system ready to capture, measure, and scale.'}</p>
+        </div>
+
+        <div class:list={['wd-inclusions-layout', inclusionsUseBento && 'wd-inclusions-bento']}>
+          {inclusionCategories.map((cat, catIdx) => (
+            <article
+              class:list={[
+                'wd-inclusion-group',
+                `wd-inclusion-tone-${(catIdx % 3) + 1}`,
+                inclusionsUseBento && catIdx < 2 && 'wd-inclusion-group--stack',
+                inclusionsUseBento && catIdx === 2 && 'wd-inclusion-group--tall',
+              ]}
+            >
+              {cat.image && (
+                <div class="wd-inclusion-visual">
+                  <img
+                    src={cat.image}
+                    alt=""
+                    role="presentation"
+                    width="800"
+                    height="450"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              )}
+              <div
+                class:list={[
+                  'wd-inclusion-body',
+                  'reveal',
+                  `reveal-delay-${(catIdx + 1) * 100}`,
+                ]}
+              >
+                <div class="wd-inclusion-head">
+                  <h3 class="wd-inclusion-cat-title">{cat.name}</h3>
+                </div>
+                {cat.intro && <p class="wd-inclusion-intro">{cat.intro}</p>}
+                <ul class="wd-inclusion-list" role="list">
+                  {cat.items.map(item => (
+                    <li class="wd-inclusion-item">{item}</li>
+                  ))}
+                </ul>
+                {cat.footer && <p class="wd-inclusion-footer">{cat.footer}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         7. IDEAL FOR — Card grid with descriptions
+    ══════════════════════════════════════════ -->
+    <section class="wd-section wd-section-dark">
+      <div class="wd-container">
+        <div class="wd-section-header reveal">
+          <h2 class="wd-section-title">{data.idealFor.title}</h2>
+          <p class="wd-section-sub">{data.idealFor.sub}</p>
+        </div>
+
+        <div class="wd-ideal-grid">
+          {data.idealFor.items.map((item, i) => (
+            <div class={`wd-ideal-card reveal reveal-delay-${(i % 3 + 1) * 100}`}>
+              <div class="wd-ideal-dot" aria-hidden="true"></div>
+              <h3 class="wd-ideal-label">{item.label}</h3>
+              <p class="wd-ideal-desc">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         8. TRUST — Large credibility blocks
+    ══════════════════════════════════════════ -->
+    <section class="wd-section wd-section-surface">
+      <div class="wd-container">
+        <h2 class="wd-section-title reveal">{data.trust.title}</h2>
+        <div class="wd-trust-grid">
+          {data.trust.items.map((item, i) => (
+            <div class={`wd-trust-card reveal reveal-delay-${(i % 2 + 1) * 100}`}>
+              <div class="wd-trust-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
+              <h3 class="wd-trust-title">{item.title}</h3>
+              <p class="wd-trust-desc">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════
+         9. CTA FINAL
+    ══════════════════════════════════════════ -->
+    <section class="wd-cta-section" id="contact">
+      <div class="wd-cta-glow" aria-hidden="true"></div>
+      <div class="wd-container">
+        <div class="wd-cta-inner reveal">
+          <h2 class="wd-cta-title">{data.cta.title}</h2>
+          <p class="wd-cta-sub">{data.cta.sub}</p>
+          <a href={data.cta.href} class="wd-btn-primary wd-btn-lg">
+            {data.cta.button}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         RELATED
+    ══════════════════════════════════════════ -->
+    <section class="wd-section wd-related">
+      <div class="wd-container">
+        <h2 class="wd-related-title">{data.related.title}</h2>
+        <div class="wd-related-grid">
+          {data.related.items.map(r => (
+            <a href={r.href} class="wd-related-card reveal">
+              {r.label}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+              </svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer t={data.footer} nav={{ logo: data.nav.logo }} lang={data.lang} />
+</BaseLayout>
+
+<style>
+/* ══ PROCESS — Sticky stack ══ */
+.wd-process-section {
+  padding: 0 0 160px;
+  background: #0B0F14;
+}
+.wd-process-section .wd-section-header {
+  padding: 100px 0 72px;
+}
+@media (max-width: 640px) {
+  .wd-process-section .wd-section-header { padding: 72px 0 40px; }
+  .wd-process-section { padding-bottom: 80px; }
+}
+
+/* Wrapper: full-width with small lateral padding only.
+   gap: 60vh creates a scroll "breathing zone" between cards —
+   so each card is the sole focus for a full screen before
+   the next slides up from below. */
+.wd-stack-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60vh;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+/* Cards: sticky so each new card slides over the previous.
+   Fixed width (min(1120px, 100%)) ensures all cards are the
+   same size regardless of content length.
+   top is set so the card rests vertically centered when sticky. */
+.wd-stack-card {
+  position: sticky;
+  /* Center the card vertically: (viewport - card height) / 2 */
+  top: calc((100vh - clamp(480px, 68vh, 680px)) / 2);
+  z-index: var(--card-z);
+  width: min(75%, 100%);
+  min-height: clamp(480px, 68vh, 680px);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.28),
+    0 24px 64px rgba(0,0,0,0.22);
+  /* Short transform transition so stack tracks scroll; long shadow for polish */
+  transition: transform 0.1s linear,
+              box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+/* JS sets inline transform per burial depth (progressive staircase).
+   .is-buried is kept for box-shadow and any CSS-only fallbacks. */
+.wd-stack-card.is-buried {
+  box-shadow:
+    0 2px 12px rgba(0,0,0,0.18),
+    0 6px 20px rgba(0,0,0,0.14);
+}
+
+@media (max-width: 900px) {
+  .wd-stack-wrapper {
+    padding: 0 20px;
+    gap: 40vh;
+  }
+  /* Slightly smaller max-width on tablet */
+  .wd-stack-card {
+    width: min(860px, 100%);
+  }
+}
+@media (max-width: 640px) {
+  .wd-stack-card {
+    position: relative;
+    top: auto;
+    width: 100%;
+    border-radius: 18px;
+    min-height: auto;
+  }
+  .wd-stack-wrapper {
+    padding: 0 14px;
+    gap: 16px;
+  }
+  /* On mobile JS clears inline transforms, nothing needed here */
+}
+
+/* Card themes */
+.wd-card-light  { background: #FFFFFF; }
+.wd-card-blue   { background: #1D4ED8; }
+.wd-card-purple { background: #6D28D9; }
+.wd-card-dark   { background: #0D1117; }
+.wd-card-sky    { background: #EFF6FF; }
+.wd-card-indigo { background: #312E81; }
+
+/* Inner layout */
+.wd-stack-inner {
+  display: grid;
+  grid-template-columns: 52fr 48fr;
+  height: 100%;
+  min-height: clamp(520px, 68vh, 700px);
+}
+@media (max-width: 900px) {
+  .wd-stack-inner { grid-template-columns: 1fr; min-height: auto; }
+}
+
+/* Visual side */
+.wd-stack-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 40px 56px 64px;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 900px) {
+  .wd-stack-visual { padding: 44px 28px 24px; }
+}
+
+/* Content side */
+.wd-stack-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 72px 64px 72px 48px;
+}
+@media (max-width: 900px) {
+  .wd-stack-content { padding: 24px 28px 52px; }
+}
+
+.wd-stack-num {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.wd-num-light  { color: #2563EB; }
+.wd-num-blue   { color: rgba(255,255,255,0.55); }
+.wd-num-purple { color: rgba(255,255,255,0.6); }
+.wd-num-dark   { color: #60A5FA; }
+.wd-num-sky    { color: #1D4ED8; }
+.wd-num-indigo { color: rgba(255,255,255,0.55); }
+
+.wd-stack-title {
+  font-size: clamp(2.25rem, 3.8vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.wd-title-dark  { color: #0F172A; }
+.wd-title-light { color: #FFFFFF; }
+
+.wd-stack-desc {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  margin-bottom: 32px;
+  max-width: 38ch;
+}
+.wd-desc-dark  { color: #4B5563; }
+.wd-desc-light { color: rgba(255,255,255,0.72); }
+
+.wd-stack-outcome {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 14px;
+  width: fit-content;
+}
+.wd-outcome-dark {
+  color: #1E40AF;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
+}
+.wd-outcome-light {
+  color: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* ── Simulation: Brief (card light) ── */
+.wd-sim-window {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+}
+.wd-sim-light { background: #F1F5F9; border: 1px solid #E2E8F0; }
+.wd-sim-chrome {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 14px;
+  background: #E8EDF4;
+  border-bottom: 1px solid #D1D9E6;
+}
+.wd-chrome-dark {
+  background: #161B22;
+  border-bottom: 1px solid #30363D;
+}
+.wd-dot-r, .wd-dot-y, .wd-dot-g {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.wd-dot-r { background: #FC4D4D; }
+.wd-dot-y { background: #FDBB3B; }
+.wd-dot-g { background: #33C34A; }
+.wd-sim-url {
+  font-size: 11px;
+  color: #64748B;
+  background: #fff;
+  border-radius: 6px;
+  padding: 3px 10px;
+  margin-left: 4px;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wd-sim-content { padding: 20px 22px 24px; }
+.wd-brief-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.wd-brief-logo-block { display: flex; align-items: center; gap: 8px; }
+.wd-logo-sq { width: 24px; height: 24px; border-radius: 6px; background: #2563EB; display: block; }
+.wd-logo-txt { width: 64px; height: 10px; border-radius: 4px; background: #94A3B8; display: block; }
+.wd-brief-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2563EB;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.wd-brief-section-title {
+  height: 14px;
+  width: 55%;
+  background: #CBD5E1;
+  border-radius: 5px;
+  margin-bottom: 16px;
+}
+.wd-brief-form { display: flex; flex-direction: column; gap: 14px; }
+.wd-form-group { display: flex; flex-direction: column; gap: 6px; }
+.wd-form-label { height: 9px; width: 38%; background: #94A3B8; border-radius: 4px; }
+.wd-form-input {
+  height: 36px;
+  background: #fff;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+}
+.wd-form-checks { display: flex; flex-direction: column; gap: 10px; }
+.wd-form-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.wd-check-box {
+  width: 18px; height: 18px;
+  border-radius: 5px;
+  border: 1.5px solid #CBD5E1;
+  display: block;
+  flex-shrink: 0;
+}
+.wd-check-on .wd-check-box {
+  background: #2563EB;
+  border-color: #2563EB;
+}
+.wd-check-text { width: 100px; height: 9px; background: #CBD5E1; border-radius: 4px; display: block; }
+.wd-form-cta {
+  height: 38px;
+  background: #2563EB;
+  border-radius: 9px;
+  margin-top: 4px;
+}
+
+/* ── Simulation: Sitemap (card blue) ── */
+.wd-sim-sitemap {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  padding: 20px;
+}
+.wd-sitemap-node {
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+.wd-sn-root {
+  width: 120px;
+  height: 48px;
+  background: rgba(255,255,255,0.95);
+  color: #1D4ED8;
+  margin: 0 auto 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+.wd-sitemap-wire {
+  width: 2px;
+  height: 24px;
+  background: rgba(255,255,255,0.35);
+  margin: 0 auto;
+}
+.wd-sitemap-children {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 24px;
+}
+.wd-sitemap-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.wd-sitemap-connector {
+  width: 2px;
+  height: 20px;
+  background: rgba(255,255,255,0.3);
+}
+.wd-sn-child {
+  width: 100px;
+  height: 40px;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  font-size: 11px;
+}
+.wd-sn-grandchild {
+  width: 80px;
+  height: 28px;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.15);
+  font-size: 10px;
+}
+
+/* ── Simulation: Design (card purple) ── */
+.wd-sim-design {
+  width: 100%;
+  max-width: 420px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+}
+.wd-design-panel {
+  background: rgba(255,255,255,0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.wd-design-header {
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  gap: 6px;
+}
+.wd-dh-layers { display: flex; gap: 6px; }
+.wd-dh-layer {
+  width: 32px; height: 8px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.2);
+}
+.wd-dh-active { background: rgba(255,255,255,0.8); }
+.wd-design-canvas { padding: 14px 12px; display: flex; flex-direction: column; gap: 10px; }
+.wd-dc-hero {
+  height: 60px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 9px;
+}
+.wd-dc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+.wd-dc-card {
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 7px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.wd-dc-highlight {
+  background: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.5);
+}
+.wd-dc-cta {
+  height: 32px;
+  width: 80px;
+  background: rgba(255,255,255,0.85);
+  border-radius: 7px;
+  margin: 0 auto;
+}
+.wd-design-props {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+.wd-dp-swatches { display: flex; flex-direction: column; gap: 8px; }
+.wd-swatch {
+  display: block;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+.wd-sw-1 { background: #fff; }
+.wd-sw-2 { background: #A78BFA; }
+.wd-sw-3 { background: #4C1D95; }
+.wd-sw-4 { background: #1E1B4B; }
+.wd-dp-typo { display: flex; flex-direction: column; gap: 8px; }
+.wd-typo-h { width: 28px; height: 14px; background: rgba(255,255,255,0.8); border-radius: 4px; }
+.wd-typo-p { width: 28px; height: 9px; background: rgba(255,255,255,0.4); border-radius: 4px; }
+.wd-typo-sm { width: 28px; height: 7px; background: rgba(255,255,255,0.25); border-radius: 4px; }
+
+/* ── Simulation: Code editor (card dark) ── */
+.wd-sim-code {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0D1117;
+  border: 1px solid #30363D;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+.wd-code-tabs {
+  display: flex;
+  gap: 0;
+  margin-left: 10px;
+  flex: 1;
+}
+.wd-code-tabs span {
+  font-size: 11px;
+  padding: 0 14px;
+  color: #8B949E;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid transparent;
+}
+.wd-tab-active {
+  color: #E6EDF3 !important;
+  border-bottom-color: #1F6FEB !important;
+  background: rgba(31,111,235,0.08);
+}
+.wd-code-body {
+  padding: 18px 20px;
+  font-family: 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 12px;
+  line-height: 1.9;
+  display: flex;
+  flex-direction: column;
+}
+.wd-code-line { color: #E6EDF3; }
+.wd-code-line.wd-indent { padding-left: 18px; }
+.wd-ct-kw  { color: #FF7B72; }
+.wd-ct-id  { color: #E6EDF3; }
+.wd-ct-str { color: #A5D6FF; }
+.wd-ct-fn  { color: #D2A8FF; }
+.wd-ct-tag { color: #7EE787; }
+.wd-ct-attr { color: #79C0FF; }
+.wd-ct-op  { color: #8B949E; }
+.wd-ct-comment { color: #6E7681; font-style: italic; }
+
+/* ── Simulation: Perf / Lighthouse (card sky) ── */
+.wd-sim-perf {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.wd-perf-gauge {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #E2E8F0;
+}
+.wd-gauge-svg {
+  width: 100%;
+  height: auto;
+}
+.wd-gauge-score {
+  font-size: 28px;
+  font-weight: 800;
+  fill: #0F172A;
+  font-family: inherit;
+}
+.wd-gauge-label {
+  font-size: 9px;
+  fill: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: inherit;
+}
+.wd-perf-vitals {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.wd-vital-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.wd-vital-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  width: 28px;
+  flex-shrink: 0;
+}
+.wd-vital-bar {
+  flex: 1;
+  height: 7px;
+  background: #F1F5F9;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.wd-vital-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+.wd-vf-green { background: #16A34A; }
+.wd-vital-val {
+  font-size: 12px;
+  font-weight: 700;
+  color: #16A34A;
+  width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ── Simulation: Analytics dashboard (card indigo) ── */
+.wd-sim-analytics {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 18px;
+  padding: 24px 24px 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+.wd-analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.wd-ah-title { width: 120px; height: 12px; background: rgba(255,255,255,0.4); border-radius: 5px; }
+.wd-ah-range { width: 80px; height: 10px; background: rgba(255,255,255,0.2); border-radius: 5px; }
+.wd-analytics-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.wd-stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 10px;
+  padding: 12px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.wd-stat-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+.wd-stat-lbl {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.wd-stat-up {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6EE7B7;
+}
+.wd-analytics-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 80px;
+  padding: 0 4px;
+}
+.wd-chart-bar {
+  flex: 1;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px 4px 0 0;
+}
+.wd-bar-active { background: rgba(255,255,255,0.75); }
+
+/* ══ CASE STUDIES — Light showcase (after main CTA) ══ */
+.wd-cs {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #eef2f7 0%, #f8fafc 45%, #f1f5f9 100%);
+  color: #0f172a;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+.wd-cs-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37, 99, 235, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 100% 40%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  will-change: transform;
+}
+.wd-cs-glow {
+  position: absolute;
+  width: min(900px, 90vw);
+  height: 420px;
+  left: 50%;
+  top: 28%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.9;
+}
+.wd-cs-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+}
+.wd-cs-header {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 140px 1.5rem 48px;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .wd-cs-header {
+    padding-top: 96px;
+    padding-bottom: 40px;
+  }
+}
+.wd-cs-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0 0 14px;
+}
+.wd-cs-title {
+  font-size: clamp(1.85rem, 4vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: #0f172a;
+  margin: 0 0 16px;
+}
+.wd-cs-sub {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+.wd-cs-featured {
+  padding: 0 1.5rem 140px;
+}
+.wd-cs-compare {
+  display: grid;
+  grid-template-columns: minmax(0, 38fr) minmax(0, 62fr);
+  gap: clamp(20px, 3.5vw, 40px);
+  max-width: 1280px;
+  margin: 0 auto;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .wd-cs-compare {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+.wd-cs-ba-before,
+.wd-cs-ba-after {
+  min-width: 0;
+}
+.wd-cs-ba-before {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.65s ease-out,
+    transform 0.65s ease-out;
+}
+.wd-cs-compare--in .wd-cs-ba-before {
+  opacity: 1;
+  transform: translateY(0);
+}
+.wd-cs-ba-after {
+  opacity: 0;
+  transform: scale(0.96);
+  transform-origin: center top;
+  transition:
+    opacity 0.72s cubic-bezier(0.2, 0.85, 0.25, 1) 0.16s,
+    transform 0.72s cubic-bezier(0.2, 0.85, 0.25, 1) 0.16s;
+}
+.wd-cs-compare--in .wd-cs-ba-after {
+  opacity: 1;
+  transform: scale(1);
+}
+.wd-cs-after-stage {
+  position: relative;
+  overflow: visible;
+  padding: 12px 0 28px;
+}
+.wd-cs-after-aura {
+  position: absolute;
+  width: 120%;
+  height: 90%;
+  left: -8%;
+  top: 4%;
+  background:
+    radial-gradient(ellipse 70% 70% at 60% 40%, rgba(99, 102, 241, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 60% at 30% 60%, rgba(37, 99, 235, 0.2) 0%, transparent 50%);
+  filter: blur(36px);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+  transition: transform 0.15s linear;
+}
+.wd-cs-frame {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: clamp(320px, 42vw, 440px);
+  width: 100%;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease;
+}
+.wd-cs-frame--before {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+.wd-cs-frame--before:hover {
+  transform: none;
+}
+.wd-cs-img-el--before {
+  opacity: 0.68;
+}
+.wd-cs-img-el--before img {
+  filter: blur(2px) saturate(0.62) contrast(0.88);
+  transform: scale(1.05);
+}
+.wd-cs-img-overlay--before {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.38);
+  pointer-events: none;
+  z-index: 1;
+}
+.wd-cs-img-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.wd-cs-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 2;
+}
+.wd-cs-img-el {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #e2e8f0;
+}
+.wd-cs-img-el img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+.wd-cs-frame--after {
+  z-index: 2;
+  transform: translateY(-6px);
+  box-shadow:
+    0 4px 6px -1px rgba(15, 23, 42, 0.06),
+    0 28px 56px -12px rgba(37, 99, 235, 0.28),
+    0 48px 80px -24px rgba(15, 23, 42, 0.12);
+}
+.wd-cs-ba-after:hover .wd-cs-frame--after {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 8px 16px -2px rgba(37, 99, 235, 0.2),
+    0 36px 64px -16px rgba(37, 99, 235, 0.35),
+    0 56px 100px -28px rgba(15, 23, 42, 0.14);
+}
+.wd-cs-after-glow {
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(circle at 50% 28%, rgba(37, 99, 235, 0.28) 0%, transparent 52%);
+  pointer-events: none;
+  z-index: 0;
+}
+.wd-cs-frame--after .wd-cs-img-el {
+  position: relative;
+  z-index: 1;
+}
+.wd-cs-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 6;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  padding: 6px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+.wd-cs-tag--after {
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+}
+.wd-cs-pins {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  will-change: transform;
+  transition: transform 0.15s linear;
+}
+.wd-cs-pin {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 168px;
+  padding: 8px 11px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  border-radius: 10px;
+  box-shadow:
+    0 6px 20px rgba(15, 23, 42, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.75) inset;
+  opacity: 0;
+  transform: translateY(10px) scale(0.96);
+}
+.wd-cs-compare--in .wd-cs-pin {
+  animation: wd-cs-pin-in 0.55s ease-out forwards;
+}
+.wd-cs-pin:nth-child(1) {
+  top: 9%;
+  left: 54%;
+  animation-delay: 0.45s;
+}
+.wd-cs-pin:nth-child(2) {
+  top: 36%;
+  left: 6%;
+  animation-delay: 0.58s;
+}
+.wd-cs-pin:nth-child(3) {
+  bottom: 14%;
+  right: 5%;
+  animation-delay: 0.7s;
+}
+@media (max-width: 640px) {
+  .wd-cs-pin {
+    max-width: 132px;
+    font-size: 10px;
+    padding: 6px 8px;
+  }
+  .wd-cs-pin:nth-child(1) {
+    top: 6%;
+    left: 40%;
+  }
+  .wd-cs-pin:nth-child(2) {
+    top: 34%;
+    left: 2%;
+  }
+}
+.wd-cs-pin-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+  flex-shrink: 0;
+}
+@keyframes wd-cs-pin-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.wd-cs-float {
+  position: absolute;
+  z-index: 6;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 14px;
+  box-shadow:
+    0 8px 28px rgba(15, 23, 42, 0.12),
+    0 2px 8px rgba(37, 99, 235, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  padding: 12px 14px;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.35s, transform 0.5s cubic-bezier(0.2, 0.85, 0.25, 1) 0.35s;
+}
+.wd-cs-compare--in .wd-cs-float {
+  opacity: 1;
+}
+.wd-cs-float--form {
+  top: 4%;
+  right: -2%;
+  max-width: 200px;
+  transform: rotate(-1.5deg) translateY(12px);
+}
+.wd-cs-compare--in .wd-cs-float--form {
+  transform: rotate(-1.5deg) translateY(0);
+}
+.wd-cs-float--pill {
+  bottom: 14%;
+  left: -1%;
+  padding: 10px 18px;
+  border-radius: 999px;
+  transform: rotate(2deg) translateY(12px);
+}
+.wd-cs-compare--in .wd-cs-float--pill {
+  transform: rotate(2deg) translateY(0);
+}
+.wd-cs-float--analytics {
+  top: 36%;
+  left: 2%;
+  width: 132px;
+  transform: rotate(-1.2deg) translateY(12px);
+}
+.wd-cs-compare--in .wd-cs-float--analytics {
+  transform: rotate(-1.2deg) translateY(0);
+}
+.wd-cs-float-cap {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+.wd-cs-float-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.wd-cs-float-ph {
+  font-size: 11px;
+  color: #94a3b8;
+}
+.wd-cs-float-line {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #e2e8f0, #f1f5f9);
+}
+.wd-cs-float-mini-cta {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.wd-cs-float-pill-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e40af;
+}
+.wd-cs-float-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  height: 52px;
+  margin-top: 8px;
+}
+.wd-cs-float-bars span {
+  flex: 1;
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(180deg, #60a5fa, #2563eb);
+  min-height: 18%;
+  opacity: 0.9;
+}
+@media (max-width: 960px) {
+  .wd-cs-float--form {
+    right: 2%;
+    top: 2%;
+  }
+  .wd-cs-float--pill {
+    left: 2%;
+    bottom: 10%;
+  }
+  .wd-cs-float--analytics {
+    left: 4%;
+    top: 32%;
+  }
+}
+@media (max-width: 640px) {
+  .wd-cs-float {
+    display: none;
+  }
+}
+.wd-cs-micro {
+  margin: 16px 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #64748b;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+.wd-cs-micro--after {
+  color: #334155;
+  font-weight: 700;
+}
+.wd-cs-compare-note {
+  max-width: 36rem;
+  margin: 40px auto 0;
+  text-align: center;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #64748b;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd-cs-ba-before,
+  .wd-cs-ba-after {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .wd-cs-pin {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .wd-cs-float {
+    opacity: 1;
+    transition: none;
+    transform: none;
+  }
+  .wd-cs-ba-after:hover .wd-cs-frame--after {
+    transform: translateY(-6px);
+  }
+}
+.wd-cs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+@media (max-width: 800px) {
+  .wd-cs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.wd-cs-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.04),
+    0 12px 32px -8px rgba(15, 23, 42, 0.1);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+}
+.wd-cs-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 4px 16px rgba(15, 23, 42, 0.08),
+    0 24px 48px -12px rgba(37, 99, 235, 0.12);
+}
+.wd-cs-card-visual {
+  height: 260px;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+}
+.wd-cs-card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.wd-cs-card:hover .wd-cs-card-visual img {
+  transform: scale(1.04);
+}
+.wd-cs-card-body {
+  padding: 20px 22px 24px;
+}
+.wd-cs-card-industry {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  margin: 0 0 8px;
+}
+.wd-cs-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
+}
+.wd-cs-card-desc {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #64748b;
+  margin: 0 0 14px;
+}
+.wd-cs-card-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wd-cs-card-bullets li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #475569;
+  font-weight: 500;
+}
+.wd-cs-card-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+.wd-cs-foot {
+  text-align: center;
+  padding: 0 1.5rem 100px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.wd-cs-foot-line {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0 0 14px;
+  font-weight: 500;
+}
+.wd-cs-foot-cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.wd-cs-foot-cta:hover {
+  color: #1d4ed8;
+  border-bottom-color: rgba(37, 99, 235, 0.4);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd-cs-frame:hover,
+  .wd-cs-card:hover {
+    transform: none;
+  }
+  .wd-cs-card:hover .wd-cs-card-visual img {
+    transform: none;
+  }
+  .wd-cs-pin {
+    animation: none;
+  }
+}
+
+</style>
+
+<script>
+// Hero parallax (sutil)
+const heroVisual = document.getElementById('wd-hero-visual');
+if (heroVisual && window.innerWidth > 900) {
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scroll = window.scrollY;
+        if (scroll < 800) {
+          heroVisual.style.transform = `translateY(${scroll * 0.06}px)`;
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+}
+
+// Stack cards: fractional depth = sum of each later card's approach to sticky,
+// so the deck grows smoothly while scrolling (not only at the last card).
+const stackCards = Array.from(document.querySelectorAll('.wd-stack-card')) as HTMLElement[];
+if (stackCards.length) {
+  const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = () => window.innerWidth <= 640;
+
+  const getStickyTop = (card: HTMLElement): number => {
+    const h = card.offsetHeight || 580;
+    return Math.max(0, (window.innerHeight - h) / 2);
+  };
+
+  /** 0 → 1 as card j scrolls from "below" into its sticky lock position */
+  const stickProgress = (j: number): number => {
+    const el = stackCards[j];
+    const t = getStickyTop(el);
+    const top = el.getBoundingClientRect().top;
+    const vh = window.innerHeight;
+    const range = Math.min(vh * 0.5, 440);
+    if (top <= t + 2) return 1;
+    if (top >= t + range) return 0;
+    return 1 - (top - t) / range;
+  };
+
+  const onScroll = () => {
+    const mobile = isMobile();
+    const vh = window.innerHeight;
+
+    stackCards.forEach((card, i) => {
+      const rect = card.getBoundingClientRect();
+
+      if (!noMotion && !mobile) {
+        const progress = (vh - rect.top) / (vh + rect.height);
+        const shift = (progress - 0.5) * 20;
+        const visual = card.querySelector('.wd-stack-visual') as HTMLElement | null;
+        if (visual) visual.style.transform = `translateY(${shift}px)`;
+      }
+
+      if (mobile) {
+        card.style.transform = '';
+        card.classList.remove('is-buried');
+        return;
+      }
+
+      // Sum progress for every card stacked above this one (immediate + gradual)
+      let depthFloat = 0;
+      for (let j = i + 1; j < stackCards.length; j++) {
+        depthFloat += noMotion ? (stickProgress(j) >= 1 ? 1 : 0) : stickProgress(j);
+      }
+
+      if (depthFloat < 0.02) {
+        card.style.transform = '';
+        card.classList.remove('is-buried');
+        return;
+      }
+
+      // Larger peek per level so the colored tabs read clearly (deck of cards)
+      const peekPx = 24;
+      const scaleStep = 0.028;
+      const scale = Math.max(0.82, 1 - depthFloat * scaleStep);
+      const translateY = -(depthFloat * peekPx);
+
+      card.style.transform = `translateY(${translateY}px) scale(${scale})`;
+      card.classList.add('is-buried');
+    });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+// Pain section: intro sticky centrado; lista en flujo normal; activa la card con más área visible
+const painIntro = document.querySelector('.wd-pain-intro') as HTMLElement | null;
+const painItems = document.querySelectorAll('.wd-pain-item');
+
+const syncPainIntroStickyTop = () => {
+  if (!painIntro || window.innerWidth <= 900) {
+    if (painIntro) painIntro.style.removeProperty('top');
+    return;
+  }
+  const h = painIntro.offsetHeight;
+  painIntro.style.top = `${Math.max(72, Math.round((window.innerHeight - h) / 2))}px`;
+};
+
+if (painIntro) {
+  syncPainIntroStickyTop();
+  window.addEventListener('resize', syncPainIntroStickyTop, { passive: true });
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(syncPainIntroStickyTop).observe(painIntro);
+  }
+}
+
+if (painItems.length) {
+  const thresholds = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1];
+  const obs = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.filter(e => e.isIntersecting);
+      if (!visible.length) return;
+      const best = visible.reduce((a, b) =>
+        b.intersectionRatio > a.intersectionRatio ? b : a
+      );
+      painItems.forEach(item => item.classList.remove('wd-pain-active'));
+      (best.target as HTMLElement).classList.add('wd-pain-active');
+    },
+    { threshold: thresholds }
+  );
+  painItems.forEach(item => obs.observe(item));
+}
+
+// Card glow effect on hover
+const interactiveCards = document.querySelectorAll('.wd-cap-card, .wd-trust-card, .wd-ideal-card, .wd-process-step');
+interactiveCards.forEach(card => {
+  const element = card as HTMLElement;
+  element.addEventListener('mousemove', (event) => {
+    const e = event as MouseEvent;
+    const rect = element.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    element.style.setProperty('--mouse-x', `${x}px`);
+    element.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+// Case studies: scroll reveal (before first, then after) + parallax
+const wdCsCompare = document.querySelector('[data-wd-cs-compare]');
+if (wdCsCompare) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    wdCsCompare.classList.add('wd-cs-compare--in');
+  } else if ('IntersectionObserver' in window) {
+    const ioCs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          wdCsCompare.classList.add('wd-cs-compare--in');
+          ioCs.disconnect();
+        }
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -6% 0px' }
+    );
+    ioCs.observe(wdCsCompare);
+  }
+}
+
+const wdCs = document.querySelector('.wd-cs');
+if (wdCs) {
+  const csBg = wdCs.querySelector('.wd-cs-bg') as HTMLElement | null;
+  const csGlow = wdCs.querySelector('.wd-cs-glow') as HTMLElement | null;
+  const afterAura = wdCs.querySelector('.wd-cs-after-aura') as HTMLElement | null;
+  const csPinsWrap = wdCs.querySelector('.wd-cs-pins') as HTMLElement | null;
+  const csReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const csParallax = () => {
+    if (csReduce) return;
+    const r = wdCs.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const mid = r.top + r.height / 2;
+    const p = Math.max(-1, Math.min(1, (mid - vh / 2) / (vh * 0.85)));
+    if (csBg) csBg.style.transform = `translate3d(0, ${p * 18}px, 0)`;
+    if (csGlow) csGlow.style.transform = `translate3d(-50%, ${p * 12}px, 0)`;
+    if (afterAura) afterAura.style.transform = `translate3d(0, ${p * -10}px, 0)`;
+    if (csPinsWrap) csPinsWrap.style.transform = `translate3d(0, ${p * 9}px, 0)`;
+  };
+  window.addEventListener('scroll', csParallax, { passive: true });
+  csParallax();
+}
+</script>

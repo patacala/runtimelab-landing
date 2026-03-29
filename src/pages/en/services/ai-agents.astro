@@ -2,12 +2,15 @@
 import ServicePage from '../../../components/ServicePage.astro';
 import nav from '../../../i18n/en.json';
 
+// SEO focus: AI agents for business
 const data = {
   lang: 'en' as const,
   meta: {
-    title: 'AI Agents for Business — Automated Client Engagement | RuntimeLab',
-    description: 'We build AI agents that respond to clients, qualify leads, and book appointments automatically, available 24/7 on WhatsApp, web, and email. Live in less than 2 weeks.',
-    keywords: 'AI agents, artificial intelligence agents, AI chatbot, AI agent for business, automated client engagement, conversational AI, lead qualification AI',
+    title: 'AI agents for business — 24/7 engagement, leads & booking | RuntimeLab',
+    description:
+      'AI agents that respond in seconds, qualify leads, and book appointments on WhatsApp, web, and email. CRM and calendar integration. Typically live in under two weeks.',
+    keywords:
+      'AI agents, artificial intelligence agents, AI agents for business, conversational AI, AI chatbot WhatsApp, AI phone answering, answer calls with AI, automated lead qualification, appointment booking AI, virtual assistant business, AI customer service, AI agent implementation, 24/7 AI response, sales AI assistant, CRM AI integration, multichannel AI agent, conversational automation, SMB AI, RuntimeLab',
     hreflangEs: 'https://runtime-lab.com/servicios/agentes-ia',
     hreflangEn: 'https://runtime-lab.com/en/services/ai-agents',
   },
@@ -16,96 +19,191 @@ const data = {
   hero: {
     badge: 'AI AGENTS',
     title: 'AI agents that engage, qualify, and book for you — 24/7',
-    sub: 'We build AI agents that respond instantly from any channel: WhatsApp, web, email, or social media. No manual intervention, no limited hours, no missed leads.',
+    sub: 'We deploy AI agents that respond instantly on WhatsApp, web, email, or social — with your brand voice, clear business rules, and seamless handoff to humans when needed.',
     cta: 'Book a free call',
     ctaHref: '/en/#contact',
+    trustBullets: [
+      'WhatsApp Business, web, and CRM integrations',
+      'Iteration on real conversations after launch',
+      'Clear path: discovery → training → production',
+    ],
   },
-  benefitsTitle: 'What an AI agent does for your business',
-  benefits: [
+  visuals: {
+    hero: '/assets/sections/hero_cube.webp',
+    mid: '/assets/sections/crm_grid_seamless.png',
+  },
+  proof: {
+    items: [
+      { value: '<2 wk', label: 'Typical go-live' },
+      { value: '24/7', label: 'Coverage' },
+      { value: 'Multi', label: 'Channels' },
+    ],
+  },
+  painPoints: {
+    title: 'When response speed is the bottleneck',
+    sub: 'It is not only “need more staff”: it is volume, spikes, and the expectation of instant replies.',
+    intro:
+      'If a lead waits hours, they have already moved on. An AI agent handles the first line without sacrificing tone or quality.',
+    items: [
+      {
+        title: 'Leads go cold after slow replies',
+        desc: 'Campaigns create intent, but conversion drops when nobody answers in minutes. The agent covers the critical first window every time.',
+      },
+      {
+        title: 'Team buried in repetitive questions',
+        desc: 'Hours, pricing, location, and requirements repeat endlessly. Automating that layer frees sales and ops to close and deliver.',
+      },
+      {
+        title: 'Scheduling chaos and double bookings',
+        desc: 'Coordinating over chat is error-prone. The agent reads real availability, confirms, and logs to CRM without friction.',
+      },
+      {
+        title: 'Inconsistent answers per channel',
+        desc: 'WhatsApp says one thing, the site another. We centralize knowledge and policies so every channel speaks the same language.',
+      },
+    ],
+  },
+  featureBlocksTitle: 'Capabilities that move revenue',
+  featureBlocksSub: 'Guided flows, real integrations, and traceability — not a generic widget bolted on your site.',
+  featureBlocks: [
     {
       icon: 'zap' as const,
-      title: 'Instant response, 24/7',
-      desc: 'Your AI agent responds within seconds, any day, any hour. No lead is lost due to slow or missing responses.',
+      title: 'First response in seconds, on every channel',
+      desc: 'We connect the agent where you already work so prospects never wait for “office hours” to move forward.',
+      bullets: ['WhatsApp Business and messaging', 'Web, forms, and campaign links', 'Email and internal team alerts'],
+      image: '/assets/sections/build_verifid.png',
     },
     {
       icon: 'check' as const,
-      title: 'Automatic lead qualification',
-      desc: 'The agent asks the right questions, evaluates purchase intent, and classifies each lead before passing it to your team.',
+      title: 'Qualification with your playbook',
+      desc: 'We define questions, branches, and criteria (intent, segment, urgency…) so humans only see the conversations that matter.',
+      bullets: ['CRM tags and fields', 'Handoff with full context', 'Escalation rules by SLA'],
+      reverse: true,
+      image: '/assets/sections/encrypted_credentials.png',
     },
     {
       icon: 'clock' as const,
-      title: 'Hands-free appointment booking',
-      desc: 'The agent checks availability, offers time slots, and confirms appointments directly in your calendar without team intervention.',
-    },
-    {
-      icon: 'bot' as const,
-      title: 'Natural conversations',
-      desc: 'We train the agent with your brand tone, vocabulary, and business knowledge. Clients feel like they\'re talking to a real team member.',
+      title: 'Real calendar booking with confirmations',
+      desc: 'The agent offers valid slots, creates events, and can send reminders to cut no-shows.',
+      bullets: ['Google Calendar / Microsoft 365', 'Reschedule and cancellation policies', 'History tied to lead or client record'],
+      image: '/assets/sections/security_standard.png',
     },
   ],
+  visualBreak: {
+    title: 'One conversational brain for sales and ops',
+    sub: 'Fewer siloed tools: same knowledge base, same rules, unified metrics per channel.',
+    bullets: [
+      'Less friction between marketing, sales, and support',
+      'Conversation audits to improve prompts and flows',
+      'Weekly iteration on real objections',
+    ],
+  },
+  deliverables: {
+    title: 'What we deliver',
+    sub: 'Shipped to run in production, documented, and transferable.',
+    spotlight: {
+      kicker: 'DELIVERABLES',
+      text: 'Documented flows, integrations tested in staging, and success criteria agreed before go-live.',
+    },
+    categories: [
+      {
+        name: 'Agent & knowledge',
+        intro: 'Everything you need to reproduce and tune agent behavior.',
+        items: [
+          'Conversational flow and branch design',
+          'Initial knowledge base and brand tone',
+          'Qualification rules and human escalation paths',
+        ],
+        footer: 'Includes a handoff session with your team.',
+      },
+      {
+        name: 'Integration & launch',
+        intro: 'Connectors, testing, and checklist before real traffic.',
+        items: ['CRM / sheets / APIs you rely on', 'UAT against agreed scenarios', 'Basic monitoring and incident logging'],
+        image: '/assets/sections/self_host.png',
+        footer: 'Operational documentation and a path for ongoing iterations.',
+      },
+    ],
+  },
   process: {
-    title: 'How we build and deploy your AI agent',
-    sub: 'From zero to a live AI agent in less than 2 weeks.',
+    title: 'How we implement your AI agent',
+    sub: 'From discovery to production with clear milestones and room to refine on real data.',
     steps: [
       {
         num: '01',
         title: 'Conversation audit',
-        desc: 'We analyze your current conversations: what clients ask, how you respond, and what stops conversion. We define the agent\'s flows.',
+        desc: 'We review current channels, frequent objections, and bottlenecks. We define agent scope and success metrics.',
       },
       {
         num: '02',
         title: 'Training and customization',
-        desc: 'We train the agent with your business knowledge, communication tone, and the qualification rules you define.',
+        desc: 'We build knowledge, tone, and flows. We align qualification, policies (pricing, hours), and sensitive topics.',
       },
       {
         num: '03',
-        title: 'Channel integration',
-        desc: 'We connect the agent to WhatsApp Business, your website, email, and any channel you use. We also integrate with your CRM and calendar.',
+        title: 'Channel and CRM integration',
+        desc: 'We connect WhatsApp, web, email, and calendar. We sync CRM fields so every conversation leaves useful data.',
       },
       {
         num: '04',
-        title: 'Testing and refinement',
-        desc: 'We test the agent with real scenarios, refine responses and flows until it performs exactly as you need.',
+        title: 'Testing and hardening',
+        desc: 'Real scenarios, edge cases, and conversational load checks. We tune until we hit agreed quality and latency targets.',
       },
       {
         num: '05',
-        title: 'Launch and monitoring',
-        desc: 'We activate the agent, monitor the first conversations, and make real-time adjustments to optimize performance.',
+        title: 'Launch and continuous improvement',
+        desc: 'Controlled go-live, monitoring of early chats, and a tight feedback loop with analytics.',
       },
     ],
   },
   useCases: {
-    title: 'What kinds of businesses use AI agents?',
+    title: 'Where AI agents fit best',
+    sub: 'Industry matters less than the pattern: high volume of repeated questions + need for speed.',
     items: [
       {
         label: 'Healthcare clinics',
-        desc: 'The agent answers service questions, triages urgent symptoms, and books appointments directly in the doctor\'s calendar.',
+        desc: 'Light intent triage, service information, and scheduling — within legal guardrails, without medical diagnosis.',
       },
       {
         label: 'Real estate',
-        desc: 'Responds to property inquiries, qualifies buyer/renter intent, and schedules viewings with the agent in minutes.',
+        desc: 'Listing Q&A, budget and area filtering, and tour booking with automated reminders.',
       },
       {
         label: 'Professional services',
-        desc: 'Lawyers, accountants, consultants: the agent filters inquiries, explains services, and books diagnostic calls automatically.',
+        desc: 'Law, accounting, agencies: filter inquiries, explain packages, and book diagnostic calls.',
       },
       {
-        label: 'Education and academies',
-        desc: 'Answers questions about courses, schedules, and pricing. Captures prospect data and guides them through enrollment.',
+        label: 'Education & training',
+        desc: 'Program questions, dates, and pricing; capture details and route to enrollment or a human advisor.',
       },
       {
-        label: 'Retail and e-commerce',
-        desc: 'Handles post-sale inquiries, order tracking, and incident resolution without support team involvement.',
+        label: 'Retail & e-commerce',
+        desc: 'Order status, return policies, and human escalation when the case requires it.',
       },
       {
-        label: 'Restaurants and hospitality',
-        desc: 'Manages reservations, answers menu questions, and confirms special events automatically.',
+        label: 'Restaurants & hospitality',
+        desc: 'Reservations, menu FAQs, and WhatsApp confirmations to reduce no-shows.',
+      },
+    ],
+  },
+  trust: {
+    title: 'Why RuntimeLab',
+    blocks: [
+      {
+        number: '01',
+        title: 'Engineering, not only prompts',
+        desc: 'Integrations, failure handling, observability, and content governance — what makes an agent survive real traffic.',
+      },
+      {
+        number: '02',
+        title: 'Clear scope and risk boundaries',
+        desc: 'We document model limits, mandatory human handoffs, and periodic safety reviews of conversational content.',
       },
     ],
   },
   cta: {
-    title: 'Your AI agent could be live this week.',
-    sub: 'Book a call and in 30 minutes we\'ll show you exactly how an AI agent would work for your specific business.',
+    title: 'Ready to stop losing leads to slow replies?',
+    sub: 'In a short call we outline flows and channels for your case — no generic slide deck.',
     button: 'Book a free call',
     href: '/en/#contact',
   },
@@ -119,39 +217,66 @@ const data = {
   },
   schemas: [
     {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "name": "AI Agents for Business",
-      "description": "Implementation of AI agents that respond to clients, qualify leads, and book appointments automatically 24/7.",
-      "provider": { "@id": "https://runtime-lab.com/#organization" },
-      "areaServed": { "@type": "Country", "name": "United States" },
-      "serviceType": "AI Agent Development",
-      "url": "https://runtime-lab.com/en/services/ai-agents"
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: 'AI agents for business',
+      description:
+        'Multichannel AI agents that respond instantly, qualify leads, and book appointments with CRM and calendar integration.',
+      provider: { '@id': 'https://runtime-lab.com/#organization' },
+      areaServed: { '@type': 'Country', name: 'United States' },
+      serviceType: 'AI Agent Development',
+      url: 'https://runtime-lab.com/en/services/ai-agents',
     },
     {
-      "@context": "https://schema.org",
-      "@type": "HowTo",
-      "name": "How we build and deploy an AI agent",
-      "description": "5-step process to implement an AI agent for your business",
-      "step": [
-        { "@type": "HowToStep", "position": 1, "name": "Conversation audit", "text": "Analyze current conversations to define agent flows and qualification rules." },
-        { "@type": "HowToStep", "position": 2, "name": "Training and customization", "text": "Train the agent with your business knowledge, tone, and qualification rules." },
-        { "@type": "HowToStep", "position": 3, "name": "Channel integration", "text": "Connect the agent to WhatsApp, website, email, CRM, and calendar." },
-        { "@type": "HowToStep", "position": 4, "name": "Testing and refinement", "text": "Test with real scenarios and refine until it performs perfectly." },
-        { "@type": "HowToStep", "position": 5, "name": "Launch and monitoring", "text": "Activate the agent and monitor early conversations with real-time adjustments." }
-      ]
+      '@context': 'https://schema.org',
+      '@type': 'HowTo',
+      name: 'How we implement an AI agent for your business',
+      description: 'Five phases: audit, training, integration, testing, and launch with continuous improvement.',
+      step: [
+        {
+          '@type': 'HowToStep',
+          position: 1,
+          name: 'Conversation audit',
+          text: 'Review channels and define scope, flows, and success metrics.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 2,
+          name: 'Training and customization',
+          text: 'Build knowledge, tone, qualification, and policies aligned to your business.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 3,
+          name: 'Channel and CRM integration',
+          text: 'Connect WhatsApp, web, email, calendar, and CRM synchronization.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 4,
+          name: 'Testing and hardening',
+          text: 'Test real scenarios and tune until quality and SLA targets are met.',
+        },
+        {
+          '@type': 'HowToStep',
+          position: 5,
+          name: 'Launch and continuous improvement',
+          text: 'Go-live, monitoring, and improvement cycles on real data.',
+        },
+      ],
     },
     {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://runtime-lab.com/en/" },
-        { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://runtime-lab.com/en/#capabilities" },
-        { "@type": "ListItem", "position": 3, "name": "AI Agents", "item": "https://runtime-lab.com/en/services/ai-agents" }
-      ]
-    }
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://runtime-lab.com/en/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://runtime-lab.com/en/#capabilities' },
+        { '@type': 'ListItem', position: 3, name: 'AI Agents', item: 'https://runtime-lab.com/en/services/ai-agents' },
+      ],
+    },
   ],
 };
 ---
 
 <ServicePage data={data} />
+
