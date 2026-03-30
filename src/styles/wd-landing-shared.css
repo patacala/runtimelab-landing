@@ -1,6 +1,6 @@
 /* ══ BASE ══ */
 .wd-container {
-  max-width: 72rem;
+  max-width: 79rem;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -1556,13 +1556,7 @@
 /* Hero asset (imagen real en lugar del mock browser) */
 .wd-hero-asset-frame {
   position: relative;
-  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(37,99,235,0.28);
-  box-shadow:
-    0 16px 56px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(37,99,235,0.1) inset;
-  background: #0b0f14;
 }
 .wd-hero-asset-frame img {
   display: block;
