@@ -1,0 +1,616 @@
+---
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Propuesta Comercial — Diana Hair Design · Runtime Lab</title>
+  <style>
+    :root {
+      --bg:      oklch(100% 0 0);
+      --surface: oklch(100% 0 0);
+      --fg:      oklch(12% 0 0);
+      --muted:   oklch(48% 0 0);
+      --border:  oklch(88% 0 0);
+      --accent:  oklch(12% 0 0);
+
+      --font-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
+      --font-body:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+      --font-mono:    ui-monospace, 'SF Mono', Menlo, monospace;
+
+      --max: 680px;
+      --wide: 720px;
+      --pad: clamp(24px, 5vw, 48px);
+      --section-gap: clamp(56px, 8vw, 80px);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .doc {
+      max-width: var(--wide);
+      margin: 0 auto;
+      padding: clamp(48px, 8vw, 96px) var(--pad) clamp(64px, 10vw, 96px);
+    }
+
+    /* ——— Cover / header ——— */
+    .doc__header {
+      padding-bottom: clamp(48px, 8vw, 72px);
+      margin-bottom: var(--section-gap);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc__meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: clamp(40px, 6vw, 64px);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .logo {
+      display: block;
+      width: clamp(120px, 22vw, 180px);
+      height: auto;
+      margin-bottom: clamp(32px, 5vw, 48px);
+    }
+
+    .doc__eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .doc__title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      text-wrap: balance;
+      margin-bottom: 12px;
+    }
+
+    .doc__client {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .doc__subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 44ch;
+      text-wrap: pretty;
+      line-height: 1.6;
+    }
+
+    /* ——— Sections ——— */
+    .section + .section {
+      margin-top: var(--section-gap);
+      padding-top: var(--section-gap);
+      border-top: 1px solid var(--border);
+    }
+
+    .section__num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section__title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: clamp(20px, 3vw, 32px);
+      text-wrap: balance;
+    }
+
+    .prose {
+      max-width: var(--max);
+    }
+
+    .prose p + p { margin-top: 1.2em; }
+
+    .prose .lead {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      text-wrap: pretty;
+    }
+
+    /* ——— Lists ——— */
+    .list {
+      list-style: none;
+      max-width: var(--max);
+    }
+
+    .list li {
+      position: relative;
+      padding: 12px 0 12px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* ——— Diagnosis ——— */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(28px, 4vw, 40px);
+    }
+
+    @media (min-width: 600px) {
+      .split { grid-template-columns: 1fr 1fr; }
+    }
+
+    .split__col h3 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ——— Strategy pillars ——— */
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (min-width: 600px) {
+      .pillars { grid-template-columns: 1fr 1fr; }
+    }
+
+    .pillar {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (min-width: 600px) {
+      .pillar:nth-child(odd) { padding-right: 24px; }
+      .pillar:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--border); }
+    }
+
+    .pillar__title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .pillar p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      text-wrap: pretty;
+    }
+
+    /* ——— Methodology ——— */
+    .steps {
+      max-width: var(--max);
+      border-top: 1px solid var(--border);
+    }
+
+    .step {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .step__num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .step__title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ——— KPIs ——— */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      max-width: var(--max);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (min-width: 500px) {
+      .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .kpi {
+      padding: 14px 0;
+      font-size: 14px;
+      line-height: 1.4;
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (min-width: 500px) {
+      .kpi:nth-child(3n+2),
+      .kpi:nth-child(3n+3) {
+        padding-left: 16px;
+        border-left: 1px solid var(--border);
+      }
+    }
+
+    /* ——— Pricing ——— */
+    .plan-block {
+      max-width: var(--max);
+      padding-top: 8px;
+    }
+
+    .plan-block__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .plan-block__name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .plan-block__price {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 7vw, 48px);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 24px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .plan-block__price span {
+      font-size: 0.4em;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+
+    .plan-block__note {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 20px;
+      line-height: 1.6;
+      max-width: 48ch;
+    }
+
+    .note-muted {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 24px;
+    }
+
+    /* ——— Footer ——— */
+    .doc__footer {
+      margin-top: var(--section-gap);
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    @media print {
+      .doc { padding: 0; }
+      .section + .section { break-inside: avoid; }
+      body { font-size: 11pt; }
+    }
+  </style>
+</head>
+<body>
+
+  <article class="doc">
+
+    <header class="doc__header">
+      <div class="doc__meta">
+        <span>Runtime Lab</span>
+        <span>2026</span>
+      </div>
+      <img class="logo" src="/assets/black-logo.png" alt="Runtime Lab" width="180" height="auto">
+      <p class="doc__eyebrow">Propuesta comercial</p>
+      <h1 class="doc__title">Estrategia integral de marketing digital</h1>
+      <p class="doc__client">Diana Hair Design</p>
+      <p class="doc__subtitle">Administración de cuentas, contenido estratégico y crecimiento en redes sociales orientado a generar citas.</p>
+    </header>
+
+    <section class="section">
+      <span class="section__num">01 — Visión</span>
+      <h2 class="section__title">Nuestra visión</h2>
+      <div class="prose">
+        <p class="lead">Diana Hair Design ya cuenta con el activo más importante para crecer: la calidad de su trabajo. Cada transformación refleja experiencia, técnica y dedicación, pero hoy ese valor no se comunica con la misma fuerza en el entorno digital.</p>
+        <p>En la actualidad, las redes sociales son el primer punto de contacto entre un cliente y un salón de belleza. Antes de agendar una cita, las personas buscan inspiración, evalúan resultados, leen opiniones y deciden si pueden confiar en el profesional que transformará su imagen.</p>
+        <p>Nuestra propuesta consiste en convertir esa confianza en una ventaja competitiva. Desarrollaremos una presencia digital sólida y coherente que refleje la calidad del servicio, fortalezca el posicionamiento de la marca y convierta las redes sociales en un canal constante para atraer nuevos clientes y fidelizar a quienes ya conocen el salón.</p>
+        <p>Nuestro compromiso es trabajar en una estrategia de crecimiento enfocada en fortalecer la marca, generar credibilidad y contribuir al incremento sostenible de las reservas y los ingresos del negocio.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section__num">02 — Objetivos</span>
+      <h2 class="section__title">Durante los primeros meses trabajaremos para</h2>
+      <ul class="list">
+        <li>Fortalecer la identidad de la marca.</li>
+        <li>Posicionar a Diana Hair Design como referente en color y cuidado capilar.</li>
+        <li>Incrementar el alcance en Facebook e Instagram.</li>
+        <li>Generar mayor interacción con potenciales clientes.</li>
+        <li>Convertir las redes sociales en un canal constante de generación de citas.</li>
+        <li>Fidelizar clientes actuales y fomentar recomendaciones.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <span class="section__num">03 — Diagnóstico</span>
+      <h2 class="section__title">Diagnóstico inicial</h2>
+      <div class="prose" style="margin-bottom: 32px;">
+        <p class="lead">Tras analizar la presencia digital actual identificamos importantes oportunidades de crecimiento.</p>
+      </div>
+      <div class="split">
+        <div class="split__col">
+          <h3>Aspectos positivos</h3>
+          <ul class="list">
+            <li>Excelente calidad en los servicios.</li>
+            <li>Muy buenos resultados en color y tratamientos.</li>
+            <li>Marca con potencial.</li>
+            <li>Base inicial en Facebook.</li>
+          </ul>
+        </div>
+        <div class="split__col">
+          <h3>Oportunidades</h3>
+          <ul class="list">
+            <li>Fortalecer la imagen de marca.</li>
+            <li>Mejorar la presencia en Instagram.</li>
+            <li>Crear contenido más atractivo y estratégico.</li>
+            <li>Incrementar la interacción con la comunidad.</li>
+            <li>Aprovechar mejor el contenido en video.</li>
+            <li>Implementar campañas orientadas a generar citas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section__num">04 — Estrategia</span>
+      <h2 class="section__title">Nuestra estrategia</h2>
+      <div class="prose" style="margin-bottom: 28px;">
+        <p>Desarrollaremos una estrategia integral enfocada en cuatro áreas principales:</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar">
+          <h3 class="pillar__title">Posicionamiento de marca</h3>
+          <p>Fortaleceremos la identidad visual para que Diana Hair Design proyecte una imagen profesional, consistente y fácil de recordar.</p>
+        </div>
+        <div class="pillar">
+          <h3 class="pillar__title">Contenido estratégico</h3>
+          <p>Crearemos contenido pensado para conectar con la audiencia, generar confianza y aumentar el interés por los servicios.</p>
+        </div>
+        <div class="pillar">
+          <h3 class="pillar__title">Crecimiento en redes sociales</h3>
+          <p>Optimizaremos la presencia digital para aumentar el alcance, mejorar la interacción y convertir seguidores en clientes.</p>
+        </div>
+        <div class="pillar">
+          <h3 class="pillar__title">Generación de clientes</h3>
+          <p>Implementaremos acciones enfocadas en atraer nuevos clientes, incentivar recomendaciones y aumentar la cantidad de citas agendadas.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section__num">05 — Servicios</span>
+      <h2 class="section__title">Servicios incluidos</h2>
+      <div class="prose" style="margin-bottom: 24px;">
+        <p>El plan contempla la gestión integral de la presencia digital del negocio.</p>
+      </div>
+      <ul class="list">
+        <li>Auditoría inicial.</li>
+        <li>Optimización de Facebook.</li>
+        <li>Creación y configuración profesional de Instagram.</li>
+        <li>Desarrollo de identidad visual.</li>
+        <li>Diseño gráfico para redes sociales.</li>
+        <li>Producción de contenido.</li>
+        <li>Edición profesional de video.</li>
+        <li>Gestión de publicaciones.</li>
+        <li>Gestión de historias.</li>
+        <li>Calendario mensual de contenido.</li>
+        <li>Gestión de comunidad.</li>
+        <li>Optimización continua.</li>
+        <li>Reportes mensuales.</li>
+        <li>Reunión estratégica mensual.</li>
+      </ul>
+      <p class="note-muted">Publicidad en Meta Ads disponible como servicio adicional.</p>
+    </section>
+
+    <section class="section">
+      <span class="section__num">06 — Metodología</span>
+      <h2 class="section__title">Nuestra metodología</h2>
+      <div class="prose" style="margin-bottom: 28px;">
+        <p>Trabajamos mediante un proceso organizado que garantiza consistencia y resultados medibles.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">01</div>
+          <div>
+            <h3 class="step__title">Planificación</h3>
+            <p>Definimos objetivos, campañas y contenido del mes.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">02</div>
+          <div>
+            <h3 class="step__title">Producción</h3>
+            <p>Realizamos sesiones de creación de contenido y material audiovisual.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">03</div>
+          <div>
+            <h3 class="step__title">Publicación</h3>
+            <p>Administramos las redes sociales siguiendo un calendario estratégico.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">04</div>
+          <div>
+            <h3 class="step__title">Optimización</h3>
+            <p>Analizamos continuamente el desempeño para mejorar los resultados.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">05</div>
+          <div>
+            <h3 class="step__title">Reporte</h3>
+            <p>Cada mes entregamos un informe con indicadores, avances y nuevas oportunidades.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section__num">07 — Indicadores</span>
+      <h2 class="section__title">Indicadores de éxito</h2>
+      <div class="prose" style="margin-bottom: 24px;">
+        <p>El crecimiento será medido mediante indicadores reales del negocio:</p>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi">Alcance de la marca</div>
+        <div class="kpi">Crecimiento de la comunidad</div>
+        <div class="kpi">Interacciones</div>
+        <div class="kpi">Solicitudes de información</div>
+        <div class="kpi">Citas generadas</div>
+        <div class="kpi">Nuevos clientes</div>
+        <div class="kpi">Clientes recurrentes</div>
+        <div class="kpi">Reseñas obtenidas</div>
+        <div class="kpi">Retorno de la inversión</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section__num">08 — Plan de lanzamiento</span>
+      <h2 class="section__title">Primeros 90 días</h2>
+      <div class="prose" style="margin-bottom: 24px;">
+        <p>Durante esta etapa construiremos una base sólida para el crecimiento de la marca.</p>
+      </div>
+      <ul class="list">
+        <li>Gestión profesional de Facebook e Instagram.</li>
+        <li>Creación de Instagram desde cero.</li>
+        <li>Desarrollo de identidad visual.</li>
+        <li>Optimización de perfiles.</li>
+        <li>Calendario mensual de contenido.</li>
+        <li>Hasta 16 publicaciones mensuales.</li>
+        <li>Entre 8 y 12 Reels mensuales.</li>
+        <li>Gestión de historias.</li>
+        <li>Reporte mensual.</li>
+        <li>Reunión estratégica mensual.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <span class="section__num">09 — Inversión</span>
+      <h2 class="section__title">Inversión</h2>
+      <div class="plan-block">
+        <p class="plan-block__label">Plan de lanzamiento</p>
+        <h3 class="plan-block__name">Gestión integral de marketing digital</h3>
+        <p class="plan-block__price">USD $300 <span>/ mes</span></p>
+        <ul class="list">
+          <li>No incluye inversión publicitaria en Meta Ads.</li>
+        </ul>
+        <p class="plan-block__note">La pauta publicitaria será administrada directamente desde la cuenta del cliente y el presupuesto será definido de acuerdo con los objetivos de la campaña.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section__num">10 — Diferenciador</span>
+      <h2 class="section__title">¿Por qué trabajar con nosotros?</h2>
+      <div class="prose">
+        <p>No nos limitamos a publicar contenido.</p>
+        <p>Nuestro enfoque combina estrategia, creatividad y análisis para que las redes sociales se conviertan en una herramienta real de crecimiento para el negocio.</p>
+        <p>Cada publicación, video y campaña tiene un propósito: atraer más clientes, fortalecer la marca y generar resultados medibles.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section__num">11 — Próximos pasos</span>
+      <h2 class="section__title">Una vez aprobada la propuesta iniciaremos con</h2>
+      <ul class="list">
+        <li>Reunión de descubrimiento.</li>
+        <li>Definición de objetivos.</li>
+        <li>Organización de la identidad visual.</li>
+        <li>Planificación del contenido del primer mes.</li>
+        <li>Producción del material inicial.</li>
+        <li>Inicio de la estrategia digital.</li>
+      </ul>
+    </section>
+
+    <footer class="doc__footer">
+      runtime-lab.com<br>
+      Documento confidencial
+    </footer>
+
+  </article>
+
+</body>
+</html>
