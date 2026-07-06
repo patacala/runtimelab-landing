@@ -142,6 +142,34 @@
       text-wrap: pretty;
     }
 
+    /* ——— Insight / callout block ——— */
+    .insight {
+      max-width: var(--max);
+      margin-top: 28px;
+      padding: 18px 20px 18px 20px;
+      border-left: 2px solid var(--fg);
+      background: oklch(97% 0 0);
+    }
+
+    .insight__label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .insight p {
+      font-size: 14px;
+      color: var(--fg);
+      line-height: 1.65;
+      text-wrap: pretty;
+    }
+
+    .insight p + p { margin-top: 0.9em; }
+
     /* ——— Lists ——— */
     .list {
       list-style: none;
@@ -224,6 +252,42 @@
       color: var(--muted);
       line-height: 1.6;
       text-wrap: pretty;
+    }
+
+    /* ——— Funnel ——— */
+    .funnel {
+      max-width: var(--max);
+      border-top: 1px solid var(--border);
+    }
+
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .funnel-step__arrow {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--muted);
+      padding-top: 1px;
+    }
+
+    .funnel-step__title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .funnel-step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.55;
     }
 
     /* ——— Methodology ——— */
@@ -343,6 +407,38 @@
       margin-top: 24px;
     }
 
+    /* ——— Add-on block ——— */
+    .addon {
+      max-width: var(--max);
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .addon__label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .addon__name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .addon p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
     /* ——— Footer ——— */
     .doc__footer {
       margin-top: var(--section-gap);
@@ -379,6 +475,7 @@
       <p class="doc__subtitle">Administración de cuentas, contenido estratégico y crecimiento en redes sociales orientado a generar citas.</p>
     </header>
 
+    <!-- 01 -->
     <section class="section">
       <span class="section__num">01 — Visión</span>
       <h2 class="section__title">Nuestra visión</h2>
@@ -386,23 +483,29 @@
         <p class="lead">Diana Hair Design ya cuenta con el activo más importante para crecer: la calidad de su trabajo. Cada transformación refleja experiencia, técnica y dedicación, pero hoy ese valor no se comunica con la misma fuerza en el entorno digital.</p>
         <p>En la actualidad, las redes sociales son el primer punto de contacto entre un cliente y un salón de belleza. Antes de agendar una cita, las personas buscan inspiración, evalúan resultados, leen opiniones y deciden si pueden confiar en el profesional que transformará su imagen.</p>
         <p>Nuestra propuesta consiste en convertir esa confianza en una ventaja competitiva. Desarrollaremos una presencia digital sólida y coherente que refleje la calidad del servicio, fortalezca el posicionamiento de la marca y convierta las redes sociales en un canal constante para atraer nuevos clientes y fidelizar a quienes ya conocen el salón.</p>
-        <p>Nuestro compromiso es trabajar en una estrategia de crecimiento enfocada en fortalecer la marca, generar credibilidad y contribuir al incremento sostenible de las reservas y los ingresos del negocio.</p>
+      </div>
+      <div class="insight">
+        <span class="insight__label">Enfoque estratégico</span>
+        <p>La meta principal es el crecimiento y posicionamiento en el mercado local. La estrategia es clara: primero hacerte reconocida en el área donde operas hoy. Cuando ese reconocimiento esté consolidado, los clientes fieles te seguirán a donde vayas — el territorio se vuelve tuyo.</p>
+        <p>Más seguidores locales = más citas. Más citas = más recomendaciones. Ese es el ciclo que vamos a construir.</p>
       </div>
     </section>
 
+    <!-- 02 -->
     <section class="section">
       <span class="section__num">02 — Objetivos</span>
       <h2 class="section__title">Durante los primeros meses trabajaremos para</h2>
       <ul class="list">
-        <li>Fortalecer la identidad de la marca.</li>
+        <li>Dominar el reconocimiento de marca en el área local.</li>
         <li>Posicionar a Diana Hair Design como referente en color y cuidado capilar.</li>
         <li>Incrementar el alcance en Facebook e Instagram.</li>
-        <li>Generar mayor interacción con potenciales clientes.</li>
+        <li>Generar mayor interacción con potenciales clientes en la zona.</li>
         <li>Convertir las redes sociales en un canal constante de generación de citas.</li>
         <li>Fidelizar clientes actuales y fomentar recomendaciones.</li>
       </ul>
     </section>
 
+    <!-- 03 -->
     <section class="section">
       <span class="section__num">03 — Diagnóstico</span>
       <h2 class="section__title">Diagnóstico inicial</h2>
@@ -425,7 +528,7 @@
             <li>Fortalecer la imagen de marca.</li>
             <li>Mejorar la presencia en Instagram.</li>
             <li>Crear contenido más atractivo y estratégico.</li>
-            <li>Incrementar la interacción con la comunidad.</li>
+            <li>Incrementar la interacción con la comunidad local.</li>
             <li>Aprovechar mejor el contenido en video.</li>
             <li>Implementar campañas orientadas a generar citas.</li>
           </ul>
@@ -433,35 +536,169 @@
       </div>
     </section>
 
+    <!-- 04 -->
     <section class="section">
-      <span class="section__num">04 — Estrategia</span>
+      <span class="section__num">04 — Embudo de ventas</span>
+      <h2 class="section__title">Cómo convertimos seguidores en citas</h2>
+      <div class="prose" style="margin-bottom: 28px;">
+        <p>Para un negocio de servicios como un salón de belleza, el proceso de conversión es directo y no requiere una página de aterrizaje. El contenido hace el trabajo de atracción; el canal de comunicación cierra la cita.</p>
+      </div>
+      <div class="funnel">
+        <div class="funnel-step">
+          <div class="funnel-step__arrow">↓</div>
+          <div>
+            <h3 class="funnel-step__title">Contenido de valor</h3>
+            <p>Publicamos contenido de calidad que muestra resultados reales, técnicas, consejos y el proceso de trabajo. Ese contenido atrae a personas que ya tienen intención de mejorar su imagen.</p>
+          </div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-step__arrow">↓</div>
+          <div>
+            <h3 class="funnel-step__title">Atracción e interés</h3>
+            <p>El algoritmo amplifica el contenido hacia personas en el área local con perfil de cliente ideal. Cada publicación es una oportunidad de que alguien nuevo descubra el salón.</p>
+          </div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-step__arrow">↓</div>
+          <div>
+            <h3 class="funnel-step__title">Canal de comunicación</h3>
+            <p>El cliente interesado se dirige a WhatsApp o Messenger — el canal que definas — donde concreta su cita. No se necesita una página de aterrizaje; el servicio en sí es la razón de contacto.</p>
+          </div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-step__arrow">✓</div>
+          <div>
+            <h3 class="funnel-step__title">Cita agendada</h3>
+            <p>El cliente llega al salón, vive la experiencia y se convierte en promotor orgánico del negocio en redes y recomendaciones.</p>
+          </div>
+        </div>
+      </div>
+      <div class="insight">
+        <span class="insight__label">Nota estratégica</span>
+        <p>Para un negocio de servicios, la landing page no es el cuello de botella — la conversación sí. Por eso el foco está en llevar a la persona al canal correcto de la forma más directa posible.</p>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="section">
+      <span class="section__num">05 — WhatsApp Business</span>
+      <h2 class="section__title">Optimización del canal de comunicación</h2>
+      <div class="prose" style="margin-bottom: 24px;">
+        <p>WhatsApp Business es el punto donde el interés se convierte en cita. Configurarlo correctamente hace que cada cliente que llega sienta que ya está en manos de un negocio profesional.</p>
+      </div>
+      <ul class="list">
+        <li>Configuración profesional del perfil de WhatsApp Business.</li>
+        <li>Mensaje de bienvenida automático al primer contacto.</li>
+        <li>Mensaje de ausencia para horarios fuera de atención.</li>
+        <li>Respuestas rápidas para preguntas frecuentes (ej: escribir <em>/precios</em> y recibir el menú completo de servicios).</li>
+        <li>Enlace de calendario para que el cliente se agende directamente.</li>
+      </ul>
+      <div class="insight">
+        <span class="insight__label">Por qué lo incluimos</span>
+        <p>WhatsApp Business no fue parte de la conversación anterior, pero es una pieza clave del embudo. Sin una configuración adecuada, los mensajes llegan sin contexto, sin filtro y sin respuesta fuera de horario — y eso cuesta citas.</p>
+        <p>Con estas configuraciones básicas, el canal trabaja por ti incluso cuando no estás disponible.</p>
+      </div>
+
+      <div class="addon">
+        <span class="addon__label">Servicio adicional — Plan superior</span>
+        <h3 class="addon__name">Automatización con bot de WhatsApp</h3>
+        <p>Para quienes quieran ir un paso más allá, existe la opción de integrar un bot inteligente que responde mensajes automáticamente, filtra clientes, agenda citas y cierra consultas sin intervención manual. Este servicio está disponible como plan adicional separado.</p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="section">
+      <span class="section__num">06 — Estrategia</span>
       <h2 class="section__title">Nuestra estrategia</h2>
       <div class="prose" style="margin-bottom: 28px;">
         <p>Desarrollaremos una estrategia integral enfocada en cuatro áreas principales:</p>
       </div>
       <div class="pillars">
         <div class="pillar">
-          <h3 class="pillar__title">Posicionamiento de marca</h3>
-          <p>Fortaleceremos la identidad visual para que Diana Hair Design proyecte una imagen profesional, consistente y fácil de recordar.</p>
+          <h3 class="pillar__title">Posicionamiento local</h3>
+          <p>Fortaleceremos la identidad visual para que Diana Hair Design proyecte una imagen profesional y sea la primera opción reconocida en su área.</p>
         </div>
         <div class="pillar">
           <h3 class="pillar__title">Contenido estratégico</h3>
-          <p>Crearemos contenido pensado para conectar con la audiencia, generar confianza y aumentar el interés por los servicios.</p>
+          <p>Crearemos contenido organizado por líneas de servicio: color, tratamientos, consejos de cuidado y entrenamiento — cada pieza con un propósito claro.</p>
         </div>
         <div class="pillar">
           <h3 class="pillar__title">Crecimiento en redes sociales</h3>
-          <p>Optimizaremos la presencia digital para aumentar el alcance, mejorar la interacción y convertir seguidores en clientes.</p>
+          <p>Optimizaremos la presencia digital para aumentar el alcance orgánico, mejorar la interacción y convertir seguidores locales en clientes recurrentes.</p>
         </div>
         <div class="pillar">
-          <h3 class="pillar__title">Generación de clientes</h3>
-          <p>Implementaremos acciones enfocadas en atraer nuevos clientes, incentivar recomendaciones y aumentar la cantidad de citas agendadas.</p>
+          <h3 class="pillar__title">Generación de citas</h3>
+          <p>Implementaremos acciones enfocadas en atraer nuevos clientes, incentivar recomendaciones y canalizar el interés directamente hacia WhatsApp o Messenger.</p>
         </div>
+      </div>
+      <div class="insight">
+        <span class="insight__label">Guía de contenido</span>
+        <p>El contenido se construirá alrededor de cada línea de servicio del salón: entrenamiento, consejos, cuidado y tratamiento por línea de producto. Cada categoría tiene su propio ciclo de contenido que educa, genera confianza y activa la intención de compra.</p>
       </div>
     </section>
 
+    <!-- 07 -->
     <section class="section">
-      <span class="section__num">05 — Servicios</span>
-      <h2 class="section__title">Servicios incluidos</h2>
+      <span class="section__num">07 — Producción de contenido</span>
+      <h2 class="section__title">Cómo vamos a crear el contenido</h2>
+      <div class="prose" style="margin-bottom: 28px;">
+        <p>El contenido de mayor impacto en un salón de belleza es el que muestra el trabajo real, en tiempo real. Por eso la producción tiene dos velocidades: la que construimos juntos una vez al mes, y la que tú generas día a día con nuestra guía.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">A</div>
+          <div>
+            <h3 class="step__title">Sesión mensual de producción</h3>
+            <p>Una vez al mes nos encontramos mientras trabajas para capturar ángulos, procesos y emociones reales. Ese material se edita y se reutiliza en múltiples formatos: posts, carruseles y reels con diferentes enfoques a lo largo del mes.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">B</div>
+          <div>
+            <h3 class="step__title">Historias espontáneas (tu contenido)</h3>
+            <p>Las historias diarias son tuyas — son espontáneas y eso es exactamente lo que las hace efectivas. Te damos la guía de qué capturar y cuándo, y configuramos tu cámara para que siempre saques la mejor calidad sin pensarlo.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">C</div>
+          <div>
+            <h3 class="step__title">Diseño gráfico y edición</h3>
+            <p>Producimos imágenes diseñadas para posts y carruseles que generan interacciones. Los reels del material de la sesión mensual se editan para maximizar su alcance orgánico.</p>
+          </div>
+        </div>
+      </div>
+      <div class="insight">
+        <span class="insight__label">Nuestra forma de trabajar</span>
+        <p>Estar contigo mientras trabajas no es una visita — es donde está el mejor contenido. Una transformación de color en proceso, una cliente reaccionando al resultado, tus manos trabajando: eso conecta con la audiencia de una forma que ningún diseño puede replicar.</p>
+        <p>El objetivo de la sesión mensual también es que aprendas a capturarlo tú misma, para que con el tiempo esa confianza sea natural.</p>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="section">
+      <span class="section__num">08 — Meta Ads</span>
+      <h2 class="section__title">Estrategia de pauta publicitaria</h2>
+      <div class="prose" style="margin-bottom: 24px;">
+        <p>La publicidad en Meta (Facebook e Instagram) es la palanca que amplifica todo lo que construimos orgánicamente. Pero tiene el mayor impacto cuando la marca ya tiene una base sólida de contenido.</p>
+      </div>
+      <ul class="list">
+        <li>No se invierte en pauta desde el primer día.</li>
+        <li>Las primeras semanas se usan para fortalecer la marca y alimentar el algoritmo con contenido constante.</li>
+        <li>En la tercera o cuarta semana, cuando el algoritmo ya está respondiendo, se activa la primera inversión publicitaria.</li>
+        <li>Presupuesto inicial recomendado: USD $150/mes de forma conservadora.</li>
+        <li>Para resultados de 400–500% de alcance actual, el rango óptimo es entre USD $200 y $300 semanales.</li>
+      </ul>
+      <div class="insight">
+        <span class="insight__label">Por qué esperamos antes de pautar</span>
+        <p>En negocios de servicio como este, invertir en pauta antes de tener contenido de calidad es desperdiciar presupuesto. El algoritmo necesita material para optimizar. Cuando ya tiene publicaciones con interacción real, las campañas rinden entre 3 y 5 veces más con el mismo presupuesto.</p>
+        <p>La pauta publicitaria se administra directamente desde la cuenta del cliente. El presupuesto queda en tu control en todo momento.</p>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section class="section">
+      <span class="section__num">09 — Servicios incluidos</span>
+      <h2 class="section__title">Servicios incluidos en el plan</h2>
       <div class="prose" style="margin-bottom: 24px;">
         <p>El plan contempla la gestión integral de la presencia digital del negocio.</p>
       </div>
@@ -471,21 +708,23 @@
         <li>Creación y configuración profesional de Instagram.</li>
         <li>Desarrollo de identidad visual.</li>
         <li>Diseño gráfico para redes sociales.</li>
-        <li>Producción de contenido.</li>
-        <li>Edición profesional de video.</li>
+        <li>Producción de contenido (sesión mensual presencial).</li>
+        <li>Edición profesional de video y reels.</li>
         <li>Gestión de publicaciones.</li>
-        <li>Gestión de historias.</li>
+        <li>Gestión de historias (guía y configuración de cámara).</li>
         <li>Calendario mensual de contenido.</li>
         <li>Gestión de comunidad.</li>
+        <li>Configuración de WhatsApp Business.</li>
         <li>Optimización continua.</li>
         <li>Reportes mensuales.</li>
         <li>Reunión estratégica mensual.</li>
       </ul>
-      <p class="note-muted">Publicidad en Meta Ads disponible como servicio adicional.</p>
+      <p class="note-muted">Publicidad en Meta Ads disponible como servicio adicional. Bot de automatización de WhatsApp disponible en plan superior.</p>
     </section>
 
+    <!-- 10 -->
     <section class="section">
-      <span class="section__num">06 — Metodología</span>
+      <span class="section__num">10 — Metodología</span>
       <h2 class="section__title">Nuestra metodología</h2>
       <div class="prose" style="margin-bottom: 28px;">
         <p>Trabajamos mediante un proceso organizado que garantiza consistencia y resultados medibles.</p>
@@ -495,28 +734,28 @@
           <div class="step__num">01</div>
           <div>
             <h3 class="step__title">Planificación</h3>
-            <p>Definimos objetivos, campañas y contenido del mes.</p>
+            <p>Definimos objetivos, campañas y calendario de contenido del mes.</p>
           </div>
         </div>
         <div class="step">
           <div class="step__num">02</div>
           <div>
             <h3 class="step__title">Producción</h3>
-            <p>Realizamos sesiones de creación de contenido y material audiovisual.</p>
+            <p>Sesión presencial mensual para capturar contenido real en el salón, más producción de diseños y carruseles.</p>
           </div>
         </div>
         <div class="step">
           <div class="step__num">03</div>
           <div>
             <h3 class="step__title">Publicación</h3>
-            <p>Administramos las redes sociales siguiendo un calendario estratégico.</p>
+            <p>Administramos las redes sociales siguiendo el calendario estratégico acordado.</p>
           </div>
         </div>
         <div class="step">
           <div class="step__num">04</div>
           <div>
             <h3 class="step__title">Optimización</h3>
-            <p>Analizamos continuamente el desempeño para mejorar los resultados.</p>
+            <p>Analizamos continuamente el desempeño para ajustar contenido, horarios y eventualmente pauta publicitaria.</p>
           </div>
         </div>
         <div class="step">
@@ -529,8 +768,9 @@
       </div>
     </section>
 
+    <!-- 11 -->
     <section class="section">
-      <span class="section__num">07 — Indicadores</span>
+      <span class="section__num">11 — Indicadores</span>
       <h2 class="section__title">Indicadores de éxito</h2>
       <div class="prose" style="margin-bottom: 24px;">
         <p>El crecimiento será medido mediante indicadores reales del negocio:</p>
@@ -548,28 +788,32 @@
       </div>
     </section>
 
+    <!-- 12 -->
     <section class="section">
-      <span class="section__num">08 — Plan de lanzamiento</span>
+      <span class="section__num">12 — Plan de lanzamiento</span>
       <h2 class="section__title">Primeros 90 días</h2>
       <div class="prose" style="margin-bottom: 24px;">
-        <p>Durante esta etapa construiremos una base sólida para el crecimiento de la marca.</p>
+        <p>Durante esta etapa construiremos la base sólida desde la que se activa el crecimiento pagado.</p>
       </div>
       <ul class="list">
         <li>Gestión profesional de Facebook e Instagram.</li>
         <li>Creación de Instagram desde cero.</li>
         <li>Desarrollo de identidad visual.</li>
-        <li>Optimización de perfiles.</li>
-        <li>Calendario mensual de contenido.</li>
+        <li>Optimización de perfiles y configuración de WhatsApp Business.</li>
+        <li>Calendario mensual de contenido por líneas de servicio.</li>
         <li>Hasta 16 publicaciones mensuales.</li>
         <li>Entre 8 y 12 Reels mensuales.</li>
-        <li>Gestión de historias.</li>
+        <li>Gestión de historias con guía y configuración de cámara.</li>
+        <li>Sesión presencial mensual de producción de contenido.</li>
+        <li>Activación de pauta conservadora en semana 3 o 4 (USD $150/mes).</li>
         <li>Reporte mensual.</li>
         <li>Reunión estratégica mensual.</li>
       </ul>
     </section>
 
+    <!-- 13 -->
     <section class="section">
-      <span class="section__num">09 — Inversión</span>
+      <span class="section__num">13 — Inversión</span>
       <h2 class="section__title">Inversión</h2>
       <div class="plan-block">
         <p class="plan-block__label">Plan de lanzamiento</p>
@@ -577,30 +821,34 @@
         <p class="plan-block__price">USD $300 <span>/ mes</span></p>
         <ul class="list">
           <li>No incluye inversión publicitaria en Meta Ads.</li>
+          <li>No incluye bot de automatización de WhatsApp.</li>
         </ul>
-        <p class="plan-block__note">La pauta publicitaria será administrada directamente desde la cuenta del cliente y el presupuesto será definido de acuerdo con los objetivos de la campaña.</p>
+        <p class="plan-block__note">La pauta publicitaria se administra directamente desde la cuenta del cliente. El presupuesto queda en tu control en todo momento y se activa a partir de la tercera o cuarta semana.</p>
       </div>
     </section>
 
+    <!-- 14 -->
     <section class="section">
-      <span class="section__num">10 — Diferenciador</span>
+      <span class="section__num">14 — Diferenciador</span>
       <h2 class="section__title">¿Por qué trabajar con nosotros?</h2>
       <div class="prose">
         <p>No nos limitamos a publicar contenido.</p>
         <p>Nuestro enfoque combina estrategia, creatividad y análisis para que las redes sociales se conviertan en una herramienta real de crecimiento para el negocio.</p>
-        <p>Cada publicación, video y campaña tiene un propósito: atraer más clientes, fortalecer la marca y generar resultados medibles.</p>
+        <p>Cada publicación, video y campaña tiene un propósito: atraer más clientes, fortalecer la marca y generar resultados medibles. Y una vez al mes, estamos contigo, mientras trabajas, capturando el contenido que ningún estudio puede fabricar.</p>
       </div>
     </section>
 
+    <!-- 15 -->
     <section class="section">
-      <span class="section__num">11 — Próximos pasos</span>
+      <span class="section__num">15 — Próximos pasos</span>
       <h2 class="section__title">Una vez aprobada la propuesta iniciaremos con</h2>
       <ul class="list">
         <li>Reunión de descubrimiento.</li>
-        <li>Definición de objetivos.</li>
+        <li>Definición de objetivos y líneas de contenido.</li>
         <li>Organización de la identidad visual.</li>
+        <li>Configuración de WhatsApp Business.</li>
         <li>Planificación del contenido del primer mes.</li>
-        <li>Producción del material inicial.</li>
+        <li>Coordinación de la primera sesión presencial de producción.</li>
         <li>Inicio de la estrategia digital.</li>
       </ul>
     </section>
