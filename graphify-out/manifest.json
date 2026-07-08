@@ -1,0 +1,237 @@
+{
+  ".claude/settings.local.json": {
+    "mtime": 1774652302.3533177,
+    "ast_hash": "fca58fcf775d1c27846eb137878e7899",
+    "semantic_hash": "fca58fcf775d1c27846eb137878e7899"
+  },
+  "astro.config.mjs": {
+    "mtime": 1774851577.0182467,
+    "ast_hash": "049e382f6ad360ff5bfd14247690948d",
+    "semantic_hash": "049e382f6ad360ff5bfd14247690948d"
+  },
+  "package.json": {
+    "mtime": 1774473977.4551537,
+    "ast_hash": "a2f1129a8b0f53965fbec6b9cfd8f347",
+    "semantic_hash": "a2f1129a8b0f53965fbec6b9cfd8f347"
+  },
+  "src/components/AIConversationDemo.astro": {
+    "mtime": 1774455626.2614682,
+    "ast_hash": "0c34736a3ddfc7e32cb25bb424c812fc",
+    "semantic_hash": "0c34736a3ddfc7e32cb25bb424c812fc"
+  },
+  "src/components/BlogCard.astro": {
+    "mtime": 1774473239.9650211,
+    "ast_hash": "3f63f8c43298662dd5b631203c02c707",
+    "semantic_hash": "3f63f8c43298662dd5b631203c02c707"
+  },
+  "src/components/BookCall.astro": {
+    "mtime": 1774454809.3302503,
+    "ast_hash": "c721e71d3604291517318bd03ee133ab",
+    "semantic_hash": "c721e71d3604291517318bd03ee133ab"
+  },
+  "src/components/CapabilitiesSnapshot.astro": {
+    "mtime": 1774454786.7711148,
+    "ast_hash": "1e424860b6599ea9e407af18d0cbece8",
+    "semantic_hash": "1e424860b6599ea9e407af18d0cbece8"
+  },
+  "src/components/ChatWidget.astro": {
+    "mtime": 1779487588.8581731,
+    "ast_hash": "176858417e14c6bdfe5086f63985af48",
+    "semantic_hash": "176858417e14c6bdfe5086f63985af48"
+  },
+  "src/components/Control.astro": {
+    "mtime": 1774672644.770416,
+    "ast_hash": "d9904a2f1bea908fa2d36f391f1f02b6",
+    "semantic_hash": "d9904a2f1bea908fa2d36f391f1f02b6"
+  },
+  "src/components/Decision.astro": {
+    "mtime": 1774454805.794868,
+    "ast_hash": "76666553936991b90176cc7ea455e116",
+    "semantic_hash": "76666553936991b90176cc7ea455e116"
+  },
+  "src/components/EngineeringAuthority.astro": {
+    "mtime": 1774398535.7739556,
+    "ast_hash": "9b8fb124eb3caea55a81599b5b05d587",
+    "semantic_hash": "9b8fb124eb3caea55a81599b5b05d587"
+  },
+  "src/components/Footer.astro": {
+    "mtime": 1774398535.7635415,
+    "ast_hash": "9301136ebdd7555143074cac083bb3e9",
+    "semantic_hash": "9301136ebdd7555143074cac083bb3e9"
+  },
+  "src/components/Hero.astro": {
+    "mtime": 1774827020.407825,
+    "ast_hash": "039ec7d11de107bdbba899c479361090",
+    "semantic_hash": "039ec7d11de107bdbba899c479361090"
+  },
+  "src/components/Nav.astro": {
+    "mtime": 1774475697.9562984,
+    "ast_hash": "7075bad976ada3809c17db87ee00d94f",
+    "semantic_hash": "7075bad976ada3809c17db87ee00d94f"
+  },
+  "src/components/ProjectsShowcase.astro": {
+    "mtime": 1773191769.292689,
+    "ast_hash": "cde124375bb4c1824e1203b9d9e071fd",
+    "semantic_hash": "cde124375bb4c1824e1203b9d9e071fd"
+  },
+  "src/components/RealityCheck.astro": {
+    "mtime": 1774576220.140608,
+    "ast_hash": "c26e4e8154a426bb684cae6b931ccb0f",
+    "semantic_hash": "c26e4e8154a426bb684cae6b931ccb0f"
+  },
+  "src/components/SEO.astro": {
+    "mtime": 1774851204.5299857,
+    "ast_hash": "2ac41b50c8118f1d804627b54f811769",
+    "semantic_hash": "2ac41b50c8118f1d804627b54f811769"
+  },
+  "src/components/ServicePage.astro": {
+    "mtime": 1774844779.103535,
+    "ast_hash": "b71430b1ecdf3180534dbb95494affc1",
+    "semantic_hash": "b71430b1ecdf3180534dbb95494affc1"
+  },
+  "src/components/StructureEmerges.astro": {
+    "mtime": 1772607284.6952665,
+    "ast_hash": "7ce340206cbdd82e2825e851cf8aedbe",
+    "semantic_hash": "7ce340206cbdd82e2825e851cf8aedbe"
+  },
+  "src/components/WebDevPage.astro": {
+    "mtime": 1774825660.9152377,
+    "ast_hash": "8ddc00eb4ec9aef6f4a3c750c0a7177c",
+    "semantic_hash": "8ddc00eb4ec9aef6f4a3c750c0a7177c"
+  },
+  "src/components/WhoWeWorkWith.astro": {
+    "mtime": 1774398535.763599,
+    "ast_hash": "d87c8d5dd062912a4b0eb39a69823263",
+    "semantic_hash": "d87c8d5dd062912a4b0eb39a69823263"
+  },
+  "src/content/config.ts": {
+    "mtime": 1774473173.744601,
+    "ast_hash": "2f854b5358109fc46d22321296ac6b91",
+    "semantic_hash": "2f854b5358109fc46d22321296ac6b91"
+  },
+  "src/env.d.ts": {
+    "mtime": 1772568926.3884563,
+    "ast_hash": "a34c63603f2fc704c29af63d4a960109",
+    "semantic_hash": "a34c63603f2fc704c29af63d4a960109"
+  },
+  "src/i18n/en.json": {
+    "mtime": 1774474337.1370885,
+    "ast_hash": "f7f21f58783a111fec40ae0df42e9f9f",
+    "semantic_hash": "f7f21f58783a111fec40ae0df42e9f9f"
+  },
+  "src/i18n/es.json": {
+    "mtime": 1774828402.8518155,
+    "ast_hash": "69e666204a06b8a91e7070198c05ad8e",
+    "semantic_hash": "69e666204a06b8a91e7070198c05ad8e"
+  },
+  "src/layouts/BaseLayout.astro": {
+    "mtime": 1774472658.3759217,
+    "ast_hash": "7e257f855cffd83c71cf32b501af4fe7",
+    "semantic_hash": "7e257f855cffd83c71cf32b501af4fe7"
+  },
+  "src/layouts/BlogPost.astro": {
+    "mtime": 1774475700.9940546,
+    "ast_hash": "c163d91ae689540b9cf7447d93e63780",
+    "semantic_hash": "c163d91ae689540b9cf7447d93e63780"
+  },
+  "src/pages/blog/[slug].astro": {
+    "mtime": 1774473272.982336,
+    "ast_hash": "eeffbb3e04b41f4d3c55255f07e649b3",
+    "semantic_hash": "eeffbb3e04b41f4d3c55255f07e649b3"
+  },
+  "src/pages/blog/index.astro": {
+    "mtime": 1774473268.4898906,
+    "ast_hash": "40c1c487a1ee4da7d8f99ba0981c068f",
+    "semantic_hash": "40c1c487a1ee4da7d8f99ba0981c068f"
+  },
+  "src/pages/en/blog/[slug].astro": {
+    "mtime": 1774473295.0675538,
+    "ast_hash": "3ba00cd81a9d11a6399b0721f1a207c6",
+    "semantic_hash": "3ba00cd81a9d11a6399b0721f1a207c6"
+  },
+  "src/pages/en/blog/index.astro": {
+    "mtime": 1774473289.790732,
+    "ast_hash": "0604e0519dec84e235da47de2cff0e11",
+    "semantic_hash": "0604e0519dec84e235da47de2cff0e11"
+  },
+  "src/pages/en/index.astro": {
+    "mtime": 1774851026.8846908,
+    "ast_hash": "c2524f35f75c1d7999f391206cc0e4f2",
+    "semantic_hash": "c2524f35f75c1d7999f391206cc0e4f2"
+  },
+  "src/pages/en/services/ai-agents.astro": {
+    "mtime": 1774825660.8429537,
+    "ast_hash": "f81111833e2aa6b1a37a1ea6da25ebe6",
+    "semantic_hash": "f81111833e2aa6b1a37a1ea6da25ebe6"
+  },
+  "src/pages/en/services/automations.astro": {
+    "mtime": 1774825660.8344913,
+    "ast_hash": "bcd76aafbff44770d14157b94e76985f",
+    "semantic_hash": "bcd76aafbff44770d14157b94e76985f"
+  },
+  "src/pages/en/services/custom-software.astro": {
+    "mtime": 1774825660.9152503,
+    "ast_hash": "dec8a34324db1ead571b59a109de5712",
+    "semantic_hash": "dec8a34324db1ead571b59a109de5712"
+  },
+  "src/pages/en/services/web-development.astro": {
+    "mtime": 1774851030.5496414,
+    "ast_hash": "b07e1fe0439b636f619abd655fe03b0b",
+    "semantic_hash": "b07e1fe0439b636f619abd655fe03b0b"
+  },
+  "src/pages/es/privacy.astro": {
+    "mtime": 1774851199.629121,
+    "ast_hash": "a36191a1b8b57f673eefb30886e5dec4",
+    "semantic_hash": "a36191a1b8b57f673eefb30886e5dec4"
+  },
+  "src/pages/es/terms.astro": {
+    "mtime": 1774851201.2513711,
+    "ast_hash": "dd7af1cfae30f97e55ce09eee5f29d54",
+    "semantic_hash": "dd7af1cfae30f97e55ce09eee5f29d54"
+  },
+  "src/pages/index.astro": {
+    "mtime": 1774851202.0404458,
+    "ast_hash": "f6d6f0db848bd400651c73feb90d2e60",
+    "semantic_hash": "f6d6f0db848bd400651c73feb90d2e60"
+  },
+  "src/pages/marketing-digital/diana-hair-design.astro": {
+    "mtime": 1783365084.3965116,
+    "ast_hash": "2b971da7320d460b34da3a4eddbfafa8",
+    "semantic_hash": "2b971da7320d460b34da3a4eddbfafa8"
+  },
+  "src/pages/privacy.astro": {
+    "mtime": 1774851199.1107404,
+    "ast_hash": "ed99a75a86f5308d111aa7d19c61ec10",
+    "semantic_hash": "ed99a75a86f5308d111aa7d19c61ec10"
+  },
+  "src/pages/servicios/agentes-ia.astro": {
+    "mtime": 1774847378.4606073,
+    "ast_hash": "acdaaaa9fee523a93eff7ff635710d0f",
+    "semantic_hash": "acdaaaa9fee523a93eff7ff635710d0f"
+  },
+  "src/pages/servicios/automatizaciones.astro": {
+    "mtime": 1774848976.0761364,
+    "ast_hash": "a538ab9197199548406d948172742b08",
+    "semantic_hash": "a538ab9197199548406d948172742b08"
+  },
+  "src/pages/servicios/desarrollo-web.astro": {
+    "mtime": 1774851030.0785658,
+    "ast_hash": "7d3541d43ed7780af0afb52863bcba6a",
+    "semantic_hash": "7d3541d43ed7780af0afb52863bcba6a"
+  },
+  "src/pages/servicios/software-a-medida.astro": {
+    "mtime": 1774850889.9934008,
+    "ast_hash": "7a3784d844f3aacc6d1a41180835d635",
+    "semantic_hash": "7a3784d844f3aacc6d1a41180835d635"
+  },
+  "src/pages/terms.astro": {
+    "mtime": 1774851200.5927453,
+    "ast_hash": "09a6189f9c1b4296ef4146b7febd9865",
+    "semantic_hash": "09a6189f9c1b4296ef4146b7febd9865"
+  },
+  "tailwind.config.js": {
+    "mtime": 1772568564.355271,
+    "ast_hash": "9771b899d27eee28a590a2f7952887aa",
+    "semantic_hash": "9771b899d27eee28a590a2f7952887aa"
+  }
+}

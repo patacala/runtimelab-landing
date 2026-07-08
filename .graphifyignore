@@ -1,0 +1,4 @@
+src/content/blog/
+public/
+dist/
+node_modules/
